@@ -1,0 +1,52 @@
+/** 自定义 Element Plus 样式 */
+// google 4原色
+@forward "element-plus/theme-chalk/src/common/var.scss" with (
+  $colors: (
+    "primary": (
+      "base": #4285f4
+    ),
+    "success": (
+      "base": #34a853
+    ),
+    "warning": (
+      "base": #f8bc05
+    ),
+    "danger": (
+      "base": #ea4335
+    )
+  )
+);
+
+@forward "element-plus/theme-chalk/src/dark/css-vars.scss";
+
+// 表格
+.el-table {
+  //自定義當欄位被選取的顏色
+  --el-table-current-row-bg-color: #ffcf87;
+  // 表头
+  th.el-table__cell {
+    background-color: var(--el-fill-color-light) !important;
+  }
+}
+html.dark {
+  .el-table {
+    //自定義當欄位被選取的顏色
+    --el-table-current-row-bg-color: #8c6223;
+  }
+}
+.el-table__body tr.current-row > td.el-table__cell {
+  background-color: var(--el-table-current-row-bg-color) !important;
+}
+// 分页
+.el-pagination {
+  // 参考 Bootstrap 的响应式设计 WIDTH = 768
+  @media screen and (max-width: 768px) {
+    .el-pagination__total,
+    .el-pagination__sizes,
+    .el-pagination__jump,
+    .btn-prev,
+    .btn-next {
+      display: none !important;
+    }
+  }
+}

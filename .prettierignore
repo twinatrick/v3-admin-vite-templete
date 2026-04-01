@@ -1,0 +1,11 @@
+# Prettier ignore file
+
+.DS_Store
+node_modules
+dist
+dist-ssr
+*.local
+.npmrc
+cypress
+tests
+types

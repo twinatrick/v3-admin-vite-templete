@@ -1,0 +1,13 @@
+# Prettier ignore file
+
+.DS_Store
+node_modules
+dist
+dist-ssr
+*.local
+.npmrc
+cypress/screenshots
+cypress/videos
+.idea/*
+.vite/*
+.vscode/*

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json.schemastore.org/web-types",
+  "framework": "vue",
+  "name": "name written in package.json",
+  "version": "version written in package.json",
+  "js-types-syntax": "typescript",
+  "contributions": {
+    "html": {
+      "attributes": [
+        {
+          "name": "v-permission",
+          "description": "根據輸入值去判斷元素是否要顯示",
+          "vue-modifiers": [
+            {
+              "name": "remove",
+              "description": "移除元素，預設值"
+            },
+            {
+              "name": "disable",
+              "description": "禁用元素"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

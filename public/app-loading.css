@@ -1,0 +1,61 @@
+/** 白屏阶段会执行的 CSS 加载动画 */
+
+#app-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20%;
+}
+
+#app-loading > .loader {
+  width: 5em;
+  height: 5em;
+  display: inline-block;
+  position: relative;
+  border: 2px solid #4385f5;
+  border-radius: 0.5em;
+  box-sizing: border-box;
+  animation: rotation 5s linear infinite;
+}
+#app-loading > .loader::after,
+#app-loading > .loader::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 2px solid #e14337;
+  width: 4em;
+  height: 4em;
+  animation: rotationBack 2.5s linear infinite;
+  transform-origin: center center;
+  border-radius: 0.5em;
+}
+#app-loading > .loader::before {
+  width: 3em;
+  height: 3em;
+  border-color: #f9bc04;
+  box-sizing: border-box;
+  animation: rotation 10s linear infinite;
+  border-radius: 0.5em;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotationBack {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}

@@ -1,0 +1,27 @@
+runtime: nodejs20 # or another supported version
+service: carrier-web
+instance_class: F4_1G
+
+automatic_scaling:
+  min_idle_instances: 1
+  max_idle_instances: 2
+  min_pending_latency: 0.030s
+  max_pending_latency: automatic
+  max_concurrent_requests: 200
+  target_cpu_utilization: 0.5
+  min_instances: 1
+  max_instances: 200
+
+handlers:
+ # Serve all static files with urls ending with a file extension
+ - url: /(.*\..+)$
+   static_files: dist/\1
+   upload: dist/(.*\..+)$
+   # catch all handler to index.html
+ - url: /.*
+   static_files: dist/index.html
+   upload: dist/index.html
+
+env_variables:
+ HOST: '0.0.0.0'
+ NODE_ENV: 'production'

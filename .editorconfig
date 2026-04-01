@@ -1,0 +1,18 @@
+# config doc://editorconfig.org/
+
+# tell EditorConfig plugin that current dir is root dir
+root = true
+
+# for all files
+[*]
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.md]
+insert_final_newline = false
+trim_trailing_whitespace = false
