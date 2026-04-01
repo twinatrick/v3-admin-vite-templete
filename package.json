@@ -18,7 +18,10 @@
     "lint": "pnpm lint:eslint && pnpm lint:prettier",
     "precommit": "pnpm run lint && npx lint-staged",
     "prepare": "husky install || true",
-    "test": "vitest"
+    "test": "vitest",
+    "generate-api": "node scripts/generate-api.js",
+    "generate-api:dev": "node scripts/generate-api.js --env development",
+    "generate-api:prod": "node scripts/generate-api.js --env production"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^40.2.0",
@@ -78,6 +81,7 @@
     "pnpm": "^8.6.5",
     "prettier": "2.8.8",
     "sass": "1.63.6",
+    "swagger-typescript-api": "^13.6.5",
     "terser": "5.18.1",
     "ts-jest": "^29.1.2",
     "typescript": "5.1.3",
