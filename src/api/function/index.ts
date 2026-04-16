@@ -3,13 +3,13 @@ import { Function, FunctionTransVo, FunctionVo } from "@/api/function/type"
 
 export function getFunction() {
   return request<ApiResponseData<Function[]>>({
-    url: "function/get",
+    url: "/backend/function/get",
     method: "get"
   })
 }
 export function createFunction(data: Function) {
   return request<ApiResponseData<Array<FunctionVo>>>({
-    url: "/function/add",
+    url: "/backend/function/add",
     method: "post",
     data: data
   })
@@ -17,7 +17,7 @@ export function createFunction(data: Function) {
 
 export function saveFunction(data: Array<FunctionVo>) {
   return request<ApiResponseData<any>>({
-    url: "/function/saveFunction",
+    url: "/backend/function/saveAllFunction",
     method: "post",
     data,
     timeout: 0
@@ -26,7 +26,7 @@ export function saveFunction(data: Array<FunctionVo>) {
 
 export function deleteFunction(data: Array<FunctionVo>) {
   return request<ApiResponseData<any>>({
-    url: "/function/deleteFunction",
+    url: "/backend/function/delete",
     method: "post",
     data: data,
     timeout: 0
@@ -35,16 +35,18 @@ export function deleteFunction(data: Array<FunctionVo>) {
 
 export function saveFunctionNewChild(data: Array<FunctionVo>) {
   return request<ApiResponseData<Array<FunctionVo>>>({
-    url: "function/saveFunctionNewChild",
+    url: "/backend/function/saveAllFunction",
     method: "post",
-    data: data,
+    data: {
+      saveFunctionNewChild: data
+    },
     timeout: 0
   })
 }
 
 export function saveAllFunction(data: FunctionTransVo) {
   return request<ApiResponseData<Array<FunctionVo>>>({
-    url: "/function/saveAllFunction",
+    url: "/backend/function/saveAllFunction",
     method: "post",
     data: data,
     timeout: 0

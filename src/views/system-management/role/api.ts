@@ -1,28 +1,56 @@
 import { request } from "@/utils/service"
 import { Role, Function, RoleVO } from "./type"
-export function queryRoleList() {
-  return request<ApiResponseData<Array<Role>>>({
-    url: "role/get",
+
+const mapRoleOutVo = (role?: RoleVO) => {
+  if (!role) return {} as RoleVO
+  return {
+    ...role,
+    key: role.key || (role as any).id,
+    functionKeys: role.functionKeys || (role as any).functionIds
+  }
+}
+
+export async function queryRoleList() {
+  const res = await request<ApiResponseData<Array<RoleVO>>>({
+    url: "/backend/role/get",
     method: "post"
   })
+  return {
+    ...res,
+    data: res.data?.map(mapRoleOutVo) || []
+  }
 }
-export function updateRole(data: RoleVO) {
-  return request<ApiResponseData<RoleVO>>({
-    url: "roles/update",
-    method: "post",
-    data
-  })
-}
-export function editRole(data: RoleVO) {
-  return request<ApiResponseData<RoleVO>>({
-    url: "/role/update",
+export async function updateRole(data: RoleVO) {
+  const res = await request<ApiResponseData<RoleVO>>({
+    url: "/backend/role/update",
     method: "post",
     data: {
-      key: data.key,
+      id: data.key,
       name: data.name,
-      description: data.description
+      description: data.description,
+      functionIds: data.functionKeys
     }
   })
+  return {
+    ...res,
+    data: mapRoleOutVo(res.data)
+  }
+}
+export async function editRole(data: RoleVO) {
+  const res = await request<ApiResponseData<RoleVO>>({
+    url: "/backend/role/update",
+    method: "post",
+    data: {
+      id: data.key,
+      name: data.name,
+      description: data.description,
+      functionIds: data.functionKeys
+    }
+  })
+  return {
+    ...res,
+    data: mapRoleOutVo(res.data)
+  }
 }
 
 export async function createRole(role: RoleVO) {
@@ -38,15 +66,19 @@ export async function createRole(role: RoleVO) {
   }
 }
 export async function addRole(role: Role) {
-  return request<ApiResponseData<Role>>({
-    url: "/role/add",
+  const res = await request<ApiResponseData<RoleVO>>({
+    url: "/backend/role/add",
     method: "post",
     data: role
   })
+  return {
+    ...res,
+    data: mapRoleOutVo(res.data)
+  }
 }
 export async function roleBindFunction(roleId: string, functionIds: string[] | undefined) {
   return request<ApiResponseData<Role>>({
-    url: `/role/roleBindFunction`,
+    url: `/backend/role/roleBindFunction`,
     method: "post",
     data: {
       role: roleId,
@@ -56,7 +88,7 @@ export async function roleBindFunction(roleId: string, functionIds: string[] | u
 }
 export function roleUnbindFunction(roleId: string, functionIds: string[] | []) {
   return request<ApiResponseData<Role>>({
-    url: `/role/roleUnbindFunction`,
+    url: `/backend/role/roleUnbindFunction`,
     method: "post",
     data: {
       role: roleId,
@@ -66,23 +98,28 @@ export function roleUnbindFunction(roleId: string, functionIds: string[] | []) {
 }
 export function deleteRole(roleId: string) {
   return request<ApiResponseData<Array<any>>>({
-    url: `roles/delete/${roleId}`,
-    method: "get"
+    url: "/backend/role/delete",
+    method: "post",
+    data: {
+      id: roleId
+    }
   })
 }
 
 export function getFunctions() {
   return request<ApiResponseData<Function[]>>({
-    url: "function/get",
+    url: "/backend/function/get",
     method: "get"
   })
 }
 
 export function updateFunctionOrder(data: Function[]) {
   return request<ApiResponseData<Array<Function>>>({
-    url: "roles/updateFunctionOrder",
+    url: "/backend/function/saveAllFunction",
     method: "post",
-    data,
+    data: {
+      saveMainFunction: data
+    },
     timeout: 0
   })
 }

@@ -3,7 +3,7 @@ import type * as Type from "./type"
 
 export function addLimitSetting(data: Type.AlertCheckLimitVo) {
   return request<ApiResponseData<Type.AlertCheckLimitVo>>({
-    url: "/alertCheckLimit/add",
+    url: "/backend/alertCheckLimit/add",
     method: "post",
     data
   })
@@ -11,7 +11,7 @@ export function addLimitSetting(data: Type.AlertCheckLimitVo) {
 
 export function updateLimitSetting(data: Type.AlertCheckLimitVo) {
   return request<ApiResponseData<Type.AlertCheckLimitVo>>({
-    url: "/alertCheckLimit/update",
+    url: "/backend/alertCheckLimit/update",
     method: "post",
     data
   })
@@ -19,7 +19,7 @@ export function updateLimitSetting(data: Type.AlertCheckLimitVo) {
 
 export function deleteLimitSetting(data: Type.AlertCheckLimitVo) {
   return request<ApiResponseData<Type.AlertCheckLimitVo>>({
-    url: "/alertCheckLimit/delete",
+    url: "/backend/alertCheckLimit/delete",
     method: "post",
     data
   })
@@ -27,7 +27,7 @@ export function deleteLimitSetting(data: Type.AlertCheckLimitVo) {
 
 export function getLimitSetting() {
   return request<ApiResponseData<Type.AlertCheckLimitVo[]>>({
-    url: "/alertCheckLimit/get",
+    url: "/backend/alertCheckLimit/get",
     method: "get"
     // params: query || {}
   })

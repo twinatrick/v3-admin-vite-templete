@@ -4,20 +4,20 @@ import { UserVO } from "@/api/users/types/user"
 
 export function getUserList(query?: Type.UserListQuery) {
   return request<ApiResponseData<Type.UserVO[]>>({
-    url: "users/query",
+    url: "/backend/users/getAllUser",
     method: "get",
     params: query || {}
   })
 }
 export function getAllUser() {
   return request<ApiResponseData<Type.UserVO[]>>({
-    url: "/users/getAllUser",
+    url: "/backend/users/getAllUser",
     method: "get"
   })
 }
 export function getUserInfoApi() {
   return request<Type.UserInfoResponseData>({
-    url: "/users/infoVo",
+    url: "/backend/users/infoVo",
     method: "get"
   })
 }
@@ -32,7 +32,7 @@ export function checkAccessToken(accessToken: string) {
 
 export function updateUser(data: Type.UserVO) {
   return request<ApiResponseData<Type.UserVO>>({
-    url: "users/update",
+    url: "/backend/users/saveUser",
     method: "post",
     data
   })
@@ -40,15 +40,18 @@ export function updateUser(data: Type.UserVO) {
 
 export function deleteUser(data: Type.UserVO) {
   return request<ApiResponseData<Type.UserVO>>({
-    url: "users/delete",
+    url: "/backend/users/saveUser",
     method: "post",
-    data
+    data: {
+      ...data,
+      disabled: true
+    }
   })
 }
 
 export function save(data: UserVO) {
   return request<ApiResponseData<Type.UserVO>>({
-    url: "/users/saveUser",
+    url: "/backend/users/saveUser",
     method: "post",
     data
   })

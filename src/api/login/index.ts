@@ -12,7 +12,7 @@ export function loginApi(authCode: string) {
 }
 export function loginUseEmail(email: string, password: string) {
   return request<Login.LoginResponseData>({
-    url: "/auth/login",
+    url: "/backend/auth/login",
     method: "post",
     data: { email, password }
   })
@@ -20,7 +20,7 @@ export function loginUseEmail(email: string, password: string) {
 
 export function registerUseEmail(email: string, password: string) {
   return request<Login.LoginResponseData>({
-    url: "/auth/signup",
+    url: "/backend/auth/signup",
     method: "post",
     data: { email, password }
   })

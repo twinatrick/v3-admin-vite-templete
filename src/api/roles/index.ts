@@ -3,15 +3,15 @@ import type * as Roles from "./type"
 
 export function getRoles() {
   return request<Roles.RoleListResponseData>({
-    url: "users/roleList",
-    method: "get"
+    url: "/backend/role/get",
+    method: "post"
   })
 }
 
 export function getTags() {
   return request<Roles.RoleListResponseData>({
-    url: "users/tagList",
-    method: "get"
+    url: "/backend/role/get",
+    method: "post"
   })
 }
 export function getRoleFunctionList() {

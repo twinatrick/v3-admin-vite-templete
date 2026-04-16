@@ -6,7 +6,7 @@ import { AlertCheckLimitVo } from "@/api/limitSetting/type"
 
 const dialogVisible = ref(false)
 const form = reactive<AlertCheckLimitVo>({
-  key: "",
+  id: "",
   tableName: "",
   columnName: "",
   limitValue: 0

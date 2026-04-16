@@ -3,20 +3,20 @@ import { AquarkDataRaw, type AverageAquark, CriteriaAPIFilter } from "./type"
 
 export function getColumnNameList() {
   return request<ApiResponseData<Array<string>>>({
-    url: "/aquarkData/getColumnNameList",
+    url: "/backend/aquarkData/getColumnNameList",
     method: "GET"
   })
 }
 export function getDataList(data: CriteriaAPIFilter[]) {
   return request<ApiResponseData<Array<AquarkDataRaw>>>({
-    url: "/aquarkData/getData",
+    url: "/backend/aquarkData/getData",
     method: "POST",
     data: data
   })
 }
 export function getAverage(start: Date, end: Date) {
   return request<ApiResponseData<Array<AverageAquark>>>({
-    url: "/aquarkData/getAverage",
+    url: "/backend/aquarkData/getAverage",
     method: "post",
     data: { start, end }
   })

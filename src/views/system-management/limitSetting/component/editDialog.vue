@@ -16,7 +16,7 @@ const props = defineProps({
   }
 })
 const formData = reactive<AlertCheckLimitVo>({
-  key: "",
+  id: "",
   tableName: "",
   columnName: "",
   limitValue: 0
@@ -41,7 +41,7 @@ const submitForm = () => {
   })
 }
 const resetForm = () => {
-  formData.key = props.rowData.key
+  formData.id = props.rowData.id
   formData.tableName = props.rowData.tableName
   formData.columnName = props.rowData.columnName
   formData.limitValue = props.rowData.limitValue

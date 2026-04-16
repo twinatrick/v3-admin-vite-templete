@@ -17,7 +17,7 @@ const tableColumnConfig = ref<Array<TableColumnMap>>([])
 const addDialogRef = ref<InstanceType<typeof AddDialog> | null>(null)
 const editDialogRef = ref<InstanceType<typeof EditDialog> | null>(null)
 const selectedRow = ref<type.AlertCheckLimitVo>({
-  key: "",
+  id: "",
   limitValue: 0,
   tableName: "",
   columnName: ""
