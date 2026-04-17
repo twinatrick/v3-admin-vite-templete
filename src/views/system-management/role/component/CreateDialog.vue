@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { PropType, ref } from "vue"
 import { ElLoading, ElTree } from "element-plus"
-import { RoleVO, TreeProp } from "../type"
-import { createRole } from "@/views/system-management/role/api"
 import { waitUntil } from "@/utils"
+import { api } from "@/api/client"
+import { RoleVO, TreeProp } from "../type"
 //data
 const visible = ref(false)
 const prop = defineProps({
@@ -38,7 +38,7 @@ const confirmClick = async () => {
   })
   try {
     formData.value.functionKeys = (treeRef.value?.getCheckedKeys(true) || []) as string[]
-    const res = await createRole(formData.value)
+    const res = await api.roles.addRole(formData.value)
     const data = res?.data
     emit("create", { ...data, functionKeys: formData.value.functionKeys })
     hide()

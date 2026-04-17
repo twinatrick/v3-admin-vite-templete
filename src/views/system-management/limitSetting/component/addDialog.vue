@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue"
-import * as api from "@/api/limitSetting"
-// import * as type from "@/api/limitSetting/type";
-import { AlertCheckLimitVo } from "@/api/limitSetting/type"
+import { AlertCheckLimitVo } from "@/api/generated/Api"
+import { api } from "@/api/client"
 
 const dialogVisible = ref(false)
 const form = reactive<AlertCheckLimitVo>({
-  key: "",
+  id: "",
   tableName: "",
   columnName: "",
   limitValue: 0
@@ -17,10 +16,8 @@ const rules = ref({
   columnName: [{ required: true, message: "Please input columnName", trigger: "blur" }],
   limitValue: [{ required: true, message: "Please input limitValue", trigger: "blur" }]
 })
-const submitForm = () => {
-  api.addLimitSetting(form).then((res) => {
-    console.log(res)
-  })
+const submitForm = async () => {
+  await api.alertLimits.addLimit(form)
   emit("confirm")
   dialogVisible.value = false
 }

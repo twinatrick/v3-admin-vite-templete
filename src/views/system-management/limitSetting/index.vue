@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import FilterTable from "@/components/FilterTable/v3.vue"
-import { TableColumnMap } from "@/components/FilterTable/type"
 import { computed, onMounted, ref } from "vue"
-import * as api from "@/api/limitSetting"
-import * as type from "@/api/limitSetting/type"
-import { transQuery } from "@/commonFunction/dataTrans"
 import AddDialog from "./component/addDialog.vue"
 import EditDialog from "./component/editDialog.vue"
 import { ElMessageBox } from "element-plus"
-const tableData = ref<Array<type.AlertCheckLimitVo>>([])
+import { AlertCheckLimitVo } from "@/api/generated/Api"
+import { transQuery } from "@/commonFunction/dataTrans"
+import { TableColumnMap } from "@/components/FilterTable/type"
+import { api } from "@/api/client"
+
+const tableData = ref<Array<AlertCheckLimitVo>>([])
 const columnData = computed(() => {
   return transQuery(tableData.value)
 })
@@ -16,8 +17,8 @@ const columnData = computed(() => {
 const tableColumnConfig = ref<Array<TableColumnMap>>([])
 const addDialogRef = ref<InstanceType<typeof AddDialog> | null>(null)
 const editDialogRef = ref<InstanceType<typeof EditDialog> | null>(null)
-const selectedRow = ref<type.AlertCheckLimitVo>({
-  key: "",
+const selectedRow = ref<AlertCheckLimitVo>({
+  id: "",
   limitValue: 0,
   tableName: "",
   columnName: ""
@@ -44,7 +45,7 @@ const handleDelete = async () => {
     .then(() => true)
     .catch(() => false)
   if (isConfirmed) {
-    const res = await api.deleteLimitSetting(selectedRow.value)
+    const res = await api.alertLimits.deleteLimit(selectedRow.value)
     if (res.code == 0) {
       ElMessageBox.alert("Success")
       reloadData()
@@ -53,16 +54,13 @@ const handleDelete = async () => {
     }
   }
 }
-const reloadData = () => {
-  api.getLimitSetting().then((res) => {
-    tableData.value = res.data
-  })
+const reloadData = async () => {
+  const res = await api.alertLimits.getLimit()
+  tableData.value = res.data
 }
 
-onMounted(() => {
-  api.getLimitSetting().then((res) => {
-    tableData.value = res.data
-  })
+onMounted(async () => {
+  await reloadData()
   tableColumnConfig.value = [
     {
       name: "tableName",
@@ -80,15 +78,11 @@ onMounted(() => {
       type: "number"
     }
   ]
-  console.log("mounted")
 })
 </script>
 
 <template>
   <div class="app-container">
-    <!--  <el-card mb-5 p-5 table :body-style="{ padding: 0 } ">-->
-    <!--    <h1>Limit Setting</h1>-->
-    <!--  </el-card>-->
     <FilterTable
       flex
       flex-col

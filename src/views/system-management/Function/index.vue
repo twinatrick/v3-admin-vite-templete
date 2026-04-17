@@ -1,29 +1,27 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue"
-import { getFunction, saveAllFunction } from "@/api/function"
 import { AllowDropType } from "element-plus/es/components/tree/src/tree.type"
 import { Delete, Edit } from "@element-plus/icons-vue"
 import type Node from "element-plus/es/components/tree/src/model/node"
 import CreateDialog from "./component/CreateDialog/index.vue"
 import { ElTree } from "element-plus"
-import { getUserInfoApi } from "@/api/users"
-import { useRouter } from "vue-router"
-import { TreeData, FunctionVo, treeDefaultProps } from "@/api/function/type"
+import { FunctionVo } from "@/api/generated/Api"
+import { api } from "@/api/client"
+import { treeDefaultProps } from "@/views/system-management/role/type"
+import type { TreeData } from "./type"
 import { waitUntil } from "@/utils"
-
 //data
-const router = useRouter()
 const treeRef = ref<InstanceType<typeof ElTree> | null>(null)
-const isloading = ref(true)
+const isLoading = ref(true)
 const tableData = ref<Array<FunctionVo>>([])
 const treeData = ref<Array<TreeData>>([])
 const createDialog = ref<InstanceType<typeof CreateDialog> | null>(null)
 //functions
 const loadingStart = async () => {
-  isloading.value = true
+  isLoading.value = true
 }
 const loadingEnd = async () => {
-  isloading.value = false
+  isLoading.value = false
 }
 const createBtnClick = () => {
   createDialog.value?.show()
@@ -33,7 +31,7 @@ const createBtnClick = () => {
 const queryData = async () => {
   try {
     await loadingStart()
-    const res = await getFunction()
+    const res = await api.functions.getFunction()
     tableData.value = res.data
     treeData.value = TransData(res.data)
     console.log(treeData.value)
@@ -57,7 +55,7 @@ const SaveAll = async () => {
     const saveFunctionNewChild = tableData.value.filter((item) => {
       return !item.disabled && item.type == 3 && item.parent == "" && item.newAdd
     })
-    const res = await saveAllFunction({
+    const res = await api.functions.saveAllFunction({
       deleteFunction: JSON.parse(JSON.stringify(deleteData)),
       saveMainFunction: JSON.parse(JSON.stringify(saveMainFunction)),
       saveFunctionNewChild: JSON.parse(JSON.stringify(saveFunctionNewChild))
@@ -135,7 +133,7 @@ const append = (add: string, data: TreeData, node: any) => {
   }
   data.children.push(newChild)
   node.expanded = true
-  event?.stopImmediatePropagation()
+  stopPropagation()
 }
 const editLeaf = (data: TreeData) => {
   if (data.edit) {
@@ -146,7 +144,7 @@ const editLeaf = (data: TreeData) => {
           map.set(item.name, 1)
         })
         if (map.get(data.newName) != undefined && !(data.newName == data.name)) {
-          event?.stopImmediatePropagation()
+          stopPropagation()
           return
         }
       }
@@ -155,7 +153,7 @@ const editLeaf = (data: TreeData) => {
       data.delete = true
       treeRef.value!.filter("")
     } else {
-      event?.stopImmediatePropagation()
+      stopPropagation()
       return
     }
     data.newName = ""
@@ -163,9 +161,11 @@ const editLeaf = (data: TreeData) => {
     data.newName = data.name
   }
   data.edit = !data.edit
+  stopPropagation()
+}
+function stopPropagation() {
   event?.stopImmediatePropagation()
 }
-
 function filterNode(_value: any, data: TreeData) {
   return !data.delete || false
 }
@@ -194,7 +194,7 @@ function TransDataReturn(Val: TreeData[]) {
       newName: item.newName,
       grandParentId: item.grandParentId || "",
       parentName: item.parentName || "",
-      sort: i
+      sort: i.toString()
     }
     i++
     if (!(functionVo.delete && functionVo.newAdd)) {
@@ -214,7 +214,7 @@ function TransDataReturn(Val: TreeData[]) {
         newName: child.newName,
         grandParentId: child.grandParentId || "",
         parentName: item.name || "",
-        sort: i
+        sort: i.toString()
       }
       functionVo.parentName = item.name
       if (tempMap.get(functionVo.name) != undefined) functionVo.disabled = true
@@ -238,7 +238,7 @@ function TransDataReturn(Val: TreeData[]) {
           newName: grandChild.newName,
           grandParentId: item.id || "",
           parentName: child.name || "",
-          sort: i
+          sort: i.toString()
         }
         if (tempMap2.get(functionVo.name) != undefined) functionVo.disabled = true
         else tempMap2.set(functionVo.name, true)
@@ -249,7 +249,6 @@ function TransDataReturn(Val: TreeData[]) {
       })
     })
   })
-  console.log(result)
   return result
 }
 
@@ -263,7 +262,7 @@ function DisableFromParentTree(data: TreeData) {
 }
 
 function statusChange(data: TreeData) {
-  event?.stopPropagation()
+  stopPropagation()
   data.disabled = !data.disabled
   if (data.newAdd && data.disabled) {
     data.delete = true
@@ -293,13 +292,6 @@ function setChildDisable(data: TreeData) {
 }
 
 onMounted(async () => {
-  const user = await getUserInfoApi()
-  const useremail = user.data.email || ""
-  if (useremail.includes("@google.com")) {
-    await router.push({
-      name: "Home:View"
-    })
-  }
   await initPage()
   await waitUntil(() => treeRef.value !== null)
 })
@@ -332,13 +324,13 @@ onMounted(async () => {
   <div class="app-container">
     <el-form>
       <el-form-item>
-        <el-button icon="Plus" type="primary" :disabled="isloading" @click="createBtnClick">Create</el-button>
-        <el-button icon="Refresh" type="info" :disabled="isloading" @click="queryData">Reload</el-button>
-        <el-button icon="Refresh" type="info" :disabled="isloading" @click="SaveAll">Save</el-button>
+        <el-button icon="Plus" type="primary" :disabled="isLoading" @click="createBtnClick">Create</el-button>
+        <el-button icon="Refresh" type="info" :disabled="isLoading" @click="queryData">Reload</el-button>
+        <el-button icon="Refresh" type="info" :disabled="isLoading" @click="SaveAll">Save</el-button>
       </el-form-item>
     </el-form>
     <el-tree
-      v-loading="isloading"
+      v-loading="isLoading"
       id="func-tree"
       ref="treeRef"
       style=""

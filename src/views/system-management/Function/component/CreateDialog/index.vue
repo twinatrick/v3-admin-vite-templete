@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue"
 import { ElForm, ElLoading, ElMessage, FormRules } from "element-plus"
-import { createFunction } from "@/api/function"
+import { api } from "@/api/client"
 //data
 const visible = ref(false)
 const formData = reactive({
@@ -43,10 +43,10 @@ const createData = async () => {
     target: "#createDialog"
   })
   try {
-    const res = await createFunction({
+    const res = await api.functions.addFunction({
       name: formData.name,
       parent: "",
-      sort: 0,
+      sort: "0",
       type: 1
     })
     if (res.code == 0) {

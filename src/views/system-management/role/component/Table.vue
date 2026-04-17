@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import CustomTable from "@/components/CustomTable/index.vue"
-import { RoleVO } from "@/views/system-management/role/type"
 import { ref } from "vue"
+import { RoleVO } from "../type"
 import { CustomTableOptionType } from "@/components/CustomTable/types/Option"
 defineProps({
   data: {

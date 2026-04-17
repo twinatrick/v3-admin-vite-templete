@@ -4,14 +4,10 @@ import { ElForm, ElMessage } from "element-plus"
 import { showLoading } from "@/utils"
 import service from "../service"
 import { UserVOFormData } from "../type"
-import { UserVO } from "@/api/users/types/user"
+import { UserVo } from "@/api/generated/Api"
 //data
 const visible = ref(false)
-//computed
-// const userList = computed(() => service.data.user)
 const roleList = computed(() => service.data.role)
-// const locationList = computed(() => service.data.location)
-// const tagList = computed(() => service.data.tag)
 const formData = reactive(new UserVOFormData())
 const formRef = ref<InstanceType<typeof ElForm> | null>(null)
 const emit = defineEmits(["reload"])
@@ -30,7 +26,7 @@ const confirmBtnClick = async () => {
     loading.close()
   }
 }
-const show = (data: UserVO) => {
+const show = (data: UserVo) => {
   formData.data = data
   formRef.value?.clearValidate()
   visible.value = true
@@ -58,30 +54,11 @@ defineExpose({
       <el-form-item label="disabled" prop="disabled" class="form-item-1-2">
         <el-switch v-model="formData.disabled" active-text="Disabled" inactive-text="Enable" />
       </el-form-item>
-      <!--      <el-form-item label="Location" prop="location" class="form-item-1-2" label-width="80px">-->
-      <!--        <el-select v-model="formData.location" filterable class="w-100%!">-->
-      <!--          <el-option v-for="loc in locationList" :key="loc.key" :value="loc.value" :label="loc.value" />-->
-      <!--        </el-select>-->
-      <!--      </el-form-item>-->
-      <!--      <el-form-item label="Name" prop="name" class="form-item-1-1">-->
-      <!--        <el-input v-model="formData.familyName" placeholder="Family Name" class="w-48%! mr-a" />-->
-      <!--        <el-input v-model="formData.givenName" placeholder="Given Name" class="w-48%!" />-->
-      <!--      </el-form-item>-->
       <el-form-item label="Roles" prop="roles" class="form-item-1-1">
         <el-select v-model="formData.roles" multiple filterable clearable class="w-100%!">
-          <el-option v-for="role in roleList" :key="role.key" :value="role.key || ''" :label="role.name || ''" />
+          <el-option v-for="role in roleList" :key="role.id" :value="role.id || ''" :label="role.name || ''" />
         </el-select>
       </el-form-item>
-      <!--      <el-form-item label="Tags" prop="tags" class="form-item-1-1">-->
-      <!--        <el-select v-model="formData.tags" multiple filterable clearable class="w-100%!">-->
-      <!--          <el-option v-for="tag in tagList" :key="tag.key" :value="tag.key || ''" :label="tag.name || ''" />-->
-      <!--        </el-select>-->
-      <!--      </el-form-item>-->
-      <!--      <el-form-item label="Supervisors" prop="supervisor" class="form-item-1-1">-->
-      <!--        <el-select v-model="formData.supervisor" multiple filterable clearable class="w-100%!">-->
-      <!--          <el-option v-for="user in userList" :key="user.id" :value="user.id!" :label="user.email" />-->
-      <!--        </el-select>-->
-      <!--      </el-form-item>-->
     </el-form>
     <template #footer>
       <el-button icon="SwitchButton" type="info" @click="hide">Cancel</el-button>

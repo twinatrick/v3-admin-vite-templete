@@ -1,21 +1,14 @@
-export type Role = {
-  key?: string
-  name?: string
-  function?: string
-  status?: number
-  description?: string
-}
-export type RoleVO = Role & {
+import { RoleOutVo, FunctionVo } from "@/api/generated/Api"
+
+export type { FunctionVo }
+
+export type Role = RoleOutVo & {}
+
+export type RoleVO = RoleOutVo & {
   functionKeys?: string[]
 }
-export type Function = {
-  id: string
-  name: string
-  parent: string
-  sort?: number
-}
 
-export type TreeProp = Function & {
+export type TreeProp = FunctionVo & {
   children?: TreeProp[]
 }
 

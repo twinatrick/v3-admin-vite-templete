@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { PropType, ref } from "vue"
-import { CriteriaAPIFilter } from "@/api/aquarkData/type"
-import * as api from "@/api/aquarkData"
-// import {getDataList} from "@/api/aquarkData";
+import { CriteriaAPIFilter } from "@/api/generated/Api"
+import { api } from "@/api/client"
 
 const inputType = ref<number>(0)
 
@@ -103,7 +102,7 @@ const queryStringTrans = async (query: string) => {
   const result = searchArr.map((item) => {
     return transShowTemplateToCriteriaAPIFilter(item)
   })
-  const res = await api.getDataList(result)
+  const res = await api.aquarkData.getData(result)
   emit("addFilter", res.data)
 }
 const transShowTemplateToCriteriaAPIFilter = (showTemplate: showTemplate): CriteriaAPIFilter => {

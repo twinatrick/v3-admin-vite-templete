@@ -3,8 +3,8 @@ import { PropType, ref } from "vue"
 import { RouteRecordRaw } from "vue-router"
 import { RoleVO, TreeProp } from "../type"
 import { ElTree } from "element-plus"
-import { editRole, roleBindFunction, roleUnbindFunction } from "../api"
 import { showLoading } from "@/utils"
+import { api } from "@/api/client"
 //data
 const prop = defineProps({
   allFunctions: {
@@ -56,12 +56,12 @@ const confirmClick = async () => {
   const loading = showLoading("Role updating...")
   try {
     formData.value.functionKeys = (treeRef.value?.getCheckedKeys(true) || []) as string[]
-    const { data } = await editRole(formData.value)
+    const { data } = await api.roles.updateRole(formData.value)
     const removeKeys = OldFunctionKeys.value.filter((key) => !formData.value.functionKeys?.includes(key))
     const addKeys = formData.value.functionKeys?.filter((key) => !OldFunctionKeys.value.includes(key))
-    if (removeKeys.length > 0) await roleUnbindFunction(formData.value.key || "", removeKeys)
-    if (addKeys.length > 0) await roleBindFunction(formData.value.key || "", addKeys)
-    // const { data } = await updateRole(formData.value)
+    if (removeKeys.length > 0)
+      await api.roles.roleUnbindFunction({ role: formData.value.id || "", functionList: removeKeys })
+    if (addKeys.length > 0) await api.roles.roleBindFunction({ role: formData.value.id || "", functionList: addKeys })
     emit("update", data)
     hide()
   } catch (e) {

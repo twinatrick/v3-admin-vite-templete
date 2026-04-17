@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import FilterTable from "@/components/FilterTable/v3.vue"
 import { onMounted, ref } from "vue"
-import { TableColumnMap, TableData } from "@/components/FilterTable/type"
-import * as api from "@/api/aquarkData"
-// import * as type from "@/api/aquarkData/type"
+import { api } from "@/api/client"
 import { transQuery } from "@/commonFunction/dataTrans"
+import { TableColumnMap, TableData } from "@/components/FilterTable/type"
 
 const startDate = ref<Date>(new Date())
 const endDate = ref<Date>(new Date())
@@ -86,7 +85,10 @@ const map = ref<Array<TableColumnMap>>([
 const getAquarkData = async () => {
   startDate.value.setHours(0, 0, 0, 0)
   endDate.value.setHours(23, 59, 59, 999)
-  const res = await api.getAverage(startDate.value, endDate.value)
+  const res = await api.aquarkData.getAverage({
+    start: startDate.value.toISOString(),
+    end: endDate.value.toISOString()
+  })
   tableData.value = transQuery(res.data)
 }
 // const handleDataReload = async (dataList: any) => {

@@ -229,7 +229,7 @@ tableData.value = calCurrentData(prop.data)
       :row-class-name="rowClassName"
       :cell-class-name="prop.cellClassName"
       @row-dblclick="
-        (row, column, event) =>
+        (row:any, column:any, event:any) =>
           emit('row-dbclick', {
             row,
             column,
@@ -237,7 +237,7 @@ tableData.value = calCurrentData(prop.data)
           })
       "
       @row-click="
-        (row, column, event) =>
+        (row:any, column:any, event:any) =>
           emit('row-click', {
             row,
             column,
@@ -245,7 +245,7 @@ tableData.value = calCurrentData(prop.data)
           })
       "
       @row-contextmenu="
-        (row, column, event) =>
+        (row:any, column:any, event:any) =>
           emit('row-contextmenu', {
             row,
             column,

@@ -4,7 +4,7 @@ import { defineStore } from "pinia"
 import { type RouteRecordRaw } from "vue-router"
 import { asyncRoutes, constantRoutes, ErrorPage } from "@/router"
 import asyncRouteSettings from "@/config/async-route"
-import * as RoleType from "@/views/system-management/role/type"
+import { FunctionVo } from "@/views/system-management/role/type"
 
 const hasPermission = (_roles: string[], _route: RouteRecordRaw) => {
   // return true
@@ -62,7 +62,7 @@ function getAsyncRouteByName(routes: RouteRecordRaw[], permissions: string[]): R
   return filteredRoutes
 }
 
-const getAsyncRouteByFunctions = (routes: RouteRecordRaw[], permissions: RoleType.Function[]): RouteRecordRaw[] => {
+const getAsyncRouteByFunctions = (routes: RouteRecordRaw[], permissions: FunctionVo[]): RouteRecordRaw[] => {
   function filterRoutes(route: RouteRecordRaw): RouteRecordRaw | undefined {
     if (route.children) {
       // 遞迴處理子路由
@@ -73,7 +73,7 @@ const getAsyncRouteByFunctions = (routes: RouteRecordRaw[], permissions: RoleTyp
       })
       route.children = temp
     }
-    const isMatch = (f: RoleType.Function) => {
+    const isMatch = (f: FunctionVo) => {
       if (route.children === undefined && route.name === undefined) return true
       const parent = permissions.find((p) => f.parent === p.id)
       if (!parent) return false
@@ -115,7 +115,7 @@ export const usePermissionStore = defineStore("permission", () => {
     dynamicRoutes.value = getAsyncRouteByName(asyncRoutes, permissions)
     routes.value = constantRoutes.concat(asyncRoutes).concat(ErrorPage)
   }
-  const setRoutesByFunctions = (permissions: RoleType.Function[]) => {
+  const setRoutesByFunctions = (permissions: FunctionVo[]) => {
     dynamicRoutes.value = getAsyncRouteByFunctions(asyncRoutes, permissions)
     routes.value = constantRoutes.concat(asyncRoutes).concat(ErrorPage)
   }

@@ -2,7 +2,7 @@
 import { computed, onMounted, ref } from "vue"
 import CreateDialog from "./create-dialog/index.vue"
 import EditDialog from "./edit-dialog/index.vue"
-import { UserVO } from "@/api/users/types/user"
+import { UserVo } from "@/api/generated/Api"
 import DeleteDialog from "./delete-dialog/index.vue"
 import { showLoading } from "@/utils"
 import service from "./service"
@@ -10,7 +10,7 @@ import DataTable from "./data-table/index.vue"
 //data
 
 //等待双極
-const selectedRow = ref<UserVO>({})
+const selectedRow = ref<UserVo>({})
 const createDialogRef = ref<InstanceType<typeof CreateDialog> | null>(null)
 const editDialogRef = ref<InstanceType<typeof EditDialog> | null>(null)
 const deleteDialogRef = ref<InstanceType<typeof DeleteDialog> | null>(null)
@@ -33,11 +33,11 @@ const init = async () => {
   }
 }
 
-const onRowDbClick = (row: UserVO) => {
+const onRowDbClick = (row: UserVo) => {
   // const row = scope.row as UserVO
   editDialogRef.value?.show(row)
 }
-const onRowSelect = (rows: UserVO) => {
+const onRowSelect = (rows: UserVo) => {
   selectedRow.value = rows
 }
 //init
