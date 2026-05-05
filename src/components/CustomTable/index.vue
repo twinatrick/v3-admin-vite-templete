@@ -24,6 +24,10 @@ const prop = defineProps({
     type: Number,
     default: 100
   },
+  currentPage: {
+    type: Number,
+    default: 1
+  },
   loading: {
     type: Boolean,
     default: false
@@ -47,9 +51,10 @@ const emit = defineEmits<{
   (event: "row-click", val: any): void
   (event: "row-dbclick", val: any): void
   (event: "row-contextmenu", val: any): void
+  (event: "page-change", val: { page: number; size: number }): void
+  (event: "sort-change", val: { sortBy: string; sortDir: "asc" | "desc" | null }): void
 }>()
 //data
-const currentPage = ref<number>(1)
 const tableData = ref<Array<any>>()
 const pageSize = ref<number>(prop.pageSize)
 const total = ref<number>(prop.total)
@@ -71,6 +76,18 @@ watch(
   () => currentPage.value,
   () => (tableData.value = calCurrentData(prop.data))
 )
+watch(
+  () => prop.currentPage,
+  () => {
+    currentPage.value = prop.currentPage
+  }
+)
+watch(
+  () => prop.pageSize,
+  () => {
+    pageSize.value = prop.pageSize
+  }
+)
 //functions
 const calCurrentData = (val: Array<any>) => {
   if (!prop.option?.pagination) return val
@@ -83,9 +100,29 @@ const calCurrentData = (val: Array<any>) => {
 }
 const handleCurrentChange = (val: number) => {
   currentPage.value = val
+  if (prop.option?.realPagination) {
+    emit("page-change", {
+      page: val - 1,
+      size: pageSize.value
+    })
+  }
 }
 const handlePageSizeChange = (val: number) => {
   pageSize.value = val
+  currentPage.value = 1
+  if (prop.option?.realPagination) {
+    emit("page-change", {
+      page: 0,
+      size: val
+    })
+  }
+}
+const handleSortChange = (payload: { prop: string; order: "ascending" | "descending" | null }) => {
+  const sortDir = payload.order === "ascending" ? "asc" : payload.order === "descending" ? "desc" : null
+  emit("sort-change", {
+    sortBy: payload.prop,
+    sortDir
+  })
 }
 const handleSelectionChange = (val: Array<any>) => {
   emit("multi-selected", val)
@@ -228,6 +265,7 @@ tableData.value = calCurrentData(prop.data)
       :row-style="prop.option?.table?.rowStyle"
       :row-class-name="rowClassName"
       :cell-class-name="prop.cellClassName"
+      @sort-change="handleSortChange"
       @row-dblclick="
         (row:any, column:any, event:any) =>
           emit('row-dbclick', {
@@ -267,6 +305,7 @@ tableData.value = calCurrentData(prop.data)
       :pager-count="option?.pagination?.maxPageCount"
       :layout="option?.pagination?.layout"
       :small="option?.pagination?.small"
+      :page-sizes="option?.pagination?.pageSizes"
       @update:current-page="handleCurrentChange"
       @update:page-size="handlePageSizeChange"
       flex-justify-center

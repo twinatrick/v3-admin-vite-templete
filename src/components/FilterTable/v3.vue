@@ -94,6 +94,18 @@ const prop = defineProps({
   rowClassName: {
     type: [String, Function] as PropType<String | ((params: any) => string | undefined)>,
     default: () => ""
+  },
+  remote: {
+    type: Boolean,
+    default: false
+  },
+  remotePagination: {
+    type: Object as PropType<{ currentPage: number; pageSize: number; total: number }>,
+    default: () => ({
+      currentPage: 1,
+      pageSize: 20,
+      total: 0
+    })
   }
 })
 const oldData = reactive<{ [key: string]: any }>({})
@@ -138,6 +150,7 @@ const pageObject = reactive({
   layout: "total, prev, pager, next, jumper, sizes"
 })
 const extraFixed = ref<boolean>(true)
+const isRemote = computed(() => prop.remote)
 //founction
 // 將原始資料轉成標準資料
 const originToStandard = () => {
@@ -198,6 +211,11 @@ const getInitSearchItem = () => {
 }
 // 根據Filter查詢
 const startSearch = () => {
+  if (isRemote.value) {
+    emit("filter-change", JSON.parse(JSON.stringify(searchItem)))
+    slicedData.value = dataSort(filteredData.value)
+    return
+  }
   const filter = (standardData: any) => {
     let resultMatch = true
     prop.tableColumnMap.forEach((tableColumn) => {
@@ -282,6 +300,13 @@ const resetFilterBtnClick = () => {
 }
 const handleCurrentChange = (val: number) => {
   pageObject.currentPage = val
+  if (isRemote.value) {
+    emit("page-change", {
+      page: val - 1,
+      size: pageObject.pageSize
+    })
+    return
+  }
   slicedData.value = dataSort(filteredData.value).slice(
     (pageObject.currentPage - 1) * pageObject.pageSize,
     pageObject.currentPage * pageObject.pageSize
@@ -293,6 +318,13 @@ const handleCurrentChange = (val: number) => {
 const handlePageSizeChange = (val: number) => {
   pageObject.pageSize = val
   pageObject.currentPage = 1
+  if (isRemote.value) {
+    emit("page-change", {
+      page: 0,
+      size: val
+    })
+    return
+  }
   slicedData.value = dataSort(filteredData.value).slice(
     (pageObject.currentPage - 1) * pageObject.pageSize,
     pageObject.currentPage * pageObject.pageSize
@@ -338,6 +370,13 @@ const sortColumn = (field: string, sort: string | null) => {
         sortItem[key] = null
       }
     }
+  }
+  if (isRemote.value) {
+    emit("sort-change", {
+      sortBy: field,
+      sortDir: sort
+    })
+    return
   }
   if (prop.pageable) {
     slicedData.value = dataSort(filteredData.value).slice(
@@ -507,7 +546,16 @@ const dbClickData = (val: any) => {
   emit("row-dbclick", result)
 }
 
-const emit = defineEmits(["onFocus", "multi-selected", "editOutput", "row-click", "row-dbclick"])
+const emit = defineEmits([
+  "onFocus",
+  "multi-selected",
+  "editOutput",
+  "row-click",
+  "row-dbclick",
+  "page-change",
+  "sort-change",
+  "filter-change"
+])
 defineExpose({
   getEditData,
   clearSelection,
@@ -526,7 +574,9 @@ watch(
       if (Object.values(sortItem).every((value) => value === null)) {
         getInitSearchItem()
       }
-      startSearch()
+      if (!isRemote.value) {
+        startSearch()
+      }
     }
   },
   { deep: true }
@@ -544,6 +594,16 @@ watch(
     }
   ),
   { deep: true }
+)
+watch(
+  () => prop.remotePagination,
+  (value) => {
+    if (!isRemote.value || !value) return
+    pageObject.currentPage = value.currentPage
+    pageObject.pageSize = value.pageSize
+    pageObject.total = value.total
+  },
+  { deep: true, immediate: true }
 )
 watch(
   () => prop.tableColumnMap,

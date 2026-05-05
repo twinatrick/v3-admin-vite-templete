@@ -4,7 +4,9 @@ import service from "../service"
 import { computed } from "vue"
 import { TableColumnMap } from "@/components/FilterTable/type"
 import { CustomTableOptionType } from "@/components/CustomTable/types/Option"
-import { showLoading } from "@/utils"
+
+const prop = defineProps<{ remotePagination: { currentPage: number; pageSize: number; total: number } }>()
+const emit = defineEmits(["page-change", "sort-change", "filter-change", "row-click", "row-dbclick", "refresh"])
 
 const userList = computed(() => service.data.user)
 const roleList = computed(() => service.data.role)
@@ -19,12 +21,14 @@ const columnMap = computed(() => {
       name: "email",
       value: "E-mail",
       type: "string",
-      fixed: "left"
+      fixed: "left",
+      sortable: true
     },
     {
       name: "roleArr",
       value: "Roles",
       type: "string",
+      sortable: true,
       formatter(value: string[]) {
         if (value.length === 0) return ""
         return value.map((v) => roleList.value.find((r) => r.id == v)?.name).join(",")
@@ -34,6 +38,7 @@ const columnMap = computed(() => {
       name: "disabled",
       value: "disabled",
       type: "select",
+      sortable: true,
       formatter: (value: boolean) => {
         return value ? "Disable" : "Enable"
       }
@@ -52,18 +57,39 @@ const options: CustomTableOptionType = {
   }
 }
 const handleRefreshClick = async () => {
-  const loading = showLoading("Fetch data...", "#user-data-table")
-  try {
-    await service.initialize()
-  } catch (e) {
-    console.error(e)
-  } finally {
-    loading.close()
-  }
+  emit("refresh")
+}
+const handlePageChange = (payload: { page: number; size: number }) => {
+  emit("page-change", payload)
+}
+const handleSortChange = (payload: { sortBy: string; sortDir: "asc" | "desc" | null }) => {
+  emit("sort-change", payload)
+}
+const handleFilterChange = (payload: Record<string, any>) => {
+  emit("filter-change", payload)
+}
+const onRowClick = (row: any) => {
+  emit("row-click", row)
+}
+const onRowDbClick = (row: any) => {
+  emit("row-dbclick", row)
 }
 </script>
 <template>
-  <filter-table :data="tableData" :table-column-map="columnMap" :option="options" class="h-100%" id="user-data-table">
+  <filter-table
+    :data="tableData"
+    :table-column-map="columnMap"
+    :option="options"
+    class="h-100%"
+    id="user-data-table"
+    remote
+    :remote-pagination="prop.remotePagination"
+    @page-change="handlePageChange"
+    @sort-change="handleSortChange"
+    @filter-change="handleFilterChange"
+    @row-click="onRowClick"
+    @row-dbclick="onRowDbClick"
+  >
     <template #header>
       <slot name="header" />
       <el-button icon="Refresh" circle @click="handleRefreshClick" />

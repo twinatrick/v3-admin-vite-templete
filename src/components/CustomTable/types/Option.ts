@@ -16,6 +16,7 @@ interface CustomTableOptionType {
   }
   pagination?: {
     pageSize?: number
+    pageSizes?: number[]
     small?: boolean
     background?: boolean
     layout?: string

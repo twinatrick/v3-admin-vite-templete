@@ -10,6 +10,8 @@ import { ElLoading, ElMessageBox } from "element-plus"
 import { showLoading } from "@/utils"
 import { useUserStore } from "@/store/modules/user"
 import { usePermissionStore } from "@/store/modules/permission"
+import { useRemoteTableQuery } from "@/hooks/useRemoteTableQuery"
+import type { LocationQuery } from "vue-router"
 //data
 const _allRoutes = router
   .getRoutes()
@@ -22,6 +24,43 @@ const tableData = ref<RoleVO[]>([])
 const allFunctions = ref<FunctionVo[]>([])
 const tableLoading = ref(false)
 const isDev = import.meta.env.DEV
+const totalElements = ref(0)
+const roleListFilters = ref({
+  name: "",
+  description: "",
+  createdBy: ""
+})
+const toQueryValue = (query: LocationQuery[string]) => {
+  if (Array.isArray(query)) return query[0] || ""
+  return query || ""
+}
+const queryState = useRemoteTableQuery({
+  defaultPageSize: 20,
+  defaultSortBy: "createdTime",
+  defaultSortDir: "desc",
+  defaultFilters: {
+    name: "",
+    description: "",
+    createdBy: ""
+  },
+  codec: {
+    keys: ["name", "description", "createdBy"],
+    parseFilters(query) {
+      return {
+        name: toQueryValue(query.name),
+        description: toQueryValue(query.description),
+        createdBy: toQueryValue(query.createdBy)
+      }
+    },
+    serializeFilters(filters) {
+      const result: Record<string, string> = {}
+      if (filters.name) result.name = filters.name
+      if (filters.description) result.description = filters.description
+      if (filters.createdBy) result.createdBy = filters.createdBy
+      return result
+    }
+  }
+})
 //compute
 const selectedRow = computed<RoleVO>(() => {
   return tableRef.value?.selectedRow || {}
@@ -70,8 +109,14 @@ const leveledFunctions = computed(() => {
 const queryList = async () => {
   tableLoading.value = true
   try {
-    const res = await api.roles.getRole()
-    tableData.value = res.data.data || []
+    queryState.setFilters(roleListFilters.value, false)
+    await queryState.syncToRouteQuery()
+    const res = await api.roles.searchRoles(queryState.buildApiQuery())
+    const pageResult = res.data.data || {}
+    tableData.value = pageResult.content || []
+    totalElements.value = pageResult.totalElements || 0
+    queryState.page.value = pageResult.currentPage ?? queryState.page.value
+    queryState.size.value = pageResult.pageSize ?? queryState.size.value
   } finally {
     tableLoading.value = false
   }
@@ -131,14 +176,46 @@ const _updateUserInfoAndPermission = async () => {
 }
 
 onMounted(() => {
+  queryState.initFromRouteQuery()
+  roleListFilters.value = {
+    name: queryState.filters.name || "",
+    description: queryState.filters.description || "",
+    createdBy: queryState.filters.createdBy || ""
+  }
   queryList()
   getFunctionList()
 })
+
+const handleRolePageChange = async (payload: { page: number; size: number }) => {
+  if (queryState.size.value !== payload.size) {
+    queryState.setPageSize(payload.size)
+  }
+  queryState.page.value = payload.page
+  await queryList()
+}
+
+const handleRoleSortChange = async (payload: { sortBy: string; sortDir: "asc" | "desc" | null }) => {
+  if (!payload.sortDir) {
+    queryState.setSort("createdTime", "desc")
+  } else {
+    queryState.setSort(payload.sortBy, payload.sortDir)
+  }
+  await queryList()
+}
 </script>
 <style scoped></style>
 <template>
   <div class="app-container">
-    <Table ref="tableRef" :data="tableData" :loading="tableLoading">
+    <Table
+      ref="tableRef"
+      :data="tableData"
+      :loading="tableLoading"
+      :total="totalElements"
+      :current-page="queryState.page.value + 1"
+      :page-size="queryState.size.value"
+      @page-change="handleRolePageChange"
+      @sort-change="handleRoleSortChange"
+    >
       <el-form>
         <el-form-item>
           <el-space>
