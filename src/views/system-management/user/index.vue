@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref } from "vue"
+import { QueryForm, QueryFormItem } from "@/components/QueryForm"
 import CreateDialog from "./create-dialog/index.vue"
 import EditDialog from "./edit-dialog/index.vue"
 import { UserVo } from "@/api/generated/Api"
@@ -7,10 +8,9 @@ import DeleteDialog from "./delete-dialog/index.vue"
 import { showLoading } from "@/utils"
 import service from "./service"
 import DataTable from "./data-table/index.vue"
-import { useRemoteTableQuery } from "@/hooks/useRemoteTableQuery"
-import type { LocationQuery } from "vue-router"
 //data
 
+const queryFormRef = ref<any>(null)
 //等待双極
 const selectedRow = ref<UserVo>({})
 const createDialogRef = ref<InstanceType<typeof CreateDialog> | null>(null)
@@ -20,54 +20,39 @@ const userListFilters = ref({
   name: "",
   email: "",
   phone: "",
+  disabled: "" as "" | "true" | "false",
   createdBy: ""
 })
-const toQueryValue = (query: LocationQuery[string]) => {
-  if (Array.isArray(query)) return query[0] || ""
-  return query || ""
-}
-const queryState = useRemoteTableQuery({
-  defaultPageSize: 20,
-  defaultSortBy: "createdTime",
-  defaultSortDir: "desc",
-  defaultFilters: {
-    name: "",
-    email: "",
-    phone: "",
-    createdBy: ""
-  },
-  codec: {
-    keys: ["name", "email", "phone", "createdBy"],
-    parseFilters(query) {
-      return {
-        name: toQueryValue(query.name),
-        email: toQueryValue(query.email),
-        phone: toQueryValue(query.phone),
-        createdBy: toQueryValue(query.createdBy)
-      }
-    },
-    serializeFilters(filters) {
-      const result: Record<string, string> = {}
-      if (filters.name) result.name = filters.name
-      if (filters.email) result.email = filters.email
-      if (filters.phone) result.phone = filters.phone
-      if (filters.createdBy) result.createdBy = filters.createdBy
-      return result
-    }
-  }
-})
 //functions
-const isSelected = computed(() => Object.values(selectedRow.value).length > 0)
-const remotePagination = computed(() => ({
-  currentPage: service.data.page + 1,
-  pageSize: service.data.size,
-  total: service.data.totalElements
-}))
-const applyAndFetch = async () => {
-  queryState.setFilters(userListFilters.value, false)
-  await queryState.syncToRouteQuery()
-  await service.queryUser(queryState.buildApiQuery())
+const queryUsers = async (params: any) => {
+  const filters = { ...params.filters }
+  // Convert disabled string to boolean if not empty
+  if (filters.disabled === "true") {
+    filters.disabled = true
+  } else if (filters.disabled === "false") {
+    filters.disabled = false
+  } else {
+    // Empty string means "All", don't send it to API
+    delete filters.disabled
+  }
+
+  await service.queryUser({
+    page: params.page,
+    size: params.size,
+    sortBy: params.sortBy,
+    sortDir: params.sortDir,
+    ...filters
+  })
+
+  return {
+    data: service.data.user,
+    total: service.data.totalElements,
+    page: service.data.page,
+    size: service.data.size
+  }
 }
+
+const isSelected = computed(() => Object.values(selectedRow.value).length > 0)
 const createBtnClick = () => {
   createDialogRef.value?.show()
 }
@@ -78,14 +63,8 @@ const init = async () => {
   const loading = showLoading("Initializing...", "#user-page")
   try {
     await service.initialize()
-    queryState.initFromRouteQuery()
-    userListFilters.value = {
-      name: queryState.filters.name || "",
-      email: queryState.filters.email || "",
-      phone: queryState.filters.phone || "",
-      createdBy: queryState.filters.createdBy || ""
-    }
-    await service.queryUser(queryState.buildApiQuery())
+    // Trigger initial query after roles are loaded
+    await queryFormRef.value?.search()
   } catch (e) {
     console.error(e)
   } finally {
@@ -100,39 +79,6 @@ const onRowDbClick = (row: UserVo) => {
 const onRowSelect = (rows: UserVo) => {
   selectedRow.value = rows
 }
-const onPageChange = async (payload: { page: number; size: number }) => {
-  if (queryState.size.value !== payload.size) {
-    queryState.setPageSize(payload.size)
-  }
-  queryState.page.value = payload.page
-  await applyAndFetch()
-}
-const onSortChange = async (payload: { sortBy: string; sortDir: "asc" | "desc" | null }) => {
-  if (!payload.sortDir) {
-    queryState.setSort("createdTime", "desc")
-  } else {
-    queryState.setSort(payload.sortBy, payload.sortDir)
-  }
-  await applyAndFetch()
-}
-const onFilterChange = async (payload: Record<string, any>) => {
-  const toSingleString = (value: unknown) => {
-    if (!Array.isArray(value)) return ""
-    const firstValue = value.find((item) => typeof item === "string" && Boolean(item.trim()))
-    return firstValue || ""
-  }
-  queryState.setFilters({
-    ...userListFilters.value,
-    name: toSingleString(payload.name),
-    email: toSingleString(payload.email),
-    phone: toSingleString(payload.phone),
-    createdBy: toSingleString(payload.createdBy)
-  })
-  userListFilters.value = {
-    ...queryState.filters
-  }
-  await applyAndFetch()
-}
 //init
 onMounted(() => {
   init()
@@ -140,22 +86,70 @@ onMounted(() => {
 </script>
 <template>
   <div class="app-container" id="user-page">
+    <!-- Query Form -->
+    <QueryForm
+      ref="queryFormRef"
+      v-model="userListFilters"
+      :grid-cols="3"
+      :query-fn="queryUsers"
+      :bind-url="true"
+      :button-col-span="1"
+      :default-page-size="20"
+      :default-sort-by="'createdTime'"
+      :default-sort-dir="'desc'"
+      :query-on-mounted="false"
+    >
+      <QueryFormItem label="Name" :col-span="1">
+        <el-input v-model="userListFilters.name" placeholder=" " clearable />
+      </QueryFormItem>
+      <QueryFormItem label="E-mail" :col-span="1">
+        <el-input v-model="userListFilters.email" placeholder=" " clearable />
+      </QueryFormItem>
+      <QueryFormItem label="Phone" :col-span="1">
+        <el-input v-model="userListFilters.phone" placeholder=" " clearable />
+      </QueryFormItem>
+      <QueryFormItem label="Status" :col-span="1">
+        <el-select v-model="userListFilters.disabled" placeholder=" " clearable>
+          <el-option label="All" value="" />
+          <el-option label="Enabled" value="false" />
+          <el-option label="Disabled" value="true" />
+        </el-select>
+      </QueryFormItem>
+      <QueryFormItem label="Created By" :col-span="1">
+        <el-input v-model="userListFilters.createdBy" placeholder=" " clearable />
+      </QueryFormItem>
+    </QueryForm>
+
+    <!-- Data Table -->
     <data-table
-      :remote-pagination="remotePagination"
+      v-if="queryFormRef"
+      :data="queryFormRef.data"
+      :loading="queryFormRef.loading"
+      :remote-pagination="{
+        currentPage: queryFormRef.currentPage,
+        pageSize: queryFormRef.size,
+        total: queryFormRef.total
+      }"
       @row-dbclick="onRowDbClick"
       @row-click="onRowSelect"
-      @page-change="onPageChange"
-      @sort-change="onSortChange"
-      @filter-change="onFilterChange"
-      @refresh="applyAndFetch"
+      @page-change="queryFormRef.onPageChange"
+      @sort-change="queryFormRef.onSortChange"
     >
       <template #header>
-        <el-button icon="Plus" type="primary" @click="createBtnClick">Create</el-button>
-        <el-button icon="Delete" type="danger" :disabled="!isSelected" @click="deleteBtnClick"> Delete </el-button>
+        <el-form>
+          <el-form-item>
+            <el-space>
+              <el-button icon="Plus" type="primary" @click="createBtnClick">Create</el-button>
+              <el-button icon="Delete" type="danger" :disabled="!isSelected" @click="deleteBtnClick">Delete</el-button>
+            </el-space>
+          </el-form-item>
+        </el-form>
       </template>
     </data-table>
-    <CreateDialog ref="createDialogRef" @reload="init" />
-    <EditDialog ref="editDialogRef" @reload="init" />
-    <DeleteDialog ref="deleteDialogRef" />
+
+    <!-- Dialogs -->
+    <CreateDialog ref="createDialogRef" @reload="queryFormRef?.refresh" />
+    <EditDialog ref="editDialogRef" @reload="queryFormRef?.refresh" />
+    <DeleteDialog ref="deleteDialogRef" @reload="queryFormRef?.refresh" />
   </div>
 </template>

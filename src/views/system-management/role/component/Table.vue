@@ -45,7 +45,7 @@ const handleSelected = (rows: Array<RoleVO>) => {
   emit("selected", selectedRow.value)
 }
 const functionCountFormatter = (row: RoleVO) => {
-  return String(row.functionKeys?.length || 0)
+  return String(row.functionIds?.length || 0)
 }
 const handlePageChange = (payload: { page: number; size: number }) => {
   emit("page-change", payload)
@@ -89,3 +89,5 @@ defineExpose({
     </template>
   </CustomTable>
 </template>
+
+<style scoped></style>

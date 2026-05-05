@@ -24,19 +24,15 @@ const selectedRow = ref<AlertCheckLimitVo>({
   columnName: ""
 })
 const handleRowClick = (row: any) => {
-  console.log(row)
   selectedRow.value = row
 }
 const handleAdd = () => {
-  console.log("add")
   addDialogRef.value?.show()
 }
 const handleEdit = () => {
-  console.log("edit")
   editDialogRef.value?.show()
 }
 const handleDelete = async () => {
-  console.log("delete")
   const isConfirmed = await ElMessageBox.confirm("Are you sure to delete?", "Confirm delete", {
     confirmButtonText: "OK",
     cancelButtonText: "Cancel",

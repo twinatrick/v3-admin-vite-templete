@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { parseRouteTitle } from "@/utils"
+// import { parseRouteTitle } from "@/utils"
 import { ref, watch } from "vue"
 import { type RouteLocationMatched, useRoute } from "vue-router"
 
@@ -54,9 +54,9 @@ getBreadcrumb()
       <span disabled v-else @click.prevent="handleLink(item)">
         {{ item.meta.title }}
       </span> -->
-      <span>
-        {{ parseRouteTitle(item) }}
-      </span>
+      <!--      <span>-->
+      <!--        {{ parseRouteTitle(item) }}-->
+      <!--      </span>-->
     </el-breadcrumb-item>
   </el-breadcrumb>
 </template>

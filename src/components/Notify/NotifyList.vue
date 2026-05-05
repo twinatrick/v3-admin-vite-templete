@@ -25,7 +25,7 @@ const notifyClick = (item: any) => {
 </script>
 
 <template>
-  <el-empty v-if="props.list.length === 0" />
+  <el-empty v-if="props.list?.length === 0" />
   <el-card
     v-else
     v-for="(item, index) in props.list"

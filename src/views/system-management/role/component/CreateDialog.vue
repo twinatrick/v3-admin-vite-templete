@@ -28,6 +28,8 @@ const show = async () => {
   visible.value = true
   formData.value = {}
   await waitUntil(() => treeRef.value !== null)
+  // 清空 Tree 的選中狀態
+  treeRef.value?.setCheckedKeys([])
 }
 const hide = () => {
   visible.value = false
@@ -37,10 +39,27 @@ const confirmClick = async () => {
     text: "Creating..."
   })
   try {
-    formData.value.functionKeys = (treeRef.value?.getCheckedKeys(true) || []) as string[]
-    const res = await api.roles.addRole(formData.value)
+    // 獲取選中的 function IDs（leafOnly=true 只取葉子節點）
+    const checkedKeys = (treeRef.value?.getCheckedKeys(true) || []) as string[]
+
+    // 1. 先創建 role（不包含 functionIds，因為後端不會自動處理）
+    const requestData: RoleVO = {
+      name: formData.value.name,
+      description: formData.value.description
+    }
+
+    const res = await api.roles.addRole(requestData)
     const data = res?.data
-    emit("create", { ...data, functionKeys: formData.value.functionKeys })
+
+    // 2. 如果有選中的 functions 且創建成功，則綁定 functions
+    if (checkedKeys.length > 0 && data?.id) {
+      await api.roles.roleBindFunction({
+        role: data.id,
+        functionList: checkedKeys
+      })
+    }
+
+    emit("create", { ...data, functionKeys: checkedKeys })
     hide()
   } catch (e) {
     console.error(e)

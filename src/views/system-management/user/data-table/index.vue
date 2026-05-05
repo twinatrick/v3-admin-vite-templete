@@ -1,52 +1,20 @@
 <script setup lang="ts">
-import FilterTable from "@/components/FilterTable/v3.vue"
+import CustomTable from "@/components/CustomTable/index.vue"
 import service from "../service"
 import { computed } from "vue"
-import { TableColumnMap } from "@/components/FilterTable/type"
 import { CustomTableOptionType } from "@/components/CustomTable/types/Option"
 
-const prop = defineProps<{ remotePagination: { currentPage: number; pageSize: number; total: number } }>()
-const emit = defineEmits(["page-change", "sort-change", "filter-change", "row-click", "row-dbclick", "refresh"])
+const prop = defineProps<{
+  data: any[]
+  loading: boolean
+  remotePagination: { currentPage: number; pageSize: number; total: number }
+}>()
+const emit = defineEmits(["page-change", "sort-change", "row-click", "row-dbclick"])
 
-const userList = computed(() => service.data.user)
 const roleList = computed(() => service.data.role)
-// const tagList = computed(() => service.data.tag)
-const tableData = computed(() => {
-  console.log(userList.value)
-  return userList.value.map((data) => ({ data: { ...data } }))
-})
-const columnMap = computed(() => {
-  const map: TableColumnMap[] = [
-    {
-      name: "email",
-      value: "E-mail",
-      type: "string",
-      fixed: "left",
-      sortable: true
-    },
-    {
-      name: "roleArr",
-      value: "Roles",
-      type: "string",
-      sortable: true,
-      formatter(value: string[]) {
-        if (value.length === 0) return ""
-        return value.map((v) => roleList.value.find((r) => r.id == v)?.name).join(",")
-      }
-    },
-    {
-      name: "disabled",
-      value: "disabled",
-      type: "select",
-      sortable: true,
-      formatter: (value: boolean) => {
-        return value ? "Disable" : "Enable"
-      }
-    }
-  ]
-  return map
-})
+
 const options: CustomTableOptionType = {
+  realPagination: true,
   pagination: {
     layout: "total, prev, pager, next, jumper"
   },
@@ -56,17 +24,22 @@ const options: CustomTableOptionType = {
     border: true
   }
 }
-const handleRefreshClick = async () => {
-  emit("refresh")
+
+const roleFormatter = (row: any) => {
+  const roles = row.roleArr || []
+  if (roles.length === 0) return ""
+  return roles.map((id: string) => roleList.value.find((r) => r.id == id)?.name).join(", ")
 }
+
+const statusFormatter = (row: any) => {
+  return row.disabled ? "Disabled" : "Enabled"
+}
+
 const handlePageChange = (payload: { page: number; size: number }) => {
   emit("page-change", payload)
 }
 const handleSortChange = (payload: { sortBy: string; sortDir: "asc" | "desc" | null }) => {
   emit("sort-change", payload)
-}
-const handleFilterChange = (payload: Record<string, any>) => {
-  emit("filter-change", payload)
 }
 const onRowClick = (row: any) => {
   emit("row-click", row)
@@ -76,23 +49,30 @@ const onRowDbClick = (row: any) => {
 }
 </script>
 <template>
-  <filter-table
-    :data="tableData"
-    :table-column-map="columnMap"
+  <custom-table
+    :data="prop.data"
     :option="options"
+    :total="prop.remotePagination.total"
+    :current-page="prop.remotePagination.currentPage"
+    :page-size="prop.remotePagination.pageSize"
+    v-loading="prop.loading"
     class="h-100%"
     id="user-data-table"
-    remote
-    :remote-pagination="prop.remotePagination"
     @page-change="handlePageChange"
     @sort-change="handleSortChange"
-    @filter-change="handleFilterChange"
     @row-click="onRowClick"
     @row-dbclick="onRowDbClick"
   >
     <template #header>
       <slot name="header" />
-      <el-button icon="Refresh" circle @click="handleRefreshClick" />
     </template>
-  </filter-table>
+    <template #body>
+      <el-table-column prop="email" label="E-mail" fixed="left" min-width="200" sortable="custom" />
+      <el-table-column prop="name" label="Name" min-width="150" sortable="custom" />
+      <el-table-column prop="phone" label="Phone" min-width="150" sortable="custom" />
+      <el-table-column label="Roles" min-width="200" :formatter="roleFormatter" sortable="custom" />
+      <el-table-column label="Status" width="120" :formatter="statusFormatter" sortable="custom" />
+      <el-table-column prop="createdBy" label="Created By" min-width="150" sortable="custom" />
+    </template>
+  </custom-table>
 </template>

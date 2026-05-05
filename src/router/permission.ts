@@ -11,7 +11,6 @@ import { RouteRecordRaw } from "vue-router"
 NProgress.configure({ showSpinner: false })
 
 router.beforeEach(async (to) => {
-  console.log(to)
   NProgress.start()
   const userStore = useUserStoreHook()
   const permissionStore = usePermissionStoreHook()
@@ -29,7 +28,6 @@ router.beforeEach(async (to) => {
       } else {
         await userStore.getInfo()
         const permissions = userStore.userInfo?.permissions
-        console.log(permissions)
         if (!permissions) {
           userStore.logout()
           throw new Error("You hava no permission to access this page.")

@@ -10,6 +10,658 @@
  * ---------------------------------------------------------------
  */
 
+export interface AbstractJsonSchemaPropertyObject {
+  title?: string
+  readOnly?: boolean
+}
+
+export interface Item {
+  type?: string
+  properties?: Record<string, AbstractJsonSchemaPropertyObject>
+  requiredProperties?: string[]
+}
+
+export interface JsonSchema {
+  title?: string
+  description?: string
+  properties?: Record<string, AbstractJsonSchemaPropertyObject>
+  requiredProperties?: string[]
+  definitions?: Record<string, Item>
+  type?: string
+  $schema?: string
+}
+
+export interface RepresentationModelObject {
+  _links?: Links
+}
+
+export interface EntityModelSkill {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  description?: string
+  _links?: Links
+}
+
+export interface PageMetadata {
+  /** @format int64 */
+  size?: number
+  /** @format int64 */
+  totalElements?: number
+  /** @format int64 */
+  totalPages?: number
+  /** @format int64 */
+  number?: number
+}
+
+export interface PagedModelEntityModelSkill {
+  _embedded?: {
+    skills?: EntityModelSkill[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelSkill {
+  _embedded?: {
+    skills?: EntityModelSkill[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelAlertCheckLimit {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  tableName?: string
+  columnName?: string
+  /** @format double */
+  limitValue?: number
+  _links?: Links
+}
+
+export interface PagedModelEntityModelAlertCheckLimit {
+  _embedded?: {
+    alertCheckLimits?: EntityModelAlertCheckLimit[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelAlertCheckLimit {
+  _embedded?: {
+    alertCheckLimits?: EntityModelAlertCheckLimit[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelSkillLevel {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  /** @format int32 */
+  levelValue?: number
+  title?: string
+  description?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelSkillLevel {
+  _embedded?: {
+    skillLevels?: EntityModelSkillLevel[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelSkillLevel {
+  _embedded?: {
+    skillLevels?: EntityModelSkillLevel[]
+  }
+  _links?: Links
+}
+
+export interface Function {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  parent?: string
+  sort?: string
+  /** @format int32 */
+  type?: number
+}
+
+export interface EntityModelFunction {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  parent?: string
+  sort?: string
+  /** @format int32 */
+  type?: number
+  _links?: Links
+}
+
+export interface PagedModelEntityModelFunction {
+  _embedded?: {
+    functions?: EntityModelFunction[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelFunction {
+  _embedded?: {
+    functions?: EntityModelFunction[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelUserSkill {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUserSkill {
+  _embedded?: {
+    userSkills?: EntityModelUserSkill[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelObject {
+  _embedded?: {
+    objects?: object[]
+  }
+  _links?: Links
+}
+
+export interface CollectionModelEntityModelUserSkill {
+  _embedded?: {
+    userSkills?: EntityModelUserSkill[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelUserProject {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUserProject {
+  _embedded?: {
+    userProjects?: EntityModelUserProject[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface EntityModelProject {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  description?: string
+  _links?: Links
+}
+
+export interface CollectionModelEntityModelUserProject {
+  _embedded?: {
+    userProjects?: EntityModelUserProject[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelRoleFunction {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelRoleFunction {
+  _embedded?: {
+    roleFunctions?: EntityModelRoleFunction[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface Role {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  description?: string
+  permissions?: string
+}
+
+export interface EntityModelRole {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  description?: string
+  permissions?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelRole {
+  _embedded?: {
+    roles?: EntityModelRole[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelRole {
+  _embedded?: {
+    roles?: EntityModelRole[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelAquarkData {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  station_id?: string
+  /** @format date-time */
+  trans_time?: string
+  /** @format float */
+  rain_d?: number
+  /** @format float */
+  moisture?: number
+  /** @format float */
+  temperature?: number
+  /** @format float */
+  echo?: number
+  /** @format float */
+  waterSpeedAquark?: number
+  /** @format float */
+  v1?: number
+  /** @format float */
+  v2?: number
+  /** @format float */
+  v3?: number
+  /** @format float */
+  v4?: number
+  /** @format float */
+  v5?: number
+  /** @format float */
+  v6?: number
+  /** @format float */
+  v7?: number
+  csq?: string
+  peak?: boolean
+  _links?: Links
+}
+
+export interface PagedModelEntityModelAquarkData {
+  _embedded?: {
+    aquarkDatas?: EntityModelAquarkData[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelAquarkData {
+  _embedded?: {
+    aquarkDatas?: EntityModelAquarkData[]
+  }
+  _links?: Links
+}
+
+export interface User {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  email?: string
+  password?: string
+  phone?: string
+  disabled?: boolean
+  roleArr?: string[]
+}
+
+export interface EntityModelUser {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  email?: string
+  password?: string
+  phone?: string
+  disabled?: boolean
+  roleArr?: string[]
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUser {
+  _embedded?: {
+    users?: EntityModelUser[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelUser {
+  _embedded?: {
+    users?: EntityModelUser[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelUserRole {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUserRole {
+  _embedded?: {
+    userRoles?: EntityModelUserRole[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface EntityModelProjectSkill {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelProjectSkill {
+  _embedded?: {
+    projectSkills?: EntityModelProjectSkill[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface PagedModelEntityModelProject {
+  _embedded?: {
+    projects?: EntityModelProject[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelProject {
+  _embedded?: {
+    projects?: EntityModelProject[]
+  }
+  _links?: Links
+}
+
+export interface AlertCheckLimitRequestBody {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  tableName?: string
+  columnName?: string
+  /** @format double */
+  limitValue?: number
+}
+
+export interface AquarkDataRequestBody {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  station_id?: string
+  /** @format date-time */
+  trans_time?: string
+  /** @format float */
+  rain_d?: number
+  /** @format float */
+  moisture?: number
+  /** @format float */
+  temperature?: number
+  /** @format float */
+  echo?: number
+  /** @format float */
+  waterSpeedAquark?: number
+  /** @format float */
+  v1?: number
+  /** @format float */
+  v2?: number
+  /** @format float */
+  v3?: number
+  /** @format float */
+  v4?: number
+  /** @format float */
+  v5?: number
+  /** @format float */
+  v6?: number
+  /** @format float */
+  v7?: number
+  csq?: string
+  peak?: boolean
+}
+
+export interface FunctionRequestBody {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  parent?: string
+  sort?: string
+  /** @format int32 */
+  type?: number
+}
+
+export interface ProjectSkillRequestBody {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  skill?: string
+  skillLevel?: string
+}
+
+export interface SkillRequestBody {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  description?: string
+}
+
+export interface SkillLevelRequestBody {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  /** @format int32 */
+  levelValue?: number
+  title?: string
+  description?: string
+}
+
+export interface ProjectRequestBody {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  description?: string
+}
+
+export interface RoleFunctionRequestBody {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+}
+
+export interface RoleRequestBody {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  description?: string
+  permissions?: string
+}
+
+export interface UserProjectRequestBody {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  project?: string
+}
+
+export interface UserRoleRequestBody {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+}
+
+export interface UserSkillRequestBody {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  skill?: string
+  skillLevel?: string
+}
+
+export interface UserRequestBody {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  email?: string
+  password?: string
+  phone?: string
+  disabled?: boolean
+  roleArr?: string[]
+}
+
 /** 使用者搜尋查詢參數 */
 export interface UserSearchQuery {
   /**
@@ -870,6 +1522,18 @@ export interface SignupRequest {
   password?: string
 }
 
+export interface ResponseTypeToken {
+  /** @format int32 */
+  code?: number
+  data?: Token
+  message?: string
+  errorType?: string
+}
+
+export interface Token {
+  accessToken?: string
+}
+
 export interface LoginRequest {
   email?: string
   password?: string
@@ -1146,6 +1810,19 @@ export interface ResponseTypeListAlertCheckLimitVo {
   errorType?: string
 }
 
+export interface Link {
+  href?: string
+  hreflang?: string
+  title?: string
+  type?: string
+  deprecation?: string
+  profile?: string
+  name?: string
+  templated?: boolean
+}
+
+export type Links = Record<string, Link>
+
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from "axios"
 import axios from "axios"
 
@@ -1296,6 +1973,3161 @@ export class Api<SecurityDataType extends unknown> {
     this.http = http
   }
 
+  alertCheckLimitEntityController = {
+    /**
+     * @description get-alertchecklimit
+     *
+     * @tags alert-check-limit-entity-controller
+     * @name GetCollectionResourceAlertchecklimitGet
+     * @request GET:/alertCheckLimits
+     * @response `200` `PagedModelEntityModelAlertCheckLimit` OK
+     */
+    "getCollectionResource-alertchecklimit-get": (
+      query?: {
+        /**
+         * Zero-based page index (0..N)
+         * @min 0
+         * @default 0
+         */
+        page?: number
+        /**
+         * The size of the page to be returned
+         * @min 1
+         * @default 20
+         */
+        size?: number
+        /** Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+        sort?: string[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<PagedModelEntityModelAlertCheckLimit, any>({
+        path: `/alertCheckLimits`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description create-alertchecklimit
+     *
+     * @tags alert-check-limit-entity-controller
+     * @name PostCollectionResourceAlertchecklimitPost
+     * @request POST:/alertCheckLimits
+     * @response `201` `EntityModelAlertCheckLimit` Created
+     */
+    "postCollectionResource-alertchecklimit-post": (data: AlertCheckLimitRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelAlertCheckLimit, any>({
+        path: `/alertCheckLimits`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-alertchecklimit
+     *
+     * @tags alert-check-limit-entity-controller
+     * @name GetItemResourceAlertchecklimitGet
+     * @request GET:/alertCheckLimits/{id}
+     * @response `200` `EntityModelAlertCheckLimit` OK
+     * @response `404` `any` Not Found
+     */
+    "getItemResource-alertchecklimit-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelAlertCheckLimit, any>({
+        path: `/alertCheckLimits/${id}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-alertchecklimit
+     *
+     * @tags alert-check-limit-entity-controller
+     * @name PutItemResourceAlertchecklimitPut
+     * @request PUT:/alertCheckLimits/{id}
+     * @response `200` `EntityModelAlertCheckLimit` OK
+     * @response `201` `EntityModelAlertCheckLimit` Created
+     * @response `204` `any` No Content
+     */
+    "putItemResource-alertchecklimit-put": (id: string, data: AlertCheckLimitRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelAlertCheckLimit, any>({
+        path: `/alertCheckLimits/${id}`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-alertchecklimit
+     *
+     * @tags alert-check-limit-entity-controller
+     * @name DeleteItemResourceAlertchecklimitDelete
+     * @request DELETE:/alertCheckLimits/{id}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deleteItemResource-alertchecklimit-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/alertCheckLimits/${id}`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-alertchecklimit
+     *
+     * @tags alert-check-limit-entity-controller
+     * @name PatchItemResourceAlertchecklimitPatch
+     * @request PATCH:/alertCheckLimits/{id}
+     * @response `200` `EntityModelAlertCheckLimit` OK
+     * @response `204` `any` No Content
+     */
+    "patchItemResource-alertchecklimit-patch": (
+      id: string,
+      data: AlertCheckLimitRequestBody,
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelAlertCheckLimit, any>({
+        path: `/alertCheckLimits/${id}`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      })
+  }
+  alertCheckLimitSearchController = {
+    /**
+     * No description
+     *
+     * @tags alert-check-limit-search-controller
+     * @name ExecuteSearchAlertchecklimitGet
+     * @request GET:/alertCheckLimits/search/findAlertCheckLimitByTableNameAndColumnName
+     * @response `200` `CollectionModelEntityModelAlertCheckLimit` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-alertchecklimit-get": (
+      query?: {
+        tableName?: string
+        columnName?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<CollectionModelEntityModelAlertCheckLimit, any>({
+        path: `/alertCheckLimits/search/findAlertCheckLimitByTableNameAndColumnName`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      })
+  }
+  aquarkDataEntityController = {
+    /**
+     * @description get-aquarkdata
+     *
+     * @tags aquark-data-entity-controller
+     * @name GetCollectionResourceAquarkdataGet
+     * @request GET:/aquarkDatas
+     * @response `200` `PagedModelEntityModelAquarkData` OK
+     */
+    "getCollectionResource-aquarkdata-get": (
+      query?: {
+        /**
+         * Zero-based page index (0..N)
+         * @min 0
+         * @default 0
+         */
+        page?: number
+        /**
+         * The size of the page to be returned
+         * @min 1
+         * @default 20
+         */
+        size?: number
+        /** Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+        sort?: string[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<PagedModelEntityModelAquarkData, any>({
+        path: `/aquarkDatas`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description create-aquarkdata
+     *
+     * @tags aquark-data-entity-controller
+     * @name PostCollectionResourceAquarkdataPost
+     * @request POST:/aquarkDatas
+     * @response `201` `EntityModelAquarkData` Created
+     */
+    "postCollectionResource-aquarkdata-post": (data: AquarkDataRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelAquarkData, any>({
+        path: `/aquarkDatas`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-aquarkdata
+     *
+     * @tags aquark-data-entity-controller
+     * @name GetItemResourceAquarkdataGet
+     * @request GET:/aquarkDatas/{id}
+     * @response `200` `EntityModelAquarkData` OK
+     * @response `404` `any` Not Found
+     */
+    "getItemResource-aquarkdata-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelAquarkData, any>({
+        path: `/aquarkDatas/${id}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-aquarkdata
+     *
+     * @tags aquark-data-entity-controller
+     * @name PutItemResourceAquarkdataPut
+     * @request PUT:/aquarkDatas/{id}
+     * @response `200` `EntityModelAquarkData` OK
+     * @response `201` `EntityModelAquarkData` Created
+     * @response `204` `any` No Content
+     */
+    "putItemResource-aquarkdata-put": (id: string, data: AquarkDataRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelAquarkData, any>({
+        path: `/aquarkDatas/${id}`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-aquarkdata
+     *
+     * @tags aquark-data-entity-controller
+     * @name DeleteItemResourceAquarkdataDelete
+     * @request DELETE:/aquarkDatas/{id}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deleteItemResource-aquarkdata-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/aquarkDatas/${id}`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-aquarkdata
+     *
+     * @tags aquark-data-entity-controller
+     * @name PatchItemResourceAquarkdataPatch
+     * @request PATCH:/aquarkDatas/{id}
+     * @response `200` `EntityModelAquarkData` OK
+     * @response `204` `any` No Content
+     */
+    "patchItemResource-aquarkdata-patch": (id: string, data: AquarkDataRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelAquarkData, any>({
+        path: `/aquarkDatas/${id}`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      })
+  }
+  aquarkDataSearchController = {
+    /**
+     * No description
+     *
+     * @tags aquark-data-search-controller
+     * @name ExecuteSearchAquarkdataGet
+     * @request GET:/aquarkDatas/search/findAquarkDataByStation_idAndTrans_time
+     * @response `200` `CollectionModelEntityModelAquarkData` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-aquarkdata-get": (
+      query?: {
+        station_id?: string
+        /** @format date-time */
+        trans_time?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<CollectionModelEntityModelAquarkData, any>({
+        path: `/aquarkDatas/search/findAquarkDataByStation_idAndTrans_time`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags aquark-data-search-controller
+     * @name ExecuteSearchAquarkdataGet1
+     * @request GET:/aquarkDatas/search/getAquarkDataQueryAllColumn
+     * @response `200` `CollectionModelEntityModelAquarkData` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-aquarkdata-get_1": (params: RequestParams = {}) =>
+      this.http.request<CollectionModelEntityModelAquarkData, any>({
+        path: `/aquarkDatas/search/getAquarkDataQueryAllColumn`,
+        method: "GET",
+        format: "json",
+        ...params
+      })
+  }
+  functionEntityController = {
+    /**
+     * @description get-function
+     *
+     * @tags function-entity-controller
+     * @name GetCollectionResourceFunctionGet
+     * @request GET:/functions
+     * @response `200` `PagedModelEntityModelFunction` OK
+     */
+    "getCollectionResource-function-get": (
+      query?: {
+        /**
+         * Zero-based page index (0..N)
+         * @min 0
+         * @default 0
+         */
+        page?: number
+        /**
+         * The size of the page to be returned
+         * @min 1
+         * @default 20
+         */
+        size?: number
+        /** Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+        sort?: string[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<PagedModelEntityModelFunction, any>({
+        path: `/functions`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description create-function
+     *
+     * @tags function-entity-controller
+     * @name PostCollectionResourceFunctionPost
+     * @request POST:/functions
+     * @response `201` `EntityModelFunction` Created
+     */
+    "postCollectionResource-function-post": (data: FunctionRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelFunction, any>({
+        path: `/functions`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-function
+     *
+     * @tags function-entity-controller
+     * @name GetItemResourceFunctionGet
+     * @request GET:/functions/{id}
+     * @response `200` `EntityModelFunction` OK
+     * @response `404` `any` Not Found
+     */
+    "getItemResource-function-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelFunction, any>({
+        path: `/functions/${id}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-function
+     *
+     * @tags function-entity-controller
+     * @name PutItemResourceFunctionPut
+     * @request PUT:/functions/{id}
+     * @response `200` `EntityModelFunction` OK
+     * @response `201` `EntityModelFunction` Created
+     * @response `204` `any` No Content
+     */
+    "putItemResource-function-put": (id: string, data: FunctionRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelFunction, any>({
+        path: `/functions/${id}`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-function
+     *
+     * @tags function-entity-controller
+     * @name DeleteItemResourceFunctionDelete
+     * @request DELETE:/functions/{id}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deleteItemResource-function-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/functions/${id}`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-function
+     *
+     * @tags function-entity-controller
+     * @name PatchItemResourceFunctionPatch
+     * @request PATCH:/functions/{id}
+     * @response `200` `EntityModelFunction` OK
+     * @response `204` `any` No Content
+     */
+    "patchItemResource-function-patch": (id: string, data: FunctionRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelFunction, any>({
+        path: `/functions/${id}`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      })
+  }
+  functionSearchController = {
+    /**
+     * No description
+     *
+     * @tags function-search-controller
+     * @name ExecuteSearchFunctionGet
+     * @request GET:/functions/search/findAllByGrandParentId
+     * @response `200` `CollectionModelEntityModelFunction` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-function-get": (
+      query?: {
+        grandParentId?: string[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<CollectionModelEntityModelFunction, any>({
+        path: `/functions/search/findAllByGrandParentId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags function-search-controller
+     * @name ExecuteSearchFunctionGet1
+     * @request GET:/functions/search/findFunctionByName
+     * @response `200` `EntityModelFunction` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-function-get_1": (
+      query?: {
+        name?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelFunction, any>({
+        path: `/functions/search/findFunctionByName`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags function-search-controller
+     * @name ExecuteSearchFunctionGet2
+     * @request GET:/functions/search/findFunctionByNameAndParent
+     * @response `200` `CollectionModelEntityModelFunction` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-function-get_2": (
+      query?: {
+        name?: string
+        parent?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<CollectionModelEntityModelFunction, any>({
+        path: `/functions/search/findFunctionByNameAndParent`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags function-search-controller
+     * @name ExecuteSearchFunctionGet3
+     * @request GET:/functions/search/getParent
+     * @response `200` `CollectionModelEntityModelFunction` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-function-get_3": (
+      query?: {
+        parent?: string[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<CollectionModelEntityModelFunction, any>({
+        path: `/functions/search/getParent`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      })
+  }
+  profileController = {
+    /**
+     * No description
+     *
+     * @tags profile-controller
+     * @name ListAllFormsOfMetadata
+     * @request GET:/profile
+     * @response `200` `RepresentationModelObject` OK
+     */
+    listAllFormsOfMetadata: (params: RequestParams = {}) =>
+      this.http.request<RepresentationModelObject, any>({
+        path: `/profile`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags profile-controller
+     * @name Descriptor
+     * @request GET:/profile/alertCheckLimits
+     * @response `200` `string` OK
+     */
+    descriptor: (params: RequestParams = {}) =>
+      this.http.request<string, any>({
+        path: `/profile/alertCheckLimits`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags profile-controller
+     * @name Descriptor1
+     * @request GET:/profile/aquarkDatas
+     * @response `200` `string` OK
+     */
+    descriptor_1: (params: RequestParams = {}) =>
+      this.http.request<string, any>({
+        path: `/profile/aquarkDatas`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags profile-controller
+     * @name Descriptor2
+     * @request GET:/profile/functions
+     * @response `200` `string` OK
+     */
+    descriptor_2: (params: RequestParams = {}) =>
+      this.http.request<string, any>({
+        path: `/profile/functions`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags profile-controller
+     * @name Descriptor3
+     * @request GET:/profile/projectSkills
+     * @response `200` `string` OK
+     */
+    descriptor_3: (params: RequestParams = {}) =>
+      this.http.request<string, any>({
+        path: `/profile/projectSkills`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags profile-controller
+     * @name Descriptor4
+     * @request GET:/profile/projects
+     * @response `200` `string` OK
+     */
+    descriptor_4: (params: RequestParams = {}) =>
+      this.http.request<string, any>({
+        path: `/profile/projects`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags profile-controller
+     * @name Descriptor5
+     * @request GET:/profile/roleFunctions
+     * @response `200` `string` OK
+     */
+    descriptor_5: (params: RequestParams = {}) =>
+      this.http.request<string, any>({
+        path: `/profile/roleFunctions`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags profile-controller
+     * @name Descriptor6
+     * @request GET:/profile/roles
+     * @response `200` `string` OK
+     */
+    descriptor_6: (params: RequestParams = {}) =>
+      this.http.request<string, any>({
+        path: `/profile/roles`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags profile-controller
+     * @name Descriptor7
+     * @request GET:/profile/skillLevels
+     * @response `200` `string` OK
+     */
+    descriptor_7: (params: RequestParams = {}) =>
+      this.http.request<string, any>({
+        path: `/profile/skillLevels`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags profile-controller
+     * @name Descriptor8
+     * @request GET:/profile/skills
+     * @response `200` `string` OK
+     */
+    descriptor_8: (params: RequestParams = {}) =>
+      this.http.request<string, any>({
+        path: `/profile/skills`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags profile-controller
+     * @name Descriptor9
+     * @request GET:/profile/userProjects
+     * @response `200` `string` OK
+     */
+    descriptor_9: (params: RequestParams = {}) =>
+      this.http.request<string, any>({
+        path: `/profile/userProjects`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags profile-controller
+     * @name Descriptor10
+     * @request GET:/profile/userRoles
+     * @response `200` `string` OK
+     */
+    descriptor_10: (params: RequestParams = {}) =>
+      this.http.request<string, any>({
+        path: `/profile/userRoles`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags profile-controller
+     * @name Descriptor11
+     * @request GET:/profile/userSkills
+     * @response `200` `string` OK
+     */
+    descriptor_11: (params: RequestParams = {}) =>
+      this.http.request<string, any>({
+        path: `/profile/userSkills`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags profile-controller
+     * @name Descriptor12
+     * @request GET:/profile/users
+     * @response `200` `string` OK
+     */
+    descriptor_12: (params: RequestParams = {}) =>
+      this.http.request<string, any>({
+        path: `/profile/users`,
+        method: "GET",
+        format: "json",
+        ...params
+      })
+  }
+  projectSkillEntityController = {
+    /**
+     * @description get-projectskill
+     *
+     * @tags project-skill-entity-controller
+     * @name GetCollectionResourceProjectskillGet
+     * @request GET:/projectSkills
+     * @response `200` `PagedModelEntityModelProjectSkill` OK
+     */
+    "getCollectionResource-projectskill-get": (
+      query?: {
+        /**
+         * Zero-based page index (0..N)
+         * @min 0
+         * @default 0
+         */
+        page?: number
+        /**
+         * The size of the page to be returned
+         * @min 1
+         * @default 20
+         */
+        size?: number
+        /** Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+        sort?: string[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<PagedModelEntityModelProjectSkill, any>({
+        path: `/projectSkills`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description create-projectskill
+     *
+     * @tags project-skill-entity-controller
+     * @name PostCollectionResourceProjectskillPost
+     * @request POST:/projectSkills
+     * @response `201` `EntityModelProjectSkill` Created
+     */
+    "postCollectionResource-projectskill-post": (data: ProjectSkillRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelProjectSkill, any>({
+        path: `/projectSkills`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-projectskill
+     *
+     * @tags project-skill-entity-controller
+     * @name GetItemResourceProjectskillGet
+     * @request GET:/projectSkills/{id}
+     * @response `200` `EntityModelProjectSkill` OK
+     * @response `404` `any` Not Found
+     */
+    "getItemResource-projectskill-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelProjectSkill, any>({
+        path: `/projectSkills/${id}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-projectskill
+     *
+     * @tags project-skill-entity-controller
+     * @name PutItemResourceProjectskillPut
+     * @request PUT:/projectSkills/{id}
+     * @response `200` `EntityModelProjectSkill` OK
+     * @response `201` `EntityModelProjectSkill` Created
+     * @response `204` `any` No Content
+     */
+    "putItemResource-projectskill-put": (id: string, data: ProjectSkillRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelProjectSkill, any>({
+        path: `/projectSkills/${id}`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-projectskill
+     *
+     * @tags project-skill-entity-controller
+     * @name DeleteItemResourceProjectskillDelete
+     * @request DELETE:/projectSkills/{id}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deleteItemResource-projectskill-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/projectSkills/${id}`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-projectskill
+     *
+     * @tags project-skill-entity-controller
+     * @name PatchItemResourceProjectskillPatch
+     * @request PATCH:/projectSkills/{id}
+     * @response `200` `EntityModelProjectSkill` OK
+     * @response `204` `any` No Content
+     */
+    "patchItemResource-projectskill-patch": (id: string, data: ProjectSkillRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelProjectSkill, any>({
+        path: `/projectSkills/${id}`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      })
+  }
+  projectSkillSearchController = {
+    /**
+     * No description
+     *
+     * @tags project-skill-search-controller
+     * @name ExecuteSearchProjectskillGet
+     * @request GET:/projectSkills/search/deleteByProjectId
+     * @response `200` `any` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-projectskill-get": (
+      query?: {
+        /** @format uuid */
+        projectId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<any, any>({
+        path: `/projectSkills/search/deleteByProjectId`,
+        method: "GET",
+        query: query,
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags project-skill-search-controller
+     * @name ExecuteSearchProjectskillGet1
+     * @request GET:/projectSkills/search/deleteBySkillId
+     * @response `200` `any` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-projectskill-get_1": (
+      query?: {
+        /** @format uuid */
+        skillId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<any, any>({
+        path: `/projectSkills/search/deleteBySkillId`,
+        method: "GET",
+        query: query,
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags project-skill-search-controller
+     * @name ExecuteSearchProjectskillGet2
+     * @request GET:/projectSkills/search/existsByProjectIdAndSkillId
+     * @response `200` `boolean` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-projectskill-get_2": (
+      query?: {
+        /** @format uuid */
+        projectId?: string
+        /** @format uuid */
+        skillId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<boolean, any>({
+        path: `/projectSkills/search/existsByProjectIdAndSkillId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags project-skill-search-controller
+     * @name ExecuteSearchProjectskillGet3
+     * @request GET:/projectSkills/search/existsBySkillLevelId
+     * @response `200` `boolean` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-projectskill-get_3": (
+      query?: {
+        /** @format uuid */
+        skillLevelId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<boolean, any>({
+        path: `/projectSkills/search/existsBySkillLevelId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      })
+  }
+  projectSkillPropertyReferenceController = {
+    /**
+     * @description get-skill-by-projectskill-Id
+     *
+     * @tags project-skill-property-reference-controller
+     * @name FollowPropertyReferenceProjectskillGet
+     * @request GET:/projectSkills/{id}/skill
+     * @response `200` `EntityModelSkill` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-projectskill-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkill, any>({
+        path: `/projectSkills/${id}/skill`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-skill-by-projectskill-Id
+     *
+     * @tags project-skill-property-reference-controller
+     * @name CreatePropertyReferenceProjectskillPut
+     * @request PUT:/projectSkills/{id}/skill
+     * @response `200` `EntityModelSkill` OK
+     * @response `201` `EntityModelSkill` Created
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-projectskill-put": (id: string, data: CollectionModelObject, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkill, any>({
+        path: `/projectSkills/${id}/skill`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-skill-by-projectskill-Id
+     *
+     * @tags project-skill-property-reference-controller
+     * @name DeletePropertyReferenceProjectskillDelete
+     * @request DELETE:/projectSkills/{id}/skill
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReference-projectskill-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/projectSkills/${id}/skill`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-skill-by-projectskill-Id
+     *
+     * @tags project-skill-property-reference-controller
+     * @name CreatePropertyReferenceProjectskillPatch
+     * @request PATCH:/projectSkills/{id}/skill
+     * @response `200` `EntityModelSkill` OK
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-projectskill-patch": (
+      id: string,
+      data: CollectionModelObject,
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelSkill, any>({
+        path: `/projectSkills/${id}/skill`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-skill-by-projectskill-Id
+     *
+     * @tags project-skill-property-reference-controller
+     * @name FollowPropertyReferenceProjectskillGet1
+     * @request GET:/projectSkills/{id}/skill/{propertyId}
+     * @response `200` `EntityModelSkill` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-projectskill-get_1": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkill, any>({
+        path: `/projectSkills/${id}/skill/${propertyId}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-skill-by-projectskill-Id
+     *
+     * @tags project-skill-property-reference-controller
+     * @name DeletePropertyReferenceIdProjectskillDelete
+     * @request DELETE:/projectSkills/{id}/skill/{propertyId}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReferenceId-projectskill-delete": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/projectSkills/${id}/skill/${propertyId}`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description get-skilllevel-by-projectskill-Id
+     *
+     * @tags project-skill-property-reference-controller
+     * @name FollowPropertyReferenceProjectskillGet2
+     * @request GET:/projectSkills/{id}/skillLevel
+     * @response `200` `EntityModelSkillLevel` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-projectskill-get_2": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkillLevel, any>({
+        path: `/projectSkills/${id}/skillLevel`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-skilllevel-by-projectskill-Id
+     *
+     * @tags project-skill-property-reference-controller
+     * @name CreatePropertyReferenceProjectskillPut1
+     * @request PUT:/projectSkills/{id}/skillLevel
+     * @response `200` `EntityModelSkillLevel` OK
+     * @response `201` `EntityModelSkillLevel` Created
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-projectskill-put_1": (
+      id: string,
+      data: CollectionModelObject,
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelSkillLevel, any>({
+        path: `/projectSkills/${id}/skillLevel`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-skilllevel-by-projectskill-Id
+     *
+     * @tags project-skill-property-reference-controller
+     * @name DeletePropertyReferenceProjectskillDelete1
+     * @request DELETE:/projectSkills/{id}/skillLevel
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReference-projectskill-delete_1": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/projectSkills/${id}/skillLevel`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-skilllevel-by-projectskill-Id
+     *
+     * @tags project-skill-property-reference-controller
+     * @name CreatePropertyReferenceProjectskillPatch1
+     * @request PATCH:/projectSkills/{id}/skillLevel
+     * @response `200` `EntityModelSkillLevel` OK
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-projectskill-patch_1": (
+      id: string,
+      data: CollectionModelObject,
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelSkillLevel, any>({
+        path: `/projectSkills/${id}/skillLevel`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-skilllevel-by-projectskill-Id
+     *
+     * @tags project-skill-property-reference-controller
+     * @name FollowPropertyReferenceProjectskillGet3
+     * @request GET:/projectSkills/{id}/skillLevel/{propertyId}
+     * @response `200` `EntityModelSkillLevel` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-projectskill-get_3": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkillLevel, any>({
+        path: `/projectSkills/${id}/skillLevel/${propertyId}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-skilllevel-by-projectskill-Id
+     *
+     * @tags project-skill-property-reference-controller
+     * @name DeletePropertyReferenceIdProjectskillDelete1
+     * @request DELETE:/projectSkills/{id}/skillLevel/{propertyId}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReferenceId-projectskill-delete_1": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/projectSkills/${id}/skillLevel/${propertyId}`,
+        method: "DELETE",
+        ...params
+      })
+  }
+  projectEntityController = {
+    /**
+     * @description get-project
+     *
+     * @tags project-entity-controller
+     * @name GetCollectionResourceProjectGet
+     * @request GET:/projects
+     * @response `200` `PagedModelEntityModelProject` OK
+     */
+    "getCollectionResource-project-get": (
+      query?: {
+        /**
+         * Zero-based page index (0..N)
+         * @min 0
+         * @default 0
+         */
+        page?: number
+        /**
+         * The size of the page to be returned
+         * @min 1
+         * @default 20
+         */
+        size?: number
+        /** Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+        sort?: string[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<PagedModelEntityModelProject, any>({
+        path: `/projects`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description create-project
+     *
+     * @tags project-entity-controller
+     * @name PostCollectionResourceProjectPost
+     * @request POST:/projects
+     * @response `201` `EntityModelProject` Created
+     */
+    "postCollectionResource-project-post": (data: ProjectRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelProject, any>({
+        path: `/projects`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-project
+     *
+     * @tags project-entity-controller
+     * @name GetItemResourceProjectGet
+     * @request GET:/projects/{id}
+     * @response `200` `EntityModelProject` OK
+     * @response `404` `any` Not Found
+     */
+    "getItemResource-project-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelProject, any>({
+        path: `/projects/${id}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-project
+     *
+     * @tags project-entity-controller
+     * @name PutItemResourceProjectPut
+     * @request PUT:/projects/{id}
+     * @response `200` `EntityModelProject` OK
+     * @response `201` `EntityModelProject` Created
+     * @response `204` `any` No Content
+     */
+    "putItemResource-project-put": (id: string, data: ProjectRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelProject, any>({
+        path: `/projects/${id}`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-project
+     *
+     * @tags project-entity-controller
+     * @name DeleteItemResourceProjectDelete
+     * @request DELETE:/projects/{id}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deleteItemResource-project-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/projects/${id}`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-project
+     *
+     * @tags project-entity-controller
+     * @name PatchItemResourceProjectPatch
+     * @request PATCH:/projects/{id}
+     * @response `200` `EntityModelProject` OK
+     * @response `204` `any` No Content
+     */
+    "patchItemResource-project-patch": (id: string, data: ProjectRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelProject, any>({
+        path: `/projects/${id}`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      })
+  }
+  projectSearchController = {
+    /**
+     * No description
+     *
+     * @tags project-search-controller
+     * @name ExecuteSearchProjectGet
+     * @request GET:/projects/search/findByName
+     * @response `200` `CollectionModelEntityModelProject` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-project-get": (
+      query?: {
+        name?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<CollectionModelEntityModelProject, any>({
+        path: `/projects/search/findByName`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      })
+  }
+  roleFunctionEntityController = {
+    /**
+     * @description get-rolefunction
+     *
+     * @tags role-function-entity-controller
+     * @name GetCollectionResourceRolefunctionGet
+     * @request GET:/roleFunctions
+     * @response `200` `PagedModelEntityModelRoleFunction` OK
+     */
+    "getCollectionResource-rolefunction-get": (
+      query?: {
+        /**
+         * Zero-based page index (0..N)
+         * @min 0
+         * @default 0
+         */
+        page?: number
+        /**
+         * The size of the page to be returned
+         * @min 1
+         * @default 20
+         */
+        size?: number
+        /** Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+        sort?: string[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<PagedModelEntityModelRoleFunction, any>({
+        path: `/roleFunctions`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description create-rolefunction
+     *
+     * @tags role-function-entity-controller
+     * @name PostCollectionResourceRolefunctionPost
+     * @request POST:/roleFunctions
+     * @response `201` `EntityModelRoleFunction` Created
+     */
+    "postCollectionResource-rolefunction-post": (data: RoleFunctionRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelRoleFunction, any>({
+        path: `/roleFunctions`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-rolefunction
+     *
+     * @tags role-function-entity-controller
+     * @name GetItemResourceRolefunctionGet
+     * @request GET:/roleFunctions/{id}
+     * @response `200` `EntityModelRoleFunction` OK
+     * @response `404` `any` Not Found
+     */
+    "getItemResource-rolefunction-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelRoleFunction, any>({
+        path: `/roleFunctions/${id}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-rolefunction
+     *
+     * @tags role-function-entity-controller
+     * @name PutItemResourceRolefunctionPut
+     * @request PUT:/roleFunctions/{id}
+     * @response `200` `EntityModelRoleFunction` OK
+     * @response `201` `EntityModelRoleFunction` Created
+     * @response `204` `any` No Content
+     */
+    "putItemResource-rolefunction-put": (id: string, data: RoleFunctionRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelRoleFunction, any>({
+        path: `/roleFunctions/${id}`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-rolefunction
+     *
+     * @tags role-function-entity-controller
+     * @name DeleteItemResourceRolefunctionDelete
+     * @request DELETE:/roleFunctions/{id}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deleteItemResource-rolefunction-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/roleFunctions/${id}`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-rolefunction
+     *
+     * @tags role-function-entity-controller
+     * @name PatchItemResourceRolefunctionPatch
+     * @request PATCH:/roleFunctions/{id}
+     * @response `200` `EntityModelRoleFunction` OK
+     * @response `204` `any` No Content
+     */
+    "patchItemResource-rolefunction-patch": (id: string, data: RoleFunctionRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelRoleFunction, any>({
+        path: `/roleFunctions/${id}`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      })
+  }
+  roleFunctionSearchController = {
+    /**
+     * No description
+     *
+     * @tags role-function-search-controller
+     * @name ExecuteSearchRolefunctionGet
+     * @request GET:/roleFunctions/search/deleteAllByFunctionIn
+     * @response `200` `any` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-rolefunction-get": (
+      query?: {
+        function?: Function[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<any, any>({
+        path: `/roleFunctions/search/deleteAllByFunctionIn`,
+        method: "GET",
+        query: query,
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags role-function-search-controller
+     * @name ExecuteSearchRolefunctionGet1
+     * @request GET:/roleFunctions/search/deleteByFunction
+     * @response `200` `any` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-rolefunction-get_1": (
+      query?: {
+        /** @format uuid */
+        key?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<any, any>({
+        path: `/roleFunctions/search/deleteByFunction`,
+        method: "GET",
+        query: query,
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags role-function-search-controller
+     * @name ExecuteSearchRolefunctionGet2
+     * @request GET:/roleFunctions/search/deleteByFunctionAndRole
+     * @response `200` `any` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-rolefunction-get_2": (
+      query?: {
+        function?: Function[]
+        role?: Role[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<any, any>({
+        path: `/roleFunctions/search/deleteByFunctionAndRole`,
+        method: "GET",
+        query: query,
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags role-function-search-controller
+     * @name ExecuteSearchRolefunctionGet3
+     * @request GET:/roleFunctions/search/deleteByRoleKey
+     * @response `200` `any` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-rolefunction-get_3": (
+      query?: {
+        /** @format uuid */
+        key?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<any, any>({
+        path: `/roleFunctions/search/deleteByRoleKey`,
+        method: "GET",
+        query: query,
+        ...params
+      })
+  }
+  roleEntityController = {
+    /**
+     * @description get-role
+     *
+     * @tags role-entity-controller
+     * @name GetCollectionResourceRoleGet
+     * @request GET:/roles
+     * @response `200` `PagedModelEntityModelRole` OK
+     */
+    "getCollectionResource-role-get": (
+      query?: {
+        /**
+         * Zero-based page index (0..N)
+         * @min 0
+         * @default 0
+         */
+        page?: number
+        /**
+         * The size of the page to be returned
+         * @min 1
+         * @default 20
+         */
+        size?: number
+        /** Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+        sort?: string[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<PagedModelEntityModelRole, any>({
+        path: `/roles`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description create-role
+     *
+     * @tags role-entity-controller
+     * @name PostCollectionResourceRolePost
+     * @request POST:/roles
+     * @response `201` `EntityModelRole` Created
+     */
+    "postCollectionResource-role-post": (data: RoleRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelRole, any>({
+        path: `/roles`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-role
+     *
+     * @tags role-entity-controller
+     * @name GetItemResourceRoleGet
+     * @request GET:/roles/{id}
+     * @response `200` `EntityModelRole` OK
+     * @response `404` `any` Not Found
+     */
+    "getItemResource-role-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelRole, any>({
+        path: `/roles/${id}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-role
+     *
+     * @tags role-entity-controller
+     * @name PutItemResourceRolePut
+     * @request PUT:/roles/{id}
+     * @response `200` `EntityModelRole` OK
+     * @response `201` `EntityModelRole` Created
+     * @response `204` `any` No Content
+     */
+    "putItemResource-role-put": (id: string, data: RoleRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelRole, any>({
+        path: `/roles/${id}`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-role
+     *
+     * @tags role-entity-controller
+     * @name DeleteItemResourceRoleDelete
+     * @request DELETE:/roles/{id}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deleteItemResource-role-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/roles/${id}`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-role
+     *
+     * @tags role-entity-controller
+     * @name PatchItemResourceRolePatch
+     * @request PATCH:/roles/{id}
+     * @response `200` `EntityModelRole` OK
+     * @response `204` `any` No Content
+     */
+    "patchItemResource-role-patch": (id: string, data: RoleRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelRole, any>({
+        path: `/roles/${id}`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      })
+  }
+  roleSearchController = {
+    /**
+     * No description
+     *
+     * @tags role-search-controller
+     * @name ExecuteSearchRoleGet
+     * @request GET:/roles/search/findRoleByIdIn
+     * @response `200` `CollectionModelEntityModelRole` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-role-get": (
+      query?: {
+        ids?: string[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<CollectionModelEntityModelRole, any>({
+        path: `/roles/search/findRoleByIdIn`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags role-search-controller
+     * @name ExecuteSearchRoleGet1
+     * @request GET:/roles/search/findRoleByName
+     * @response `200` `EntityModelRole` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-role-get_1": (
+      query?: {
+        name?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelRole, any>({
+        path: `/roles/search/findRoleByName`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      })
+  }
+  skillLevelEntityController = {
+    /**
+     * @description get-skilllevel
+     *
+     * @tags skill-level-entity-controller
+     * @name GetCollectionResourceSkilllevelGet
+     * @request GET:/skillLevels
+     * @response `200` `PagedModelEntityModelSkillLevel` OK
+     */
+    "getCollectionResource-skilllevel-get": (
+      query?: {
+        /**
+         * Zero-based page index (0..N)
+         * @min 0
+         * @default 0
+         */
+        page?: number
+        /**
+         * The size of the page to be returned
+         * @min 1
+         * @default 20
+         */
+        size?: number
+        /** Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+        sort?: string[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<PagedModelEntityModelSkillLevel, any>({
+        path: `/skillLevels`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description create-skilllevel
+     *
+     * @tags skill-level-entity-controller
+     * @name PostCollectionResourceSkilllevelPost
+     * @request POST:/skillLevels
+     * @response `201` `EntityModelSkillLevel` Created
+     */
+    "postCollectionResource-skilllevel-post": (data: SkillLevelRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkillLevel, any>({
+        path: `/skillLevels`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-skilllevel
+     *
+     * @tags skill-level-entity-controller
+     * @name GetItemResourceSkilllevelGet
+     * @request GET:/skillLevels/{id}
+     * @response `200` `EntityModelSkillLevel` OK
+     * @response `404` `any` Not Found
+     */
+    "getItemResource-skilllevel-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkillLevel, any>({
+        path: `/skillLevels/${id}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-skilllevel
+     *
+     * @tags skill-level-entity-controller
+     * @name PutItemResourceSkilllevelPut
+     * @request PUT:/skillLevels/{id}
+     * @response `200` `EntityModelSkillLevel` OK
+     * @response `201` `EntityModelSkillLevel` Created
+     * @response `204` `any` No Content
+     */
+    "putItemResource-skilllevel-put": (id: string, data: SkillLevelRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkillLevel, any>({
+        path: `/skillLevels/${id}`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-skilllevel
+     *
+     * @tags skill-level-entity-controller
+     * @name DeleteItemResourceSkilllevelDelete
+     * @request DELETE:/skillLevels/{id}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deleteItemResource-skilllevel-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/skillLevels/${id}`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-skilllevel
+     *
+     * @tags skill-level-entity-controller
+     * @name PatchItemResourceSkilllevelPatch
+     * @request PATCH:/skillLevels/{id}
+     * @response `200` `EntityModelSkillLevel` OK
+     * @response `204` `any` No Content
+     */
+    "patchItemResource-skilllevel-patch": (id: string, data: SkillLevelRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkillLevel, any>({
+        path: `/skillLevels/${id}`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      })
+  }
+  skillLevelSearchController = {
+    /**
+     * No description
+     *
+     * @tags skill-level-search-controller
+     * @name ExecuteSearchSkilllevelGet
+     * @request GET:/skillLevels/search/deleteBySkillId
+     * @response `200` `any` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-skilllevel-get": (
+      query?: {
+        /** @format uuid */
+        skillId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<any, any>({
+        path: `/skillLevels/search/deleteBySkillId`,
+        method: "GET",
+        query: query,
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags skill-level-search-controller
+     * @name ExecuteSearchSkilllevelGet1
+     * @request GET:/skillLevels/search/existsBySkillIdAndLevelValue
+     * @response `200` `boolean` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-skilllevel-get_1": (
+      query?: {
+        /** @format uuid */
+        skillId?: string
+        /** @format int32 */
+        levelValue?: number
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<boolean, any>({
+        path: `/skillLevels/search/existsBySkillIdAndLevelValue`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags skill-level-search-controller
+     * @name ExecuteSearchSkilllevelGet2
+     * @request GET:/skillLevels/search/findBySkillIdOrderByLevelValueAsc
+     * @response `200` `CollectionModelEntityModelSkillLevel` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-skilllevel-get_2": (
+      query?: {
+        /** @format uuid */
+        skillId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<CollectionModelEntityModelSkillLevel, any>({
+        path: `/skillLevels/search/findBySkillIdOrderByLevelValueAsc`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      })
+  }
+  skillEntityController = {
+    /**
+     * @description get-skill
+     *
+     * @tags skill-entity-controller
+     * @name GetCollectionResourceSkillGet
+     * @request GET:/skills
+     * @response `200` `PagedModelEntityModelSkill` OK
+     */
+    "getCollectionResource-skill-get": (
+      query?: {
+        /**
+         * Zero-based page index (0..N)
+         * @min 0
+         * @default 0
+         */
+        page?: number
+        /**
+         * The size of the page to be returned
+         * @min 1
+         * @default 20
+         */
+        size?: number
+        /** Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+        sort?: string[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<PagedModelEntityModelSkill, any>({
+        path: `/skills`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description create-skill
+     *
+     * @tags skill-entity-controller
+     * @name PostCollectionResourceSkillPost
+     * @request POST:/skills
+     * @response `201` `EntityModelSkill` Created
+     */
+    "postCollectionResource-skill-post": (data: SkillRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkill, any>({
+        path: `/skills`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-skill
+     *
+     * @tags skill-entity-controller
+     * @name GetItemResourceSkillGet
+     * @request GET:/skills/{id}
+     * @response `200` `EntityModelSkill` OK
+     * @response `404` `any` Not Found
+     */
+    "getItemResource-skill-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkill, any>({
+        path: `/skills/${id}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-skill
+     *
+     * @tags skill-entity-controller
+     * @name PutItemResourceSkillPut
+     * @request PUT:/skills/{id}
+     * @response `200` `EntityModelSkill` OK
+     * @response `201` `EntityModelSkill` Created
+     * @response `204` `any` No Content
+     */
+    "putItemResource-skill-put": (id: string, data: SkillRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkill, any>({
+        path: `/skills/${id}`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-skill
+     *
+     * @tags skill-entity-controller
+     * @name DeleteItemResourceSkillDelete
+     * @request DELETE:/skills/{id}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deleteItemResource-skill-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/skills/${id}`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-skill
+     *
+     * @tags skill-entity-controller
+     * @name PatchItemResourceSkillPatch
+     * @request PATCH:/skills/{id}
+     * @response `200` `EntityModelSkill` OK
+     * @response `204` `any` No Content
+     */
+    "patchItemResource-skill-patch": (id: string, data: SkillRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkill, any>({
+        path: `/skills/${id}`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      })
+  }
+  skillSearchController = {
+    /**
+     * No description
+     *
+     * @tags skill-search-controller
+     * @name ExecuteSearchSkillGet
+     * @request GET:/skills/search/findByName
+     * @response `200` `CollectionModelEntityModelSkill` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-skill-get": (
+      query?: {
+        name?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<CollectionModelEntityModelSkill, any>({
+        path: `/skills/search/findByName`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      })
+  }
+  userProjectEntityController = {
+    /**
+     * @description get-userproject
+     *
+     * @tags user-project-entity-controller
+     * @name GetCollectionResourceUserprojectGet
+     * @request GET:/userProjects
+     * @response `200` `PagedModelEntityModelUserProject` OK
+     */
+    "getCollectionResource-userproject-get": (
+      query?: {
+        /**
+         * Zero-based page index (0..N)
+         * @min 0
+         * @default 0
+         */
+        page?: number
+        /**
+         * The size of the page to be returned
+         * @min 1
+         * @default 20
+         */
+        size?: number
+        /** Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+        sort?: string[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<PagedModelEntityModelUserProject, any>({
+        path: `/userProjects`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description create-userproject
+     *
+     * @tags user-project-entity-controller
+     * @name PostCollectionResourceUserprojectPost
+     * @request POST:/userProjects
+     * @response `201` `EntityModelUserProject` Created
+     */
+    "postCollectionResource-userproject-post": (data: UserProjectRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelUserProject, any>({
+        path: `/userProjects`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-userproject
+     *
+     * @tags user-project-entity-controller
+     * @name GetItemResourceUserprojectGet
+     * @request GET:/userProjects/{id}
+     * @response `200` `EntityModelUserProject` OK
+     * @response `404` `any` Not Found
+     */
+    "getItemResource-userproject-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelUserProject, any>({
+        path: `/userProjects/${id}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-userproject
+     *
+     * @tags user-project-entity-controller
+     * @name PutItemResourceUserprojectPut
+     * @request PUT:/userProjects/{id}
+     * @response `200` `EntityModelUserProject` OK
+     * @response `201` `EntityModelUserProject` Created
+     * @response `204` `any` No Content
+     */
+    "putItemResource-userproject-put": (id: string, data: UserProjectRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelUserProject, any>({
+        path: `/userProjects/${id}`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-userproject
+     *
+     * @tags user-project-entity-controller
+     * @name DeleteItemResourceUserprojectDelete
+     * @request DELETE:/userProjects/{id}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deleteItemResource-userproject-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/userProjects/${id}`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-userproject
+     *
+     * @tags user-project-entity-controller
+     * @name PatchItemResourceUserprojectPatch
+     * @request PATCH:/userProjects/{id}
+     * @response `200` `EntityModelUserProject` OK
+     * @response `204` `any` No Content
+     */
+    "patchItemResource-userproject-patch": (id: string, data: UserProjectRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelUserProject, any>({
+        path: `/userProjects/${id}`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      })
+  }
+  userProjectSearchController = {
+    /**
+     * No description
+     *
+     * @tags user-project-search-controller
+     * @name ExecuteSearchUserprojectGet
+     * @request GET:/userProjects/search/deleteByProjectId
+     * @response `200` `any` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userproject-get": (
+      query?: {
+        /** @format uuid */
+        projectId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<any, any>({
+        path: `/userProjects/search/deleteByProjectId`,
+        method: "GET",
+        query: query,
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-project-search-controller
+     * @name ExecuteSearchUserprojectGet1
+     * @request GET:/userProjects/search/existsByUserIdAndProjectId
+     * @response `200` `boolean` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userproject-get_1": (
+      query?: {
+        /** @format uuid */
+        userId?: string
+        /** @format uuid */
+        projectId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<boolean, any>({
+        path: `/userProjects/search/existsByUserIdAndProjectId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-project-search-controller
+     * @name ExecuteSearchUserprojectGet2
+     * @request GET:/userProjects/search/findByUserId
+     * @response `200` `CollectionModelEntityModelUserProject` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userproject-get_2": (
+      query?: {
+        /** @format uuid */
+        userId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<CollectionModelEntityModelUserProject, any>({
+        path: `/userProjects/search/findByUserId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      })
+  }
+  userProjectPropertyReferenceController = {
+    /**
+     * @description get-project-by-userproject-Id
+     *
+     * @tags user-project-property-reference-controller
+     * @name FollowPropertyReferenceUserprojectGet
+     * @request GET:/userProjects/{id}/project
+     * @response `200` `EntityModelProject` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-userproject-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelProject, any>({
+        path: `/userProjects/${id}/project`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-project-by-userproject-Id
+     *
+     * @tags user-project-property-reference-controller
+     * @name CreatePropertyReferenceUserprojectPut
+     * @request PUT:/userProjects/{id}/project
+     * @response `200` `EntityModelProject` OK
+     * @response `201` `EntityModelProject` Created
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-userproject-put": (id: string, data: CollectionModelObject, params: RequestParams = {}) =>
+      this.http.request<EntityModelProject, any>({
+        path: `/userProjects/${id}/project`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-project-by-userproject-Id
+     *
+     * @tags user-project-property-reference-controller
+     * @name DeletePropertyReferenceUserprojectDelete
+     * @request DELETE:/userProjects/{id}/project
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReference-userproject-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/userProjects/${id}/project`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-project-by-userproject-Id
+     *
+     * @tags user-project-property-reference-controller
+     * @name CreatePropertyReferenceUserprojectPatch
+     * @request PATCH:/userProjects/{id}/project
+     * @response `200` `EntityModelProject` OK
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-userproject-patch": (
+      id: string,
+      data: CollectionModelObject,
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelProject, any>({
+        path: `/userProjects/${id}/project`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-project-by-userproject-Id
+     *
+     * @tags user-project-property-reference-controller
+     * @name FollowPropertyReferenceUserprojectGet1
+     * @request GET:/userProjects/{id}/project/{propertyId}
+     * @response `200` `EntityModelProject` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-userproject-get_1": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelProject, any>({
+        path: `/userProjects/${id}/project/${propertyId}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-project-by-userproject-Id
+     *
+     * @tags user-project-property-reference-controller
+     * @name DeletePropertyReferenceIdUserprojectDelete
+     * @request DELETE:/userProjects/{id}/project/{propertyId}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReferenceId-userproject-delete": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/userProjects/${id}/project/${propertyId}`,
+        method: "DELETE",
+        ...params
+      })
+  }
+  userRoleEntityController = {
+    /**
+     * @description get-userrole
+     *
+     * @tags user-role-entity-controller
+     * @name GetCollectionResourceUserroleGet
+     * @request GET:/userRoles
+     * @response `200` `PagedModelEntityModelUserRole` OK
+     */
+    "getCollectionResource-userrole-get": (
+      query?: {
+        /**
+         * Zero-based page index (0..N)
+         * @min 0
+         * @default 0
+         */
+        page?: number
+        /**
+         * The size of the page to be returned
+         * @min 1
+         * @default 20
+         */
+        size?: number
+        /** Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+        sort?: string[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<PagedModelEntityModelUserRole, any>({
+        path: `/userRoles`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description create-userrole
+     *
+     * @tags user-role-entity-controller
+     * @name PostCollectionResourceUserrolePost
+     * @request POST:/userRoles
+     * @response `201` `EntityModelUserRole` Created
+     */
+    "postCollectionResource-userrole-post": (data: UserRoleRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelUserRole, any>({
+        path: `/userRoles`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-userrole
+     *
+     * @tags user-role-entity-controller
+     * @name GetItemResourceUserroleGet
+     * @request GET:/userRoles/{id}
+     * @response `200` `EntityModelUserRole` OK
+     * @response `404` `any` Not Found
+     */
+    "getItemResource-userrole-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelUserRole, any>({
+        path: `/userRoles/${id}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-userrole
+     *
+     * @tags user-role-entity-controller
+     * @name PutItemResourceUserrolePut
+     * @request PUT:/userRoles/{id}
+     * @response `200` `EntityModelUserRole` OK
+     * @response `201` `EntityModelUserRole` Created
+     * @response `204` `any` No Content
+     */
+    "putItemResource-userrole-put": (id: string, data: UserRoleRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelUserRole, any>({
+        path: `/userRoles/${id}`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-userrole
+     *
+     * @tags user-role-entity-controller
+     * @name DeleteItemResourceUserroleDelete
+     * @request DELETE:/userRoles/{id}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deleteItemResource-userrole-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/userRoles/${id}`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-userrole
+     *
+     * @tags user-role-entity-controller
+     * @name PatchItemResourceUserrolePatch
+     * @request PATCH:/userRoles/{id}
+     * @response `200` `EntityModelUserRole` OK
+     * @response `204` `any` No Content
+     */
+    "patchItemResource-userrole-patch": (id: string, data: UserRoleRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelUserRole, any>({
+        path: `/userRoles/${id}`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      })
+  }
+  userRoleSearchController = {
+    /**
+     * No description
+     *
+     * @tags user-role-search-controller
+     * @name ExecuteSearchUserroleGet
+     * @request GET:/userRoles/search/deleteAllByUserInAndRoleIn
+     * @response `200` `any` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userrole-get": (
+      query?: {
+        userKey?: User[]
+        roleKey?: Role[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<any, any>({
+        path: `/userRoles/search/deleteAllByUserInAndRoleIn`,
+        method: "GET",
+        query: query,
+        ...params
+      })
+  }
+  userSkillEntityController = {
+    /**
+     * @description get-userskill
+     *
+     * @tags user-skill-entity-controller
+     * @name GetCollectionResourceUserskillGet
+     * @request GET:/userSkills
+     * @response `200` `PagedModelEntityModelUserSkill` OK
+     */
+    "getCollectionResource-userskill-get": (
+      query?: {
+        /**
+         * Zero-based page index (0..N)
+         * @min 0
+         * @default 0
+         */
+        page?: number
+        /**
+         * The size of the page to be returned
+         * @min 1
+         * @default 20
+         */
+        size?: number
+        /** Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+        sort?: string[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<PagedModelEntityModelUserSkill, any>({
+        path: `/userSkills`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description create-userskill
+     *
+     * @tags user-skill-entity-controller
+     * @name PostCollectionResourceUserskillPost
+     * @request POST:/userSkills
+     * @response `201` `EntityModelUserSkill` Created
+     */
+    "postCollectionResource-userskill-post": (data: UserSkillRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelUserSkill, any>({
+        path: `/userSkills`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-userskill
+     *
+     * @tags user-skill-entity-controller
+     * @name GetItemResourceUserskillGet
+     * @request GET:/userSkills/{id}
+     * @response `200` `EntityModelUserSkill` OK
+     * @response `404` `any` Not Found
+     */
+    "getItemResource-userskill-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelUserSkill, any>({
+        path: `/userSkills/${id}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-userskill
+     *
+     * @tags user-skill-entity-controller
+     * @name PutItemResourceUserskillPut
+     * @request PUT:/userSkills/{id}
+     * @response `200` `EntityModelUserSkill` OK
+     * @response `201` `EntityModelUserSkill` Created
+     * @response `204` `any` No Content
+     */
+    "putItemResource-userskill-put": (id: string, data: UserSkillRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelUserSkill, any>({
+        path: `/userSkills/${id}`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-userskill
+     *
+     * @tags user-skill-entity-controller
+     * @name DeleteItemResourceUserskillDelete
+     * @request DELETE:/userSkills/{id}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deleteItemResource-userskill-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/userSkills/${id}`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-userskill
+     *
+     * @tags user-skill-entity-controller
+     * @name PatchItemResourceUserskillPatch
+     * @request PATCH:/userSkills/{id}
+     * @response `200` `EntityModelUserSkill` OK
+     * @response `204` `any` No Content
+     */
+    "patchItemResource-userskill-patch": (id: string, data: UserSkillRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelUserSkill, any>({
+        path: `/userSkills/${id}`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      })
+  }
+  userSkillSearchController = {
+    /**
+     * No description
+     *
+     * @tags user-skill-search-controller
+     * @name ExecuteSearchUserskillGet
+     * @request GET:/userSkills/search/deleteBySkillId
+     * @response `200` `any` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userskill-get": (
+      query?: {
+        /** @format uuid */
+        skillId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<any, any>({
+        path: `/userSkills/search/deleteBySkillId`,
+        method: "GET",
+        query: query,
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-skill-search-controller
+     * @name ExecuteSearchUserskillGet1
+     * @request GET:/userSkills/search/existsBySkillLevelId
+     * @response `200` `boolean` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userskill-get_1": (
+      query?: {
+        /** @format uuid */
+        skillLevelId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<boolean, any>({
+        path: `/userSkills/search/existsBySkillLevelId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-skill-search-controller
+     * @name ExecuteSearchUserskillGet2
+     * @request GET:/userSkills/search/existsByUserIdAndSkillId
+     * @response `200` `boolean` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userskill-get_2": (
+      query?: {
+        /** @format uuid */
+        userId?: string
+        /** @format uuid */
+        skillId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<boolean, any>({
+        path: `/userSkills/search/existsByUserIdAndSkillId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-skill-search-controller
+     * @name ExecuteSearchUserskillGet3
+     * @request GET:/userSkills/search/findByUserId
+     * @response `200` `CollectionModelEntityModelUserSkill` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userskill-get_3": (
+      query?: {
+        /** @format uuid */
+        userId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<CollectionModelEntityModelUserSkill, any>({
+        path: `/userSkills/search/findByUserId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      })
+  }
+  userSkillPropertyReferenceController = {
+    /**
+     * @description get-skill-by-userskill-Id
+     *
+     * @tags user-skill-property-reference-controller
+     * @name FollowPropertyReferenceUserskillGet
+     * @request GET:/userSkills/{id}/skill
+     * @response `200` `EntityModelSkill` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-userskill-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkill, any>({
+        path: `/userSkills/${id}/skill`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-skill-by-userskill-Id
+     *
+     * @tags user-skill-property-reference-controller
+     * @name CreatePropertyReferenceUserskillPut
+     * @request PUT:/userSkills/{id}/skill
+     * @response `200` `EntityModelSkill` OK
+     * @response `201` `EntityModelSkill` Created
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-userskill-put": (id: string, data: CollectionModelObject, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkill, any>({
+        path: `/userSkills/${id}/skill`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-skill-by-userskill-Id
+     *
+     * @tags user-skill-property-reference-controller
+     * @name DeletePropertyReferenceUserskillDelete
+     * @request DELETE:/userSkills/{id}/skill
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReference-userskill-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/userSkills/${id}/skill`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-skill-by-userskill-Id
+     *
+     * @tags user-skill-property-reference-controller
+     * @name CreatePropertyReferenceUserskillPatch
+     * @request PATCH:/userSkills/{id}/skill
+     * @response `200` `EntityModelSkill` OK
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-userskill-patch": (id: string, data: CollectionModelObject, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkill, any>({
+        path: `/userSkills/${id}/skill`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-skill-by-userskill-Id
+     *
+     * @tags user-skill-property-reference-controller
+     * @name FollowPropertyReferenceUserskillGet1
+     * @request GET:/userSkills/{id}/skill/{propertyId}
+     * @response `200` `EntityModelSkill` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-userskill-get_1": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkill, any>({
+        path: `/userSkills/${id}/skill/${propertyId}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-skill-by-userskill-Id
+     *
+     * @tags user-skill-property-reference-controller
+     * @name DeletePropertyReferenceIdUserskillDelete
+     * @request DELETE:/userSkills/{id}/skill/{propertyId}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReferenceId-userskill-delete": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/userSkills/${id}/skill/${propertyId}`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description get-skilllevel-by-userskill-Id
+     *
+     * @tags user-skill-property-reference-controller
+     * @name FollowPropertyReferenceUserskillGet2
+     * @request GET:/userSkills/{id}/skillLevel
+     * @response `200` `EntityModelSkillLevel` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-userskill-get_2": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkillLevel, any>({
+        path: `/userSkills/${id}/skillLevel`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-skilllevel-by-userskill-Id
+     *
+     * @tags user-skill-property-reference-controller
+     * @name CreatePropertyReferenceUserskillPut1
+     * @request PUT:/userSkills/{id}/skillLevel
+     * @response `200` `EntityModelSkillLevel` OK
+     * @response `201` `EntityModelSkillLevel` Created
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-userskill-put_1": (id: string, data: CollectionModelObject, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkillLevel, any>({
+        path: `/userSkills/${id}/skillLevel`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-skilllevel-by-userskill-Id
+     *
+     * @tags user-skill-property-reference-controller
+     * @name DeletePropertyReferenceUserskillDelete1
+     * @request DELETE:/userSkills/{id}/skillLevel
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReference-userskill-delete_1": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/userSkills/${id}/skillLevel`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-skilllevel-by-userskill-Id
+     *
+     * @tags user-skill-property-reference-controller
+     * @name CreatePropertyReferenceUserskillPatch1
+     * @request PATCH:/userSkills/{id}/skillLevel
+     * @response `200` `EntityModelSkillLevel` OK
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-userskill-patch_1": (
+      id: string,
+      data: CollectionModelObject,
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelSkillLevel, any>({
+        path: `/userSkills/${id}/skillLevel`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-skilllevel-by-userskill-Id
+     *
+     * @tags user-skill-property-reference-controller
+     * @name FollowPropertyReferenceUserskillGet3
+     * @request GET:/userSkills/{id}/skillLevel/{propertyId}
+     * @response `200` `EntityModelSkillLevel` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-userskill-get_3": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkillLevel, any>({
+        path: `/userSkills/${id}/skillLevel/${propertyId}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-skilllevel-by-userskill-Id
+     *
+     * @tags user-skill-property-reference-controller
+     * @name DeletePropertyReferenceIdUserskillDelete1
+     * @request DELETE:/userSkills/{id}/skillLevel/{propertyId}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReferenceId-userskill-delete_1": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/userSkills/${id}/skillLevel/${propertyId}`,
+        method: "DELETE",
+        ...params
+      })
+  }
+  userEntityController = {
+    /**
+     * @description get-user
+     *
+     * @tags user-entity-controller
+     * @name GetCollectionResourceUserGet
+     * @request GET:/users
+     * @response `200` `PagedModelEntityModelUser` OK
+     */
+    "getCollectionResource-user-get": (
+      query?: {
+        /**
+         * Zero-based page index (0..N)
+         * @min 0
+         * @default 0
+         */
+        page?: number
+        /**
+         * The size of the page to be returned
+         * @min 1
+         * @default 20
+         */
+        size?: number
+        /** Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+        sort?: string[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<PagedModelEntityModelUser, any>({
+        path: `/users`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description create-user
+     *
+     * @tags user-entity-controller
+     * @name PostCollectionResourceUserPost
+     * @request POST:/users
+     * @response `201` `EntityModelUser` Created
+     */
+    "postCollectionResource-user-post": (data: UserRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelUser, any>({
+        path: `/users`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-user
+     *
+     * @tags user-entity-controller
+     * @name GetItemResourceUserGet
+     * @request GET:/users/{id}
+     * @response `200` `EntityModelUser` OK
+     * @response `404` `any` Not Found
+     */
+    "getItemResource-user-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelUser, any>({
+        path: `/users/${id}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-user
+     *
+     * @tags user-entity-controller
+     * @name PutItemResourceUserPut
+     * @request PUT:/users/{id}
+     * @response `200` `EntityModelUser` OK
+     * @response `201` `EntityModelUser` Created
+     * @response `204` `any` No Content
+     */
+    "putItemResource-user-put": (id: string, data: UserRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelUser, any>({
+        path: `/users/${id}`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-user
+     *
+     * @tags user-entity-controller
+     * @name DeleteItemResourceUserDelete
+     * @request DELETE:/users/{id}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deleteItemResource-user-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/users/${id}`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-user
+     *
+     * @tags user-entity-controller
+     * @name PatchItemResourceUserPatch
+     * @request PATCH:/users/{id}
+     * @response `200` `EntityModelUser` OK
+     * @response `204` `any` No Content
+     */
+    "patchItemResource-user-patch": (id: string, data: UserRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelUser, any>({
+        path: `/users/${id}`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      })
+  }
+  userSearchController = {
+    /**
+     * No description
+     *
+     * @tags user-search-controller
+     * @name ExecuteSearchUserGet
+     * @request GET:/users/search/findByEmail
+     * @response `200` `CollectionModelEntityModelUser` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-user-get": (
+      query?: {
+        email?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<CollectionModelEntityModelUser, any>({
+        path: `/users/search/findByEmail`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      })
+  }
   users = {
     /**
      * @description 搜尋使用者並回傳分頁結果，支援多種查詢條件與排序
@@ -1303,13 +5135,13 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Users
      * @name SearchUsers
      * @summary Search users with pagination
-     * @request POST:/backend/users/search
+     * @request POST:/users/search
      * @response `200` `ResponseTypePageResultUserVo` OK
      * @response `500` `ResponseTypePageResultUserVo` Server error
      */
     searchUsers: (data: UserSearchQuery, params: RequestParams = {}) =>
       this.http.request<ResponseTypePageResultUserVo, ResponseTypePageResultUserVo>({
-        path: `/backend/users/search`,
+        path: `/users/search`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1323,14 +5155,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Users
      * @name SaveUser
      * @summary Save user with roles
-     * @request POST:/backend/users/saveUser
+     * @request POST:/users/saveUser
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
      */
     saveUser: (data: UserVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeString, ResponseTypeString>({
-        path: `/backend/users/saveUser`,
+        path: `/users/saveUser`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1344,14 +5176,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Users
      * @name CreateUser
      * @summary Create user
-     * @request POST:/backend/users/create
+     * @request POST:/users/create
      * @response `200` `boolean` OK
      * @response `400` `boolean` Invalid input
      * @response `500` `boolean` Server error
      */
     createUser: (data: UserVo, params: RequestParams = {}) =>
       this.http.request<boolean, boolean>({
-        path: `/backend/users/create`,
+        path: `/users/create`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1365,14 +5197,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Users
      * @name BindUserSkill
      * @summary Bind user skill
-     * @request POST:/backend/users/bindSkill
+     * @request POST:/users/bindSkill
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
      */
     bindUserSkill: (data: UserSkillBindRequest, params: RequestParams = {}) =>
       this.http.request<ResponseTypeString, ResponseTypeString>({
-        path: `/backend/users/bindSkill`,
+        path: `/users/bindSkill`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1386,14 +5218,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Users
      * @name BindUserProject
      * @summary Bind user project
-     * @request POST:/backend/users/bindProject
+     * @request POST:/users/bindProject
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
      */
     bindUserProject: (data: UserProjectBindRequest, params: RequestParams = {}) =>
       this.http.request<ResponseTypeString, ResponseTypeString>({
-        path: `/backend/users/bindProject`,
+        path: `/users/bindProject`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1407,14 +5239,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Users
      * @name GetUserInfo
      * @summary Get current user info
-     * @request GET:/backend/users/infoVo
+     * @request GET:/users/infoVo
      * @response `200` `ResponseTypeUserVo` OK
      * @response `401` `ResponseTypeUserVo` Unauthorized
      * @response `500` `ResponseTypeUserVo` Server error
      */
     getUserInfo: (params: RequestParams = {}) =>
       this.http.request<ResponseTypeUserVo, ResponseTypeUserVo>({
-        path: `/backend/users/infoVo`,
+        path: `/users/infoVo`,
         method: "GET",
         format: "json",
         ...params
@@ -1426,13 +5258,13 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Users
      * @name GetAllUser
      * @summary Get all users
-     * @request GET:/backend/users/getAllUser
+     * @request GET:/users/getAllUser
      * @response `200` `ResponseTypeListUserVo` OK
      * @response `500` `ResponseTypeListUserVo` Server error
      */
     getAllUser: (params: RequestParams = {}) =>
       this.http.request<ResponseTypeListUserVo, ResponseTypeListUserVo>({
-        path: `/backend/users/getAllUser`,
+        path: `/users/getAllUser`,
         method: "GET",
         format: "json",
         ...params
@@ -1445,14 +5277,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Skills
      * @name UpdateSkill
      * @summary Update skill
-     * @request POST:/backend/skill/update
+     * @request POST:/skill/update
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
      */
     updateSkill: (data: SkillVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeString, ResponseTypeString>({
-        path: `/backend/skill/update`,
+        path: `/skill/update`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1466,14 +5298,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Skills
      * @name SearchSkills
      * @summary 搜尋技能（分頁）
-     * @request POST:/backend/skill/search
+     * @request POST:/skill/search
      * @response `200` `ResponseTypePageResultSkillVo` OK
      * @response `400` `ResponseTypePageResultSkillVo` Invalid input
      * @response `500` `ResponseTypePageResultSkillVo` Server error
      */
     searchSkills: (data: SkillSearchQuery, params: RequestParams = {}) =>
       this.http.request<ResponseTypePageResultSkillVo, ResponseTypePageResultSkillVo>({
-        path: `/backend/skill/search`,
+        path: `/skill/search`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1487,14 +5319,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Skills
      * @name UpdateSkillLevel
      * @summary Update skill level
-     * @request POST:/backend/skill/level/update
+     * @request POST:/skill/level/update
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
      */
     updateSkillLevel: (data: SkillLevelVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeString, ResponseTypeString>({
-        path: `/backend/skill/level/update`,
+        path: `/skill/level/update`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1508,14 +5340,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Skills
      * @name SearchSkillLevels
      * @summary 搜尋技能等級（分頁）
-     * @request POST:/backend/skill/level/search
+     * @request POST:/skill/level/search
      * @response `200` `ResponseTypePageResultSkillLevelVo` OK
      * @response `400` `ResponseTypePageResultSkillLevelVo` Invalid input
      * @response `500` `ResponseTypePageResultSkillLevelVo` Server error
      */
     searchSkillLevels: (data: SkillLevelSearchQuery, params: RequestParams = {}) =>
       this.http.request<ResponseTypePageResultSkillLevelVo, ResponseTypePageResultSkillLevelVo>({
-        path: `/backend/skill/level/search`,
+        path: `/skill/level/search`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1529,14 +5361,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Skills
      * @name DeleteSkillLevel
      * @summary Delete skill level
-     * @request POST:/backend/skill/level/delete
+     * @request POST:/skill/level/delete
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
      */
     deleteSkillLevel: (data: SkillLevelVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeString, ResponseTypeString>({
-        path: `/backend/skill/level/delete`,
+        path: `/skill/level/delete`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1550,14 +5382,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Skills
      * @name AddSkillLevel
      * @summary Add skill level
-     * @request POST:/backend/skill/level/add
+     * @request POST:/skill/level/add
      * @response `200` `ResponseTypeSkillLevelVo` OK
      * @response `400` `ResponseTypeSkillLevelVo` Invalid input
      * @response `500` `ResponseTypeSkillLevelVo` Server error
      */
     addSkillLevel: (data: SkillLevelVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeSkillLevelVo, ResponseTypeSkillLevelVo>({
-        path: `/backend/skill/level/add`,
+        path: `/skill/level/add`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1571,14 +5403,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Skills
      * @name DeleteSkill
      * @summary Delete skill
-     * @request POST:/backend/skill/delete
+     * @request POST:/skill/delete
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
      */
     deleteSkill: (data: SkillVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeString, ResponseTypeString>({
-        path: `/backend/skill/delete`,
+        path: `/skill/delete`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1592,14 +5424,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Skills
      * @name SearchCurrentUserSkills
      * @summary 搜尋當前使用者技能（分頁）
-     * @request POST:/backend/skill/current/search
+     * @request POST:/skill/current/search
      * @response `200` `ResponseTypePageResultCurrentUserSkillVo` OK
      * @response `400` `ResponseTypePageResultCurrentUserSkillVo` Invalid input
      * @response `500` `ResponseTypePageResultCurrentUserSkillVo` Server error
      */
     searchCurrentUserSkills: (data: SkillSearchQuery, params: RequestParams = {}) =>
       this.http.request<ResponseTypePageResultCurrentUserSkillVo, ResponseTypePageResultCurrentUserSkillVo>({
-        path: `/backend/skill/current/search`,
+        path: `/skill/current/search`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1613,14 +5445,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Skills
      * @name AddSkill
      * @summary Add skill
-     * @request POST:/backend/skill/add
+     * @request POST:/skill/add
      * @response `200` `ResponseTypeSkillVo` OK
      * @response `400` `ResponseTypeSkillVo` Invalid input
      * @response `500` `ResponseTypeSkillVo` Server error
      */
     addSkill: (data: SkillVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeSkillVo, ResponseTypeSkillVo>({
-        path: `/backend/skill/add`,
+        path: `/skill/add`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1634,13 +5466,13 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Skills
      * @name GetSkillLevels
      * @summary Get skill levels
-     * @request GET:/backend/skill/level/get/{skillId}
+     * @request GET:/skill/level/get/{skillId}
      * @response `200` `ResponseTypeListSkillLevelVo` OK
      * @response `500` `ResponseTypeListSkillLevelVo` Server error
      */
     getSkillLevels: (skillId: string, params: RequestParams = {}) =>
       this.http.request<ResponseTypeListSkillLevelVo, ResponseTypeListSkillLevelVo>({
-        path: `/backend/skill/level/get/${skillId}`,
+        path: `/skill/level/get/${skillId}`,
         method: "GET",
         format: "json",
         ...params
@@ -1652,13 +5484,13 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Skills
      * @name GetSkill
      * @summary Get skills
-     * @request GET:/backend/skill/get
+     * @request GET:/skill/get
      * @response `200` `ResponseTypeListSkillVo` OK
      * @response `500` `ResponseTypeListSkillVo` Server error
      */
     getSkill: (params: RequestParams = {}) =>
       this.http.request<ResponseTypeListSkillVo, ResponseTypeListSkillVo>({
-        path: `/backend/skill/get`,
+        path: `/skill/get`,
         method: "GET",
         format: "json",
         ...params
@@ -1670,13 +5502,13 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Skills
      * @name GetCurrentUserSkills
      * @summary 取得當前使用者技能
-     * @request GET:/backend/skill/current
+     * @request GET:/skill/current
      * @response `200` `ResponseTypeListCurrentUserSkillVo` OK
      * @response `500` `ResponseTypeListCurrentUserSkillVo` Server error
      */
     getCurrentUserSkills: (params: RequestParams = {}) =>
       this.http.request<ResponseTypeListCurrentUserSkillVo, ResponseTypeListCurrentUserSkillVo>({
-        path: `/backend/skill/current`,
+        path: `/skill/current`,
         method: "GET",
         format: "json",
         ...params
@@ -1689,14 +5521,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Roles
      * @name UserUnbindRole
      * @summary Unbind user from roles
-     * @request POST:/backend/role/userUnbindRole
+     * @request POST:/role/userUnbindRole
      * @response `200` `ResponseTypeUserVo` OK
      * @response `400` `ResponseTypeUserVo` Invalid input
      * @response `500` `ResponseTypeUserVo` Server error
      */
     userUnbindRole: (data: PermissionVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeUserVo, ResponseTypeUserVo>({
-        path: `/backend/role/userUnbindRole`,
+        path: `/role/userUnbindRole`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1710,14 +5542,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Roles
      * @name UserBindRole
      * @summary Bind user to roles
-     * @request POST:/backend/role/userBindRole
+     * @request POST:/role/userBindRole
      * @response `200` `ResponseTypeUserVo` OK
      * @response `400` `ResponseTypeUserVo` Invalid input
      * @response `500` `ResponseTypeUserVo` Server error
      */
     userBindRole: (data: PermissionVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeUserVo, ResponseTypeUserVo>({
-        path: `/backend/role/userBindRole`,
+        path: `/role/userBindRole`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1731,14 +5563,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Roles
      * @name UpdateRole
      * @summary Update role
-     * @request POST:/backend/role/update
+     * @request POST:/role/update
      * @response `200` `ResponseTypeRoleOutVo` OK
      * @response `400` `ResponseTypeRoleOutVo` Invalid input
      * @response `500` `ResponseTypeRoleOutVo` Server error
      */
     updateRole: (data: RoleOutVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeRoleOutVo, ResponseTypeRoleOutVo>({
-        path: `/backend/role/update`,
+        path: `/role/update`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1752,13 +5584,13 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Roles
      * @name SearchRoles
      * @summary Search roles with pagination
-     * @request POST:/backend/role/search
+     * @request POST:/role/search
      * @response `200` `ResponseTypePageResultRoleOutVo` OK
      * @response `500` `ResponseTypePageResultRoleOutVo` Server error
      */
     searchRoles: (data: RoleSearchQuery, params: RequestParams = {}) =>
       this.http.request<ResponseTypePageResultRoleOutVo, ResponseTypePageResultRoleOutVo>({
-        path: `/backend/role/search`,
+        path: `/role/search`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1772,14 +5604,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Roles
      * @name RoleUnbindUser
      * @summary Unbind role from users
-     * @request POST:/backend/role/roleUnbindUser
+     * @request POST:/role/roleUnbindUser
      * @response `200` `ResponseTypeRoleOutVo` OK
      * @response `400` `ResponseTypeRoleOutVo` Invalid input
      * @response `500` `ResponseTypeRoleOutVo` Server error
      */
     roleUnbindUser: (data: PermissionVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeRoleOutVo, ResponseTypeRoleOutVo>({
-        path: `/backend/role/roleUnbindUser`,
+        path: `/role/roleUnbindUser`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1793,14 +5625,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Roles
      * @name RoleUnbindFunction
      * @summary Unbind role from functions
-     * @request POST:/backend/role/roleUnbindFunction
+     * @request POST:/role/roleUnbindFunction
      * @response `200` `ResponseTypeRoleOutVo` OK
      * @response `400` `ResponseTypeRoleOutVo` Invalid input
      * @response `500` `ResponseTypeRoleOutVo` Server error
      */
     roleUnbindFunction: (data: PermissionVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeRoleOutVo, ResponseTypeRoleOutVo>({
-        path: `/backend/role/roleUnbindFunction`,
+        path: `/role/roleUnbindFunction`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1814,14 +5646,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Roles
      * @name RoleBindUser
      * @summary Bind role to users
-     * @request POST:/backend/role/roleBindUser
+     * @request POST:/role/roleBindUser
      * @response `200` `ResponseTypeRoleOutVo` OK
      * @response `400` `ResponseTypeRoleOutVo` Invalid input
      * @response `500` `ResponseTypeRoleOutVo` Server error
      */
     roleBindUser: (data: PermissionVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeRoleOutVo, ResponseTypeRoleOutVo>({
-        path: `/backend/role/roleBindUser`,
+        path: `/role/roleBindUser`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1835,14 +5667,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Roles
      * @name RoleBindFunction
      * @summary Bind role to functions
-     * @request POST:/backend/role/roleBindFunction
+     * @request POST:/role/roleBindFunction
      * @response `200` `ResponseTypeRoleOutVo` OK
      * @response `400` `ResponseTypeRoleOutVo` Invalid input
      * @response `500` `ResponseTypeRoleOutVo` Server error
      */
     roleBindFunction: (data: PermissionVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeRoleOutVo, ResponseTypeRoleOutVo>({
-        path: `/backend/role/roleBindFunction`,
+        path: `/role/roleBindFunction`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1856,13 +5688,13 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Roles
      * @name GetRole
      * @summary Get roles
-     * @request POST:/backend/role/get
+     * @request POST:/role/get
      * @response `200` `ResponseTypeListRoleOutVo` OK
      * @response `500` `ResponseTypeListRoleOutVo` Server error
      */
     getRole: (params: RequestParams = {}) =>
       this.http.request<ResponseTypeListRoleOutVo, ResponseTypeListRoleOutVo>({
-        path: `/backend/role/get`,
+        path: `/role/get`,
         method: "POST",
         format: "json",
         ...params
@@ -1874,14 +5706,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Roles
      * @name GetUserByRole
      * @summary Get users by role
-     * @request POST:/backend/role/getUserByRole
+     * @request POST:/role/getUserByRole
      * @response `200` `ResponseTypeListUserVo` OK
      * @response `400` `ResponseTypeListUserVo` Invalid input
      * @response `500` `ResponseTypeListUserVo` Server error
      */
     getUserByRole: (data: RoleOutVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeListUserVo, ResponseTypeListUserVo>({
-        path: `/backend/role/getUserByRole`,
+        path: `/role/getUserByRole`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1895,14 +5727,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Roles
      * @name GetRoleByUser
      * @summary Get roles by user
-     * @request POST:/backend/role/getRoleByUser
+     * @request POST:/role/getRoleByUser
      * @response `200` `ResponseTypeListRoleOutVo` OK
      * @response `400` `ResponseTypeListRoleOutVo` Invalid input
      * @response `500` `ResponseTypeListRoleOutVo` Server error
      */
     getRoleByUser: (data: UserVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeListRoleOutVo, ResponseTypeListRoleOutVo>({
-        path: `/backend/role/getRoleByUser`,
+        path: `/role/getRoleByUser`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1916,14 +5748,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Roles
      * @name GetRoleByFunction
      * @summary Get roles by function
-     * @request POST:/backend/role/getRoleByFunction
+     * @request POST:/role/getRoleByFunction
      * @response `200` `ResponseTypeListRoleOutVo` OK
      * @response `400` `ResponseTypeListRoleOutVo` Invalid input
      * @response `500` `ResponseTypeListRoleOutVo` Server error
      */
     getRoleByFunction: (data: FunctionVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeListRoleOutVo, ResponseTypeListRoleOutVo>({
-        path: `/backend/role/getRoleByFunction`,
+        path: `/role/getRoleByFunction`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1937,14 +5769,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Roles
      * @name GetFunctionByRole
      * @summary Get functions by role
-     * @request POST:/backend/role/getFunctionByRole
+     * @request POST:/role/getFunctionByRole
      * @response `200` `ResponseTypeListFunctionVo` OK
      * @response `400` `ResponseTypeListFunctionVo` Invalid input
      * @response `500` `ResponseTypeListFunctionVo` Server error
      */
     getFunctionByRole: (data: RoleOutVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeListFunctionVo, ResponseTypeListFunctionVo>({
-        path: `/backend/role/getFunctionByRole`,
+        path: `/role/getFunctionByRole`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1958,14 +5790,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Roles
      * @name FunctionUnbindRole
      * @summary Unbind function from roles
-     * @request POST:/backend/role/functionUnbindRole
+     * @request POST:/role/functionUnbindRole
      * @response `200` `ResponseTypeFunctionVo` OK
      * @response `400` `ResponseTypeFunctionVo` Invalid input
      * @response `500` `ResponseTypeFunctionVo` Server error
      */
     functionUnbindRole: (data: PermissionVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeFunctionVo, ResponseTypeFunctionVo>({
-        path: `/backend/role/functionUnbindRole`,
+        path: `/role/functionUnbindRole`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1979,14 +5811,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Roles
      * @name FunctionBindRole
      * @summary Bind function to roles
-     * @request POST:/backend/role/functionBindRole
+     * @request POST:/role/functionBindRole
      * @response `200` `ResponseTypeFunctionVo` OK
      * @response `400` `ResponseTypeFunctionVo` Invalid input
      * @response `500` `ResponseTypeFunctionVo` Server error
      */
     functionBindRole: (data: PermissionVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeFunctionVo, ResponseTypeFunctionVo>({
-        path: `/backend/role/functionBindRole`,
+        path: `/role/functionBindRole`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2000,14 +5832,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Roles
      * @name DeleteRole
      * @summary Delete role
-     * @request POST:/backend/role/delete
+     * @request POST:/role/delete
      * @response `200` `ResponseTypeRoleOutVo` OK
      * @response `400` `ResponseTypeRoleOutVo` Invalid input
      * @response `500` `ResponseTypeRoleOutVo` Server error
      */
     deleteRole: (data: RoleOutVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeRoleOutVo, ResponseTypeRoleOutVo>({
-        path: `/backend/role/delete`,
+        path: `/role/delete`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2021,14 +5853,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Roles
      * @name AddRole
      * @summary Add role
-     * @request POST:/backend/role/add
+     * @request POST:/role/add
      * @response `200` `ResponseTypeRoleOutVo` OK
      * @response `400` `ResponseTypeRoleOutVo` Invalid input
      * @response `500` `ResponseTypeRoleOutVo` Server error
      */
     addRole: (data: RoleOutVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeRoleOutVo, ResponseTypeRoleOutVo>({
-        path: `/backend/role/add`,
+        path: `/role/add`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2043,14 +5875,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Projects
      * @name UpdateProject
      * @summary Update project
-     * @request POST:/backend/project/update
+     * @request POST:/project/update
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
      */
     updateProject: (data: ProjectVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeString, ResponseTypeString>({
-        path: `/backend/project/update`,
+        path: `/project/update`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2064,13 +5896,13 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Projects
      * @name SearchProjects
      * @summary Search projects with pagination
-     * @request POST:/backend/project/search
+     * @request POST:/project/search
      * @response `200` `ResponseTypePageResultProjectVo` OK
      * @response `500` `ResponseTypePageResultProjectVo` Server error
      */
     searchProjects: (data: ProjectSearchQuery, params: RequestParams = {}) =>
       this.http.request<ResponseTypePageResultProjectVo, ResponseTypePageResultProjectVo>({
-        path: `/backend/project/search`,
+        path: `/project/search`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2084,14 +5916,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Projects
      * @name DeleteProject
      * @summary Delete project
-     * @request POST:/backend/project/delete
+     * @request POST:/project/delete
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
      */
     deleteProject: (data: ProjectVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeString, ResponseTypeString>({
-        path: `/backend/project/delete`,
+        path: `/project/delete`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2105,13 +5937,13 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Projects
      * @name SearchCurrentUserProjects
      * @summary Search current user projects with pagination
-     * @request POST:/backend/project/current/search
+     * @request POST:/project/current/search
      * @response `200` `ResponseTypePageResultProjectVo` OK
      * @response `500` `ResponseTypePageResultProjectVo` Server error
      */
     searchCurrentUserProjects: (data: ProjectSearchQuery, params: RequestParams = {}) =>
       this.http.request<ResponseTypePageResultProjectVo, ResponseTypePageResultProjectVo>({
-        path: `/backend/project/current/search`,
+        path: `/project/current/search`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2125,14 +5957,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Projects
      * @name BindProjectSkill
      * @summary Bind project skill
-     * @request POST:/backend/project/bindSkill
+     * @request POST:/project/bindSkill
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
      */
     bindProjectSkill: (data: ProjectSkillBindRequest, params: RequestParams = {}) =>
       this.http.request<ResponseTypeString, ResponseTypeString>({
-        path: `/backend/project/bindSkill`,
+        path: `/project/bindSkill`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2146,14 +5978,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Projects
      * @name AddProject
      * @summary Add project
-     * @request POST:/backend/project/add
+     * @request POST:/project/add
      * @response `200` `ResponseTypeProjectVo` OK
      * @response `400` `ResponseTypeProjectVo` Invalid input
      * @response `500` `ResponseTypeProjectVo` Server error
      */
     addProject: (data: ProjectVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeProjectVo, ResponseTypeProjectVo>({
-        path: `/backend/project/add`,
+        path: `/project/add`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2167,13 +5999,13 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Projects
      * @name GetProject
      * @summary Get projects
-     * @request GET:/backend/project/get
+     * @request GET:/project/get
      * @response `200` `ResponseTypeListProjectVo` OK
      * @response `500` `ResponseTypeListProjectVo` Server error
      */
     getProject: (params: RequestParams = {}) =>
       this.http.request<ResponseTypeListProjectVo, ResponseTypeListProjectVo>({
-        path: `/backend/project/get`,
+        path: `/project/get`,
         method: "GET",
         format: "json",
         ...params
@@ -2185,13 +6017,13 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Projects
      * @name GetCurrentUserProjects
      * @summary Get current user projects
-     * @request GET:/backend/project/current
+     * @request GET:/project/current
      * @response `200` `ResponseTypeListProjectVo` OK
      * @response `500` `ResponseTypeListProjectVo` Server error
      */
     getCurrentUserProjects: (params: RequestParams = {}) =>
       this.http.request<ResponseTypeListProjectVo, ResponseTypeListProjectVo>({
-        path: `/backend/project/current`,
+        path: `/project/current`,
         method: "GET",
         format: "json",
         ...params
@@ -2204,14 +6036,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Functions
      * @name UpdateFunction
      * @summary Update function
-     * @request POST:/backend/function/update
+     * @request POST:/function/update
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
      */
     updateFunction: (data: FunctionVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeString, ResponseTypeString>({
-        path: `/backend/function/update`,
+        path: `/function/update`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2225,13 +6057,13 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Functions
      * @name SearchFunctions
      * @summary Search functions with pagination
-     * @request POST:/backend/function/search
+     * @request POST:/function/search
      * @response `200` `ResponseTypePageResultFunctionVo` OK
      * @response `500` `ResponseTypePageResultFunctionVo` Server error
      */
     searchFunctions: (data: FunctionSearchQuery, params: RequestParams = {}) =>
       this.http.request<ResponseTypePageResultFunctionVo, ResponseTypePageResultFunctionVo>({
-        path: `/backend/function/search`,
+        path: `/function/search`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2245,14 +6077,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Functions
      * @name SaveAllFunction
      * @summary Save function changes
-     * @request POST:/backend/function/saveAllFunction
+     * @request POST:/function/saveAllFunction
      * @response `200` `ResponseTypeObject` OK
      * @response `400` `ResponseTypeObject` Invalid input
      * @response `500` `ResponseTypeObject` Server error
      */
     saveAllFunction: (data: FunctionTransVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeObject, ResponseTypeObject>({
-        path: `/backend/function/saveAllFunction`,
+        path: `/function/saveAllFunction`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2266,14 +6098,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Functions
      * @name DeleteFunction
      * @summary Delete function
-     * @request POST:/backend/function/delete
+     * @request POST:/function/delete
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
      */
     deleteFunction: (data: FunctionVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeString, ResponseTypeString>({
-        path: `/backend/function/delete`,
+        path: `/function/delete`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2287,14 +6119,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Functions
      * @name AddFunction
      * @summary Add function
-     * @request POST:/backend/function/add
+     * @request POST:/function/add
      * @response `200` `ResponseTypeObject` OK
      * @response `400` `ResponseTypeObject` Invalid input
      * @response `500` `ResponseTypeObject` Server error
      */
     addFunction: (data: FunctionVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeObject, ResponseTypeObject>({
-        path: `/backend/function/add`,
+        path: `/function/add`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2308,13 +6140,13 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Functions
      * @name GetFunction
      * @summary Get functions
-     * @request GET:/backend/function/get
+     * @request GET:/function/get
      * @response `200` `ResponseTypeListFunctionVo` OK
      * @response `500` `ResponseTypeListFunctionVo` Server error
      */
     getFunction: (params: RequestParams = {}) =>
       this.http.request<ResponseTypeListFunctionVo, ResponseTypeListFunctionVo>({
-        path: `/backend/function/get`,
+        path: `/function/get`,
         method: "GET",
         format: "json",
         ...params
@@ -2327,14 +6159,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Auth
      * @name CreateSuperUser
      * @summary Create super user
-     * @request POST:/backend/auth/superuser
+     * @request POST:/auth/superuser
      * @response `200` `ResponseTypeObject` OK
      * @response `400` `ResponseTypeObject` Invalid input
      * @response `500` `ResponseTypeObject` Server error
      */
     createSuperUser: (data: SuperUserRequest, params: RequestParams = {}) =>
       this.http.request<ResponseTypeObject, ResponseTypeObject>({
-        path: `/backend/auth/superuser`,
+        path: `/auth/superuser`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2348,14 +6180,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Auth
      * @name Signup
      * @summary Register a new user
-     * @request POST:/backend/auth/signup
-     * @response `200` `ResponseTypeObject` OK
-     * @response `400` `ResponseTypeObject` Invalid input
-     * @response `500` `ResponseTypeObject` Server error
+     * @request POST:/auth/signup
+     * @response `200` `ResponseTypeToken` OK
+     * @response `400` `ResponseTypeToken` Invalid input
+     * @response `500` `ResponseTypeToken` Server error
      */
     signup: (data: SignupRequest, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeObject, ResponseTypeObject>({
-        path: `/backend/auth/signup`,
+      this.http.request<ResponseTypeToken, ResponseTypeToken>({
+        path: `/auth/signup`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2369,14 +6201,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Auth
      * @name Login
      * @summary User login
-     * @request POST:/backend/auth/login
-     * @response `200` `ResponseTypeObject` OK
-     * @response `401` `ResponseTypeObject` Unauthorized
-     * @response `500` `ResponseTypeObject` Server error
+     * @request POST:/auth/login
+     * @response `200` `ResponseTypeToken` OK
+     * @response `401` `ResponseTypeToken` Unauthorized
+     * @response `500` `ResponseTypeToken` Server error
      */
     login: (data: LoginRequest, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeObject, ResponseTypeObject>({
-        path: `/backend/auth/login`,
+      this.http.request<ResponseTypeToken, ResponseTypeToken>({
+        path: `/auth/login`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2391,14 +6223,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags AquarkData
      * @name GetData
      * @summary Get aquark data
-     * @request POST:/backend/aquarkData/getData
+     * @request POST:/aquarkData/getData
      * @response `200` `ResponseTypeListAquarkDataRaw` OK
      * @response `400` `ResponseTypeListAquarkDataRaw` Invalid input
      * @response `500` `ResponseTypeListAquarkDataRaw` Server error
      */
     getData: (data: CriteriaAPIFilter[], params: RequestParams = {}) =>
       this.http.request<ResponseTypeListAquarkDataRaw, ResponseTypeListAquarkDataRaw>({
-        path: `/backend/aquarkData/getData`,
+        path: `/aquarkData/getData`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2412,14 +6244,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags AquarkData
      * @name GetAverage
      * @summary Get average aquark data
-     * @request POST:/backend/aquarkData/getAverage
+     * @request POST:/aquarkData/getAverage
      * @response `200` `ResponseTypeListAverageAquark` OK
      * @response `400` `ResponseTypeListAverageAquark` Invalid input
      * @response `500` `ResponseTypeListAverageAquark` Server error
      */
     getAverage: (data: TimeRange, params: RequestParams = {}) =>
       this.http.request<ResponseTypeListAverageAquark, ResponseTypeListAverageAquark>({
-        path: `/backend/aquarkData/getAverage`,
+        path: `/aquarkData/getAverage`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2433,13 +6265,13 @@ export class Api<SecurityDataType extends unknown> {
      * @tags AquarkData
      * @name GetColumnNameList
      * @summary Get column names
-     * @request GET:/backend/aquarkData/getColumnNameList
+     * @request GET:/aquarkData/getColumnNameList
      * @response `200` `ResponseTypeListString` OK
      * @response `500` `ResponseTypeListString` Server error
      */
     getColumnNameList: (params: RequestParams = {}) =>
       this.http.request<ResponseTypeListString, ResponseTypeListString>({
-        path: `/backend/aquarkData/getColumnNameList`,
+        path: `/aquarkData/getColumnNameList`,
         method: "GET",
         format: "json",
         ...params
@@ -2452,14 +6284,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Alert Limits
      * @name UpdateLimit
      * @summary Update alert limit
-     * @request POST:/backend/alertCheckLimit/update
+     * @request POST:/alertCheckLimit/update
      * @response `200` `ResponseTypeAlertCheckLimitVo` OK
      * @response `400` `ResponseTypeAlertCheckLimitVo` Invalid input
      * @response `500` `ResponseTypeAlertCheckLimitVo` Server error
      */
     updateLimit: (data: AlertCheckLimitVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeAlertCheckLimitVo, ResponseTypeAlertCheckLimitVo>({
-        path: `/backend/alertCheckLimit/update`,
+        path: `/alertCheckLimit/update`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2473,14 +6305,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Alert Limits
      * @name SearchAlertCheckLimits
      * @summary 搜尋告警檢查限制（分頁）
-     * @request POST:/backend/alertCheckLimit/search
+     * @request POST:/alertCheckLimit/search
      * @response `200` `ResponseTypePageResultAlertCheckLimitVo` OK
      * @response `400` `ResponseTypePageResultAlertCheckLimitVo` Invalid input
      * @response `500` `ResponseTypePageResultAlertCheckLimitVo` Server error
      */
     searchAlertCheckLimits: (data: AlertCheckLimitSearchQuery, params: RequestParams = {}) =>
       this.http.request<ResponseTypePageResultAlertCheckLimitVo, ResponseTypePageResultAlertCheckLimitVo>({
-        path: `/backend/alertCheckLimit/search`,
+        path: `/alertCheckLimit/search`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2494,14 +6326,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Alert Limits
      * @name DeleteLimit
      * @summary Delete alert limit
-     * @request POST:/backend/alertCheckLimit/delete
+     * @request POST:/alertCheckLimit/delete
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
      */
     deleteLimit: (data: AlertCheckLimitVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeString, ResponseTypeString>({
-        path: `/backend/alertCheckLimit/delete`,
+        path: `/alertCheckLimit/delete`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2515,14 +6347,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Alert Limits
      * @name AddLimit
      * @summary Add alert limit
-     * @request POST:/backend/alertCheckLimit/add
+     * @request POST:/alertCheckLimit/add
      * @response `200` `ResponseTypeAlertCheckLimitVo` OK
      * @response `400` `ResponseTypeAlertCheckLimitVo` Invalid input
      * @response `500` `ResponseTypeAlertCheckLimitVo` Server error
      */
     addLimit: (data: AlertCheckLimitVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeAlertCheckLimitVo, ResponseTypeAlertCheckLimitVo>({
-        path: `/backend/alertCheckLimit/add`,
+        path: `/alertCheckLimit/add`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -2536,13 +6368,13 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Alert Limits
      * @name GetLimit
      * @summary Get alert limits
-     * @request GET:/backend/alertCheckLimit/get
+     * @request GET:/alertCheckLimit/get
      * @response `200` `ResponseTypeListAlertCheckLimitVo` OK
      * @response `500` `ResponseTypeListAlertCheckLimitVo` Server error
      */
     getLimit: (params: RequestParams = {}) =>
       this.http.request<ResponseTypeListAlertCheckLimitVo, ResponseTypeListAlertCheckLimitVo>({
-        path: `/backend/alertCheckLimit/get`,
+        path: `/alertCheckLimit/get`,
         method: "GET",
         format: "json",
         ...params

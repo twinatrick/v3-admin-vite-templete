@@ -16,10 +16,10 @@ const props = withDefaults(defineProps<Props>(), {
   <div class="sidebar-logo-container" :class="{ collapse: props.collapse }">
     <transition name="sidebar-logo-fade">
       <router-link v-if="props.collapse" key="collapse" :to="toPath">
-        <img src="@/assets/layout/menu-icon.png" class="sidebar-logo" />
+        <img src="@/assets/layout/login-logo.png" class="sidebar-logo" />
       </router-link>
       <router-link v-else key="expand" :to="toPath">
-        <img src="@/assets/layout/menu-logo.png" class="sidebar-logo-text" />
+        <img src="@/assets/layout/login-logo.png" class="sidebar-logo-text" />
       </router-link>
     </transition>
   </div>

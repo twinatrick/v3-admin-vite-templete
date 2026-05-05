@@ -34,7 +34,7 @@ function createService() {
   const data = reactive<Data>(new Data())
   async function initialize() {
     const res1 = await api.roles.getRole()
-    data.role = res1.data.data || []
+    data.role = res1.data || []
   }
   async function queryUser(payload?: Partial<UserSearchQuery>) {
     if (payload?.page !== undefined) data.page = payload.page
@@ -56,7 +56,7 @@ function createService() {
       sortDir: data.sortDir,
       ...data.filters
     })
-    const pageResult = res.data.data || {}
+    const pageResult = res.data || {}
     data.user = pageResult.content || []
     data.totalElements = pageResult.totalElements || 0
     data.page = pageResult.currentPage ?? data.page
@@ -69,13 +69,13 @@ function createService() {
   }
   async function updateUser(userVO: UserVo) {
     const res = await api.users.saveUser(userVO)
-    if (res.data.code !== 200) throw new Error(res.data.message)
+    if (res.code !== 200) throw new Error(res.message)
     const index = data.user.findIndex((item) => item.id === userVO.id)
     data.user.splice(index, 1, userVO)
   }
   async function saveUser(userVO: UserVo) {
     const res = await api.users.saveUser(userVO)
-    if (res.data.code !== 200) throw new Error(res.data.message)
+    if (res.code !== 200) throw new Error(res.data.message)
     await queryUser()
   }
 

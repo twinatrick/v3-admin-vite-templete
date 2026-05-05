@@ -20,17 +20,17 @@ const loading = ref(false)
 //       loading.value = false
 //     })
 // }
-const loginByEmail = () => {
+const loginByEmail = async () => {
   loading.value = true
-  userStore
-    .loginByEmail(email.value, password.value)
-    .then(async () => {
-      const firstRoute = userStore.getFirstPermissionRoute()
-      await router.push(firstRoute)
-    })
-    .finally(() => {
-      loading.value = false
-    })
+  try {
+    await userStore.loginByEmail(email.value, password.value)
+    const firstRoute = userStore.getFirstPermissionRoute()
+    await router.push(firstRoute)
+  } catch (error) {
+    console.error("Login failed:", error)
+  } finally {
+    loading.value = false
+  }
 }
 const registerByEmail = () => {
   loading.value = true

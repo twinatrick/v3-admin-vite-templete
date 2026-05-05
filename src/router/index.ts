@@ -17,21 +17,21 @@ export const constantRoutes: RouteRecordRaw[] = [
       }
     ]
   },
-  {
-    path: "/403",
-    component: () => import("@/views/error-page/403.vue"),
-    meta: {
-      hidden: true
-    }
-  },
-  {
-    path: "/404",
-    component: () => import("@/views/error-page/404.vue"),
-    meta: {
-      hidden: true
-    },
-    alias: "/:pathMatch(.*)*"
-  },
+  // {
+  //   path: "/403",
+  //   component: () => import("@/views/error-page/403.vue"),
+  //   meta: {
+  //     hidden: true
+  //   }
+  // },
+  // {
+  //   path: "/404",
+  //   component: () => import("@/views/error-page/404.vue"),
+  //   meta: {
+  //     hidden: true
+  //   },
+  //   alias: "/:pathMatch(.*)*"
+  // },
   {
     path: "/login",
     component: () => import("@/views/login/index.vue"),
@@ -41,7 +41,7 @@ export const constantRoutes: RouteRecordRaw[] = [
   },
   {
     path: "/",
-    redirect: "/home/"
+    redirect: "/sa/f"
   },
   {
     path: "/sa",

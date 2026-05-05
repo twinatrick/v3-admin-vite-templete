@@ -10,8 +10,8 @@ import { ElLoading, ElMessageBox } from "element-plus"
 import { showLoading } from "@/utils"
 import { useUserStore } from "@/store/modules/user"
 import { usePermissionStore } from "@/store/modules/permission"
-import { useRemoteTableQuery } from "@/hooks/useRemoteTableQuery"
-import type { LocationQuery } from "vue-router"
+import { QueryForm, QueryFormItem } from "@/components/QueryForm"
+
 //data
 const _allRoutes = router
   .getRoutes()
@@ -20,52 +20,23 @@ const _allRoutes = router
 const createDialogRef = ref<InstanceType<typeof CreateDialog> | null>(null)
 const editDialogRef = ref<InstanceType<typeof EditDialog> | null>(null)
 const tableRef = ref<InstanceType<typeof Table> | null>(null)
-const tableData = ref<RoleVO[]>([])
+const queryFormRef = ref<any>(null)
 const allFunctions = ref<FunctionVo[]>([])
-const tableLoading = ref(false)
-const isDev = import.meta.env.DEV
-const totalElements = ref(0)
+
+// 查询过滤器
 const roleListFilters = ref({
   name: "",
   description: "",
   createdBy: ""
 })
-const toQueryValue = (query: LocationQuery[string]) => {
-  if (Array.isArray(query)) return query[0] || ""
-  return query || ""
-}
-const queryState = useRemoteTableQuery({
-  defaultPageSize: 20,
-  defaultSortBy: "createdTime",
-  defaultSortDir: "desc",
-  defaultFilters: {
-    name: "",
-    description: "",
-    createdBy: ""
-  },
-  codec: {
-    keys: ["name", "description", "createdBy"],
-    parseFilters(query) {
-      return {
-        name: toQueryValue(query.name),
-        description: toQueryValue(query.description),
-        createdBy: toQueryValue(query.createdBy)
-      }
-    },
-    serializeFilters(filters) {
-      const result: Record<string, string> = {}
-      if (filters.name) result.name = filters.name
-      if (filters.description) result.description = filters.description
-      if (filters.createdBy) result.createdBy = filters.createdBy
-      return result
-    }
-  }
-})
+
 //compute
 const selectedRow = computed<RoleVO>(() => {
   return tableRef.value?.selectedRow || {}
 })
+
 const isSelected = computed(() => Object.keys(selectedRow.value).length > 0)
+
 const leveledFunctions = computed(() => {
   const sort = (a: FunctionVo, b: FunctionVo) => {
     return parseInt(a.sort || "0") - parseInt(b.sort || "0")
@@ -88,45 +59,46 @@ const leveledFunctions = computed(() => {
     })
   }
   return temp
-  // const sortTemp: TreeProp[] = []
-  // for (const grandRoute of leveledRoutes.value) {
-  //   const grandParent = temp.find((item) => item.name === grandRoute.name)
-  //   if (!grandParent) continue
-  //   const parentTemp: TreeProp[] = []
-  //   for (const parentRoute of grandRoute.children) {
-  //     if (!grandParent.children) continue
-  //     const parent = grandParent.children.find((item) => item.name === parentRoute)
-  //     if (!parent) continue
-  //     parentTemp.push(parent)
-  //   }
-  //   sortTemp.push({
-  //     ...grandParent,
-  //     children: parentTemp
-  //   })
-  // }
-  // return sortTemp
 })
-const queryList = async () => {
-  tableLoading.value = true
-  try {
-    queryState.setFilters(roleListFilters.value, false)
-    await queryState.syncToRouteQuery()
-    const res = await api.roles.searchRoles(queryState.buildApiQuery())
-    const pageResult = res.data.data || {}
-    tableData.value = pageResult.content || []
-    totalElements.value = pageResult.totalElements || 0
-    queryState.page.value = pageResult.currentPage ?? queryState.page.value
-    queryState.size.value = pageResult.pageSize ?? queryState.size.value
-  } finally {
-    tableLoading.value = false
+
+/**
+ * 查询函数 - 传递给 QueryForm
+ */
+const queryRoles = async (params: any) => {
+  const res = await api.roles.searchRoles({
+    page: params.page,
+    size: params.size,
+    sortBy: params.sortBy,
+    sortDir: params.sortDir,
+    ...params.filters
+  })
+
+  const pageResult = res.data || {}
+
+  return {
+    data: pageResult.content || [],
+    total: pageResult.totalElements || 0,
+    page: pageResult.currentPage,
+    size: pageResult.pageSize
   }
 }
+
+const handleResetClick = () => {
+  roleListFilters.value = {
+    name: "",
+    description: "",
+    createdBy: ""
+  }
+}
+
 const createBtnClick = () => {
   createDialogRef.value?.show()
 }
+
 const editBtnClick = () => {
   editDialogRef.value?.show()
 }
+
 const deleteBtnClick = async () => {
   const isConfirmed = await ElMessageBox.confirm("Are you sure to delete?", "Confirm Delete", {
     confirmButtonText: "OK",
@@ -142,13 +114,15 @@ const deleteBtnClick = async () => {
   try {
     if (!selectedRow.value?.id) throw new Error("No selected row")
     await api.roles.deleteRole(selectedRow.value)
-    queryList()
+    // 刷新列表
+    await queryFormRef.value?.refresh()
   } catch (e) {
     console.log(e)
   } finally {
     loading.close()
   }
 }
+
 const getFunctionList = async () => {
   const loading = showLoading("Loading...")
   try {
@@ -160,12 +134,15 @@ const getFunctionList = async () => {
     loading.close()
   }
 }
+
 const afterCreate = async (_data: RoleVO) => {
-  await queryList()
+  await queryFormRef.value?.refresh()
 }
+
 const afterUpdate = async (_data: RoleVO) => {
-  await queryList()
+  await queryFormRef.value?.refresh()
 }
+
 const _updateUserInfoAndPermission = async () => {
   const userStore = useUserStore()
   const permissionStore = usePermissionStore()
@@ -176,56 +153,58 @@ const _updateUserInfoAndPermission = async () => {
 }
 
 onMounted(() => {
-  queryState.initFromRouteQuery()
-  roleListFilters.value = {
-    name: queryState.filters.name || "",
-    description: queryState.filters.description || "",
-    createdBy: queryState.filters.createdBy || ""
-  }
-  queryList()
   getFunctionList()
 })
-
-const handleRolePageChange = async (payload: { page: number; size: number }) => {
-  if (queryState.size.value !== payload.size) {
-    queryState.setPageSize(payload.size)
-  }
-  queryState.page.value = payload.page
-  await queryList()
-}
-
-const handleRoleSortChange = async (payload: { sortBy: string; sortDir: "asc" | "desc" | null }) => {
-  if (!payload.sortDir) {
-    queryState.setSort("createdTime", "desc")
-  } else {
-    queryState.setSort(payload.sortBy, payload.sortDir)
-  }
-  await queryList()
-}
 </script>
 <style scoped></style>
 <template>
   <div class="app-container">
+    <!-- 查詢表單 -->
+    <QueryForm
+      ref="queryFormRef"
+      v-model="roleListFilters"
+      :grid-cols="3"
+      :query-fn="queryRoles"
+      :query-on-mounted="true"
+      :query-on-activated="true"
+      :bind-url="true"
+      :default-page-size="20"
+      :default-sort-by="'createdTime'"
+      :default-sort-dir="'desc'"
+      @reset="handleResetClick"
+    >
+      <QueryFormItem label="Name" :col-span="1">
+        <el-input v-model="roleListFilters.name" placeholder=" " clearable />
+      </QueryFormItem>
+      <QueryFormItem label="Description" :col-span="1">
+        <el-input v-model="roleListFilters.description" placeholder=" " clearable />
+      </QueryFormItem>
+      <QueryFormItem label="Created By" :col-span="1">
+        <el-input v-model="roleListFilters.createdBy" placeholder=" " clearable />
+      </QueryFormItem>
+    </QueryForm>
+
+    <!-- 表格組件 -->
     <Table
+      v-if="queryFormRef"
       ref="tableRef"
-      :data="tableData"
-      :loading="tableLoading"
-      :total="totalElements"
-      :current-page="queryState.page.value + 1"
-      :page-size="queryState.size.value"
-      @page-change="handleRolePageChange"
-      @sort-change="handleRoleSortChange"
+      :data="queryFormRef.data"
+      :loading="queryFormRef.loading"
+      :total="queryFormRef.total"
+      :current-page="queryFormRef.currentPage"
+      :page-size="queryFormRef.size"
+      @page-change="queryFormRef.onPageChange"
+      @sort-change="queryFormRef.onSortChange"
     >
       <el-form>
         <el-form-item>
           <el-space>
             <el-button icon="Plus" type="primary" @click="createBtnClick">Create</el-button>
             <el-button icon="Edit" type="warning" :disabled="!isSelected" @click="editBtnClick">Edit </el-button>
-            <el-button v-show="isDev" icon="Plus" type="primary">Edit Function</el-button>
+            <el-button icon="Delete" type="danger" ml-auto :disabled="!isSelected" @click="deleteBtnClick"
+              >Delete
+            </el-button>
           </el-space>
-          <el-button icon="Delete" type="danger" ml-auto :disabled="!isSelected" @click="deleteBtnClick"
-            >Delete
-          </el-button>
         </el-form-item>
       </el-form>
     </Table>

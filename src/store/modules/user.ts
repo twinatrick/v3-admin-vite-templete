@@ -24,22 +24,20 @@ export const useUserStore = defineStore("user", () => {
   }
   const loginByEmail = async (email: string, password: string) => {
     const res = await api.auth.login({ email, password })
-    if (res.data.code !== 200 || !(res.data.data as { accessToken?: string })?.accessToken) {
-      throw new Error(res.data.message || "Login failed: No data returned or accessToken missing.")
+    if (res.code !== 200) {
+      throw new Error(res.message || "Login failed: No data returned or accessToken missing.")
     }
-    accessToken.value = (res.data.data as { accessToken: string }).accessToken
+    accessToken.value = res.data.accessToken
     setAccessToken(accessToken.value)
-    // setToken(accessToken.value)
-    console.log(accessToken.value)
     await getInfo()
     return res
   }
   const register = async (email: string, password: string) => {
     const res = await api.auth.signup({ email, password })
-    if (res.data.code !== 200 || !(res.data.data as { accessToken?: string })?.accessToken) {
-      throw new Error(res.data.message || "Registration failed: No data returned or accessToken missing.")
+    if (res.code !== 200 || !res.data.accessToken) {
+      throw new Error(res.message || "Registration failed: No data returned or accessToken missing.")
     }
-    accessToken.value = (res.data.data as { accessToken: string }).accessToken
+    accessToken.value = res.data.accessToken
     setAccessToken(accessToken.value)
     // setToken(accessToken.value)
     await getInfo()
@@ -49,7 +47,7 @@ export const useUserStore = defineStore("user", () => {
   const getInfo = async () => {
     try {
       const { data } = await api.users.getUserInfo()
-      userInfo.value = data.data
+      userInfo.value = data
     } catch (e) {
       console.log(e)
     }

@@ -42,7 +42,7 @@ export default (configEnv: ConfigEnv): UserConfigExport => {
           ws: true,
           /** cros */
           changeOrigin: true,
-          rewrite: (path) => path.replace("/api/v1", "/backend")
+          rewrite: (path) => path.replace("/api/v1", "/")
         },
         "/ws": {
           target: "ws://localhost:8000",

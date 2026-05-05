@@ -17,7 +17,7 @@ const componentWithRouteName = (component: any, name?: RouteRecordName | null) =
         <transition name="el-fade-in" mode="out-in">
           <div class="h-full flex flex-col">
             <keep-alive :include="tagsViewStore.cachedViews">
-              <component :is="componentWithRouteName(Component, route.fullPath)" :key="route.fullPath" />
+              <component :is="componentWithRouteName(Component, route.fullPath)" :key="route.path" />
             </keep-alive>
           </div>
         </transition>
