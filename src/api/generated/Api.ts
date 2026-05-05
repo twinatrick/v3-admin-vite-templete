@@ -10,6 +10,62 @@
  * ---------------------------------------------------------------
  */
 
+/** 使用者搜尋查詢參數 */
+export interface UserSearchQuery {
+  /**
+   * 頁碼，從0開始
+   * @format int32
+   * @min 0
+   * @example 0
+   */
+  page?: number
+  /**
+   * 每頁大小
+   * @format int32
+   * @min 1
+   * @max 100
+   * @example 20
+   */
+  size?: number
+  /**
+   * 排序欄位
+   * @example "createdTime"
+   */
+  sortBy?: string
+  /**
+   * 排序方向：asc/desc
+   * @example "desc"
+   */
+  sortDir?: string
+  /**
+   * 使用者名稱（模糊查詢）
+   * @example "張三"
+   */
+  name?: string
+  /**
+   * 電子郵件（模糊查詢）
+   * @example "user@example.com"
+   */
+  email?: string
+  /**
+   * 電話號碼（模糊查詢）
+   * @example "0912345678"
+   */
+  phone?: string
+  /**
+   * 是否停用
+   * @example false
+   */
+  disabled?: boolean
+  /**
+   * 創建者（精確查詢）
+   * @example "admin"
+   */
+  createdBy?: string
+  normalizedSortDir?: string
+  validSortDir?: boolean
+}
+
 export interface FunctionVo {
   id?: string
   name?: string
@@ -24,6 +80,49 @@ export interface FunctionVo {
   newAdd?: boolean
   newName?: string
   delete?: boolean
+}
+
+/** 分頁結果 */
+export interface PageResultUserVo {
+  /** 資料列表 */
+  content?: UserVo[]
+  /**
+   * 總記錄數
+   * @format int64
+   */
+  totalElements?: number
+  /**
+   * 總頁數
+   * @format int32
+   */
+  totalPages?: number
+  /**
+   * 當前頁碼（從0開始）
+   * @format int32
+   */
+  currentPage?: number
+  /**
+   * 每頁大小
+   * @format int32
+   */
+  pageSize?: number
+  /** 是否有下一頁 */
+  hasNext?: boolean
+  /** 是否有上一頁 */
+  hasPrevious?: boolean
+  /** 是否為第一頁 */
+  isFirst?: boolean
+  /** 是否為最後一頁 */
+  isLast?: boolean
+}
+
+export interface ResponseTypePageResultUserVo {
+  /** @format int32 */
+  code?: number
+  /** 分頁結果 */
+  data?: PageResultUserVo
+  message?: string
+  errorType?: string
 }
 
 export interface UserVo {
@@ -51,11 +150,15 @@ export interface ResponseTypeString {
   errorType?: string
 }
 
-export interface BindUserSkillOrProject {
+export interface UserSkillBindRequest {
   userId?: string
-  skill?: string
+  skillId?: string
+  skillLevelId?: string
+}
+
+export interface UserProjectBindRequest {
+  userId?: string
   projectId?: string
-  type?: string
 }
 
 export interface SkillVo {
@@ -69,6 +172,298 @@ export interface SkillVo {
   createdTime?: string
   /** @format date-time */
   updatedTime?: string
+}
+
+/** 技能搜尋查詢參數 */
+export interface SkillSearchQuery {
+  /**
+   * 頁碼，從0開始
+   * @format int32
+   * @min 0
+   * @example 0
+   */
+  page?: number
+  /**
+   * 每頁大小
+   * @format int32
+   * @min 1
+   * @max 100
+   * @example 20
+   */
+  size?: number
+  /**
+   * 排序欄位
+   * @example "createdTime"
+   */
+  sortBy?: string
+  /**
+   * 排序方向：asc/desc
+   * @example "desc"
+   */
+  sortDir?: string
+  /**
+   * 技能名稱（模糊查詢）
+   * @example "Java"
+   */
+  name?: string
+  /**
+   * 技能描述（模糊查詢）
+   * @example "程式語言"
+   */
+  description?: string
+  /**
+   * 創建者（精確查詢）
+   * @example "admin"
+   */
+  createdBy?: string
+  normalizedSortDir?: string
+  validSortDir?: boolean
+}
+
+/** 分頁結果 */
+export interface PageResultSkillVo {
+  /** 資料列表 */
+  content?: SkillVo[]
+  /**
+   * 總記錄數
+   * @format int64
+   */
+  totalElements?: number
+  /**
+   * 總頁數
+   * @format int32
+   */
+  totalPages?: number
+  /**
+   * 當前頁碼（從0開始）
+   * @format int32
+   */
+  currentPage?: number
+  /**
+   * 每頁大小
+   * @format int32
+   */
+  pageSize?: number
+  /** 是否有下一頁 */
+  hasNext?: boolean
+  /** 是否有上一頁 */
+  hasPrevious?: boolean
+  /** 是否為第一頁 */
+  isFirst?: boolean
+  /** 是否為最後一頁 */
+  isLast?: boolean
+}
+
+export interface ResponseTypePageResultSkillVo {
+  /** @format int32 */
+  code?: number
+  /** 分頁結果 */
+  data?: PageResultSkillVo
+  message?: string
+  errorType?: string
+}
+
+export interface SkillLevelVo {
+  id?: string
+  skillId?: string
+  /** @format int32 */
+  levelValue?: number
+  title?: string
+  description?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+}
+
+/** 技能等級搜尋查詢參數 */
+export interface SkillLevelSearchQuery {
+  /**
+   * 頁碼，從0開始
+   * @format int32
+   * @min 0
+   * @example 0
+   */
+  page?: number
+  /**
+   * 每頁大小
+   * @format int32
+   * @min 1
+   * @max 100
+   * @example 20
+   */
+  size?: number
+  /**
+   * 排序欄位
+   * @example "createdTime"
+   */
+  sortBy?: string
+  /**
+   * 排序方向：asc/desc
+   * @example "desc"
+   */
+  sortDir?: string
+  /**
+   * 技能ID（精確查詢）
+   * @format uuid
+   * @example "550e8400-e29b-41d4-a716-446655440000"
+   */
+  skillId?: string
+  /**
+   * 等級數值（精確查詢）
+   * @format int32
+   * @example 3
+   */
+  levelValue?: number
+  /**
+   * 等級標題（模糊查詢）
+   * @example "高級"
+   */
+  title?: string
+  /**
+   * 等級描述（模糊查詢）
+   * @example "精通"
+   */
+  description?: string
+  /**
+   * 創建者（精確查詢）
+   * @example "admin"
+   */
+  createdBy?: string
+  normalizedSortDir?: string
+  validSortDir?: boolean
+}
+
+/** 分頁結果 */
+export interface PageResultSkillLevelVo {
+  /** 資料列表 */
+  content?: SkillLevelVo[]
+  /**
+   * 總記錄數
+   * @format int64
+   */
+  totalElements?: number
+  /**
+   * 總頁數
+   * @format int32
+   */
+  totalPages?: number
+  /**
+   * 當前頁碼（從0開始）
+   * @format int32
+   */
+  currentPage?: number
+  /**
+   * 每頁大小
+   * @format int32
+   */
+  pageSize?: number
+  /** 是否有下一頁 */
+  hasNext?: boolean
+  /** 是否有上一頁 */
+  hasPrevious?: boolean
+  /** 是否為第一頁 */
+  isFirst?: boolean
+  /** 是否為最後一頁 */
+  isLast?: boolean
+}
+
+export interface ResponseTypePageResultSkillLevelVo {
+  /** @format int32 */
+  code?: number
+  /** 分頁結果 */
+  data?: PageResultSkillLevelVo
+  message?: string
+  errorType?: string
+}
+
+export interface ResponseTypeSkillLevelVo {
+  /** @format int32 */
+  code?: number
+  data?: SkillLevelVo
+  message?: string
+  errorType?: string
+}
+
+/** 當前使用者技能資訊（含來源） */
+export interface CurrentUserSkillVo {
+  /**
+   * 技能ID
+   * @format uuid
+   */
+  id?: string
+  /** 技能名稱 */
+  name?: string
+  /** 技能描述 */
+  description?: string
+  /** 創建者 */
+  createdBy?: string
+  /** 更新者 */
+  updatedBy?: string
+  /**
+   * 創建時間
+   * @format date-time
+   */
+  createdTime?: string
+  /**
+   * 更新時間
+   * @format date-time
+   */
+  updatedTime?: string
+  /** 來源類型：USER（直接綁定）或 PROJECT（專案技能） */
+  sourceType?: string
+  /**
+   * 專案ID（當 sourceType 為 PROJECT 時有值）
+   * @format uuid
+   */
+  projectId?: string
+  /** 專案名稱（當 sourceType 為 PROJECT 時有值） */
+  projectName?: string
+}
+
+/** 分頁結果 */
+export interface PageResultCurrentUserSkillVo {
+  /** 資料列表 */
+  content?: CurrentUserSkillVo[]
+  /**
+   * 總記錄數
+   * @format int64
+   */
+  totalElements?: number
+  /**
+   * 總頁數
+   * @format int32
+   */
+  totalPages?: number
+  /**
+   * 當前頁碼（從0開始）
+   * @format int32
+   */
+  currentPage?: number
+  /**
+   * 每頁大小
+   * @format int32
+   */
+  pageSize?: number
+  /** 是否有下一頁 */
+  hasNext?: boolean
+  /** 是否有上一頁 */
+  hasPrevious?: boolean
+  /** 是否為第一頁 */
+  isFirst?: boolean
+  /** 是否為最後一頁 */
+  isLast?: boolean
+}
+
+export interface ResponseTypePageResultCurrentUserSkillVo {
+  /** @format int32 */
+  code?: number
+  /** 分頁結果 */
+  data?: PageResultCurrentUserSkillVo
+  message?: string
+  errorType?: string
 }
 
 export interface ResponseTypeSkillVo {
@@ -119,6 +514,95 @@ export interface ResponseTypeRoleOutVo {
   errorType?: string
 }
 
+/** 角色搜尋查詢參數 */
+export interface RoleSearchQuery {
+  /**
+   * 頁碼，從0開始
+   * @format int32
+   * @min 0
+   * @example 0
+   */
+  page?: number
+  /**
+   * 每頁大小
+   * @format int32
+   * @min 1
+   * @max 100
+   * @example 20
+   */
+  size?: number
+  /**
+   * 排序欄位
+   * @example "createdTime"
+   */
+  sortBy?: string
+  /**
+   * 排序方向：asc/desc
+   * @example "desc"
+   */
+  sortDir?: string
+  /**
+   * 角色名稱（模糊查詢）
+   * @example "管理員"
+   */
+  name?: string
+  /**
+   * 角色描述（模糊查詢）
+   * @example "系統管理"
+   */
+  description?: string
+  /**
+   * 創建者（精確查詢）
+   * @example "admin"
+   */
+  createdBy?: string
+  normalizedSortDir?: string
+  validSortDir?: boolean
+}
+
+/** 分頁結果 */
+export interface PageResultRoleOutVo {
+  /** 資料列表 */
+  content?: RoleOutVo[]
+  /**
+   * 總記錄數
+   * @format int64
+   */
+  totalElements?: number
+  /**
+   * 總頁數
+   * @format int32
+   */
+  totalPages?: number
+  /**
+   * 當前頁碼（從0開始）
+   * @format int32
+   */
+  currentPage?: number
+  /**
+   * 每頁大小
+   * @format int32
+   */
+  pageSize?: number
+  /** 是否有下一頁 */
+  hasNext?: boolean
+  /** 是否有上一頁 */
+  hasPrevious?: boolean
+  /** 是否為第一頁 */
+  isFirst?: boolean
+  /** 是否為最後一頁 */
+  isLast?: boolean
+}
+
+export interface ResponseTypePageResultRoleOutVo {
+  /** @format int32 */
+  code?: number
+  /** 分頁結果 */
+  data?: PageResultRoleOutVo
+  message?: string
+  errorType?: string
+}
+
 export interface ResponseTypeListRoleOutVo {
   /** @format int32 */
   code?: number
@@ -164,10 +648,200 @@ export interface ProjectVo {
   updatedTime?: string
 }
 
+/** 專案搜尋查詢參數 */
+export interface ProjectSearchQuery {
+  /**
+   * 頁碼，從0開始
+   * @format int32
+   * @min 0
+   * @example 0
+   */
+  page?: number
+  /**
+   * 每頁大小
+   * @format int32
+   * @min 1
+   * @max 100
+   * @example 20
+   */
+  size?: number
+  /**
+   * 排序欄位
+   * @example "createdTime"
+   */
+  sortBy?: string
+  /**
+   * 排序方向：asc/desc
+   * @example "desc"
+   */
+  sortDir?: string
+  /**
+   * 專案名稱（模糊查詢）
+   * @example "電商系統"
+   */
+  name?: string
+  /**
+   * 專案描述（模糊查詢）
+   * @example "線上購物"
+   */
+  description?: string
+  /**
+   * 創建者（精確查詢）
+   * @example "admin"
+   */
+  createdBy?: string
+  normalizedSortDir?: string
+  validSortDir?: boolean
+}
+
+/** 分頁結果 */
+export interface PageResultProjectVo {
+  /** 資料列表 */
+  content?: ProjectVo[]
+  /**
+   * 總記錄數
+   * @format int64
+   */
+  totalElements?: number
+  /**
+   * 總頁數
+   * @format int32
+   */
+  totalPages?: number
+  /**
+   * 當前頁碼（從0開始）
+   * @format int32
+   */
+  currentPage?: number
+  /**
+   * 每頁大小
+   * @format int32
+   */
+  pageSize?: number
+  /** 是否有下一頁 */
+  hasNext?: boolean
+  /** 是否有上一頁 */
+  hasPrevious?: boolean
+  /** 是否為第一頁 */
+  isFirst?: boolean
+  /** 是否為最後一頁 */
+  isLast?: boolean
+}
+
+export interface ResponseTypePageResultProjectVo {
+  /** @format int32 */
+  code?: number
+  /** 分頁結果 */
+  data?: PageResultProjectVo
+  message?: string
+  errorType?: string
+}
+
+export interface ProjectSkillBindRequest {
+  projectId?: string
+  skillId?: string
+  skillLevelId?: string
+}
+
 export interface ResponseTypeProjectVo {
   /** @format int32 */
   code?: number
   data?: ProjectVo
+  message?: string
+  errorType?: string
+}
+
+/** 功能搜尋查詢參數 */
+export interface FunctionSearchQuery {
+  /**
+   * 頁碼，從0開始
+   * @format int32
+   * @min 0
+   * @example 0
+   */
+  page?: number
+  /**
+   * 每頁大小
+   * @format int32
+   * @min 1
+   * @max 100
+   * @example 20
+   */
+  size?: number
+  /**
+   * 排序欄位
+   * @example "createdTime"
+   */
+  sortBy?: string
+  /**
+   * 排序方向：asc/desc
+   * @example "desc"
+   */
+  sortDir?: string
+  /**
+   * 功能名稱（模糊查詢）
+   * @example "使用者管理"
+   */
+  name?: string
+  /**
+   * 父功能ID（精確查詢）
+   * @example "uuid"
+   */
+  parent?: string
+  /**
+   * 功能類型（精確查詢）
+   * @format int32
+   * @example 1
+   */
+  type?: number
+  /**
+   * 創建者（精確查詢）
+   * @example "admin"
+   */
+  createdBy?: string
+  normalizedSortDir?: string
+  validSortDir?: boolean
+}
+
+/** 分頁結果 */
+export interface PageResultFunctionVo {
+  /** 資料列表 */
+  content?: FunctionVo[]
+  /**
+   * 總記錄數
+   * @format int64
+   */
+  totalElements?: number
+  /**
+   * 總頁數
+   * @format int32
+   */
+  totalPages?: number
+  /**
+   * 當前頁碼（從0開始）
+   * @format int32
+   */
+  currentPage?: number
+  /**
+   * 每頁大小
+   * @format int32
+   */
+  pageSize?: number
+  /** 是否有下一頁 */
+  hasNext?: boolean
+  /** 是否有上一頁 */
+  hasPrevious?: boolean
+  /** 是否為第一頁 */
+  isFirst?: boolean
+  /** 是否為最後一頁 */
+  isLast?: boolean
+}
+
+export interface ResponseTypePageResultFunctionVo {
+  /** @format int32 */
+  code?: number
+  /** 分頁結果 */
+  data?: PageResultFunctionVo
   message?: string
   errorType?: string
 }
@@ -323,10 +997,127 @@ export interface ResponseTypeAlertCheckLimitVo {
   errorType?: string
 }
 
+/** 告警檢查限制搜尋查詢參數 */
+export interface AlertCheckLimitSearchQuery {
+  /**
+   * 頁碼，從0開始
+   * @format int32
+   * @min 0
+   * @example 0
+   */
+  page?: number
+  /**
+   * 每頁大小
+   * @format int32
+   * @min 1
+   * @max 100
+   * @example 20
+   */
+  size?: number
+  /**
+   * 排序欄位
+   * @example "createdTime"
+   */
+  sortBy?: string
+  /**
+   * 排序方向：asc/desc
+   * @example "desc"
+   */
+  sortDir?: string
+  /**
+   * 表名（模糊查詢）
+   * @example "user"
+   */
+  tableName?: string
+  /**
+   * 欄位名（模糊查詢）
+   * @example "age"
+   */
+  columnName?: string
+  /**
+   * 限制值最小值（範圍查詢）
+   * @format double
+   * @example 0
+   */
+  limitValueMin?: number
+  /**
+   * 限制值最大值（範圍查詢）
+   * @format double
+   * @example 100
+   */
+  limitValueMax?: number
+  /**
+   * 創建者（精確查詢）
+   * @example "admin"
+   */
+  createdBy?: string
+  normalizedSortDir?: string
+  validSortDir?: boolean
+}
+
+/** 分頁結果 */
+export interface PageResultAlertCheckLimitVo {
+  /** 資料列表 */
+  content?: AlertCheckLimitVo[]
+  /**
+   * 總記錄數
+   * @format int64
+   */
+  totalElements?: number
+  /**
+   * 總頁數
+   * @format int32
+   */
+  totalPages?: number
+  /**
+   * 當前頁碼（從0開始）
+   * @format int32
+   */
+  currentPage?: number
+  /**
+   * 每頁大小
+   * @format int32
+   */
+  pageSize?: number
+  /** 是否有下一頁 */
+  hasNext?: boolean
+  /** 是否有上一頁 */
+  hasPrevious?: boolean
+  /** 是否為第一頁 */
+  isFirst?: boolean
+  /** 是否為最後一頁 */
+  isLast?: boolean
+}
+
+export interface ResponseTypePageResultAlertCheckLimitVo {
+  /** @format int32 */
+  code?: number
+  /** 分頁結果 */
+  data?: PageResultAlertCheckLimitVo
+  message?: string
+  errorType?: string
+}
+
+export interface ResponseTypeListSkillLevelVo {
+  /** @format int32 */
+  code?: number
+  data?: SkillLevelVo[]
+  message?: string
+  errorType?: string
+}
+
 export interface ResponseTypeListSkillVo {
   /** @format int32 */
   code?: number
   data?: SkillVo[]
+  message?: string
+  errorType?: string
+}
+
+export interface ResponseTypeListCurrentUserSkillVo {
+  /** @format int32 */
+  code?: number
+  data?: CurrentUserSkillVo[]
   message?: string
   errorType?: string
 }
@@ -498,7 +1289,6 @@ export class HttpClient<SecurityDataType = unknown> {
  * @version v0
  * @baseUrl http://localhost:8000
  */
-
 export class Api<SecurityDataType extends unknown> {
   http: HttpClient<SecurityDataType>
 
@@ -507,6 +1297,26 @@ export class Api<SecurityDataType extends unknown> {
   }
 
   users = {
+    /**
+     * @description 搜尋使用者並回傳分頁結果，支援多種查詢條件與排序
+     *
+     * @tags Users
+     * @name SearchUsers
+     * @summary Search users with pagination
+     * @request POST:/backend/users/search
+     * @response `200` `ResponseTypePageResultUserVo` OK
+     * @response `500` `ResponseTypePageResultUserVo` Server error
+     */
+    searchUsers: (data: UserSearchQuery, params: RequestParams = {}) =>
+      this.http.request<ResponseTypePageResultUserVo, ResponseTypePageResultUserVo>({
+        path: `/backend/users/search`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
     /**
      * @description Updates a user and their role assignments.
      *
@@ -550,19 +1360,40 @@ export class Api<SecurityDataType extends unknown> {
       }),
 
     /**
-     * @description Binds a skill to a user or to a project and user.
+     * @description Binds a skill level to a user.
      *
      * @tags Users
-     * @name BindUserSkillOrProject
-     * @summary Bind user skill or project
-     * @request POST:/backend/users/BindUserSkillOrProject
+     * @name BindUserSkill
+     * @summary Bind user skill
+     * @request POST:/backend/users/bindSkill
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
      */
-    BindUserSkillOrProject: (data: BindUserSkillOrProject, params: RequestParams = {}) =>
+    bindUserSkill: (data: UserSkillBindRequest, params: RequestParams = {}) =>
       this.http.request<ResponseTypeString, ResponseTypeString>({
-        path: `/backend/users/BindUserSkillOrProject`,
+        path: `/backend/users/bindSkill`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description Binds a user to a project.
+     *
+     * @tags Users
+     * @name BindUserProject
+     * @summary Bind user project
+     * @request POST:/backend/users/bindProject
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    bindUserProject: (data: UserProjectBindRequest, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/backend/users/bindProject`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -630,6 +1461,111 @@ export class Api<SecurityDataType extends unknown> {
       }),
 
     /**
+     * @description 支援 name、description、createdBy 查詢條件，預設按 createdTime 降序排序
+     *
+     * @tags Skills
+     * @name SearchSkills
+     * @summary 搜尋技能（分頁）
+     * @request POST:/backend/skill/search
+     * @response `200` `ResponseTypePageResultSkillVo` OK
+     * @response `400` `ResponseTypePageResultSkillVo` Invalid input
+     * @response `500` `ResponseTypePageResultSkillVo` Server error
+     */
+    searchSkills: (data: SkillSearchQuery, params: RequestParams = {}) =>
+      this.http.request<ResponseTypePageResultSkillVo, ResponseTypePageResultSkillVo>({
+        path: `/backend/skill/search`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description Updates a skill level.
+     *
+     * @tags Skills
+     * @name UpdateSkillLevel
+     * @summary Update skill level
+     * @request POST:/backend/skill/level/update
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    updateSkillLevel: (data: SkillLevelVo, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/backend/skill/level/update`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 支援 skillId、levelValue、title、description、createdBy 查詢條件，預設按 createdTime 降序排序
+     *
+     * @tags Skills
+     * @name SearchSkillLevels
+     * @summary 搜尋技能等級（分頁）
+     * @request POST:/backend/skill/level/search
+     * @response `200` `ResponseTypePageResultSkillLevelVo` OK
+     * @response `400` `ResponseTypePageResultSkillLevelVo` Invalid input
+     * @response `500` `ResponseTypePageResultSkillLevelVo` Server error
+     */
+    searchSkillLevels: (data: SkillLevelSearchQuery, params: RequestParams = {}) =>
+      this.http.request<ResponseTypePageResultSkillLevelVo, ResponseTypePageResultSkillLevelVo>({
+        path: `/backend/skill/level/search`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description Deletes a skill level.
+     *
+     * @tags Skills
+     * @name DeleteSkillLevel
+     * @summary Delete skill level
+     * @request POST:/backend/skill/level/delete
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    deleteSkillLevel: (data: SkillLevelVo, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/backend/skill/level/delete`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description Creates a level under a specific skill.
+     *
+     * @tags Skills
+     * @name AddSkillLevel
+     * @summary Add skill level
+     * @request POST:/backend/skill/level/add
+     * @response `200` `ResponseTypeSkillLevelVo` OK
+     * @response `400` `ResponseTypeSkillLevelVo` Invalid input
+     * @response `500` `ResponseTypeSkillLevelVo` Server error
+     */
+    addSkillLevel: (data: SkillLevelVo, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeSkillLevelVo, ResponseTypeSkillLevelVo>({
+        path: `/backend/skill/level/add`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
      * @description Deletes a skill.
      *
      * @tags Skills
@@ -643,6 +1579,27 @@ export class Api<SecurityDataType extends unknown> {
     deleteSkill: (data: SkillVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeString, ResponseTypeString>({
         path: `/backend/skill/delete`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 在合併後的技能列表中搜尋，支援 name、description、createdBy 查詢條件
+     *
+     * @tags Skills
+     * @name SearchCurrentUserSkills
+     * @summary 搜尋當前使用者技能（分頁）
+     * @request POST:/backend/skill/current/search
+     * @response `200` `ResponseTypePageResultCurrentUserSkillVo` OK
+     * @response `400` `ResponseTypePageResultCurrentUserSkillVo` Invalid input
+     * @response `500` `ResponseTypePageResultCurrentUserSkillVo` Server error
+     */
+    searchCurrentUserSkills: (data: SkillSearchQuery, params: RequestParams = {}) =>
+      this.http.request<ResponseTypePageResultCurrentUserSkillVo, ResponseTypePageResultCurrentUserSkillVo>({
+        path: `/backend/skill/current/search`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -672,6 +1629,24 @@ export class Api<SecurityDataType extends unknown> {
       }),
 
     /**
+     * @description Returns all levels for a skill.
+     *
+     * @tags Skills
+     * @name GetSkillLevels
+     * @summary Get skill levels
+     * @request GET:/backend/skill/level/get/{skillId}
+     * @response `200` `ResponseTypeListSkillLevelVo` OK
+     * @response `500` `ResponseTypeListSkillLevelVo` Server error
+     */
+    getSkillLevels: (skillId: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListSkillLevelVo, ResponseTypeListSkillLevelVo>({
+        path: `/backend/skill/level/get/${skillId}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
      * @description Returns all skills.
      *
      * @tags Skills
@@ -684,6 +1659,24 @@ export class Api<SecurityDataType extends unknown> {
     getSkill: (params: RequestParams = {}) =>
       this.http.request<ResponseTypeListSkillVo, ResponseTypeListSkillVo>({
         path: `/backend/skill/get`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 合併 USER（直接綁定）和 PROJECT（專案技能）兩個來源，每筆標記 sourceType
+     *
+     * @tags Skills
+     * @name GetCurrentUserSkills
+     * @summary 取得當前使用者技能
+     * @request GET:/backend/skill/current
+     * @response `200` `ResponseTypeListCurrentUserSkillVo` OK
+     * @response `500` `ResponseTypeListCurrentUserSkillVo` Server error
+     */
+    getCurrentUserSkills: (params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListCurrentUserSkillVo, ResponseTypeListCurrentUserSkillVo>({
+        path: `/backend/skill/current`,
         method: "GET",
         format: "json",
         ...params
@@ -746,6 +1739,26 @@ export class Api<SecurityDataType extends unknown> {
     updateRole: (data: RoleOutVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeRoleOutVo, ResponseTypeRoleOutVo>({
         path: `/backend/role/update`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 搜尋角色並回傳分頁結果，支援多種查詢條件與排序
+     *
+     * @tags Roles
+     * @name SearchRoles
+     * @summary Search roles with pagination
+     * @request POST:/backend/role/search
+     * @response `200` `ResponseTypePageResultRoleOutVo` OK
+     * @response `500` `ResponseTypePageResultRoleOutVo` Server error
+     */
+    searchRoles: (data: RoleSearchQuery, params: RequestParams = {}) =>
+      this.http.request<ResponseTypePageResultRoleOutVo, ResponseTypePageResultRoleOutVo>({
+        path: `/backend/role/search`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1046,6 +2059,26 @@ export class Api<SecurityDataType extends unknown> {
       }),
 
     /**
+     * @description 搜尋專案並回傳分頁結果，支援多種查詢條件與排序
+     *
+     * @tags Projects
+     * @name SearchProjects
+     * @summary Search projects with pagination
+     * @request POST:/backend/project/search
+     * @response `200` `ResponseTypePageResultProjectVo` OK
+     * @response `500` `ResponseTypePageResultProjectVo` Server error
+     */
+    searchProjects: (data: ProjectSearchQuery, params: RequestParams = {}) =>
+      this.http.request<ResponseTypePageResultProjectVo, ResponseTypePageResultProjectVo>({
+        path: `/backend/project/search`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
      * @description Deletes a project.
      *
      * @tags Projects
@@ -1059,6 +2092,47 @@ export class Api<SecurityDataType extends unknown> {
     deleteProject: (data: ProjectVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeString, ResponseTypeString>({
         path: `/backend/project/delete`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 搜尋當前使用者的專案並回傳分頁結果，支援多種查詢條件與排序
+     *
+     * @tags Projects
+     * @name SearchCurrentUserProjects
+     * @summary Search current user projects with pagination
+     * @request POST:/backend/project/current/search
+     * @response `200` `ResponseTypePageResultProjectVo` OK
+     * @response `500` `ResponseTypePageResultProjectVo` Server error
+     */
+    searchCurrentUserProjects: (data: ProjectSearchQuery, params: RequestParams = {}) =>
+      this.http.request<ResponseTypePageResultProjectVo, ResponseTypePageResultProjectVo>({
+        path: `/backend/project/current/search`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description Binds a skill level to a project.
+     *
+     * @tags Projects
+     * @name BindProjectSkill
+     * @summary Bind project skill
+     * @request POST:/backend/project/bindSkill
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    bindProjectSkill: (data: ProjectSkillBindRequest, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/backend/project/bindSkill`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1103,6 +2177,24 @@ export class Api<SecurityDataType extends unknown> {
         method: "GET",
         format: "json",
         ...params
+      }),
+
+    /**
+     * @description 回傳當前使用者所屬的所有專案
+     *
+     * @tags Projects
+     * @name GetCurrentUserProjects
+     * @summary Get current user projects
+     * @request GET:/backend/project/current
+     * @response `200` `ResponseTypeListProjectVo` OK
+     * @response `500` `ResponseTypeListProjectVo` Server error
+     */
+    getCurrentUserProjects: (params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListProjectVo, ResponseTypeListProjectVo>({
+        path: `/backend/project/current`,
+        method: "GET",
+        format: "json",
+        ...params
       })
   }
   functions = {
@@ -1120,6 +2212,26 @@ export class Api<SecurityDataType extends unknown> {
     updateFunction: (data: FunctionVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeString, ResponseTypeString>({
         path: `/backend/function/update`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 搜尋功能並回傳分頁結果，支援多種查詢條件與排序
+     *
+     * @tags Functions
+     * @name SearchFunctions
+     * @summary Search functions with pagination
+     * @request POST:/backend/function/search
+     * @response `200` `ResponseTypePageResultFunctionVo` OK
+     * @response `500` `ResponseTypePageResultFunctionVo` Server error
+     */
+    searchFunctions: (data: FunctionSearchQuery, params: RequestParams = {}) =>
+      this.http.request<ResponseTypePageResultFunctionVo, ResponseTypePageResultFunctionVo>({
+        path: `/backend/function/search`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -1348,6 +2460,27 @@ export class Api<SecurityDataType extends unknown> {
     updateLimit: (data: AlertCheckLimitVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeAlertCheckLimitVo, ResponseTypeAlertCheckLimitVo>({
         path: `/backend/alertCheckLimit/update`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 支援 tableName、columnName、limitValue 範圍、createdBy 查詢條件，預設按 createdTime 降序排序
+     *
+     * @tags Alert Limits
+     * @name SearchAlertCheckLimits
+     * @summary 搜尋告警檢查限制（分頁）
+     * @request POST:/backend/alertCheckLimit/search
+     * @response `200` `ResponseTypePageResultAlertCheckLimitVo` OK
+     * @response `400` `ResponseTypePageResultAlertCheckLimitVo` Invalid input
+     * @response `500` `ResponseTypePageResultAlertCheckLimitVo` Server error
+     */
+    searchAlertCheckLimits: (data: AlertCheckLimitSearchQuery, params: RequestParams = {}) =>
+      this.http.request<ResponseTypePageResultAlertCheckLimitVo, ResponseTypePageResultAlertCheckLimitVo>({
+        path: `/backend/alertCheckLimit/search`,
         method: "POST",
         body: data,
         type: ContentType.Json,
