@@ -152,25 +152,6 @@ export const asyncRoutes: RouteRecordRaw[] = [
           elIcon: "UserFilled",
           keepAlive: false
         }
-      },
-      {
-        path: "3pl-template-map",
-        component: () => import("@/views/system-management/mapTable/index.vue"),
-        name: "3PLTemplateMapping:View",
-        meta: {
-          title: "3PL Template Mapping",
-          elIcon: "Reading"
-        }
-      },
-      {
-        path: "parameter",
-        component: () => import("@/views/system-management/setting/index.vue"),
-        name: "SystemParameter:View",
-        meta: {
-          title: "System Parameter",
-          elIcon: "Setting",
-          keepAlive: false
-        }
       }
     ]
   },
@@ -192,15 +173,6 @@ export const asyncRoutes: RouteRecordRaw[] = [
           title: "Role Permission",
           elIcon: "User",
           keepAlive: false
-        }
-      },
-      {
-        path: "column-config",
-        component: () => import("@/views/column-config/index.vue"),
-        name: "ColumnConfig:View",
-        meta: {
-          title: "ColumnConfig",
-          elIcon: "User"
         }
       }
     ]

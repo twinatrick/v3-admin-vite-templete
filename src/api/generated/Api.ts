@@ -10,16 +10,229 @@
  * ---------------------------------------------------------------
  */
 
-export interface AlertCheckLimitVo {
-  columnName?: string
+export interface FunctionVo {
+  id?: string
+  name?: string
+  parent?: string
+  sort?: string
+  /** @format int32 */
+  type?: number
+  parentName?: string
+  grandParentId?: string
+  disabled?: boolean
+  edit?: boolean
+  newAdd?: boolean
+  newName?: string
+  delete?: boolean
+}
+
+export interface UserVo {
+  id?: string
+  name?: string
+  email?: string
+  password?: string
+  phone?: string
+  disabled?: boolean
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  roleArr?: string[]
+  permissions?: FunctionVo[]
+}
+
+export interface ResponseTypeString {
+  /** @format int32 */
+  code?: number
+  data?: string
+  message?: string
+  errorType?: string
+}
+
+export interface BindUserSkillOrProject {
+  userId?: string
+  skill?: string
+  projectId?: string
+  type?: string
+}
+
+export interface SkillVo {
   /** @format uuid */
   id?: string
+  name?: string
+  description?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+}
+
+export interface ResponseTypeSkillVo {
+  /** @format int32 */
+  code?: number
+  data?: SkillVo
+  message?: string
+  errorType?: string
+}
+
+export interface PermissionVo {
+  user?: string
+  userList?: string[]
+  function?: string
+  functionList?: string[]
+  role?: string
+  roleList?: string[]
+}
+
+export interface ResponseTypeUserVo {
+  /** @format int32 */
+  code?: number
+  data?: UserVo
+  message?: string
+  errorType?: string
+}
+
+export interface RoleOutVo {
+  /** @format uuid */
+  id?: string
+  name?: string
+  description?: string
+  permissions?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  functionIds?: string[]
+}
+
+export interface ResponseTypeRoleOutVo {
+  /** @format int32 */
+  code?: number
+  data?: RoleOutVo
+  message?: string
+  errorType?: string
+}
+
+export interface ResponseTypeListRoleOutVo {
+  /** @format int32 */
+  code?: number
+  data?: RoleOutVo[]
+  message?: string
+  errorType?: string
+}
+
+export interface ResponseTypeListUserVo {
+  /** @format int32 */
+  code?: number
+  data?: UserVo[]
+  message?: string
+  errorType?: string
+}
+
+export interface ResponseTypeListFunctionVo {
+  /** @format int32 */
+  code?: number
+  data?: FunctionVo[]
+  message?: string
+  errorType?: string
+}
+
+export interface ResponseTypeFunctionVo {
+  /** @format int32 */
+  code?: number
+  data?: FunctionVo
+  message?: string
+  errorType?: string
+}
+
+export interface ProjectVo {
+  /** @format uuid */
+  id?: string
+  name?: string
+  description?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+}
+
+export interface ResponseTypeProjectVo {
+  /** @format int32 */
+  code?: number
+  data?: ProjectVo
+  message?: string
+  errorType?: string
+}
+
+export interface FunctionTransVo {
+  deleteFunction?: FunctionVo[]
+  saveMainFunction?: FunctionVo[]
+  saveFunctionNewChild?: FunctionVo[]
+}
+
+export interface ResponseTypeObject {
+  /** @format int32 */
+  code?: number
+  data?: object
+  message?: string
+  errorType?: string
+}
+
+export interface SuperUserRequest {
+  key?: string
+  email?: string
+}
+
+export interface SignupRequest {
+  email?: string
+  password?: string
+}
+
+export interface LoginRequest {
+  email?: string
+  password?: string
+}
+
+export interface CriteriaAPIFilter {
+  columnName?: string
+  /** @format int32 */
+  type?: number
+  string?: string
   /** @format double */
-  limitValue?: number
-  tableName?: string
+  doubleValue?: number
+  /** @format date-time */
+  date?: string
+  booleanValue?: boolean
+  large?: boolean
+  small?: boolean
+  like?: boolean
+  equal?: boolean
 }
 
 export interface AquarkDataRaw {
+  id?: string
+  station_id?: string
+  obs_time?: string
+  /** @format date-time */
+  trans_time?: string
+  /** @format float */
+  rain_d?: number
+  /** @format float */
+  moisture?: number
+  /** @format float */
+  temperature?: number
+  /** @format float */
+  echo?: number
+  /** @format float */
+  waterSpeedAquark?: number
   /** @format float */
   v1?: number
   /** @format float */
@@ -35,25 +248,40 @@ export interface AquarkDataRaw {
   /** @format float */
   v7?: number
   csq?: string
-  /** @format float */
-  echo?: number
-  id?: string
-  /** @format float */
-  moisture?: number
-  obs_time?: string
   peak?: boolean
-  /** @format float */
-  rain_d?: number
-  station_id?: string
-  /** @format float */
-  temperature?: number
+}
+
+export interface ResponseTypeListAquarkDataRaw {
+  /** @format int32 */
+  code?: number
+  data?: AquarkDataRaw[]
+  message?: string
+  errorType?: string
+}
+
+export interface TimeRange {
   /** @format date-time */
-  trans_time?: string
-  /** @format float */
-  waterSpeedAquark?: number
+  start?: string
+  /** @format date-time */
+  end?: string
 }
 
 export interface AverageAquark {
+  station_id?: string
+  /** @format date-time */
+  trans_time?: string
+  date?: string
+  dateHour?: string
+  /** @format float */
+  rain_d?: number
+  /** @format float */
+  moisture?: number
+  /** @format float */
+  temperature?: number
+  /** @format float */
+  echo?: number
+  /** @format float */
+  waterSpeedAquark?: number
   /** @format float */
   v1?: number
   /** @format float */
@@ -68,1078 +296,63 @@ export interface AverageAquark {
   v6?: number
   /** @format float */
   v7?: number
-  date?: string
-  dateHour?: string
-  /** @format float */
-  echo?: number
-  /** @format float */
-  moisture?: number
-  /** @format float */
-  rain_d?: number
-  station_id?: string
-  /** @format float */
-  temperature?: number
-  /** @format date-time */
-  trans_time?: string
-  /** @format float */
-  waterSpeedAquark?: number
-}
-
-export interface BindUserSkillOrProject {
-  projectId?: string
-  skill?: string
-  type?: string
-  userId?: string
-}
-
-export interface CriteriaAPIFilter {
-  booleanValue?: boolean
-  columnName?: string
-  /** @format date-time */
-  date?: string
-  /** @format double */
-  doubleValue?: number
-  equal?: boolean
-  large?: boolean
-  like?: boolean
-  small?: boolean
-  string?: string
-  /** @format int32 */
-  type?: number
-}
-
-export interface FunctionTransVo {
-  deleteFunction?: FunctionVo[]
-  saveFunctionNewChild?: FunctionVo[]
-  saveMainFunction?: FunctionVo[]
-}
-
-export interface FunctionVo {
-  delete?: boolean
-  disabled?: boolean
-  edit?: boolean
-  grandParentId?: string
-  id?: string
-  name?: string
-  newAdd?: boolean
-  newName?: string
-  parent?: string
-  parentName?: string
-  sort?: string
-  /** @format int32 */
-  type?: number
-}
-
-export interface LoginRequest {
-  email?: string
-  password?: string
-}
-
-export interface PermissionVo {
-  function?: string
-  functionList?: string[]
-  role?: string
-  roleList?: string[]
-  user?: string
-  userList?: string[]
-}
-
-export interface ProjectVo {
-  createdBy?: string
-  /** @format date-time */
-  createdTime?: string
-  description?: string
-  /** @format uuid */
-  id?: string
-  name?: string
-  updatedBy?: string
-  /** @format date-time */
-  updatedTime?: string
-}
-
-export interface ResponseTypeAlertCheckLimitVo {
-  /** @format int32 */
-  code?: number
-  data?: AlertCheckLimitVo
-  errorType?: string
-  message?: string
-}
-
-export interface ResponseTypeFunctionVo {
-  /** @format int32 */
-  code?: number
-  data?: FunctionVo
-  errorType?: string
-  message?: string
-}
-
-export interface ResponseTypeListAlertCheckLimitVo {
-  /** @format int32 */
-  code?: number
-  data?: AlertCheckLimitVo[]
-  errorType?: string
-  message?: string
-}
-
-export interface ResponseTypeListAquarkDataRaw {
-  /** @format int32 */
-  code?: number
-  data?: AquarkDataRaw[]
-  errorType?: string
-  message?: string
 }
 
 export interface ResponseTypeListAverageAquark {
   /** @format int32 */
   code?: number
   data?: AverageAquark[]
-  errorType?: string
   message?: string
+  errorType?: string
 }
 
-export interface ResponseTypeListFunctionVo {
-  /** @format int32 */
-  code?: number
-  data?: FunctionVo[]
-  errorType?: string
-  message?: string
+export interface AlertCheckLimitVo {
+  /** @format uuid */
+  id?: string
+  tableName?: string
+  columnName?: string
+  /** @format double */
+  limitValue?: number
 }
 
-export interface ResponseTypeListProjectVo {
+export interface ResponseTypeAlertCheckLimitVo {
   /** @format int32 */
   code?: number
-  data?: ProjectVo[]
-  errorType?: string
+  data?: AlertCheckLimitVo
   message?: string
-}
-
-export interface ResponseTypeListRoleOutVo {
-  /** @format int32 */
-  code?: number
-  data?: RoleOutVo[]
   errorType?: string
-  message?: string
 }
 
 export interface ResponseTypeListSkillVo {
   /** @format int32 */
   code?: number
   data?: SkillVo[]
-  errorType?: string
   message?: string
+  errorType?: string
+}
+
+export interface ResponseTypeListProjectVo {
+  /** @format int32 */
+  code?: number
+  data?: ProjectVo[]
+  message?: string
+  errorType?: string
 }
 
 export interface ResponseTypeListString {
   /** @format int32 */
   code?: number
   data?: string[]
-  errorType?: string
   message?: string
+  errorType?: string
 }
 
-export interface ResponseTypeListUserVo {
+export interface ResponseTypeListAlertCheckLimitVo {
   /** @format int32 */
   code?: number
-  data?: UserVo[]
-  errorType?: string
+  data?: AlertCheckLimitVo[]
   message?: string
-}
-
-export interface ResponseTypeObject {
-  /** @format int32 */
-  code?: number
-  data?: object
   errorType?: string
-  message?: string
-}
-
-export interface ResponseTypeProjectVo {
-  /** @format int32 */
-  code?: number
-  data?: ProjectVo
-  errorType?: string
-  message?: string
-}
-
-export interface ResponseTypeRoleOutVo {
-  /** @format int32 */
-  code?: number
-  data?: RoleOutVo
-  errorType?: string
-  message?: string
-}
-
-export interface ResponseTypeSkillVo {
-  /** @format int32 */
-  code?: number
-  data?: SkillVo
-  errorType?: string
-  message?: string
-}
-
-export interface ResponseTypeString {
-  /** @format int32 */
-  code?: number
-  data?: string
-  errorType?: string
-  message?: string
-}
-
-export interface ResponseTypeUserVo {
-  /** @format int32 */
-  code?: number
-  data?: UserVo
-  errorType?: string
-  message?: string
-}
-
-export interface RoleOutVo {
-  createdBy?: string
-  /** @format date-time */
-  createdTime?: string
-  description?: string
-  functionIds?: string[]
-  /** @format uuid */
-  id?: string
-  name?: string
-  permissions?: string
-  updatedBy?: string
-  /** @format date-time */
-  updatedTime?: string
-}
-
-export interface SignupRequest {
-  email?: string
-  password?: string
-}
-
-export interface SkillVo {
-  createdBy?: string
-  /** @format date-time */
-  createdTime?: string
-  description?: string
-  /** @format uuid */
-  id?: string
-  name?: string
-  updatedBy?: string
-  /** @format date-time */
-  updatedTime?: string
-}
-
-export interface SuperUserRequest {
-  email?: string
-  key?: string
-}
-
-export interface TimeRange {
-  /** @format date-time */
-  end?: string
-  /** @format date-time */
-  start?: string
-}
-
-export interface UserVo {
-  createdBy?: string
-  /** @format date-time */
-  createdTime?: string
-  disabled?: boolean
-  email?: string
-  id?: string
-  name?: string
-  password?: string
-  permissions?: FunctionVo[]
-  phone?: string
-  roleArr?: string[]
-  updatedBy?: string
-  /** @format date-time */
-  updatedTime?: string
-}
-
-export namespace Backend {
-  /**
-   * @description Updates a user and their role assignments.
-   * @tags Users
-   * @name SaveUser
-   * @summary Save user with roles
-   * @request POST:/backend/users/saveUser
-   * @response `200` `ResponseTypeString` OK
-   * @response `400` `ResponseTypeString` Invalid input
-   * @response `500` `ResponseTypeString` Server error
-   */
-  export namespace SaveUser {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = UserVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeString
-  }
-
-  /**
-   * @description Creates a new user account.
-   * @tags Users
-   * @name CreateUser
-   * @summary Create user
-   * @request POST:/backend/users/create
-   * @response `200` `boolean` OK
-   * @response `400` `boolean` Invalid input
-   * @response `500` `boolean` Server error
-   */
-  export namespace CreateUser {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = UserVo
-    export type RequestHeaders = {}
-    export type ResponseBody = boolean
-  }
-
-  /**
-   * @description Binds a skill to a user or to a project and user.
-   * @tags Users
-   * @name BindUserSkillOrProject
-   * @summary Bind user skill or project
-   * @request POST:/backend/users/BindUserSkillOrProject
-   * @response `200` `ResponseTypeString` OK
-   * @response `400` `ResponseTypeString` Invalid input
-   * @response `500` `ResponseTypeString` Server error
-   */
-  export namespace BindUserSkillOrProject {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = BindUserSkillOrProject
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeString
-  }
-
-  /**
-   * @description Updates an existing skill.
-   * @tags Skills
-   * @name UpdateSkill
-   * @summary Update skill
-   * @request POST:/backend/skill/update
-   * @response `200` `ResponseTypeString` OK
-   * @response `400` `ResponseTypeString` Invalid input
-   * @response `500` `ResponseTypeString` Server error
-   */
-  export namespace UpdateSkill {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = SkillVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeString
-  }
-
-  /**
-   * @description Deletes a skill.
-   * @tags Skills
-   * @name DeleteSkill
-   * @summary Delete skill
-   * @request POST:/backend/skill/delete
-   * @response `200` `ResponseTypeString` OK
-   * @response `400` `ResponseTypeString` Invalid input
-   * @response `500` `ResponseTypeString` Server error
-   */
-  export namespace DeleteSkill {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = SkillVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeString
-  }
-
-  /**
-   * @description Creates a new skill.
-   * @tags Skills
-   * @name AddSkill
-   * @summary Add skill
-   * @request POST:/backend/skill/add
-   * @response `200` `ResponseTypeSkillVo` OK
-   * @response `400` `ResponseTypeSkillVo` Invalid input
-   * @response `500` `ResponseTypeSkillVo` Server error
-   */
-  export namespace AddSkill {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = SkillVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeSkillVo
-  }
-
-  /**
-   * @description Removes roles from a user.
-   * @tags Roles
-   * @name UserUnbindRole
-   * @summary Unbind user from roles
-   * @request POST:/backend/role/userUnbindRole
-   * @response `200` `ResponseTypeUserVo` OK
-   * @response `400` `ResponseTypeUserVo` Invalid input
-   * @response `500` `ResponseTypeUserVo` Server error
-   */
-  export namespace UserUnbindRole {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = PermissionVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeUserVo
-  }
-
-  /**
-   * @description Assigns roles to a user.
-   * @tags Roles
-   * @name UserBindRole
-   * @summary Bind user to roles
-   * @request POST:/backend/role/userBindRole
-   * @response `200` `ResponseTypeUserVo` OK
-   * @response `400` `ResponseTypeUserVo` Invalid input
-   * @response `500` `ResponseTypeUserVo` Server error
-   */
-  export namespace UserBindRole {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = PermissionVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeUserVo
-  }
-
-  /**
-   * @description Updates role details.
-   * @tags Roles
-   * @name UpdateRole
-   * @summary Update role
-   * @request POST:/backend/role/update
-   * @response `200` `ResponseTypeRoleOutVo` OK
-   * @response `400` `ResponseTypeRoleOutVo` Invalid input
-   * @response `500` `ResponseTypeRoleOutVo` Server error
-   */
-  export namespace UpdateRole {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = RoleOutVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeRoleOutVo
-  }
-
-  /**
-   * @description Removes users from a role.
-   * @tags Roles
-   * @name RoleUnbindUser
-   * @summary Unbind role from users
-   * @request POST:/backend/role/roleUnbindUser
-   * @response `200` `ResponseTypeRoleOutVo` OK
-   * @response `400` `ResponseTypeRoleOutVo` Invalid input
-   * @response `500` `ResponseTypeRoleOutVo` Server error
-   */
-  export namespace RoleUnbindUser {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = PermissionVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeRoleOutVo
-  }
-
-  /**
-   * @description Removes functions from a role.
-   * @tags Roles
-   * @name RoleUnbindFunction
-   * @summary Unbind role from functions
-   * @request POST:/backend/role/roleUnbindFunction
-   * @response `200` `ResponseTypeRoleOutVo` OK
-   * @response `400` `ResponseTypeRoleOutVo` Invalid input
-   * @response `500` `ResponseTypeRoleOutVo` Server error
-   */
-  export namespace RoleUnbindFunction {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = PermissionVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeRoleOutVo
-  }
-
-  /**
-   * @description Assigns users to a role.
-   * @tags Roles
-   * @name RoleBindUser
-   * @summary Bind role to users
-   * @request POST:/backend/role/roleBindUser
-   * @response `200` `ResponseTypeRoleOutVo` OK
-   * @response `400` `ResponseTypeRoleOutVo` Invalid input
-   * @response `500` `ResponseTypeRoleOutVo` Server error
-   */
-  export namespace RoleBindUser {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = PermissionVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeRoleOutVo
-  }
-
-  /**
-   * @description Assigns functions to a role.
-   * @tags Roles
-   * @name RoleBindFunction
-   * @summary Bind role to functions
-   * @request POST:/backend/role/roleBindFunction
-   * @response `200` `ResponseTypeRoleOutVo` OK
-   * @response `400` `ResponseTypeRoleOutVo` Invalid input
-   * @response `500` `ResponseTypeRoleOutVo` Server error
-   */
-  export namespace RoleBindFunction {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = PermissionVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeRoleOutVo
-  }
-
-  /**
-   * @description Returns all roles.
-   * @tags Roles
-   * @name GetRole
-   * @summary Get roles
-   * @request POST:/backend/role/get
-   * @response `200` `ResponseTypeListRoleOutVo` OK
-   * @response `500` `ResponseTypeListRoleOutVo` Server error
-   */
-  export namespace GetRole {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = never
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeListRoleOutVo
-  }
-
-  /**
-   * @description Returns users assigned to a role.
-   * @tags Roles
-   * @name GetUserByRole
-   * @summary Get users by role
-   * @request POST:/backend/role/getUserByRole
-   * @response `200` `ResponseTypeListUserVo` OK
-   * @response `400` `ResponseTypeListUserVo` Invalid input
-   * @response `500` `ResponseTypeListUserVo` Server error
-   */
-  export namespace GetUserByRole {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = RoleOutVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeListUserVo
-  }
-
-  /**
-   * @description Returns roles assigned to a user.
-   * @tags Roles
-   * @name GetRoleByUser
-   * @summary Get roles by user
-   * @request POST:/backend/role/getRoleByUser
-   * @response `200` `ResponseTypeListRoleOutVo` OK
-   * @response `400` `ResponseTypeListRoleOutVo` Invalid input
-   * @response `500` `ResponseTypeListRoleOutVo` Server error
-   */
-  export namespace GetRoleByUser {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = UserVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeListRoleOutVo
-  }
-
-  /**
-   * @description Returns roles assigned to a function.
-   * @tags Roles
-   * @name GetRoleByFunction
-   * @summary Get roles by function
-   * @request POST:/backend/role/getRoleByFunction
-   * @response `200` `ResponseTypeListRoleOutVo` OK
-   * @response `400` `ResponseTypeListRoleOutVo` Invalid input
-   * @response `500` `ResponseTypeListRoleOutVo` Server error
-   */
-  export namespace GetRoleByFunction {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = FunctionVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeListRoleOutVo
-  }
-
-  /**
-   * @description Returns functions assigned to a role.
-   * @tags Roles
-   * @name GetFunctionByRole
-   * @summary Get functions by role
-   * @request POST:/backend/role/getFunctionByRole
-   * @response `200` `ResponseTypeListFunctionVo` OK
-   * @response `400` `ResponseTypeListFunctionVo` Invalid input
-   * @response `500` `ResponseTypeListFunctionVo` Server error
-   */
-  export namespace GetFunctionByRole {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = RoleOutVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeListFunctionVo
-  }
-
-  /**
-   * @description Removes roles from a function.
-   * @tags Roles
-   * @name FunctionUnbindRole
-   * @summary Unbind function from roles
-   * @request POST:/backend/role/functionUnbindRole
-   * @response `200` `ResponseTypeFunctionVo` OK
-   * @response `400` `ResponseTypeFunctionVo` Invalid input
-   * @response `500` `ResponseTypeFunctionVo` Server error
-   */
-  export namespace FunctionUnbindRole {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = PermissionVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeFunctionVo
-  }
-
-  /**
-   * @description Assigns roles to a function.
-   * @tags Roles
-   * @name FunctionBindRole
-   * @summary Bind function to roles
-   * @request POST:/backend/role/functionBindRole
-   * @response `200` `ResponseTypeFunctionVo` OK
-   * @response `400` `ResponseTypeFunctionVo` Invalid input
-   * @response `500` `ResponseTypeFunctionVo` Server error
-   */
-  export namespace FunctionBindRole {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = PermissionVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeFunctionVo
-  }
-
-  /**
-   * @description Deletes a role.
-   * @tags Roles
-   * @name DeleteRole
-   * @summary Delete role
-   * @request POST:/backend/role/delete
-   * @response `200` `ResponseTypeRoleOutVo` OK
-   * @response `400` `ResponseTypeRoleOutVo` Invalid input
-   * @response `500` `ResponseTypeRoleOutVo` Server error
-   */
-  export namespace DeleteRole {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = RoleOutVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeRoleOutVo
-  }
-
-  /**
-   * @description Creates a new role.
-   * @tags Roles
-   * @name AddRole
-   * @summary Add role
-   * @request POST:/backend/role/add
-   * @response `200` `ResponseTypeRoleOutVo` OK
-   * @response `400` `ResponseTypeRoleOutVo` Invalid input
-   * @response `500` `ResponseTypeRoleOutVo` Server error
-   */
-  export namespace AddRole {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = RoleOutVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeRoleOutVo
-  }
-
-  /**
-   * @description Updates an existing project.
-   * @tags Projects
-   * @name UpdateProject
-   * @summary Update project
-   * @request POST:/backend/project/update
-   * @response `200` `ResponseTypeString` OK
-   * @response `400` `ResponseTypeString` Invalid input
-   * @response `500` `ResponseTypeString` Server error
-   */
-  export namespace UpdateProject {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = ProjectVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeString
-  }
-
-  /**
-   * @description Deletes a project.
-   * @tags Projects
-   * @name DeleteProject
-   * @summary Delete project
-   * @request POST:/backend/project/delete
-   * @response `200` `ResponseTypeString` OK
-   * @response `400` `ResponseTypeString` Invalid input
-   * @response `500` `ResponseTypeString` Server error
-   */
-  export namespace DeleteProject {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = ProjectVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeString
-  }
-
-  /**
-   * @description Creates a new project.
-   * @tags Projects
-   * @name AddProject
-   * @summary Add project
-   * @request POST:/backend/project/add
-   * @response `200` `ResponseTypeProjectVo` OK
-   * @response `400` `ResponseTypeProjectVo` Invalid input
-   * @response `500` `ResponseTypeProjectVo` Server error
-   */
-  export namespace AddProject {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = ProjectVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeProjectVo
-  }
-
-  /**
-   * @description Updates an existing function.
-   * @tags Functions
-   * @name UpdateFunction
-   * @summary Update function
-   * @request POST:/backend/function/update
-   * @response `200` `ResponseTypeString` OK
-   * @response `400` `ResponseTypeString` Invalid input
-   * @response `500` `ResponseTypeString` Server error
-   */
-  export namespace UpdateFunction {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = FunctionVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeString
-  }
-
-  /**
-   * @description Applies function deletions and saves new or updated functions.
-   * @tags Functions
-   * @name SaveAllFunction
-   * @summary Save function changes
-   * @request POST:/backend/function/saveAllFunction
-   * @response `200` `ResponseTypeObject` OK
-   * @response `400` `ResponseTypeObject` Invalid input
-   * @response `500` `ResponseTypeObject` Server error
-   */
-  export namespace SaveAllFunction {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = FunctionTransVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeObject
-  }
-
-  /**
-   * @description Deletes a function.
-   * @tags Functions
-   * @name DeleteFunction
-   * @summary Delete function
-   * @request POST:/backend/function/delete
-   * @response `200` `ResponseTypeString` OK
-   * @response `400` `ResponseTypeString` Invalid input
-   * @response `500` `ResponseTypeString` Server error
-   */
-  export namespace DeleteFunction {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = FunctionVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeString
-  }
-
-  /**
-   * @description Creates a new function entry.
-   * @tags Functions
-   * @name AddFunction
-   * @summary Add function
-   * @request POST:/backend/function/add
-   * @response `200` `ResponseTypeObject` OK
-   * @response `400` `ResponseTypeObject` Invalid input
-   * @response `500` `ResponseTypeObject` Server error
-   */
-  export namespace AddFunction {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = FunctionVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeObject
-  }
-
-  /**
-   * @description Creates an admin user when the provided key matches configuration.
-   * @tags Auth
-   * @name CreateSuperUser
-   * @summary Create super user
-   * @request POST:/backend/auth/superuser
-   * @response `200` `ResponseTypeObject` OK
-   * @response `400` `ResponseTypeObject` Invalid input
-   * @response `500` `ResponseTypeObject` Server error
-   */
-  export namespace CreateSuperUser {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = SuperUserRequest
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeObject
-  }
-
-  /**
-   * @description Creates a user account and returns a JWT access token.
-   * @tags Auth
-   * @name Signup
-   * @summary Register a new user
-   * @request POST:/backend/auth/signup
-   * @response `200` `ResponseTypeObject` OK
-   * @response `400` `ResponseTypeObject` Invalid input
-   * @response `500` `ResponseTypeObject` Server error
-   */
-  export namespace Signup {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = SignupRequest
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeObject
-  }
-
-  /**
-   * @description Authenticates user credentials and returns a JWT access token.
-   * @tags Auth
-   * @name Login
-   * @summary User login
-   * @request POST:/backend/auth/login
-   * @response `200` `ResponseTypeObject` OK
-   * @response `401` `ResponseTypeObject` Unauthorized
-   * @response `500` `ResponseTypeObject` Server error
-   */
-  export namespace Login {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = LoginRequest
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeObject
-  }
-
-  /**
-   * @description Returns aquark data filtered by criteria.
-   * @tags AquarkData
-   * @name GetData
-   * @summary Get aquark data
-   * @request POST:/backend/aquarkData/getData
-   * @response `200` `ResponseTypeListAquarkDataRaw` OK
-   * @response `400` `ResponseTypeListAquarkDataRaw` Invalid input
-   * @response `500` `ResponseTypeListAquarkDataRaw` Server error
-   */
-  export namespace GetData {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = CriteriaAPIFilter[]
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeListAquarkDataRaw
-  }
-
-  /**
-   * @description Returns averaged aquark data within a time range.
-   * @tags AquarkData
-   * @name GetAverage
-   * @summary Get average aquark data
-   * @request POST:/backend/aquarkData/getAverage
-   * @response `200` `ResponseTypeListAverageAquark` OK
-   * @response `400` `ResponseTypeListAverageAquark` Invalid input
-   * @response `500` `ResponseTypeListAverageAquark` Server error
-   */
-  export namespace GetAverage {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = TimeRange
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeListAverageAquark
-  }
-
-  /**
-   * @description Updates an existing alert limit.
-   * @tags Alert Limits
-   * @name UpdateLimit
-   * @summary Update alert limit
-   * @request POST:/backend/alertCheckLimit/update
-   * @response `200` `ResponseTypeAlertCheckLimitVo` OK
-   * @response `400` `ResponseTypeAlertCheckLimitVo` Invalid input
-   * @response `500` `ResponseTypeAlertCheckLimitVo` Server error
-   */
-  export namespace UpdateLimit {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = AlertCheckLimitVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeAlertCheckLimitVo
-  }
-
-  /**
-   * @description Deletes an alert limit.
-   * @tags Alert Limits
-   * @name DeleteLimit
-   * @summary Delete alert limit
-   * @request POST:/backend/alertCheckLimit/delete
-   * @response `200` `ResponseTypeString` OK
-   * @response `400` `ResponseTypeString` Invalid input
-   * @response `500` `ResponseTypeString` Server error
-   */
-  export namespace DeleteLimit {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = AlertCheckLimitVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeString
-  }
-
-  /**
-   * @description Creates or updates an alert limit for a table column.
-   * @tags Alert Limits
-   * @name AddLimit
-   * @summary Add alert limit
-   * @request POST:/backend/alertCheckLimit/add
-   * @response `200` `ResponseTypeAlertCheckLimitVo` OK
-   * @response `400` `ResponseTypeAlertCheckLimitVo` Invalid input
-   * @response `500` `ResponseTypeAlertCheckLimitVo` Server error
-   */
-  export namespace AddLimit {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = AlertCheckLimitVo
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeAlertCheckLimitVo
-  }
-
-  /**
-   * @description Returns current user profile and permissions.
-   * @tags Users
-   * @name GetUserInfo
-   * @summary Get current user info
-   * @request GET:/backend/users/infoVo
-   * @response `200` `ResponseTypeUserVo` OK
-   * @response `401` `ResponseTypeUserVo` Unauthorized
-   * @response `500` `ResponseTypeUserVo` Server error
-   */
-  export namespace GetUserInfo {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = never
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeUserVo
-  }
-
-  /**
-   * @description Returns all users with their roles and permissions.
-   * @tags Users
-   * @name GetAllUser
-   * @summary Get all users
-   * @request GET:/backend/users/getAllUser
-   * @response `200` `ResponseTypeListUserVo` OK
-   * @response `500` `ResponseTypeListUserVo` Server error
-   */
-  export namespace GetAllUser {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = never
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeListUserVo
-  }
-
-  /**
-   * @description Returns all skills.
-   * @tags Skills
-   * @name GetSkill
-   * @summary Get skills
-   * @request GET:/backend/skill/get
-   * @response `200` `ResponseTypeListSkillVo` OK
-   * @response `500` `ResponseTypeListSkillVo` Server error
-   */
-  export namespace GetSkill {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = never
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeListSkillVo
-  }
-
-  /**
-   * @description Returns all projects.
-   * @tags Projects
-   * @name GetProject
-   * @summary Get projects
-   * @request GET:/backend/project/get
-   * @response `200` `ResponseTypeListProjectVo` OK
-   * @response `500` `ResponseTypeListProjectVo` Server error
-   */
-  export namespace GetProject {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = never
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeListProjectVo
-  }
-
-  /**
-   * @description Returns all functions.
-   * @tags Functions
-   * @name GetFunction
-   * @summary Get functions
-   * @request GET:/backend/function/get
-   * @response `200` `ResponseTypeListFunctionVo` OK
-   * @response `500` `ResponseTypeListFunctionVo` Server error
-   */
-  export namespace GetFunction {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = never
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeListFunctionVo
-  }
-
-  /**
-   * @description Returns available aquark data column names.
-   * @tags AquarkData
-   * @name GetColumnNameList
-   * @summary Get column names
-   * @request GET:/backend/aquarkData/getColumnNameList
-   * @response `200` `ResponseTypeListString` OK
-   * @response `500` `ResponseTypeListString` Server error
-   */
-  export namespace GetColumnNameList {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = never
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeListString
-  }
-
-  /**
-   * @description Returns all alert limits.
-   * @tags Alert Limits
-   * @name GetLimit
-   * @summary Get alert limits
-   * @request GET:/backend/alertCheckLimit/get
-   * @response `200` `ResponseTypeListAlertCheckLimitVo` OK
-   * @response `500` `ResponseTypeListAlertCheckLimitVo` Server error
-   */
-  export namespace GetLimit {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = never
-    export type RequestHeaders = {}
-    export type ResponseBody = ResponseTypeListAlertCheckLimitVo
-  }
 }
 
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from "axios"
@@ -1249,7 +462,7 @@ export class HttpClient<SecurityDataType = unknown> {
     format,
     body,
     ...params
-  }: FullRequestParams): Promise<AxiosResponse<T>> => {
+  }: FullRequestParams): Promise<ApiResponse<T>> => {
     const secureParams =
       ((typeof secure === "boolean" ? secure : this.secure) &&
         this.securityWorker &&
@@ -1285,6 +498,7 @@ export class HttpClient<SecurityDataType = unknown> {
  * @version v0
  * @baseUrl http://localhost:8000
  */
+
 export class Api<SecurityDataType extends unknown> {
   http: HttpClient<SecurityDataType>
 
@@ -1292,7 +506,7 @@ export class Api<SecurityDataType extends unknown> {
     this.http = http
   }
 
-  backend = {
+  users = {
     /**
      * @description Updates a user and their role assignments.
      *
@@ -1346,7 +560,7 @@ export class Api<SecurityDataType extends unknown> {
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
      */
-    bindUserSkillOrProject: (data: BindUserSkillOrProject, params: RequestParams = {}) =>
+    BindUserSkillOrProject: (data: BindUserSkillOrProject, params: RequestParams = {}) =>
       this.http.request<ResponseTypeString, ResponseTypeString>({
         path: `/backend/users/BindUserSkillOrProject`,
         method: "POST",
@@ -1356,6 +570,44 @@ export class Api<SecurityDataType extends unknown> {
         ...params
       }),
 
+    /**
+     * @description Returns current user profile and permissions.
+     *
+     * @tags Users
+     * @name GetUserInfo
+     * @summary Get current user info
+     * @request GET:/backend/users/infoVo
+     * @response `200` `ResponseTypeUserVo` OK
+     * @response `401` `ResponseTypeUserVo` Unauthorized
+     * @response `500` `ResponseTypeUserVo` Server error
+     */
+    getUserInfo: (params: RequestParams = {}) =>
+      this.http.request<ResponseTypeUserVo, ResponseTypeUserVo>({
+        path: `/backend/users/infoVo`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description Returns all users with their roles and permissions.
+     *
+     * @tags Users
+     * @name GetAllUser
+     * @summary Get all users
+     * @request GET:/backend/users/getAllUser
+     * @response `200` `ResponseTypeListUserVo` OK
+     * @response `500` `ResponseTypeListUserVo` Server error
+     */
+    getAllUser: (params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListUserVo, ResponseTypeListUserVo>({
+        path: `/backend/users/getAllUser`,
+        method: "GET",
+        format: "json",
+        ...params
+      })
+  }
+  skills = {
     /**
      * @description Updates an existing skill.
      *
@@ -1419,6 +671,25 @@ export class Api<SecurityDataType extends unknown> {
         ...params
       }),
 
+    /**
+     * @description Returns all skills.
+     *
+     * @tags Skills
+     * @name GetSkill
+     * @summary Get skills
+     * @request GET:/backend/skill/get
+     * @response `200` `ResponseTypeListSkillVo` OK
+     * @response `500` `ResponseTypeListSkillVo` Server error
+     */
+    getSkill: (params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListSkillVo, ResponseTypeListSkillVo>({
+        path: `/backend/skill/get`,
+        method: "GET",
+        format: "json",
+        ...params
+      })
+  }
+  roles = {
     /**
      * @description Removes roles from a user.
      *
@@ -1750,8 +1021,9 @@ export class Api<SecurityDataType extends unknown> {
         type: ContentType.Json,
         format: "json",
         ...params
-      }),
-
+      })
+  }
+  projects = {
     /**
      * @description Updates an existing project.
      *
@@ -1815,6 +1087,25 @@ export class Api<SecurityDataType extends unknown> {
         ...params
       }),
 
+    /**
+     * @description Returns all projects.
+     *
+     * @tags Projects
+     * @name GetProject
+     * @summary Get projects
+     * @request GET:/backend/project/get
+     * @response `200` `ResponseTypeListProjectVo` OK
+     * @response `500` `ResponseTypeListProjectVo` Server error
+     */
+    getProject: (params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListProjectVo, ResponseTypeListProjectVo>({
+        path: `/backend/project/get`,
+        method: "GET",
+        format: "json",
+        ...params
+      })
+  }
+  functions = {
     /**
      * @description Updates an existing function.
      *
@@ -1900,6 +1191,25 @@ export class Api<SecurityDataType extends unknown> {
       }),
 
     /**
+     * @description Returns all functions.
+     *
+     * @tags Functions
+     * @name GetFunction
+     * @summary Get functions
+     * @request GET:/backend/function/get
+     * @response `200` `ResponseTypeListFunctionVo` OK
+     * @response `500` `ResponseTypeListFunctionVo` Server error
+     */
+    getFunction: (params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListFunctionVo, ResponseTypeListFunctionVo>({
+        path: `/backend/function/get`,
+        method: "GET",
+        format: "json",
+        ...params
+      })
+  }
+  auth = {
+    /**
      * @description Creates an admin user when the provided key matches configuration.
      *
      * @tags Auth
@@ -1960,8 +1270,9 @@ export class Api<SecurityDataType extends unknown> {
         type: ContentType.Json,
         format: "json",
         ...params
-      }),
-
+      })
+  }
+  aquarkData = {
     /**
      * @description Returns aquark data filtered by criteria.
      *
@@ -2004,6 +1315,25 @@ export class Api<SecurityDataType extends unknown> {
         ...params
       }),
 
+    /**
+     * @description Returns available aquark data column names.
+     *
+     * @tags AquarkData
+     * @name GetColumnNameList
+     * @summary Get column names
+     * @request GET:/backend/aquarkData/getColumnNameList
+     * @response `200` `ResponseTypeListString` OK
+     * @response `500` `ResponseTypeListString` Server error
+     */
+    getColumnNameList: (params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListString, ResponseTypeListString>({
+        path: `/backend/aquarkData/getColumnNameList`,
+        method: "GET",
+        format: "json",
+        ...params
+      })
+  }
+  alertLimits = {
     /**
      * @description Updates an existing alert limit.
      *
@@ -2063,115 +1393,6 @@ export class Api<SecurityDataType extends unknown> {
         method: "POST",
         body: data,
         type: ContentType.Json,
-        format: "json",
-        ...params
-      }),
-
-    /**
-     * @description Returns current user profile and permissions.
-     *
-     * @tags Users
-     * @name GetUserInfo
-     * @summary Get current user info
-     * @request GET:/backend/users/infoVo
-     * @response `200` `ResponseTypeUserVo` OK
-     * @response `401` `ResponseTypeUserVo` Unauthorized
-     * @response `500` `ResponseTypeUserVo` Server error
-     */
-    getUserInfo: (params: RequestParams = {}) =>
-      this.http.request<ResponseTypeUserVo, ResponseTypeUserVo>({
-        path: `/backend/users/infoVo`,
-        method: "GET",
-        format: "json",
-        ...params
-      }),
-
-    /**
-     * @description Returns all users with their roles and permissions.
-     *
-     * @tags Users
-     * @name GetAllUser
-     * @summary Get all users
-     * @request GET:/backend/users/getAllUser
-     * @response `200` `ResponseTypeListUserVo` OK
-     * @response `500` `ResponseTypeListUserVo` Server error
-     */
-    getAllUser: (params: RequestParams = {}) =>
-      this.http.request<ResponseTypeListUserVo, ResponseTypeListUserVo>({
-        path: `/backend/users/getAllUser`,
-        method: "GET",
-        format: "json",
-        ...params
-      }),
-
-    /**
-     * @description Returns all skills.
-     *
-     * @tags Skills
-     * @name GetSkill
-     * @summary Get skills
-     * @request GET:/backend/skill/get
-     * @response `200` `ResponseTypeListSkillVo` OK
-     * @response `500` `ResponseTypeListSkillVo` Server error
-     */
-    getSkill: (params: RequestParams = {}) =>
-      this.http.request<ResponseTypeListSkillVo, ResponseTypeListSkillVo>({
-        path: `/backend/skill/get`,
-        method: "GET",
-        format: "json",
-        ...params
-      }),
-
-    /**
-     * @description Returns all projects.
-     *
-     * @tags Projects
-     * @name GetProject
-     * @summary Get projects
-     * @request GET:/backend/project/get
-     * @response `200` `ResponseTypeListProjectVo` OK
-     * @response `500` `ResponseTypeListProjectVo` Server error
-     */
-    getProject: (params: RequestParams = {}) =>
-      this.http.request<ResponseTypeListProjectVo, ResponseTypeListProjectVo>({
-        path: `/backend/project/get`,
-        method: "GET",
-        format: "json",
-        ...params
-      }),
-
-    /**
-     * @description Returns all functions.
-     *
-     * @tags Functions
-     * @name GetFunction
-     * @summary Get functions
-     * @request GET:/backend/function/get
-     * @response `200` `ResponseTypeListFunctionVo` OK
-     * @response `500` `ResponseTypeListFunctionVo` Server error
-     */
-    getFunction: (params: RequestParams = {}) =>
-      this.http.request<ResponseTypeListFunctionVo, ResponseTypeListFunctionVo>({
-        path: `/backend/function/get`,
-        method: "GET",
-        format: "json",
-        ...params
-      }),
-
-    /**
-     * @description Returns available aquark data column names.
-     *
-     * @tags AquarkData
-     * @name GetColumnNameList
-     * @summary Get column names
-     * @request GET:/backend/aquarkData/getColumnNameList
-     * @response `200` `ResponseTypeListString` OK
-     * @response `500` `ResponseTypeListString` Server error
-     */
-    getColumnNameList: (params: RequestParams = {}) =>
-      this.http.request<ResponseTypeListString, ResponseTypeListString>({
-        path: `/backend/aquarkData/getColumnNameList`,
-        method: "GET",
         format: "json",
         ...params
       }),

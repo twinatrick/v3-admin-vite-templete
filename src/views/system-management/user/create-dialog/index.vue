@@ -54,7 +54,7 @@ defineExpose({
       </el-form-item>
       <el-form-item label="Roles" prop="roles" class="form-item-1-1">
         <el-select v-model="formData.roles" multiple filterable clearable class="w-100%!">
-          <el-option v-for="role in roleList" :key="role.key" :value="role.key || ''" :label="role.name || ''" />
+          <el-option v-for="role in roleList" :key="role.id" :value="role.id || ''" :label="role.name || ''" />
         </el-select>
       </el-form-item>
       <el-form-item label="disabled" prop="disabled" class="form-item-1-2">

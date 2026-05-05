@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue"
-import { deleteRole, getFunctions, queryRoleList } from "./api"
-import { Function, TreeProp, RoleVO } from "./type"
+import router, { asyncRoutes } from "@/router"
+import { FunctionVo, TreeProp, RoleVO } from "./type"
+import { api } from "@/api/client"
 import CreateDialog from "./component/CreateDialog.vue"
 import EditDialog from "./component/EditDialog.vue"
 import Table from "./component/Table.vue"
-import router, { asyncRoutes } from "@/router"
 import { ElLoading, ElMessageBox } from "element-plus"
 import { showLoading } from "@/utils"
-import EditFunctionDialog from "./edit-function-dialog/index.vue"
 import { useUserStore } from "@/store/modules/user"
 import { usePermissionStore } from "@/store/modules/permission"
 //data
@@ -18,10 +17,9 @@ const _allRoutes = router
   .filter((route) => asyncRoutes.find((item) => item.path === route.path))
 const createDialogRef = ref<InstanceType<typeof CreateDialog> | null>(null)
 const editDialogRef = ref<InstanceType<typeof EditDialog> | null>(null)
-const editFunctionDialogRef = ref<InstanceType<typeof EditFunctionDialog> | null>(null)
 const tableRef = ref<InstanceType<typeof Table> | null>(null)
 const tableData = ref<RoleVO[]>([])
-const allFunctions = ref<Function[]>([])
+const allFunctions = ref<FunctionVo[]>([])
 const tableLoading = ref(false)
 const isDev = import.meta.env.DEV
 //compute
@@ -30,10 +28,8 @@ const selectedRow = computed<RoleVO>(() => {
 })
 const isSelected = computed(() => Object.keys(selectedRow.value).length > 0)
 const leveledFunctions = computed(() => {
-  const sort = (a: Function, b: Function) => {
-    const aSort = a.sort || 0
-    const bSort = b.sort || 0
-    return aSort - bSort
+  const sort = (a: FunctionVo, b: FunctionVo) => {
+    return parseInt(a.sort || "0") - parseInt(b.sort || "0")
   }
   const temp: TreeProp[] = []
   const grandParents = allFunctions.value.filter((item) => !item.parent).sort(sort)
@@ -74,8 +70,8 @@ const leveledFunctions = computed(() => {
 const queryList = async () => {
   tableLoading.value = true
   try {
-    const res = await queryRoleList()
-    tableData.value = res.data
+    const res = await api.roles.getRole()
+    tableData.value = res.data.data || []
   } finally {
     tableLoading.value = false
   }
@@ -99,8 +95,8 @@ const deleteBtnClick = async () => {
     text: "Deleting..."
   })
   try {
-    if (!selectedRow.value?.key) throw new Error("No selected row")
-    await deleteRole(selectedRow.value.key)
+    if (!selectedRow.value?.id) throw new Error("No selected row")
+    await api.roles.deleteRole(selectedRow.value)
     queryList()
   } catch (e) {
     console.log(e)
@@ -111,7 +107,7 @@ const deleteBtnClick = async () => {
 const getFunctionList = async () => {
   const loading = showLoading("Loading...")
   try {
-    const { data } = await getFunctions()
+    const { data } = await api.functions.getFunction()
     allFunctions.value = data
   } catch (e) {
     console.log(e)
@@ -133,17 +129,10 @@ const _updateUserInfoAndPermission = async () => {
   if (!permission) return
   permissionStore.setRoutesByFunctions(permission)
 }
-const editFunctionBtnClick = () => {
-  editFunctionDialogRef.value?.show()
-}
+
 onMounted(() => {
   queryList()
   getFunctionList()
-  ;(window as any).baray = {
-    role: {
-      editFunctionBtnClick
-    }
-  }
 })
 </script>
 <style scoped></style>
@@ -155,7 +144,7 @@ onMounted(() => {
           <el-space>
             <el-button icon="Plus" type="primary" @click="createBtnClick">Create</el-button>
             <el-button icon="Edit" type="warning" :disabled="!isSelected" @click="editBtnClick">Edit </el-button>
-            <el-button v-show="isDev" icon="Plus" type="primary" @click="editFunctionBtnClick">Edit Function</el-button>
+            <el-button v-show="isDev" icon="Plus" type="primary">Edit Function</el-button>
           </el-space>
           <el-button icon="Delete" type="danger" ml-auto :disabled="!isSelected" @click="deleteBtnClick"
             >Delete
@@ -165,6 +154,5 @@ onMounted(() => {
     </Table>
     <CreateDialog ref="createDialogRef" :all-functions="leveledFunctions" @create="afterCreate" />
     <EditDialog ref="editDialogRef" :all-functions="leveledFunctions" :data="selectedRow" @update="afterUpdate" />
-    <EditFunctionDialog ref="editFunctionDialogRef" :all-functions="leveledFunctions" />
   </div>
 </template>

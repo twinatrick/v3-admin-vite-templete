@@ -1,9 +1,4 @@
-import { ColumnMap } from "@/api/testRequest/type"
-
-export type TableData<T = { [key: string]: any }> = {
-  data: T
-  extraList?: Array<ColumnMap>
-}
+export type TableData<T = { [key: string]: any }> = T
 
 export type TableColumnMap = {
   name: string //對應到的欄位屬姓名

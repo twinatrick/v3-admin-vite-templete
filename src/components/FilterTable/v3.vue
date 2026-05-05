@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { computed, onMounted, PropType, reactive, ref, useSlots, watch } from "vue"
 import { TableColumnMap, TableData } from "./type"
-import { ColumnMap } from "@/api/testRequest/type"
 import ElInputWithTag from "@/components/InputWithTag/el-input-with-tag.vue"
 import MultiSelect from "@/components/MultiSelect/index.vue"
 import { VxeTableEvents, VxeTableInstance } from "vxe-table"
@@ -42,7 +41,7 @@ const prop = defineProps({
   },
   keyReference: {
     type: String,
-    default: "key"
+    default: "id"
   },
   editOption: {
     type: Object as PropType<{ [key: string]: any }>,
@@ -175,19 +174,9 @@ const originToStandard = () => {
 }
 // 單一資料攤平並format
 const turnToStandard = (tempData: TableData) => {
-  const { data, extraList } = tempData
+  const { data } = tempData
   const splitData: { [key: string]: any } = {}
   Object.assign(splitData, data)
-  extraList?.forEach((extra: ColumnMap) => {
-    splitData[extra.columnName] = extra.columnValue
-  })
-  const copyData: { [key: string]: any } = {}
-  Object.assign(copyData, splitData)
-  prop.tableColumnMap.forEach((tableColumn) => {
-    if (tableColumn.formatter != undefined) {
-      splitData[tableColumn.name] = tableColumn.formatter(splitData[tableColumn.name], copyData)
-    }
-  })
   return splitData
 }
 // 初始化Filter、Sort條件
@@ -410,12 +399,9 @@ const handleSelectionChange: VxeTableEvents.CheckboxChange<any> = () => {
     .forEach((selected) => {
       const originData = prop.data.find((item: any) => item.data[prop.keyReference] === selected[prop.keyReference])
       if (originData) {
-        const { data, extraList } = originData
+        const { data } = originData
         const splitData: { [key: string]: any } = {}
         Object.assign(splitData, data)
-        extraList?.forEach((extra: ColumnMap) => {
-          splitData[extra.columnName] = extra.columnValue
-        })
         result.push(splitData)
       }
     })
@@ -437,12 +423,9 @@ const handleAllSelectionChange: VxeTableEvents.CheckboxChange<any> = () => {
     .forEach((selected) => {
       const originData = prop.data.find((item: any) => item.data[prop.keyReference] === selected[prop.keyReference])
       if (originData) {
-        const { data, extraList } = originData
+        const { data } = originData
         const splitData: { [key: string]: any } = {}
         Object.assign(splitData, data)
-        extraList?.forEach((extra: ColumnMap) => {
-          splitData[extra.columnName] = extra.columnValue
-        })
         result.push(splitData)
       }
     })
@@ -508,11 +491,8 @@ const clickData = (val: any) => {
   const result: { [key: string]: any } = {}
   const originData = prop.data.find((item: any) => item.data[prop.keyReference] === val.row[prop.keyReference])
   if (originData) {
-    const { data, extraList } = originData
+    const { data } = originData
     Object.assign(result, data)
-    extraList?.forEach(async (extra) => {
-      result[extra.columnName] = extra.columnValue
-    })
   }
   emit("row-click", result)
 }
@@ -521,11 +501,8 @@ const dbClickData = (val: any) => {
   const result: { [key: string]: any } = {}
   const originData = prop.data.find((item: any) => item.data[prop.keyReference] === val.row[prop.keyReference])
   if (originData) {
-    const { data, extraList } = originData
+    const { data } = originData
     Object.assign(result, data)
-    extraList?.forEach(async (extra) => {
-      result[extra.columnName] = extra.columnValue
-    })
   }
   emit("row-dbclick", result)
 }
@@ -762,7 +739,7 @@ onMounted(() => {
                   v-if="slot[tableColumn.name + '-edit']?.().length && prop.editable && tableColumn.isEditable"
                   :name="tableColumn.name + '-edit'"
                   v-bind="scope"
-                  :oneDataChange="(prop:any, value:any) => oneDataChange(scope.row[keyReference], prop, value)"
+                  :oneDataChange="(prop: any, value: any) => oneDataChange(scope.row[keyReference], prop, value)"
                 />
                 <el-input
                   v-else-if="tableColumn.type == 'string'"
@@ -838,7 +815,7 @@ onMounted(() => {
                 v-if="slot[tableColumn.name + '-edit']?.().length && prop.editable && tableColumn.isEditable"
                 :name="tableColumn.name + '-edit'"
                 v-bind="scope"
-                :oneDataChange="(prop:any, value:any) => oneDataChange(scope.row[keyReference], prop, value)"
+                :oneDataChange="(prop: any, value: any) => oneDataChange(scope.row[keyReference], prop, value)"
               />
             </template>
           </vxe-column>

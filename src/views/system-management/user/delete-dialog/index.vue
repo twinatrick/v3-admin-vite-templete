@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { UserVO } from "@/api/users/types/user"
+import { UserVo } from "@/api/generated/Api"
 import { computed, ref, reactive } from "vue"
 import { UserVOFormData } from "@/views/system-management/user/type"
 import service from "../service"
@@ -9,9 +9,8 @@ import { ElMessage } from "element-plus"
 const formData = reactive(new UserVOFormData())
 const visible = ref(false)
 const roleList = computed(() => service.data.role)
-const tagList = computed(() => service.data.tag)
 //functions
-const show = (data: UserVO) => {
+const show = (data: UserVo) => {
   formData.data = { ...data }
   visible.value = true
 }
@@ -19,15 +18,8 @@ const hide = () => {
   visible.value = false
 }
 const roleNames = computed(() => {
-  const roleNameList = formData.roles?.map((role) => roleList.value.find((item) => item.key === role)?.name)
+  const roleNameList = formData.roles?.map((role) => roleList.value.find((item) => item.id === role)?.name)
   return roleNameList?.join(", ")
-})
-const tagNames = computed(() => {
-  const tagNameList = formData.tags?.map((role) => tagList.value.find((item) => item.key === role)?.name)
-  return tagNameList?.join(", ")
-})
-const supervisors = computed(() => {
-  return formData.supervisor?.map((supervisor) => supervisor.email).join(", ")
 })
 const confirmBtnClick = async () => {
   const loading = showLoading("Deleting...")
@@ -63,23 +55,9 @@ defineExpose({
       <el-descriptions-item :span="2" label-class-name="description-label" label="E-mail:">
         {{ formData.email }}
       </el-descriptions-item>
-      <el-descriptions-item label-class-name="description-label" label="Family Name:">
-        {{ formData.familyName }}
-      </el-descriptions-item>
-      <el-descriptions-item label-class-name="description-label" label="Given Name:">
-        {{ formData.givenName }}
-      </el-descriptions-item>
-      <el-descriptions-item :span="2" label-class-name="description-label" label="Location:">
-        {{ formData.location }}
-      </el-descriptions-item>
+
       <el-descriptions-item :span="2" label-class-name="description-label" label="Roles:">
         {{ roleNames }}
-      </el-descriptions-item>
-      <el-descriptions-item :span="2" label-class-name="description-label" label="Tags:">
-        {{ tagNames }}
-      </el-descriptions-item>
-      <el-descriptions-item :span="2" label-class-name="description-label" label="Supervisors:">
-        {{ supervisors }}
       </el-descriptions-item>
     </el-descriptions>
     <template #footer>

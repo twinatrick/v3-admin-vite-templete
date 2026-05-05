@@ -30,17 +30,27 @@ export default defineComponent({
     },
     checkBoxValue: {
       get() {
+        if (!Array.isArray(this.options) || !Array.isArray(this.modelValue)) {
+          return false
+        }
+        if (this.options.length === 0) {
+          return false
+        }
         return this.modelValue.length === this.options.length
       },
       set(val: boolean) {
         if (val) {
-          this._modelValue = this.options.map((option: any) => option.value)
+          const uniqueValues = new Set(this.options.map((option: any) => option.value))
+          this._modelValue = Array.from(uniqueValues)
         } else {
           this._modelValue = []
         }
       }
     },
     checkBoxIndeterminate() {
+      if (!Array.isArray(this.modelValue)) {
+        return false
+      }
       return !this.checkBoxValue && this.modelValue.length > 0
     },
     options() {

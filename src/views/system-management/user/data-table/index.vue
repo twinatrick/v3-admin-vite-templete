@@ -3,7 +3,6 @@ import FilterTable from "@/components/FilterTable/v3.vue"
 import service from "../service"
 import { computed } from "vue"
 import { TableColumnMap } from "@/components/FilterTable/type"
-// import { UserVO } from "@/api/users/types/user"
 import { CustomTableOptionType } from "@/components/CustomTable/types/Option"
 import { showLoading } from "@/utils"
 
@@ -22,24 +21,13 @@ const columnMap = computed(() => {
       type: "string",
       fixed: "left"
     },
-    // {
-    //   name: "familyName",
-    //   value: "Name",
-    //   type: "string",
-    //   formatter: (_v: any, row: UserVO) => `${row.familyName} ${row.givenName}`
-    // },
-    // {
-    //   name: "location",
-    //   value: "Location",
-    //   type: "select"
-    // },
     {
       name: "roleArr",
       value: "Roles",
       type: "string",
       formatter(value: string[]) {
         if (value.length === 0) return ""
-        return value.map((v) => roleList.value.find((r) => r.key == v)?.name).join(",")
+        return value.map((v) => roleList.value.find((r) => r.id == v)?.name).join(",")
       }
     },
     {
@@ -50,24 +38,6 @@ const columnMap = computed(() => {
         return value ? "Disable" : "Enable"
       }
     }
-    // {
-    //   name: "tags",
-    //   value: "Tags",
-    //   type: "string",
-    //   formatter(value: string[]) {
-    //     if (value.length === 0) return ""
-    //     return value.map((v) => tagList.value.find((r) => r.key == v)?.name).join(", ")
-    //   }
-    // },
-    // {
-    //   name: "supervisor",
-    //   value: "Supervisor",
-    //   type: "string",
-    //   formatter(value?: string[]) {
-    //     if (!value) return ""
-    //     return value.map((x) => userList.value.find((y) => y.id == x)?.email).join(", ")
-    //   }
-    // }
   ]
   return map
 })
@@ -93,14 +63,7 @@ const handleRefreshClick = async () => {
 }
 </script>
 <template>
-  <filter-table
-    :data="tableData"
-    :table-column-map="columnMap"
-    :option="options"
-    key-reference="key"
-    class="h-100%"
-    id="user-data-table"
-  >
+  <filter-table :data="tableData" :table-column-map="columnMap" :option="options" class="h-100%" id="user-data-table">
     <template #header>
       <slot name="header" />
       <el-button icon="Refresh" circle @click="handleRefreshClick" />

@@ -1,194 +1,115 @@
-#!/usr/bin/env node
-
-/**
- * Swagger TypeScript API Generator
- *
- * 此腳本從 Swagger/OpenAPI 規格自動生成 TypeScript API 客戶端程式碼
- *
- * 使用方式:
- *   npm run generate-api              # 使用預設環境 (development)
- *   npm run generate-api:dev          # 使用開發環境
- *   npm run generate-api:prod         # 使用生產環境
- *   node scripts/generate-api.js --env development
- */
-
 const { generateApi } = require("swagger-typescript-api")
 const path = require("path")
 const fs = require("fs")
+require("dotenv").config({ path: path.resolve(process.cwd(), ".env.development") })
 
-// 解析命令列參數
-const args = process.argv.slice(2)
-const envIndex = args.indexOf("--env")
-const environment = envIndex !== -1 ? args[envIndex + 1] : "development"
+const swaggerUrl = process.env.VITE_SWAGGER_URL || "http://localhost:7000/swagger/v1/swagger.json"
 
-// 載入環境變數
-function loadEnv(env) {
-  const envFile = path.resolve(__dirname, `../.env.${env}`)
+/* NOTE: Make sure your backend authentication is either disabled for local dev, or you handle it here if needed.
+   Usually for generating types, no auth is needed if the swagger.json is public. */
 
-  if (!fs.existsSync(envFile)) {
-    console.warn(`⚠️  環境檔案不存在: ${envFile}`)
-    console.warn(`⚠️  將使用預設配置`)
-    return {}
-  }
-
-  const envContent = fs.readFileSync(envFile, "utf-8")
-  const envVars = {}
-
-  envContent.split("\n").forEach((line) => {
-    // 移除註解和空行
-    const trimmedLine = line.trim()
-    if (!trimmedLine || trimmedLine.startsWith("#")) return
-
-    // 解析 KEY=VALUE 或 KEY='VALUE' 或 KEY="VALUE"
-    const match = trimmedLine.match(/^([^=]+)=(.*)$/)
-    if (match) {
-      const key = match[1].trim()
-      let value = match[2].trim()
-
-      // 移除引號
-      if ((value.startsWith("'") && value.endsWith("'")) || (value.startsWith('"') && value.endsWith('"'))) {
-        value = value.slice(1, -1)
-      }
-
-      envVars[key] = value
-    }
-  })
-
-  return envVars
-}
-
-// 載入環境變數
-const envVars = loadEnv(environment)
-
-// 配置
-const SWAGGER_URL = envVars.VITE_SWAGGER_URL || "http://localhost:7000/api/swagger/v1/swagger.json"
-const OUTPUT_DIR = path.resolve(__dirname, "../src/api/generated")
-// const HTTP_CLIENT_PATH = path.resolve(OUTPUT_DIR, "http-client.ts")
-
-console.log("🚀 開始生成 API 客戶端程式碼...")
-console.log(`📝 環境: ${environment}`)
-console.log(`📍 Swagger URL: ${SWAGGER_URL}`)
-console.log(`📂 輸出目錄: ${OUTPUT_DIR}`)
-console.log("")
-
-// 生成 API
 generateApi({
-  name: "Api.ts",
-  output: OUTPUT_DIR,
-  url: SWAGGER_URL,
+  name: "api.ts",
+  output: path.resolve(process.cwd(), "./src/api/generated"),
+  url: swaggerUrl,
   httpClientType: "axios",
-
-  // 生成選項
-  generateClient: true, // 生成 API 客戶端類別
-  generateRouteTypes: true, // 生成路由型別
-  generateResponses: true, // 生成完整的 response 型別
-
-  // 類型選項
-  enumNamesAsValues: true, // 使用 enum 值作為名稱
-  singleHttpClient: true, // 使用單一 HTTP 客戶端
-
-  // 輸出選項
-  cleanOutput: false, // 不清空輸出目錄 (保留 http-client.ts)
-  modular: false, // 使用單一檔案模式
-
-  // 代碼風格
-  sortTypes: true, // 排序類型定義
-  extractRequestParams: true, // 提取請求參數
-
-  // 自訂模板選項
-  templates: path.resolve(__dirname, "./api-templates"), // 如果需要自訂模板
-
-  // Axios 配置
-  unwrapResponseData: false, // 不自動解包 response.data (由我們的攔截器處理)
-
-  // 鉤子函數
+  defaultResponseAsSuccess: false,
+  generateClient: true,
+  generateRouteTypes: false,
+  generateResponses: true,
+  toJS: false,
+  extractRequestParams: false,
+  extractRequestBody: false,
+  prettier: {
+    printWidth: 120,
+    tabWidth: 4,
+    trailingComma: "none",
+    parser: "typescript"
+  },
+  defaultResponseType: "any",
+  singleHttpClient: true,
+  cleanOutput: true,
+  enumNamesAsValues: false,
+  moduleNameFirstTag: true,
+  generateUnionEnums: false,
+  extraTemplates: [],
   hooks: {
     onCreateComponent: (component) => {
-      // 可以在這裡修改生成的組件
+      // You can customize component generation here
       return component
     },
-    onCreateRoute: (routeData) => {
-      // 可以在這裡修改生成的路由
-      return routeData
-    },
     onCreateRequestParams: (rawType) => {
-      // 可以在這裡修改請求參數
+      // You can customize request params here
       return rawType
     },
-    onParseSchema: (originalSchema, parsedSchema) => {
-      // 可以在這裡修改 schema 解析結果
-      return parsedSchema
+    onCreateRoute: (routeData) => {
+      // You can customize route generation here
+      return routeData
+    },
+    onCreateRouteName: (routeNameInfo, rawRouteInfo) => {
+      // Priority 1: Use OperationId if available
+      if (rawRouteInfo.operationId)
+        return {
+          ...routeNameInfo,
+          usage: rawRouteInfo.operationId,
+          original: rawRouteInfo.operationId
+        }
+
+      // Priority 2: Custom naming - Strip standard suffixes and append HTTP Method
+      const method = rawRouteInfo.method.toLowerCase()
+      const methodSuffix = method.charAt(0).toUpperCase() + method.slice(1) // "Get", "Post"
+
+      // Suffixes that we want to remove because we will append the HTTP method instead.
+      // Note: We KEEP 'Detail' to distinguish GET /resource from GET /resource/{id} in some cases,
+      // but if we append Verb, maybe we don't need Detail? Let's keep it safe.
+      const suffixesToRemove = ["Create", "List", "Update", "Delete"]
+
+      let baseName = routeNameInfo.original
+      const routeParts = rawRouteInfo.route.split("/").filter((p) => !!p)
+      const lastPathPart = routeParts[routeParts.length - 1].replace(/[{}]/g, "")
+
+      for (const suffix of suffixesToRemove) {
+        if (baseName.endsWith(suffix) && baseName !== suffix) {
+          // Safety check: don't strip if the path itself is the suffix
+          if (lastPathPart.toLowerCase() !== suffix.toLowerCase()) {
+            baseName = baseName.slice(0, -suffix.length)
+            break
+          }
+        }
+      }
+
+      // Append Method Suffix
+      // e.g. users -> usersGet
+      if (!baseName.toLowerCase().endsWith(methodSuffix.toLowerCase())) {
+        baseName += methodSuffix
+      }
+
+      return { ...routeNameInfo, usage: baseName, original: baseName }
     }
   }
 })
-  .then(({ files, _configuration }) => {
-    console.log("✅ API 客戶端程式碼生成成功!")
-    console.log("")
-    console.log("📄 生成的檔案:")
+  .then(() => {
+    // files.forEach(({ content, name }) => {
+    //   fs.writeFileSync(path.resolve(process.cwd(), './src/api/generated', name), content);
+    // });
 
-    files.forEach(({ fileName, fileContent }) => {
-      console.log(`   - ${fileName} (${(fileContent.length / 1024).toFixed(2)} KB)`)
-    })
+    // Post-processing: Patch Api.ts to return Promise<T> instead of Promise<AxiosResponse<T>>
+    // because the custom axios interceptor already unwraps the response.
+    const apiFilePath = path.resolve(process.cwd(), "./src/api/generated/Api.ts")
+    if (fs.existsSync(apiFilePath)) {
+      let content = fs.readFileSync(apiFilePath, "utf8")
 
-    console.log("")
-    console.log("🎉 完成! 你現在可以在專案中使用生成的 API:")
-    console.log("")
-    console.log('   import { Api } from "@/api/generated/Api"')
-    console.log("   ")
-    console.log("   const api = new Api({ ")
-    console.log("     baseURL: import.meta.env.VITE_BASE_API ")
-    console.log("   })")
-    console.log("")
-    console.log("📚 詳細使用說明請參考: docs/API_GENERATION.md")
-    console.log("")
-  })
-  .catch((error) => {
-    console.error("❌ API 生成失敗:")
-    console.error("")
+      // Add import for ApiResponse
 
-    const errorMessage = error.message || String(error)
-    const hasConnectionError =
-      errorMessage.includes("ECONNREFUSED") ||
-      errorMessage.includes("connect") ||
-      errorMessage.includes("fetch failed") ||
-      errorMessage.includes("internalConnectMultiple")
+      // Replace return type in HttpClient.request to Promise<ApiResponse<T>>
+      // Note: swagger-typescript-api generates Promise<AxiosResponse<T>> by default
+      content = content.replace(/: Promise<AxiosResponse<T>>/g, ": Promise<ApiResponse<T>>")
 
-    if (hasConnectionError) {
-      console.error("🔌 無法連接到 Swagger API:")
-      console.error(`   URL: ${SWAGGER_URL}`)
-      console.error("")
-      console.error("💡 請確認:")
-      console.error("   1. 後端服務是否正在運行")
-      console.error("   2. Swagger URL 是否正確")
-      console.error("   3. 是否有網路連線問題")
-      console.error("")
-      console.error("🔧 你可以嘗試:")
-      console.error("   - 檢查 .env.development 中的 VITE_SWAGGER_URL")
-      console.error("   - 在瀏覽器中訪問 Swagger URL 確認可訪問")
-      console.error("   - 確認後端服務已啟動")
-      console.error("   - 使用 curl 測試: curl " + SWAGGER_URL)
-    } else if (errorMessage.includes("404")) {
-      console.error("🔍 Swagger 文檔不存在:")
-      console.error(`   URL: ${SWAGGER_URL}`)
-      console.error("")
-      console.error("💡 請確認:")
-      console.error("   1. Swagger 文檔路徑是否正確")
-      console.error("   2. 後端是否已配置 Swagger")
-      console.error("")
-    } else {
-      console.error("⚠️  發生未預期的錯誤")
-      console.error("")
-      console.error("錯誤詳情:")
-      console.error(errorMessage)
-      if (error.stack) {
-        console.error("")
-        console.error("堆疊追蹤:")
-        console.error(error.stack)
-      }
+      // Save
+      fs.writeFileSync(apiFilePath, content)
+      console.log("Patched Api.ts to match custom axios interceptor (unwrapped data).")
     }
 
-    console.error("")
-    console.error("📖 更多資訊請參考: docs/API_GENERATION.md")
-    console.error("")
-    process.exit(1)
+    console.log("API files generated successfully.")
   })
+  .catch((e) => console.error(e))

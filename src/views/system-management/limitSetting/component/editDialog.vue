@@ -1,16 +1,13 @@
 <script setup lang="ts">
 import { PropType, reactive, ref } from "vue"
-import * as api from "@/api/limitSetting"
-import * as type from "@/api/limitSetting/type"
-import { AlertCheckLimitVo } from "@/api/limitSetting/type"
-// import {TableData} from "@/components/FilterTable/type";
-// import * as Type from "@/api/PCR/type";
 import { ElMessageBox } from "element-plus"
+import { AlertCheckLimitVo } from "@/api/generated/Api"
+import { api } from "@/api/client"
 
 const dialogVisible = ref(false)
 const props = defineProps({
   rowData: {
-    type: Object as PropType<type.AlertCheckLimitVo>,
+    type: Object as PropType<AlertCheckLimitVo>,
     required: true,
     default: () => ({})
   }
@@ -27,18 +24,16 @@ const rules = ref({
   columnName: [{ required: true, message: "Please input columnName", trigger: "blur" }],
   limitValue: [{ required: true, message: "Please input limitValue", trigger: "blur" }]
 })
-const submitForm = () => {
-  api.updateLimitSetting(formData).then((res) => {
-    console.log(res)
-    if (res.code == 0) {
-      ElMessageBox.alert("success")
+const submitForm = async () => {
+  const res = await api.alertLimits.updateLimit(formData)
+  if (res.code == 0) {
+    await ElMessageBox.alert("success")
 
-      emit("confirm")
-      dialogVisible.value = false
-    } else {
-      ElMessageBox.alert("error")
-    }
-  })
+    emit("confirm")
+    dialogVisible.value = false
+  } else {
+    await ElMessageBox.alert("error")
+  }
 }
 const resetForm = () => {
   formData.id = props.rowData.id
