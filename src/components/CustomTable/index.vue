@@ -55,6 +55,7 @@ const emit = defineEmits<{
   (event: "sort-change", val: { sortBy: string; sortDir: "asc" | "desc" | null }): void
 }>()
 //data
+const currentPageWatch = ref<number>(1)
 const tableData = ref<Array<any>>()
 const pageSize = ref<number>(prop.pageSize)
 const total = ref<number>(prop.total)
@@ -73,13 +74,13 @@ watch(
   }
 )
 watch(
-  () => currentPage.value,
+  () => currentPageWatch.value,
   () => (tableData.value = calCurrentData(prop.data))
 )
 watch(
   () => prop.currentPage,
   () => {
-    currentPage.value = prop.currentPage
+    currentPageWatch.value = prop.currentPage
   }
 )
 watch(
@@ -94,12 +95,12 @@ const calCurrentData = (val: Array<any>) => {
   //若為真分頁模式，則直接回傳資料
   if (prop.option?.realPagination == true) return val
   //use currentPage and pageSize to calculate current data
-  const start = (currentPage.value - 1) * pageSize.value
+  const start = (currentPageWatch.value - 1) * pageSize.value
   const end = start + pageSize.value
   return val.slice(start, end)
 }
 const handleCurrentChange = (val: number) => {
-  currentPage.value = val
+  currentPageWatch.value = val
   if (prop.option?.realPagination) {
     emit("page-change", {
       page: val - 1,
@@ -109,7 +110,7 @@ const handleCurrentChange = (val: number) => {
 }
 const handlePageSizeChange = (val: number) => {
   pageSize.value = val
-  currentPage.value = 1
+  currentPageWatch.value = 1
   if (prop.option?.realPagination) {
     emit("page-change", {
       page: 0,
@@ -300,7 +301,7 @@ tableData.value = calCurrentData(prop.data)
       background
       v-show="option?.pagination"
       :page-size="pageSize"
-      :current-page="currentPage"
+      :current-page="currentPageWatch"
       :total="total"
       :pager-count="option?.pagination?.maxPageCount"
       :layout="option?.pagination?.layout"
