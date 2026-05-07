@@ -35,15 +35,13 @@ export interface RepresentationModelObject {
   _links?: Links
 }
 
-export interface EntityModelSkill {
+export interface EntityModelRoleFunction {
   createdBy?: string
   updatedBy?: string
   /** @format date-time */
   createdTime?: string
   /** @format date-time */
   updatedTime?: string
-  name?: string
-  description?: string
   _links?: Links
 }
 
@@ -58,77 +56,12 @@ export interface PageMetadata {
   number?: number
 }
 
-export interface PagedModelEntityModelSkill {
+export interface PagedModelEntityModelRoleFunction {
   _embedded?: {
-    skills?: EntityModelSkill[]
+    roleFunctions?: EntityModelRoleFunction[]
   }
   _links?: Links
   page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelSkill {
-  _embedded?: {
-    skills?: EntityModelSkill[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelAlertCheckLimit {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  tableName?: string
-  columnName?: string
-  /** @format double */
-  limitValue?: number
-  _links?: Links
-}
-
-export interface PagedModelEntityModelAlertCheckLimit {
-  _embedded?: {
-    alertCheckLimits?: EntityModelAlertCheckLimit[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelAlertCheckLimit {
-  _embedded?: {
-    alertCheckLimits?: EntityModelAlertCheckLimit[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelSkillLevel {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  /** @format int32 */
-  levelValue?: number
-  title?: string
-  description?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelSkillLevel {
-  _embedded?: {
-    skillLevels?: EntityModelSkillLevel[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelSkillLevel {
-  _embedded?: {
-    skillLevels?: EntityModelSkillLevel[]
-  }
-  _links?: Links
 }
 
 export interface Function {
@@ -147,123 +80,6 @@ export interface Function {
   type?: number
 }
 
-export interface EntityModelFunction {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  parent?: string
-  sort?: string
-  /** @format int32 */
-  type?: number
-  _links?: Links
-}
-
-export interface PagedModelEntityModelFunction {
-  _embedded?: {
-    functions?: EntityModelFunction[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelFunction {
-  _embedded?: {
-    functions?: EntityModelFunction[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelUserSkill {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelUserSkill {
-  _embedded?: {
-    userSkills?: EntityModelUserSkill[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelObject {
-  _embedded?: {
-    objects?: object[]
-  }
-  _links?: Links
-}
-
-export interface CollectionModelEntityModelUserSkill {
-  _embedded?: {
-    userSkills?: EntityModelUserSkill[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelUserProject {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelUserProject {
-  _embedded?: {
-    userProjects?: EntityModelUserProject[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface EntityModelProject {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  description?: string
-  _links?: Links
-}
-
-export interface CollectionModelEntityModelUserProject {
-  _embedded?: {
-    userProjects?: EntityModelUserProject[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelRoleFunction {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelRoleFunction {
-  _embedded?: {
-    roleFunctions?: EntityModelRoleFunction[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
 export interface Role {
   /** @format uuid */
   id?: string
@@ -278,7 +94,7 @@ export interface Role {
   permissions?: string
 }
 
-export interface EntityModelRole {
+export interface EntityModelUser {
   createdBy?: string
   updatedBy?: string
   /** @format date-time */
@@ -286,22 +102,42 @@ export interface EntityModelRole {
   /** @format date-time */
   updatedTime?: string
   name?: string
-  description?: string
-  permissions?: string
+  email?: string
+  password?: string
+  phone?: string
+  disabled?: boolean
+  roleArr?: string[]
   _links?: Links
 }
 
-export interface PagedModelEntityModelRole {
+export interface PagedModelEntityModelUser {
   _embedded?: {
-    roles?: EntityModelRole[]
+    users?: EntityModelUser[]
   }
   _links?: Links
   page?: PageMetadata
 }
 
-export interface CollectionModelEntityModelRole {
+export interface User {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  email?: string
+  password?: string
+  phone?: string
+  disabled?: boolean
+  roleArr?: string[]
+}
+
+export interface CollectionModelEntityModelUser {
   _embedded?: {
-    roles?: EntityModelRole[]
+    users?: EntityModelUser[]
   }
   _links?: Links
 }
@@ -340,8 +176,8 @@ export interface EntityModelAquarkData {
   v6?: number
   /** @format float */
   v7?: number
-  csq?: string
   peak?: boolean
+  csq?: string
   _links?: Links
 }
 
@@ -360,50 +196,229 @@ export interface CollectionModelEntityModelAquarkData {
   _links?: Links
 }
 
-export interface User {
-  /** @format uuid */
-  id?: string
+export interface EntityModelAlertCheckLimit {
   createdBy?: string
   updatedBy?: string
   /** @format date-time */
   createdTime?: string
   /** @format date-time */
   updatedTime?: string
-  name?: string
-  email?: string
-  password?: string
-  phone?: string
-  disabled?: boolean
-  roleArr?: string[]
-}
-
-export interface EntityModelUser {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  email?: string
-  password?: string
-  phone?: string
-  disabled?: boolean
-  roleArr?: string[]
+  tableName?: string
+  columnName?: string
+  /** @format double */
+  limitValue?: number
   _links?: Links
 }
 
-export interface PagedModelEntityModelUser {
+export interface PagedModelEntityModelAlertCheckLimit {
   _embedded?: {
-    users?: EntityModelUser[]
+    alertCheckLimits?: EntityModelAlertCheckLimit[]
   }
   _links?: Links
   page?: PageMetadata
 }
 
-export interface CollectionModelEntityModelUser {
+export interface CollectionModelEntityModelAlertCheckLimit {
   _embedded?: {
-    users?: EntityModelUser[]
+    alertCheckLimits?: EntityModelAlertCheckLimit[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelUserSkill {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUserSkill {
+  _embedded?: {
+    userSkills?: EntityModelUserSkill[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface EntityModelSkillLevel {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  /** @format int32 */
+  levelValue?: number
+  title?: string
+  description?: string
+  _links?: Links
+}
+
+export interface CollectionModelObject {
+  _embedded?: {
+    objects?: object[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelSkill {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  description?: string
+  _links?: Links
+}
+
+export interface CollectionModelEntityModelUserSkill {
+  _embedded?: {
+    userSkills?: EntityModelUserSkill[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelProject {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  description?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelProject {
+  _embedded?: {
+    projects?: EntityModelProject[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelProject {
+  _embedded?: {
+    projects?: EntityModelProject[]
+  }
+  _links?: Links
+}
+
+export interface PagedModelEntityModelSkillLevel {
+  _embedded?: {
+    skillLevels?: EntityModelSkillLevel[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelSkillLevel {
+  _embedded?: {
+    skillLevels?: EntityModelSkillLevel[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelRole {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  description?: string
+  permissions?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelRole {
+  _embedded?: {
+    roles?: EntityModelRole[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelRole {
+  _embedded?: {
+    roles?: EntityModelRole[]
+  }
+  _links?: Links
+}
+
+export interface PagedModelEntityModelSkill {
+  _embedded?: {
+    skills?: EntityModelSkill[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelSkill {
+  _embedded?: {
+    skills?: EntityModelSkill[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelUserProject {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUserProject {
+  _embedded?: {
+    userProjects?: EntityModelUserProject[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelUserProject {
+  _embedded?: {
+    userProjects?: EntityModelUserProject[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelFunction {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  parent?: string
+  sort?: string
+  /** @format int32 */
+  type?: number
+  _links?: Links
+}
+
+export interface PagedModelEntityModelFunction {
+  _embedded?: {
+    functions?: EntityModelFunction[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelFunction {
+  _embedded?: {
+    functions?: EntityModelFunction[]
   }
   _links?: Links
 }
@@ -442,21 +457,6 @@ export interface PagedModelEntityModelProjectSkill {
   }
   _links?: Links
   page?: PageMetadata
-}
-
-export interface PagedModelEntityModelProject {
-  _embedded?: {
-    projects?: EntityModelProject[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelProject {
-  _embedded?: {
-    projects?: EntityModelProject[]
-  }
-  _links?: Links
 }
 
 export interface AlertCheckLimitRequestBody {
@@ -510,8 +510,8 @@ export interface AquarkDataRequestBody {
   v6?: number
   /** @format float */
   v7?: number
-  csq?: string
   peak?: boolean
+  csq?: string
 }
 
 export interface FunctionRequestBody {
@@ -662,6 +662,23 @@ export interface UserRequestBody {
   roleArr?: string[]
 }
 
+export interface PersonalProjectSkillLevelRequest {
+  skillLevelId?: string
+}
+
+export interface ResponseTypeString {
+  /** @format int32 */
+  code?: number
+  data?: string
+  message?: string
+  errorType?: string
+}
+
+export interface PersonalProjectRequest {
+  name?: string
+  description?: string
+}
+
 /** 使用者搜尋查詢參數 */
 export interface UserSearchQuery {
   /**
@@ -794,14 +811,6 @@ export interface UserVo {
   permissions?: FunctionVo[]
 }
 
-export interface ResponseTypeString {
-  /** @format int32 */
-  code?: number
-  data?: string
-  message?: string
-  errorType?: string
-}
-
 export interface UserSkillBindRequest {
   userId?: string
   skillId?: string
@@ -824,6 +833,8 @@ export interface SkillVo {
   createdTime?: string
   /** @format date-time */
   updatedTime?: string
+  userIds?: string[]
+  skillLevelId?: string
 }
 
 /** 技能搜尋查詢參數 */
@@ -911,6 +922,28 @@ export interface ResponseTypePageResultSkillVo {
   code?: number
   /** 分頁結果 */
   data?: PageResultSkillVo
+  message?: string
+  errorType?: string
+}
+
+export interface PersonalSkillRequest {
+  name?: string
+  description?: string
+  skillLevelId?: string
+  /** @format int32 */
+  skillLevelValue?: number
+  skillLevelTitle?: string
+  skillLevelDescription?: string
+}
+
+export interface PersonalSkillLevelRequest {
+  skillLevelId?: string
+}
+
+export interface ResponseTypeSkillVo {
+  /** @format int32 */
+  code?: number
+  data?: SkillVo
   message?: string
   errorType?: string
 }
@@ -1064,7 +1097,7 @@ export interface CurrentUserSkillVo {
    * @format date-time
    */
   updatedTime?: string
-  /** 來源類型：USER（直接綁定）或 PROJECT（專案技能） */
+  /** 來源類型：USER（直接綁定）或 PROJECT（專案技能）。管理者指派到使用者的技能屬於 USER 來源但視為唯讀（不可透過個人技能 API 修改內容）；可依權限進行綁定關聯。 */
   sourceType?: string
   /**
    * 專案ID（當 sourceType 為 PROJECT 時有值）
@@ -1114,14 +1147,6 @@ export interface ResponseTypePageResultCurrentUserSkillVo {
   code?: number
   /** 分頁結果 */
   data?: PageResultCurrentUserSkillVo
-  message?: string
-  errorType?: string
-}
-
-export interface ResponseTypeSkillVo {
-  /** @format int32 */
-  code?: number
-  data?: SkillVo
   message?: string
   errorType?: string
 }
@@ -1298,6 +1323,7 @@ export interface ProjectVo {
   createdTime?: string
   /** @format date-time */
   updatedTime?: string
+  userIds?: string[]
 }
 
 /** 專案搜尋查詢參數 */
@@ -1389,8 +1415,7 @@ export interface ResponseTypePageResultProjectVo {
   errorType?: string
 }
 
-export interface ProjectSkillBindRequest {
-  projectId?: string
+export interface PersonalProjectSkillBindRequest {
   skillId?: string
   skillLevelId?: string
 }
@@ -1401,6 +1426,12 @@ export interface ResponseTypeProjectVo {
   data?: ProjectVo
   message?: string
   errorType?: string
+}
+
+export interface ProjectSkillBindRequest {
+  projectId?: string
+  skillId?: string
+  skillLevelId?: string
 }
 
 /** 功能搜尋查詢參數 */
@@ -1585,8 +1616,8 @@ export interface AquarkDataRaw {
   v6?: number
   /** @format float */
   v7?: number
-  csq?: string
   peak?: boolean
+  csq?: string
 }
 
 export interface ResponseTypeListAquarkDataRaw {
@@ -2897,11 +2928,36 @@ export class Api<SecurityDataType extends unknown> {
      *
      * @tags project-skill-search-controller
      * @name ExecuteSearchProjectskillGet1
-     * @request GET:/projectSkills/search/deleteBySkillId
+     * @request GET:/projectSkills/search/deleteByProjectIdAndSkillId
      * @response `200` `any` OK
      * @response `404` `any` Not Found
      */
     "executeSearch-projectskill-get_1": (
+      query?: {
+        /** @format uuid */
+        projectId?: string
+        /** @format uuid */
+        skillId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<any, any>({
+        path: `/projectSkills/search/deleteByProjectIdAndSkillId`,
+        method: "GET",
+        query: query,
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags project-skill-search-controller
+     * @name ExecuteSearchProjectskillGet2
+     * @request GET:/projectSkills/search/deleteBySkillId
+     * @response `200` `any` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-projectskill-get_2": (
       query?: {
         /** @format uuid */
         skillId?: string
@@ -2919,12 +2975,12 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags project-skill-search-controller
-     * @name ExecuteSearchProjectskillGet2
+     * @name ExecuteSearchProjectskillGet3
      * @request GET:/projectSkills/search/existsByProjectIdAndSkillId
      * @response `200` `boolean` OK
      * @response `404` `any` Not Found
      */
-    "executeSearch-projectskill-get_2": (
+    "executeSearch-projectskill-get_3": (
       query?: {
         /** @format uuid */
         projectId?: string
@@ -2945,12 +3001,36 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags project-skill-search-controller
-     * @name ExecuteSearchProjectskillGet3
+     * @name ExecuteSearchProjectskillGet4
+     * @request GET:/projectSkills/search/existsBySkillId
+     * @response `200` `boolean` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-projectskill-get_4": (
+      query?: {
+        /** @format uuid */
+        skillId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<boolean, any>({
+        path: `/projectSkills/search/existsBySkillId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags project-skill-search-controller
+     * @name ExecuteSearchProjectskillGet5
      * @request GET:/projectSkills/search/existsBySkillLevelId
      * @response `200` `boolean` OK
      * @response `404` `any` Not Found
      */
-    "executeSearch-projectskill-get_3": (
+    "executeSearch-projectskill-get_5": (
       query?: {
         /** @format uuid */
         skillLevelId?: string
@@ -2959,6 +3039,32 @@ export class Api<SecurityDataType extends unknown> {
     ) =>
       this.http.request<boolean, any>({
         path: `/projectSkills/search/existsBySkillLevelId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags project-skill-search-controller
+     * @name ExecuteSearchProjectskillGet6
+     * @request GET:/projectSkills/search/findByProjectIdAndSkillId
+     * @response `200` `EntityModelProjectSkill` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-projectskill-get_6": (
+      query?: {
+        /** @format uuid */
+        projectId?: string
+        /** @format uuid */
+        skillId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelProjectSkill, any>({
+        path: `/projectSkills/search/findByProjectIdAndSkillId`,
         method: "GET",
         query: query,
         format: "json",
@@ -4234,11 +4340,60 @@ export class Api<SecurityDataType extends unknown> {
      *
      * @tags user-project-search-controller
      * @name ExecuteSearchUserprojectGet1
+     * @request GET:/userProjects/search/deleteByUserIdAndProjectId
+     * @response `200` `any` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userproject-get_1": (
+      query?: {
+        /** @format uuid */
+        userId?: string
+        /** @format uuid */
+        projectId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<any, any>({
+        path: `/userProjects/search/deleteByUserIdAndProjectId`,
+        method: "GET",
+        query: query,
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-project-search-controller
+     * @name ExecuteSearchUserprojectGet2
+     * @request GET:/userProjects/search/existsByProjectId
+     * @response `200` `boolean` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userproject-get_2": (
+      query?: {
+        /** @format uuid */
+        projectId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<boolean, any>({
+        path: `/userProjects/search/existsByProjectId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-project-search-controller
+     * @name ExecuteSearchUserprojectGet3
      * @request GET:/userProjects/search/existsByUserIdAndProjectId
      * @response `200` `boolean` OK
      * @response `404` `any` Not Found
      */
-    "executeSearch-userproject-get_1": (
+    "executeSearch-userproject-get_3": (
       query?: {
         /** @format uuid */
         userId?: string
@@ -4259,12 +4414,12 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags user-project-search-controller
-     * @name ExecuteSearchUserprojectGet2
+     * @name ExecuteSearchUserprojectGet4
      * @request GET:/userProjects/search/findByUserId
      * @response `200` `CollectionModelEntityModelUserProject` OK
      * @response `404` `any` Not Found
      */
-    "executeSearch-userproject-get_2": (
+    "executeSearch-userproject-get_4": (
       query?: {
         /** @format uuid */
         userId?: string
@@ -4694,11 +4849,60 @@ export class Api<SecurityDataType extends unknown> {
      *
      * @tags user-skill-search-controller
      * @name ExecuteSearchUserskillGet1
+     * @request GET:/userSkills/search/deleteByUserIdAndSkillId
+     * @response `200` `any` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userskill-get_1": (
+      query?: {
+        /** @format uuid */
+        userId?: string
+        /** @format uuid */
+        skillId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<any, any>({
+        path: `/userSkills/search/deleteByUserIdAndSkillId`,
+        method: "GET",
+        query: query,
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-skill-search-controller
+     * @name ExecuteSearchUserskillGet2
+     * @request GET:/userSkills/search/existsBySkillId
+     * @response `200` `boolean` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userskill-get_2": (
+      query?: {
+        /** @format uuid */
+        skillId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<boolean, any>({
+        path: `/userSkills/search/existsBySkillId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-skill-search-controller
+     * @name ExecuteSearchUserskillGet3
      * @request GET:/userSkills/search/existsBySkillLevelId
      * @response `200` `boolean` OK
      * @response `404` `any` Not Found
      */
-    "executeSearch-userskill-get_1": (
+    "executeSearch-userskill-get_3": (
       query?: {
         /** @format uuid */
         skillLevelId?: string
@@ -4717,12 +4921,12 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags user-skill-search-controller
-     * @name ExecuteSearchUserskillGet2
+     * @name ExecuteSearchUserskillGet4
      * @request GET:/userSkills/search/existsByUserIdAndSkillId
      * @response `200` `boolean` OK
      * @response `404` `any` Not Found
      */
-    "executeSearch-userskill-get_2": (
+    "executeSearch-userskill-get_4": (
       query?: {
         /** @format uuid */
         userId?: string
@@ -4743,12 +4947,36 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags user-skill-search-controller
-     * @name ExecuteSearchUserskillGet3
+     * @name ExecuteSearchUserskillGet5
+     * @request GET:/userSkills/search/findBySkillId
+     * @response `200` `CollectionModelEntityModelUserSkill` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userskill-get_5": (
+      query?: {
+        /** @format uuid */
+        skillId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<CollectionModelEntityModelUserSkill, any>({
+        path: `/userSkills/search/findBySkillId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-skill-search-controller
+     * @name ExecuteSearchUserskillGet6
      * @request GET:/userSkills/search/findByUserId
      * @response `200` `CollectionModelEntityModelUserSkill` OK
      * @response `404` `any` Not Found
      */
-    "executeSearch-userskill-get_3": (
+    "executeSearch-userskill-get_6": (
       query?: {
         /** @format uuid */
         userId?: string
@@ -4757,6 +4985,32 @@ export class Api<SecurityDataType extends unknown> {
     ) =>
       this.http.request<CollectionModelEntityModelUserSkill, any>({
         path: `/userSkills/search/findByUserId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-skill-search-controller
+     * @name ExecuteSearchUserskillGet7
+     * @request GET:/userSkills/search/findByUserIdAndSkillId
+     * @response `200` `CollectionModelEntityModelUserSkill` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userskill-get_7": (
+      query?: {
+        /** @format uuid */
+        userId?: string
+        /** @format uuid */
+        skillId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<CollectionModelEntityModelUserSkill, any>({
+        path: `/userSkills/search/findByUserIdAndSkillId`,
         method: "GET",
         query: query,
         format: "json",
@@ -5128,6 +5382,294 @@ export class Api<SecurityDataType extends unknown> {
         ...params
       })
   }
+  projects = {
+    /**
+     * @description 更新個人可操作專案中某技能的等級綁定。僅接受既有等級 ID。
+     *
+     * @tags Projects
+     * @name UpdatePersonalProjectSkillLevel
+     * @summary Update personal project skill level
+     * @request PUT:/project/personal/{projectId}/skill/{skillId}/level
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    updatePersonalProjectSkillLevel: (
+      projectId: string,
+      skillId: string,
+      data: PersonalProjectSkillLevelRequest,
+      params: RequestParams = {}
+    ) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/project/personal/${projectId}/skill/${skillId}/level`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 修改個人專案，僅限擁有者
+     *
+     * @tags Projects
+     * @name UpdatePersonalProject
+     * @summary Update personal project
+     * @request PUT:/project/personal/update/{projectId}
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    updatePersonalProject: (projectId: string, data: PersonalProjectRequest, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/project/personal/update/${projectId}`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description Updates an existing project.
+     *
+     * @tags Projects
+     * @name UpdateProject
+     * @summary Update project
+     * @request POST:/project/update
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    updateProject: (data: ProjectVo, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/project/update`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 搜尋專案並回傳分頁結果，支援多種查詢條件與排序
+     *
+     * @tags Projects
+     * @name SearchProjects
+     * @summary Search projects with pagination
+     * @request POST:/project/search
+     * @response `200` `ResponseTypePageResultProjectVo` OK
+     * @response `500` `ResponseTypePageResultProjectVo` Server error
+     */
+    searchProjects: (data: ProjectSearchQuery, params: RequestParams = {}) =>
+      this.http.request<ResponseTypePageResultProjectVo, ResponseTypePageResultProjectVo>({
+        path: `/project/search`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 綁定技能到可操作的個人專案。管理員指定專案雖不可修改主資料，但可修改綁定關係。每個專案技能綁定只能選擇一個等級。
+     *
+     * @tags Projects
+     * @name BindPersonalProjectSkill
+     * @summary Bind personal project skill
+     * @request POST:/project/personal/{projectId}/skill/bind
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    bindPersonalProjectSkill: (projectId: string, data: PersonalProjectSkillBindRequest, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/project/personal/${projectId}/skill/bind`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 新增個人專案，自動綁定當前使用者
+     *
+     * @tags Projects
+     * @name AddPersonalProject
+     * @summary Add personal project
+     * @request POST:/project/personal/add
+     * @response `200` `ResponseTypeProjectVo` OK
+     * @response `400` `ResponseTypeProjectVo` Invalid input
+     * @response `500` `ResponseTypeProjectVo` Server error
+     */
+    addPersonalProject: (data: PersonalProjectRequest, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeProjectVo, ResponseTypeProjectVo>({
+        path: `/project/personal/add`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description Deletes a project.
+     *
+     * @tags Projects
+     * @name DeleteProject
+     * @summary Delete project
+     * @request POST:/project/delete
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    deleteProject: (data: ProjectVo, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/project/delete`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 搜尋當前使用者的專案並回傳分頁結果，支援多種查詢條件與排序
+     *
+     * @tags Projects
+     * @name SearchCurrentUserProjects
+     * @summary Search current user projects with pagination
+     * @request POST:/project/current/search
+     * @response `200` `ResponseTypePageResultProjectVo` OK
+     * @response `500` `ResponseTypePageResultProjectVo` Server error
+     */
+    searchCurrentUserProjects: (data: ProjectSearchQuery, params: RequestParams = {}) =>
+      this.http.request<ResponseTypePageResultProjectVo, ResponseTypePageResultProjectVo>({
+        path: `/project/current/search`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description Binds a skill level to a project. This operation manages binding relation only and does not modify skill content. Admin-assigned skills can still be bound by authorized users.
+     *
+     * @tags Projects
+     * @name BindProjectSkill
+     * @summary Bind project skill
+     * @request POST:/project/bindSkill
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    bindProjectSkill: (data: ProjectSkillBindRequest, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/project/bindSkill`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description Creates a new project.
+     *
+     * @tags Projects
+     * @name AddProject
+     * @summary Add project
+     * @request POST:/project/add
+     * @response `200` `ResponseTypeProjectVo` OK
+     * @response `400` `ResponseTypeProjectVo` Invalid input
+     * @response `500` `ResponseTypeProjectVo` Server error
+     */
+    addProject: (data: ProjectVo, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeProjectVo, ResponseTypeProjectVo>({
+        path: `/project/add`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description Returns all projects.
+     *
+     * @tags Projects
+     * @name GetProject
+     * @summary Get projects
+     * @request GET:/project/get
+     * @response `200` `ResponseTypeListProjectVo` OK
+     * @response `500` `ResponseTypeListProjectVo` Server error
+     */
+    getProject: (params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListProjectVo, ResponseTypeListProjectVo>({
+        path: `/project/get`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 回傳當前使用者所屬的所有專案
+     *
+     * @tags Projects
+     * @name GetCurrentUserProjects
+     * @summary Get current user projects
+     * @request GET:/project/current
+     * @response `200` `ResponseTypeListProjectVo` OK
+     * @response `500` `ResponseTypeListProjectVo` Server error
+     */
+    getCurrentUserProjects: (params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListProjectVo, ResponseTypeListProjectVo>({
+        path: `/project/current`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 解除個人可操作專案中的技能綁定。
+     *
+     * @tags Projects
+     * @name UnbindPersonalProjectSkill
+     * @summary Unbind personal project skill
+     * @request DELETE:/project/personal/{projectId}/skill/{skillId}
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    unbindPersonalProjectSkill: (projectId: string, skillId: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/project/personal/${projectId}/skill/${skillId}`,
+        method: "DELETE",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 刪除個人專案，僅限擁有者
+     *
+     * @tags Projects
+     * @name DeletePersonalProject
+     * @summary Delete personal project
+     * @request DELETE:/project/personal/delete/{projectId}
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    deletePersonalProject: (projectId: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/project/personal/delete/${projectId}`,
+        method: "DELETE",
+        format: "json",
+        ...params
+      })
+  }
   users = {
     /**
      * @description 搜尋使用者並回傳分頁結果，支援多種查詢條件與排序
@@ -5192,7 +5734,7 @@ export class Api<SecurityDataType extends unknown> {
       }),
 
     /**
-     * @description Binds a skill level to a user.
+     * @description Binds a skill level to a user. This operation manages binding relation only and does not modify skill content. Admin-assigned skills can still be bound by authorized users.
      *
      * @tags Users
      * @name BindUserSkill
@@ -5314,6 +5856,108 @@ export class Api<SecurityDataType extends unknown> {
       }),
 
     /**
+     * @description 只有技能的擁有者可以修改技能主資料。管理者指派給使用者的技能視為唯讀，不可透過個人修改 API 變更 name/description 等內容。
+     *
+     * @tags Skills
+     * @name UpdatePersonalSkill
+     * @summary 修改個人技能
+     * @request POST:/skill/personal/update
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    updatePersonalSkill: (
+      query: {
+        skillId: string
+      },
+      data: PersonalSkillRequest,
+      params: RequestParams = {}
+    ) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/skill/personal/update`,
+        method: "POST",
+        query: query,
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 更新 user-skill 關聯上的 skill level，不會修改技能主資料。
+     *
+     * @tags Skills
+     * @name UpdatePersonalSkillLevel
+     * @summary 修改個人技能綁定等級
+     * @request POST:/skill/personal/update-level
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    updatePersonalSkillLevel: (
+      query: {
+        skillId: string
+      },
+      data: PersonalSkillLevelRequest,
+      params: RequestParams = {}
+    ) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/skill/personal/update-level`,
+        method: "POST",
+        query: query,
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 移除 user-skill 綁定。管理者指派技能雖不可修改主資料，仍可解除個人綁定。
+     *
+     * @tags Skills
+     * @name DeletePersonalSkill
+     * @summary 解除個人技能綁定
+     * @request POST:/skill/personal/delete
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    deletePersonalSkill: (
+      query: {
+        skillId: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/skill/personal/delete`,
+        method: "POST",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 一般使用者新增技能，會自動綁定到當前登入使用者。此路徑建立的技能視為使用者自有技能，可由本人後續修改或刪除。
+     *
+     * @tags Skills
+     * @name AddPersonalSkill
+     * @summary 新增個人技能
+     * @request POST:/skill/personal/add
+     * @response `200` `ResponseTypeSkillVo` OK
+     * @response `400` `ResponseTypeSkillVo` Invalid input
+     * @response `500` `ResponseTypeSkillVo` Server error
+     */
+    addPersonalSkill: (data: PersonalSkillRequest, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeSkillVo, ResponseTypeSkillVo>({
+        path: `/skill/personal/add`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
      * @description Updates a skill level.
      *
      * @tags Skills
@@ -5419,7 +6063,7 @@ export class Api<SecurityDataType extends unknown> {
       }),
 
     /**
-     * @description 在合併後的技能列表中搜尋，支援 name、description、createdBy 查詢條件
+     * @description 在合併後的技能列表中搜尋，支援 name、description、createdBy 查詢條件。管理者指派技能可查詢但不可透過個人 API 修改；可依權限進行綁定關聯。
      *
      * @tags Skills
      * @name SearchCurrentUserSkills
@@ -5497,7 +6141,7 @@ export class Api<SecurityDataType extends unknown> {
       }),
 
     /**
-     * @description 合併 USER（直接綁定）和 PROJECT（專案技能）兩個來源，每筆標記 sourceType
+     * @description 合併 USER（直接綁定）和 PROJECT（專案技能）兩個來源，每筆標記 sourceType。管理者指派技能可查看但不可透過個人 API 修改；可依權限進行綁定關聯。
      *
      * @tags Skills
      * @name GetCurrentUserSkills
@@ -5864,167 +6508,6 @@ export class Api<SecurityDataType extends unknown> {
         method: "POST",
         body: data,
         type: ContentType.Json,
-        format: "json",
-        ...params
-      })
-  }
-  projects = {
-    /**
-     * @description Updates an existing project.
-     *
-     * @tags Projects
-     * @name UpdateProject
-     * @summary Update project
-     * @request POST:/project/update
-     * @response `200` `ResponseTypeString` OK
-     * @response `400` `ResponseTypeString` Invalid input
-     * @response `500` `ResponseTypeString` Server error
-     */
-    updateProject: (data: ProjectVo, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeString, ResponseTypeString>({
-        path: `/project/update`,
-        method: "POST",
-        body: data,
-        type: ContentType.Json,
-        format: "json",
-        ...params
-      }),
-
-    /**
-     * @description 搜尋專案並回傳分頁結果，支援多種查詢條件與排序
-     *
-     * @tags Projects
-     * @name SearchProjects
-     * @summary Search projects with pagination
-     * @request POST:/project/search
-     * @response `200` `ResponseTypePageResultProjectVo` OK
-     * @response `500` `ResponseTypePageResultProjectVo` Server error
-     */
-    searchProjects: (data: ProjectSearchQuery, params: RequestParams = {}) =>
-      this.http.request<ResponseTypePageResultProjectVo, ResponseTypePageResultProjectVo>({
-        path: `/project/search`,
-        method: "POST",
-        body: data,
-        type: ContentType.Json,
-        format: "json",
-        ...params
-      }),
-
-    /**
-     * @description Deletes a project.
-     *
-     * @tags Projects
-     * @name DeleteProject
-     * @summary Delete project
-     * @request POST:/project/delete
-     * @response `200` `ResponseTypeString` OK
-     * @response `400` `ResponseTypeString` Invalid input
-     * @response `500` `ResponseTypeString` Server error
-     */
-    deleteProject: (data: ProjectVo, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeString, ResponseTypeString>({
-        path: `/project/delete`,
-        method: "POST",
-        body: data,
-        type: ContentType.Json,
-        format: "json",
-        ...params
-      }),
-
-    /**
-     * @description 搜尋當前使用者的專案並回傳分頁結果，支援多種查詢條件與排序
-     *
-     * @tags Projects
-     * @name SearchCurrentUserProjects
-     * @summary Search current user projects with pagination
-     * @request POST:/project/current/search
-     * @response `200` `ResponseTypePageResultProjectVo` OK
-     * @response `500` `ResponseTypePageResultProjectVo` Server error
-     */
-    searchCurrentUserProjects: (data: ProjectSearchQuery, params: RequestParams = {}) =>
-      this.http.request<ResponseTypePageResultProjectVo, ResponseTypePageResultProjectVo>({
-        path: `/project/current/search`,
-        method: "POST",
-        body: data,
-        type: ContentType.Json,
-        format: "json",
-        ...params
-      }),
-
-    /**
-     * @description Binds a skill level to a project.
-     *
-     * @tags Projects
-     * @name BindProjectSkill
-     * @summary Bind project skill
-     * @request POST:/project/bindSkill
-     * @response `200` `ResponseTypeString` OK
-     * @response `400` `ResponseTypeString` Invalid input
-     * @response `500` `ResponseTypeString` Server error
-     */
-    bindProjectSkill: (data: ProjectSkillBindRequest, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeString, ResponseTypeString>({
-        path: `/project/bindSkill`,
-        method: "POST",
-        body: data,
-        type: ContentType.Json,
-        format: "json",
-        ...params
-      }),
-
-    /**
-     * @description Creates a new project.
-     *
-     * @tags Projects
-     * @name AddProject
-     * @summary Add project
-     * @request POST:/project/add
-     * @response `200` `ResponseTypeProjectVo` OK
-     * @response `400` `ResponseTypeProjectVo` Invalid input
-     * @response `500` `ResponseTypeProjectVo` Server error
-     */
-    addProject: (data: ProjectVo, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeProjectVo, ResponseTypeProjectVo>({
-        path: `/project/add`,
-        method: "POST",
-        body: data,
-        type: ContentType.Json,
-        format: "json",
-        ...params
-      }),
-
-    /**
-     * @description Returns all projects.
-     *
-     * @tags Projects
-     * @name GetProject
-     * @summary Get projects
-     * @request GET:/project/get
-     * @response `200` `ResponseTypeListProjectVo` OK
-     * @response `500` `ResponseTypeListProjectVo` Server error
-     */
-    getProject: (params: RequestParams = {}) =>
-      this.http.request<ResponseTypeListProjectVo, ResponseTypeListProjectVo>({
-        path: `/project/get`,
-        method: "GET",
-        format: "json",
-        ...params
-      }),
-
-    /**
-     * @description 回傳當前使用者所屬的所有專案
-     *
-     * @tags Projects
-     * @name GetCurrentUserProjects
-     * @summary Get current user projects
-     * @request GET:/project/current
-     * @response `200` `ResponseTypeListProjectVo` OK
-     * @response `500` `ResponseTypeListProjectVo` Server error
-     */
-    getCurrentUserProjects: (params: RequestParams = {}) =>
-      this.http.request<ResponseTypeListProjectVo, ResponseTypeListProjectVo>({
-        path: `/project/current`,
-        method: "GET",
         format: "json",
         ...params
       })

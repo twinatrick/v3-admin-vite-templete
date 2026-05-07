@@ -2,6 +2,7 @@
 import { reactive, ref, computed } from "vue"
 import { ElForm, ElMessage } from "element-plus"
 import { showLoading } from "@/utils"
+import { resolveErrorMessage } from "@/utils"
 import service from "../service"
 import { UserVOFormData } from "../type"
 import { UserVo } from "@/api/generated/Api"
@@ -21,13 +22,13 @@ const confirmBtnClick = async () => {
     emit("reload")
     hide()
   } catch (e: any) {
-    ElMessage.error(e.message)
+    ElMessage.error(resolveErrorMessage(e, "更新使用者失敗"))
   } finally {
     loading.close()
   }
 }
 const show = (data: UserVo) => {
-  formData.data = data
+  formData.data = { ...data, password: "" } // 密碼欄位預設為空
   formRef.value?.clearValidate()
   visible.value = true
 }
@@ -44,7 +45,13 @@ defineExpose({
     <template #header>
       <h2 text-center>Edit User</h2>
     </template>
-    <el-form ref="formRef" label-width="auto" :rules="UserVOFormData.Rules" :model="formData" class="flex flex-wrap">
+    <el-form
+      ref="formRef"
+      label-width="auto"
+      :rules="UserVOFormData.EditRules"
+      :model="formData"
+      class="flex flex-wrap"
+    >
       <el-form-item label="E-mail" prop="email" class="form-item-1-2">
         <el-input v-model="formData.email" disabled />
       </el-form-item>

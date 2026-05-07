@@ -2,6 +2,7 @@ import { reactive } from "vue"
 import { Role } from "../role/type"
 import { api } from "@/api/client"
 import { UserSearchQuery, UserVo } from "@/api/generated/Api"
+import { resolveErrorMessage } from "@/utils"
 
 class Data {
   role: Role[]
@@ -64,18 +65,18 @@ function createService() {
   }
   async function createUser(userVO: UserVo) {
     const res = await api.users.saveUser(userVO)
-    if (res.data.code !== 200) throw new Error(res.data.message)
+    if (res.data.code !== 200) throw new Error(resolveErrorMessage(res.data, "創建使用者失敗"))
     data.user.unshift(userVO)
   }
   async function updateUser(userVO: UserVo) {
     const res = await api.users.saveUser(userVO)
-    if (res.code !== 200) throw new Error(res.message)
+    if (res.code !== 200) throw new Error(resolveErrorMessage(res, "更新使用者失敗"))
     const index = data.user.findIndex((item) => item.id === userVO.id)
     data.user.splice(index, 1, userVO)
   }
   async function saveUser(userVO: UserVo) {
     const res = await api.users.saveUser(userVO)
-    if (res.code !== 200) throw new Error(res.data.message)
+    if (res.code !== 200) throw new Error(resolveErrorMessage(res, "儲存使用者失敗"))
     await queryUser()
   }
 

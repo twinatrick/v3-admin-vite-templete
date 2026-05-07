@@ -1,35 +1,9 @@
 import { UserVo } from "@/api/generated/Api"
-import { FormRules } from "element-plus"
+import { userCreateRules, userEditRules } from "./rules"
 export class UserVOFormData {
   private _data: UserVo = {}
-  static Rules: FormRules = {
-    email: {
-      required: true,
-      message: "Please input email"
-    },
-    roles: {
-      required: true,
-      message: "Please select role",
-      validator(_r, value: string[]) {
-        return value.length > 0
-      }
-    },
-    // password: {
-    //   required: true,
-    //   message: "Please input password",
-    //   trigger: "blur"
-    // },
-    name: {
-      required: true,
-      message: "Please input name",
-      trigger: "blur"
-    },
-    disabled: {
-      required: true,
-      message: "Please select status",
-      trigger: "change"
-    }
-  }
+  static CreateRules = userCreateRules
+  static EditRules = userEditRules
   constructor(vo?: UserVo) {
     this.reset()
     if (vo) this._data = vo

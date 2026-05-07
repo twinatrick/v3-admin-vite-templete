@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { PropType, ref } from "vue"
-import { RouteRecordRaw } from "vue-router"
-import { RoleVO, TreeProp } from "../type"
-import { ElTree } from "element-plus"
+import { PropType, reactive, ref } from "vue"
+import { RoleVO, TreeProp, RoleFormData } from "../type"
 import { showLoading } from "@/utils"
+import { resolveErrorMessage } from "@/utils"
 import { api } from "@/api/client"
+import { CascaderProps, ElForm, ElMessage } from "element-plus"
 //data
 const prop = defineProps({
   allFunctions: {
@@ -16,56 +16,53 @@ const prop = defineProps({
     default: () => ({})
   }
 })
-const formData = ref<RoleVO>({})
-const emit = defineEmits(["update"])
-const treeRef = ref<InstanceType<typeof ElTree> | null>(null)
-const defaultProps: Object = {
-  children: "children",
-  label: (data: RouteRecordRaw) => {
-    return data.name || data.path
-  }
+const cascaderProps: CascaderProps = {
+  multiple: true, // 多選模式
+  checkStrictly: false, // 只能選擇葉子節點
+  emitPath: false, // 只返回葉子節點的值
+  value: "id", // 節點的唯一標識
+  label: "name", // 節點顯示的文本
+  children: "children", // 子節點的屬性名
+  expandTrigger: "hover" // 滑鼠懸停展開
 }
+const formData = reactive(new RoleFormData(prop.data))
+const formRef = ref<InstanceType<typeof ElForm> | null>(null)
+const selectedFunctionIds = ref<string[]>([])
+const emit = defineEmits(["update"])
 const visible = ref(false)
 //function
-const treeIsReady = async () => {
-  if (treeRef.value !== null) return Promise.resolve()
-  else
-    return new Promise<void>((resolve) => {
-      const timer = setInterval(() => {
-        if (treeRef.value !== null) {
-          console.log("tree is ready")
-          clearInterval(timer)
-          resolve()
-        }
-      }, 100)
-    })
-}
 const show = async () => {
-  formData.value = { ...prop.data }
+  formData.data = { ...prop.data } // 使用 formData.data = { ...prop.data } 來更新響應式對象
+  formData.reset()
+  formData.data = { ...prop.data } // 確保數據完整複製
+  selectedFunctionIds.value = [...(formData.functionKeys || [])]
+  OldFunctionKeys.value = [...(formData.functionKeys || [])]
+  formRef.value?.resetFields()
   visible.value = true
-  await treeIsReady()
-  treeRef.value?.setCheckedKeys(formData.value.functionKeys || [])
-  OldFunctionKeys.value = formData.value.functionKeys || []
-  OldFunctionKeys.value = [...OldFunctionKeys.value]
 }
 const OldFunctionKeys = ref<string[]>([])
 const hide = () => {
   visible.value = false
 }
 const confirmClick = async () => {
-  const loading = showLoading("Role updating...")
+  if (!(await formRef.value?.validate())) {
+    ElMessage.error("請填寫必填欄位")
+    return
+  }
+  const loading = showLoading("角色更新中...")
   try {
-    formData.value.functionKeys = (treeRef.value?.getCheckedKeys(true) || []) as string[]
-    const { data } = await api.roles.updateRole(formData.value)
-    const removeKeys = OldFunctionKeys.value.filter((key) => !formData.value.functionKeys?.includes(key))
-    const addKeys = formData.value.functionKeys?.filter((key) => !OldFunctionKeys.value.includes(key))
+    formData.functionKeys = selectedFunctionIds.value
+    const { data } = await api.roles.updateRole(formData.data)
+    const removeKeys = OldFunctionKeys.value.filter((key) => !formData.functionKeys?.includes(key))
+    const addKeys = formData.functionKeys?.filter((key) => !OldFunctionKeys.value.includes(key))
     if (removeKeys.length > 0)
-      await api.roles.roleUnbindFunction({ role: formData.value.id || "", functionList: removeKeys })
-    if (addKeys.length > 0) await api.roles.roleBindFunction({ role: formData.value.id || "", functionList: addKeys })
+      await api.roles.roleUnbindFunction({ role: formData.data.id || "", functionList: removeKeys })
+    if (addKeys.length > 0) await api.roles.roleBindFunction({ role: formData.data.id || "", functionList: addKeys })
     emit("update", data)
     hide()
   } catch (e) {
     console.log(e)
+    ElMessage.error(resolveErrorMessage(e, "更新角色失敗"))
   } finally {
     loading.close()
   }
@@ -78,20 +75,33 @@ defineExpose({
 <style scoped></style>
 <template>
   <el-dialog v-model="visible" id="edit-dialog" top="5vh" :close-on-click-modal="false">
-    <el-form label-width="auto">
-      <el-form-item label="Name">
+    <template #header>
+      <h1 text-center my-0>編輯角色</h1>
+    </template>
+    <el-form ref="formRef" label-width="auto" :rules="RoleFormData.EditRules" :model="formData.data">
+      <el-form-item label="名稱">
         <el-input v-model="formData.name" disabled />
       </el-form-item>
-      <el-form-item label="Description">
+      <el-form-item label="描述">
         <el-input type="textarea" v-model="formData.description" />
       </el-form-item>
-      <el-form-item label="Function">
-        <el-tree ref="treeRef" :data="prop.allFunctions" :props="defaultProps" show-checkbox node-key="id" />
+      <el-form-item label="功能權限">
+        <el-cascader
+          v-model="selectedFunctionIds"
+          :options="prop.allFunctions as any"
+          :props="cascaderProps"
+          clearable
+          filterable
+          collapse-tags
+          collapse-tags-tooltip
+          placeholder="請選擇功能權限"
+          style="width: 100%"
+        />
       </el-form-item>
     </el-form>
     <template #footer>
-      <el-button icon="Check" type="primary" @click="confirmClick"> Confirm</el-button>
-      <el-button icon="Close" type="danger" @click="hide"> Cancel</el-button>
+      <el-button icon="Check" type="primary" @click="confirmClick"> 確認</el-button>
+      <el-button icon="Close" type="danger" @click="hide"> 取消</el-button>
     </template>
   </el-dialog>
 </template>

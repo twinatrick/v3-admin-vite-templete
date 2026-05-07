@@ -7,6 +7,7 @@ import isWhiteList from "@/config/white-list"
 import NProgress from "nprogress"
 import "nprogress/nprogress.css"
 import { RouteRecordRaw } from "vue-router"
+import { resolveErrorMessage } from "@/utils"
 
 NProgress.configure({ showSpinner: false })
 
@@ -76,7 +77,7 @@ router.beforeEach(async (to) => {
     // 過程中發生任何錯誤，都直接重置 Token，並導到登錄頁面
     userStore.resetToken()
     console.error(err)
-    ElMessage.error(err.message || "路由守衛發生錯誤")
+    ElMessage.error(resolveErrorMessage(err, "路由守衛發生錯誤"))
     return { path: "/login" }
   } finally {
     NProgress.done()

@@ -82,15 +82,6 @@ onMounted(() => {
       <el-descriptions-item label="Role" label-align="right">
         {{ userStore.userInfo?.roles?.join(",") }}
       </el-descriptions-item>
-      <el-descriptions-item label="Supervisor" label-align="right">
-        {{ userStore.userInfo?.supervisor?.join(",") }}
-      </el-descriptions-item>
-      <el-descriptions-item label="Subordinate" label-align="right">
-        {{ userStore.userInfo?.subordinates?.join(",") }}
-      </el-descriptions-item>
-      <el-descriptions-item label="Tag" label-align="right">
-        {{ userStore.userInfo?.tags?.join(",") }}
-      </el-descriptions-item>
     </el-descriptions>
   </el-dialog>
 </template>

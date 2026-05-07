@@ -2,6 +2,7 @@
 import { reactive, ref, computed } from "vue"
 import { ElForm, ElMessage } from "element-plus"
 import { showLoading } from "@/utils"
+import { resolveErrorMessage } from "@/utils"
 import service from "../service"
 import { UserVOFormData } from "../type"
 //data
@@ -21,7 +22,7 @@ const confirmBtnClick = async () => {
     emit("reload")
     hide()
   } catch (e: any) {
-    ElMessage.error(e.message)
+    ElMessage.error(resolveErrorMessage(e, "創建使用者失敗"))
   } finally {
     loading.close()
   }
@@ -44,7 +45,13 @@ defineExpose({
     <template #header>
       <h2 text-center>Create User</h2>
     </template>
-    <el-form ref="formRef" label-width="auto" :rules="UserVOFormData.Rules" :model="formData" class="flex flex-wrap">
+    <el-form
+      ref="formRef"
+      label-width="auto"
+      :rules="UserVOFormData.CreateRules"
+      :model="formData"
+      class="flex flex-wrap"
+    >
       <el-form-item label="E-mail" prop="email" class="form-item-1-1">
         <el-input v-model="formData.email" />
       </el-form-item>

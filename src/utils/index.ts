@@ -90,6 +90,23 @@ export const showMessageBox = (option: {
     .then(() => true)
     .catch(() => false)
 }
+
+export function resolveErrorMessage(error: any, fallback = "操作失敗") {
+  const candidates = [
+    error?.response?.data?.message,
+    error?.response?.data?.data?.message,
+    error?.response?.data?.error,
+    error?.message,
+    error?.data?.message,
+    error?.data,
+    error?.error?.message,
+    error?.error
+  ]
+
+  const message = candidates.find((item) => typeof item === "string" && item.trim().length > 0)
+  return (message as string) || fallback
+}
+
 export async function waitUntil(func: () => boolean, interval = 100) {
   return new Promise<void>((resolve, reject) => {
     const timeID = setInterval(() => {

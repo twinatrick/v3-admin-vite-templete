@@ -4,6 +4,7 @@ import { computed, ref, reactive } from "vue"
 import { UserVOFormData } from "@/views/system-management/user/type"
 import service from "../service"
 import { showLoading } from "@/utils"
+import { resolveErrorMessage } from "@/utils"
 import { ElMessage } from "element-plus"
 //data
 const formData = reactive(new UserVOFormData())
@@ -28,8 +29,8 @@ const confirmBtnClick = async () => {
     ElMessage.success("User deleted successfully")
     hide()
   } catch (e: any) {
-    console.error(e.message)
-    ElMessage.error(e.message)
+    console.error(resolveErrorMessage(e, "刪除失敗"))
+    ElMessage.error(resolveErrorMessage(e, "刪除失敗"))
   } finally {
     loading.close()
   }

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { PropType, ref } from "vue"
-import { ElLoading, ElTree } from "element-plus"
-import { waitUntil } from "@/utils"
+import { PropType, reactive, ref } from "vue"
+import { CascaderProps, ElLoading, ElForm, ElMessage } from "element-plus"
 import { api } from "@/api/client"
-import { RoleVO, TreeProp } from "../type"
+import { RoleVO, TreeProp, RoleFormData } from "../type"
+import { resolveErrorMessage } from "@/utils"
 //data
 const visible = ref(false)
 const prop = defineProps({
@@ -12,40 +12,47 @@ const prop = defineProps({
     default: () => []
   }
 })
-const defaultProps: Object = {
-  children: "children",
-  label: (data: TreeProp) => {
-    return data.name
-  }
+const cascaderProps: CascaderProps = {
+  multiple: true, // 多選模式
+  checkStrictly: false, // 只能選擇葉子節點
+  emitPath: false, // 只返回葉子節點的值（不返回完整路徑）
+  value: "id", // 節點的唯一標識
+  label: "name", // 節點顯示的文本
+  children: "children", // 子節點的屬性名
+  expandTrigger: "hover" // 滑鼠懸停展開
 }
-const formData = ref<RoleVO>({})
-const treeRef = ref<InstanceType<typeof ElTree> | null>(null)
+const formData = reactive(new RoleFormData())
+const formRef = ref<InstanceType<typeof ElForm> | null>(null)
+const selectedFunctionIds = ref<string[]>([])
 const emit = defineEmits<{
   (event: "create", value: RoleVO): void
 }>()
 //function
 const show = async () => {
   visible.value = true
-  formData.value = {}
-  await waitUntil(() => treeRef.value !== null)
-  // 清空 Tree 的選中狀態
-  treeRef.value?.setCheckedKeys([])
+  formData.reset()
+  selectedFunctionIds.value = []
+  formRef.value?.resetFields()
 }
 const hide = () => {
   visible.value = false
 }
 const confirmClick = async () => {
+  if (!(await formRef.value?.validate())) {
+    ElMessage.error("請填寫必填欄位")
+    return
+  }
   const loading = ElLoading.service({
-    text: "Creating..."
+    text: "創建中..."
   })
   try {
-    // 獲取選中的 function IDs（leafOnly=true 只取葉子節點）
-    const checkedKeys = (treeRef.value?.getCheckedKeys(true) || []) as string[]
+    // 獲取選中的 function IDs
+    const checkedKeys = selectedFunctionIds.value
 
     // 1. 先創建 role（不包含 functionIds，因為後端不會自動處理）
     const requestData: RoleVO = {
-      name: formData.value.name,
-      description: formData.value.description
+      name: formData.name,
+      description: formData.description
     }
 
     const res = await api.roles.addRole(requestData)
@@ -63,6 +70,7 @@ const confirmClick = async () => {
     hide()
   } catch (e) {
     console.error(e)
+    ElMessage.error(resolveErrorMessage(e, "創建角色失敗"))
   } finally {
     loading.close()
   }
@@ -76,22 +84,32 @@ defineExpose({
 <template>
   <el-dialog v-model="visible" top="5vh" :close-on-click-modal="false">
     <template #header>
-      <h1 text-center my-0>Create Role</h1>
+      <h1 text-center my-0>創建角色</h1>
     </template>
-    <el-form label-width="auto">
-      <el-form-item label="Name">
+    <el-form ref="formRef" label-width="auto" :rules="RoleFormData.CreateRules" :model="formData.data">
+      <el-form-item label="名稱">
         <el-input v-model="formData.name" />
       </el-form-item>
-      <el-form-item label="Description">
+      <el-form-item label="描述">
         <el-input type="textarea" v-model="formData.description" />
       </el-form-item>
-      <el-form-item label="Function">
-        <el-tree ref="treeRef" :data="prop.allFunctions" :props="defaultProps" show-checkbox node-key="id" />
+      <el-form-item label="功能權限">
+        <el-cascader
+          v-model="selectedFunctionIds"
+          :options="prop.allFunctions as any"
+          :props="cascaderProps"
+          clearable
+          filterable
+          collapse-tags
+          collapse-tags-tooltip
+          placeholder="請選擇功能權限"
+          style="width: 100%"
+        />
       </el-form-item>
     </el-form>
     <template #footer>
-      <el-button icon="Check" type="primary" @click="confirmClick"> Confirm</el-button>
-      <el-button icon="Close" type="danger" @click="hide"> Cancel</el-button>
+      <el-button icon="Check" type="primary" @click="confirmClick"> 確認</el-button>
+      <el-button icon="Close" type="danger" @click="hide"> 取消</el-button>
     </template>
   </el-dialog>
 </template>

@@ -92,6 +92,36 @@ export const constantRoutes: RouteRecordRaw[] = [
  */
 export const asyncRoutes: RouteRecordRaw[] = [
   {
+    path: "/personal-management",
+    component: Layout,
+    redirect: "/personal-management/skill",
+    meta: {
+      title: "個人管理",
+      elIcon: "User",
+      alwaysShow: true
+    },
+    children: [
+      {
+        path: "skill",
+        component: () => import("@/views/personal-management/skill/index.vue"),
+        meta: {
+          title: "我的技能",
+          elIcon: "Star",
+          keepAlive: false
+        }
+      },
+      {
+        path: "project",
+        component: () => import("@/views/personal-management/project/index.vue"),
+        meta: {
+          title: "我的項目",
+          elIcon: "Folder",
+          keepAlive: false
+        }
+      }
+    ]
+  },
+  {
     path: "/dataView",
     component: Layout,
     redirect: "/system/user",
@@ -172,6 +202,26 @@ export const asyncRoutes: RouteRecordRaw[] = [
         meta: {
           title: "Role Permission",
           elIcon: "User",
+          keepAlive: false
+        }
+      },
+      {
+        path: "skill",
+        component: () => import("@/views/system-management/skill/index.vue"),
+        name: "SkillManagement:View",
+        meta: {
+          title: "技能管理",
+          elIcon: "Star",
+          keepAlive: false
+        }
+      },
+      {
+        path: "project",
+        component: () => import("@/views/system-management/project/index.vue"),
+        name: "ProjectManagement:View",
+        meta: {
+          title: "項目管理",
+          elIcon: "Folder",
           keepAlive: false
         }
       }

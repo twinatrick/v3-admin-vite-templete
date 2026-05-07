@@ -5,6 +5,10 @@ import { get, merge } from "lodash-es"
 import { getToken, setToken } from "./cache/cookies"
 import { h } from "vue"
 
+const extractErrorMessage = (error: any, fallback = "Request failed") => {
+  return error?.response?.data?.message || error?.response?.data?.data?.message || error?.message || fallback
+}
+
 /** 创建请求实例 */
 function createService() {
   // 创建一个 axios 实例命名为 service
@@ -48,19 +52,19 @@ function createService() {
           // Token 过期时，直接退出登录并强制刷新页面（会重定向到登录页）
           useUserStoreHook().logout()
           location.reload()
-          ElMessage.error(error.message)
+          ElMessage.error(extractErrorMessage(error, "Unauthorized"))
           return Promise.reject(error)
         case 500: {
           const {
             type = "Unknown Type",
             title = "Unknown Title",
-            message,
+            message = extractErrorMessage(error, "Internal server error"),
             exception,
             timestamp
-          } = error.response.data.data
+          } = error.response?.data?.data || {}
           showErrorNotification(type, title, message, timestamp, exception)
           console.error(exception)
-          throw new Error(exception)
+          throw new Error(message)
         }
         default: {
           const { status, statusText } = error.response
@@ -70,7 +74,7 @@ function createService() {
             message: path,
             duration: 0
           })
-          throw new Error(error)
+          throw new Error(extractErrorMessage(error, path || "Request failed"))
         }
       }
     }
@@ -108,16 +112,21 @@ function createSPService() {
           throw new Error("Time out")
         }
         case 400: {
-          const { title, message } = error.response.data
+          const { title = "Validation Error", message = extractErrorMessage(error, "Invalid request") } =
+            error.response.data || {}
           throw new Error(JSON.stringify({ title: title, message: message }))
         }
         case 401:
           useUserStoreHook().logout()
           location.reload()
-          ElMessage.error(error.message)
+          ElMessage.error(extractErrorMessage(error, "Unauthorized"))
           return Promise.reject(error)
         case 500: {
-          const { title = "Unknown Title", message, exception } = error.response.data.data
+          const {
+            title = "Unknown Title",
+            message = extractErrorMessage(error, "Internal server error"),
+            exception
+          } = error.response?.data?.data || {}
           console.error(exception)
           throw new Error(JSON.stringify({ title: title, message: message }))
         }
@@ -129,7 +138,7 @@ function createSPService() {
             message: path,
             duration: 0
           })
-          throw new Error(error)
+          throw new Error(extractErrorMessage(error, path || "Request failed"))
         }
       }
     }
