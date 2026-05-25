@@ -1,6 +1,6 @@
 import { reactive } from "vue"
 import { api } from "@/api/client"
-import { ProjectSearchQuery, ProjectVo, SkillVo } from "@/api/generated/Api"
+import { ProjectSearchQuery, ProjectSkillVo, ProjectVo, SkillLevelBindingItem, SkillVo } from "@/api/generated/Api"
 import { resolveErrorMessage } from "@/utils"
 
 class Data {
@@ -98,11 +98,43 @@ function createService() {
     return res.data || []
   }
 
-  async function bindSkillToProject(projectId: string, skillId: string, skillLevelId: string) {
-    const res = await api.projects.bindProjectSkill({
+  async function getProjectSkills(projectId: string) {
+    const res = await api.projects.getProjectSkills(projectId)
+    return res.data || []
+  }
+
+  async function rebindProjectSkills(projectId: string, bindings: SkillLevelBindingItem[]) {
+    const res = await api.adminBindings.rebindProjectSkills({
       projectId,
-      skillId,
-      skillLevelId
+      bindings
+    })
+    if (res.code !== 200) throw new Error(resolveErrorMessage(res, "更新專案技能綁定失敗"))
+  }
+
+  async function bindSkillToProject(projectId: string, skillId: string, skillLevelId: string) {
+    const existingBindings = await getProjectSkills(projectId)
+    const nextBindings: SkillLevelBindingItem[] = existingBindings
+      .filter((binding): binding is Required<Pick<ProjectSkillVo, "skillId" | "skillLevelId">> =>
+        Boolean(binding.skillId && binding.skillLevelId)
+      )
+      .map((binding) => ({
+        skillId: binding.skillId,
+        skillLevelId: binding.skillLevelId
+      }))
+
+    const existingIndex = nextBindings.findIndex((binding) => binding.skillId === skillId)
+    if (existingIndex >= 0) {
+      nextBindings[existingIndex].skillLevelId = skillLevelId
+    } else {
+      nextBindings.push({
+        skillId,
+        skillLevelId
+      })
+    }
+
+    const res = await api.adminBindings.rebindProjectSkills({
+      projectId,
+      bindings: nextBindings
     })
     if (res.code !== 200) throw new Error(resolveErrorMessage(res, "綁定技能失敗"))
   }
@@ -114,6 +146,8 @@ function createService() {
     deleteProject,
     getAllSkills,
     getSkillLevels,
+    getProjectSkills,
+    rebindProjectSkills,
     bindSkillToProject
   }
 }

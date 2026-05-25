@@ -107,6 +107,11 @@ function createService() {
     return res.data || []
   }
 
+  async function getProjectSkills(projectId: string) {
+    const res = await api.projects.getPersonalProjectSkills(projectId)
+    return res.data || []
+  }
+
   async function bindSkillToProject(projectId: string, skillId: string, skillLevelId: string) {
     const res = await api.projects.bindPersonalProjectSkill(projectId, {
       skillId,
@@ -134,6 +139,7 @@ function createService() {
     deleteProject,
     getAllSkills,
     getSkillLevels,
+    getProjectSkills,
     bindSkillToProject,
     updateProjectSkillLevel,
     unbindSkillFromProject

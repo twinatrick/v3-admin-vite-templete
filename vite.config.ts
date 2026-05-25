@@ -87,7 +87,25 @@ export default (configEnv: ConfigEnv): UserConfigExport => {
     /** Vitest unit test config：https://vitejs.dev/config/ */
     test: {
       include: ["tests/**/*.test.ts"],
-      environment: "jsdom"
+      environment: "jsdom",
+      deps: {
+        inline: ["element-plus", "@popperjs/core"]
+      },
+      testTimeout: 30000,
+      hookTimeout: 30000,
+      coverage: {
+        provider: "v8",
+        reporter: ["text", "json", "html"],
+        include: [
+          "src/views/system-management/user/service.ts",
+          "src/views/system-management/skill/service.ts",
+          "src/views/system-management/project/service.ts",
+          "src/views/personal-management/skill/service.ts",
+          "src/views/personal-management/project/service.ts"
+        ],
+        exclude: ["node_modules/**", "tests/**"],
+        all: false
+      }
     },
     define: {
       _GIT_SHA: currentGitSHA()

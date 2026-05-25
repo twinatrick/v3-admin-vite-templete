@@ -116,8 +116,8 @@ const addSkillBinding = () => {
       skillId: skill.id!,
       skillName: skill.name!,
       skillLevelId: level.id!,
-      skillLevelTitle: level.title!,
-      skillLevelValue: level.levelValue!
+      levelTitle: level.title!,
+      levelValue: level.levelValue!
     })
 
     // 重置選擇
@@ -178,7 +178,7 @@ defineExpose({
         <el-table :data="projectSkillBindings" border style="width: 100%; margin-bottom: 20px">
           <el-table-column prop="skillName" label="技能名稱" min-width="150" />
           <el-table-column label="技能等級" min-width="150">
-            <template #default="{ row }"> {{ row.skillLevelTitle }} ({{ row.skillLevelValue }}) </template>
+            <template #default="{ row }"> {{ row.levelTitle }} ({{ row.levelValue }}) </template>
           </el-table-column>
           <el-table-column label="操作" width="100" fixed="right">
             <template #default="{ $index }">

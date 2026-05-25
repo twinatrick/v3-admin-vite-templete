@@ -35,7 +35,7 @@ export interface RepresentationModelObject {
   _links?: Links
 }
 
-export interface EntityModelRoleFunction {
+export interface EntityModelUserSkill {
   createdBy?: string
   updatedBy?: string
   /** @format date-time */
@@ -54,6 +54,64 @@ export interface PageMetadata {
   totalPages?: number
   /** @format int64 */
   number?: number
+}
+
+export interface PagedModelEntityModelUserSkill {
+  _embedded?: {
+    userSkills?: EntityModelUserSkill[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface EntityModelSkill {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  description?: string
+  _links?: Links
+}
+
+export interface CollectionModelObject {
+  _embedded?: {
+    objects?: object[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelSkillLevel {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  /** @format int32 */
+  levelValue?: number
+  title?: string
+  description?: string
+  _links?: Links
+}
+
+export interface CollectionModelEntityModelUserSkill {
+  _embedded?: {
+    userSkills?: EntityModelUserSkill[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelRoleFunction {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
 }
 
 export interface PagedModelEntityModelRoleFunction {
@@ -94,7 +152,25 @@ export interface Role {
   permissions?: string
 }
 
-export interface EntityModelUser {
+export interface EntityModelUserProject {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUserProject {
+  _embedded?: {
+    userProjects?: EntityModelUserProject[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface EntityModelProject {
   createdBy?: string
   updatedBy?: string
   /** @format date-time */
@@ -102,17 +178,113 @@ export interface EntityModelUser {
   /** @format date-time */
   updatedTime?: string
   name?: string
-  email?: string
-  password?: string
-  phone?: string
-  disabled?: boolean
-  roleArr?: string[]
+  description?: string
   _links?: Links
 }
 
-export interface PagedModelEntityModelUser {
+export interface CollectionModelEntityModelUserProject {
   _embedded?: {
-    users?: EntityModelUser[]
+    userProjects?: EntityModelUserProject[]
+  }
+  _links?: Links
+}
+
+export interface PagedModelEntityModelSkill {
+  _embedded?: {
+    skills?: EntityModelSkill[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelSkill {
+  _embedded?: {
+    skills?: EntityModelSkill[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelRole {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  description?: string
+  permissions?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelRole {
+  _embedded?: {
+    roles?: EntityModelRole[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelRole {
+  _embedded?: {
+    roles?: EntityModelRole[]
+  }
+  _links?: Links
+}
+
+export interface PagedModelEntityModelSkillLevel {
+  _embedded?: {
+    skillLevels?: EntityModelSkillLevel[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelSkillLevel {
+  _embedded?: {
+    skillLevels?: EntityModelSkillLevel[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelProjectSkill {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelProjectSkill {
+  _embedded?: {
+    projectSkills?: EntityModelProjectSkill[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelProjectSkill {
+  _embedded?: {
+    projectSkills?: EntityModelProjectSkill[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelUserRole {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUserRole {
+  _embedded?: {
+    userRoles?: EntityModelUserRole[]
   }
   _links?: Links
   page?: PageMetadata
@@ -135,9 +307,32 @@ export interface User {
   roleArr?: string[]
 }
 
-export interface CollectionModelEntityModelUser {
+export interface EntityModelFunction {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  parent?: string
+  sort?: string
+  /** @format int32 */
+  type?: number
+  _links?: Links
+}
+
+export interface PagedModelEntityModelFunction {
   _embedded?: {
-    users?: EntityModelUser[]
+    functions?: EntityModelFunction[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelFunction {
+  _embedded?: {
+    functions?: EntityModelFunction[]
   }
   _links?: Links
 }
@@ -225,76 +420,6 @@ export interface CollectionModelEntityModelAlertCheckLimit {
   _links?: Links
 }
 
-export interface EntityModelUserSkill {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelUserSkill {
-  _embedded?: {
-    userSkills?: EntityModelUserSkill[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface EntityModelSkillLevel {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  /** @format int32 */
-  levelValue?: number
-  title?: string
-  description?: string
-  _links?: Links
-}
-
-export interface CollectionModelObject {
-  _embedded?: {
-    objects?: object[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelSkill {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  description?: string
-  _links?: Links
-}
-
-export interface CollectionModelEntityModelUserSkill {
-  _embedded?: {
-    userSkills?: EntityModelUserSkill[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelProject {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  description?: string
-  _links?: Links
-}
-
 export interface PagedModelEntityModelProject {
   _embedded?: {
     projects?: EntityModelProject[]
@@ -310,22 +435,7 @@ export interface CollectionModelEntityModelProject {
   _links?: Links
 }
 
-export interface PagedModelEntityModelSkillLevel {
-  _embedded?: {
-    skillLevels?: EntityModelSkillLevel[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelSkillLevel {
-  _embedded?: {
-    skillLevels?: EntityModelSkillLevel[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelRole {
+export interface EntityModelUser {
   createdBy?: string
   updatedBy?: string
   /** @format date-time */
@@ -333,130 +443,27 @@ export interface EntityModelRole {
   /** @format date-time */
   updatedTime?: string
   name?: string
-  description?: string
-  permissions?: string
+  email?: string
+  password?: string
+  phone?: string
+  disabled?: boolean
+  roleArr?: string[]
   _links?: Links
 }
 
-export interface PagedModelEntityModelRole {
+export interface PagedModelEntityModelUser {
   _embedded?: {
-    roles?: EntityModelRole[]
+    users?: EntityModelUser[]
   }
   _links?: Links
   page?: PageMetadata
 }
 
-export interface CollectionModelEntityModelRole {
+export interface CollectionModelEntityModelUser {
   _embedded?: {
-    roles?: EntityModelRole[]
+    users?: EntityModelUser[]
   }
   _links?: Links
-}
-
-export interface PagedModelEntityModelSkill {
-  _embedded?: {
-    skills?: EntityModelSkill[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelSkill {
-  _embedded?: {
-    skills?: EntityModelSkill[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelUserProject {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelUserProject {
-  _embedded?: {
-    userProjects?: EntityModelUserProject[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelUserProject {
-  _embedded?: {
-    userProjects?: EntityModelUserProject[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelFunction {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  parent?: string
-  sort?: string
-  /** @format int32 */
-  type?: number
-  _links?: Links
-}
-
-export interface PagedModelEntityModelFunction {
-  _embedded?: {
-    functions?: EntityModelFunction[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelFunction {
-  _embedded?: {
-    functions?: EntityModelFunction[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelUserRole {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelUserRole {
-  _embedded?: {
-    userRoles?: EntityModelUserRole[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface EntityModelProjectSkill {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelProjectSkill {
-  _embedded?: {
-    projectSkills?: EntityModelProjectSkill[]
-  }
-  _links?: Links
-  page?: PageMetadata
 }
 
 export interface AlertCheckLimitRequestBody {
@@ -820,6 +827,15 @@ export interface UserSkillBindRequest {
 export interface UserProjectBindRequest {
   userId?: string
   projectId?: string
+}
+
+export interface SkillBindingsRebindRequest {
+  bindings?: SkillLevelBindingItem[]
+}
+
+export interface SkillLevelBindingItem {
+  skillId?: string
+  skillLevelId?: string
 }
 
 export interface SkillVo {
@@ -1793,6 +1809,21 @@ export interface ResponseTypePageResultAlertCheckLimitVo {
   errorType?: string
 }
 
+export interface UserSkillRebindRequest {
+  userId?: string
+  bindings?: SkillLevelBindingItem[]
+}
+
+export interface UserProjectRebindRequest {
+  userId?: string
+  projectIds?: string[]
+}
+
+export interface ProjectSkillRebindRequest {
+  projectId?: string
+  bindings?: SkillLevelBindingItem[]
+}
+
 export interface ResponseTypeListSkillLevelVo {
   /** @format int32 */
   code?: number
@@ -1813,6 +1844,46 @@ export interface ResponseTypeListCurrentUserSkillVo {
   /** @format int32 */
   code?: number
   data?: CurrentUserSkillVo[]
+  message?: string
+  errorType?: string
+}
+
+/** 專案綁定的技能與詳細等級資訊 */
+export interface ProjectSkillVo {
+  /**
+   * 專案ID
+   * @format uuid
+   */
+  projectId?: string
+  /**
+   * 技能ID
+   * @format uuid
+   */
+  skillId?: string
+  /** 技能名稱 */
+  skillName?: string
+  /** 技能描述 */
+  skillDescription?: string
+  /**
+   * 技能等級ID
+   * @format uuid
+   */
+  skillLevelId?: string
+  /**
+   * 技能等級數值
+   * @format int32
+   */
+  levelValue?: number
+  /** 技能等級標題 */
+  levelTitle?: string
+  /** 技能等級描述 */
+  levelDescription?: string
+}
+
+export interface ResponseTypeListProjectSkillVo {
+  /** @format int32 */
+  code?: number
+  data?: ProjectSkillVo[]
   message?: string
   errorType?: string
 }
@@ -3050,11 +3121,35 @@ export class Api<SecurityDataType extends unknown> {
      *
      * @tags project-skill-search-controller
      * @name ExecuteSearchProjectskillGet6
+     * @request GET:/projectSkills/search/findByProjectId
+     * @response `200` `CollectionModelEntityModelProjectSkill` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-projectskill-get_6": (
+      query?: {
+        /** @format uuid */
+        projectId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<CollectionModelEntityModelProjectSkill, any>({
+        path: `/projectSkills/search/findByProjectId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags project-skill-search-controller
+     * @name ExecuteSearchProjectskillGet7
      * @request GET:/projectSkills/search/findByProjectIdAndSkillId
      * @response `200` `EntityModelProjectSkill` OK
      * @response `404` `any` Not Found
      */
-    "executeSearch-projectskill-get_6": (
+    "executeSearch-projectskill-get_7": (
       query?: {
         /** @format uuid */
         projectId?: string
@@ -5561,6 +5656,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name BindProjectSkill
      * @summary Bind project skill
      * @request POST:/project/bindSkill
+     * @deprecated
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -5592,6 +5688,42 @@ export class Api<SecurityDataType extends unknown> {
         method: "POST",
         body: data,
         type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 獲取指定專案綁定的所有技能與等級詳細資訊
+     *
+     * @tags Projects
+     * @name GetProjectSkills
+     * @summary Get project skills
+     * @request GET:/project/{projectId}/skills
+     * @response `200` `ResponseTypeListProjectSkillVo` OK
+     * @response `500` `ResponseTypeListProjectSkillVo` Server error
+     */
+    getProjectSkills: (projectId: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListProjectSkillVo, ResponseTypeListProjectSkillVo>({
+        path: `/project/${projectId}/skills`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 獲取個人專屬的專案綁定的所有技能與等級詳細資訊，會驗證當前使用者權限
+     *
+     * @tags Projects
+     * @name GetPersonalProjectSkills
+     * @summary Get personal project skills
+     * @request GET:/project/personal/{projectId}/skills
+     * @response `200` `ResponseTypeListProjectSkillVo` OK
+     * @response `500` `ResponseTypeListProjectSkillVo` Server error
+     */
+    getPersonalProjectSkills: (projectId: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListProjectSkillVo, ResponseTypeListProjectSkillVo>({
+        path: `/project/personal/${projectId}/skills`,
+        method: "GET",
         format: "json",
         ...params
       }),
@@ -5740,6 +5872,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name BindUserSkill
      * @summary Bind user skill
      * @request POST:/users/bindSkill
+     * @deprecated
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -5761,6 +5894,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name BindUserProject
      * @summary Bind user project
      * @request POST:/users/bindProject
+     * @deprecated
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -5808,6 +5942,49 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListUserVo, ResponseTypeListUserVo>({
         path: `/users/getAllUser`,
         method: "GET",
+        format: "json",
+        ...params
+      })
+  }
+  userBindings = {
+    /**
+     * @description Rebind all current-user skill-level bindings with diff strategy
+     *
+     * @tags User Bindings
+     * @name RebindCurrentUserSkills
+     * @summary Rebind current user skills
+     * @request POST:/user/bindings/skill/rebind
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    rebindCurrentUserSkills: (data: SkillBindingsRebindRequest, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/user/bindings/skill/rebind`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description Rebind project skills for a manageable project with diff strategy
+     *
+     * @tags User Bindings
+     * @name RebindCurrentUserProjectSkills
+     * @summary Rebind current user project skills
+     * @request POST:/user/bindings/project/{projectId}/skill/rebind
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    rebindCurrentUserProjectSkills: (projectId: string, data: SkillBindingsRebindRequest, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/user/bindings/project/${projectId}/skill/rebind`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
         format: "json",
         ...params
       })
@@ -5937,7 +6114,7 @@ export class Api<SecurityDataType extends unknown> {
       }),
 
     /**
-     * @description 一般使用者新增技能，會自動綁定到當前登入使用者。此路徑建立的技能視為使用者自有技能，可由本人後續修改或刪除。
+     * @description 一般使用者新增技能，會自動綁定到當前登入使用者。若未提供 skillLevelId，可手動填寫等級值、標題與描述建立第一個技能等級。
      *
      * @tags Skills
      * @name AddPersonalSkill
@@ -6859,6 +7036,70 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListAlertCheckLimitVo, ResponseTypeListAlertCheckLimitVo>({
         path: `/alertCheckLimit/get`,
         method: "GET",
+        format: "json",
+        ...params
+      })
+  }
+  adminBindings = {
+    /**
+     * @description Rebind all user-skill relations with level diff strategy
+     *
+     * @tags Admin Bindings
+     * @name RebindUserSkills
+     * @summary Rebind user skills
+     * @request POST:/admin/bindings/user-skill/rebind
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    rebindUserSkills: (data: UserSkillRebindRequest, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/admin/bindings/user-skill/rebind`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description Rebind all user-project relations with diff strategy
+     *
+     * @tags Admin Bindings
+     * @name RebindUserProjects
+     * @summary Rebind user projects
+     * @request POST:/admin/bindings/user-project/rebind
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    rebindUserProjects: (data: UserProjectRebindRequest, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/admin/bindings/user-project/rebind`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description Rebind all project-skill relations with level diff strategy
+     *
+     * @tags Admin Bindings
+     * @name RebindProjectSkills
+     * @summary Rebind project skills
+     * @request POST:/admin/bindings/project-skill/rebind
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    rebindProjectSkills: (data: ProjectSkillRebindRequest, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/admin/bindings/project-skill/rebind`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
         format: "json",
         ...params
       })

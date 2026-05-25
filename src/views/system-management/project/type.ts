@@ -63,6 +63,6 @@ export interface ProjectSkillBinding {
   skillId: string
   skillName: string
   skillLevelId: string
-  skillLevelTitle: string
-  skillLevelValue: number
+  levelTitle: string
+  levelValue: number
 }

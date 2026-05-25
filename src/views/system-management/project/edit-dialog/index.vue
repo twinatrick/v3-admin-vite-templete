@@ -5,7 +5,7 @@ import { showLoading } from "@/utils"
 import { resolveErrorMessage } from "@/utils"
 import service from "../service"
 import { ProjectFormData, ProjectSkillBinding } from "../type"
-import { ProjectVo, SkillVo, SkillLevelVo } from "@/api/generated/Api"
+import { ProjectVo, SkillLevelVo, SkillVo } from "@/api/generated/Api"
 
 // Data
 const visible = ref(false)
@@ -31,8 +31,18 @@ const show = async (data: ProjectVo) => {
   const loading = showLoading("加載中...")
   try {
     allSkills.value = await service.getAllSkills()
-    // TODO: 加載此項目已綁定的 Skills（需要後端 API 支持）
-    // 暫時為空數組，用戶需要重新添加
+    if (data.id) {
+      const boundSkills = await service.getProjectSkills(data.id)
+      projectSkillBindings.value = boundSkills
+        .filter((item) => item.skillId && item.skillName && item.skillLevelId)
+        .map((item) => ({
+          skillId: item.skillId!,
+          skillName: item.skillName!,
+          skillLevelId: item.skillLevelId!,
+          levelTitle: item.levelTitle || "",
+          levelValue: item.levelValue || 0
+        }))
+    }
   } catch (e) {
     console.error(e)
     ElMessage.error(resolveErrorMessage(e, "加載技能列表失敗"))
@@ -56,11 +66,15 @@ const confirmBtnClick = async () => {
     // 1. 更新 Project 基本資訊
     await service.saveProject(formData.data)
 
-    // 2. 綁定新的 Skills（如果有）
-    if (projectSkillBindings.value.length > 0 && formData.data.id) {
-      for (const binding of projectSkillBindings.value) {
-        await service.bindSkillToProject(formData.data.id, binding.skillId, binding.skillLevelId)
-      }
+    // 2. 更新專案技能綁定
+    if (formData.data.id) {
+      await service.rebindProjectSkills(
+        formData.data.id,
+        projectSkillBindings.value.map((binding) => ({
+          skillId: binding.skillId,
+          skillLevelId: binding.skillLevelId
+        }))
+      )
     }
 
     ElMessage.success("更新項目成功")
@@ -118,8 +132,8 @@ const addSkillBinding = () => {
       skillId: skill.id!,
       skillName: skill.name!,
       skillLevelId: level.id!,
-      skillLevelTitle: level.title!,
-      skillLevelValue: level.levelValue!
+      levelTitle: level.title!,
+      levelValue: level.levelValue!
     })
 
     // 重置選擇
@@ -186,7 +200,7 @@ defineExpose({
         <el-table :data="projectSkillBindings" border style="width: 100%; margin-bottom: 20px">
           <el-table-column prop="skillName" label="技能名稱" min-width="150" />
           <el-table-column label="技能等級" min-width="150">
-            <template #default="{ row }"> {{ row.skillLevelTitle }} ({{ row.skillLevelValue }}) </template>
+            <template #default="{ row }"> {{ row.levelTitle }} ({{ row.levelValue }}) </template>
           </el-table-column>
           <el-table-column label="操作" width="100" fixed="right">
             <template #default="{ $index }">

@@ -34,26 +34,17 @@ const show = async (data: ProjectVo) => {
   try {
     allSkills.value = await service.getAllSkills()
 
-    // 載入此項目已綁定的 Skills
-    const boundSkills = allSkills.value.filter((s) => s.projectId === data.id)
+    const boundSkills = data.id ? await service.getProjectSkills(data.id) : []
+    const bindings: ProjectSkillBinding[] = boundSkills
+      .filter((item) => item.skillId && item.skillName && item.skillLevelId)
+      .map((item) => ({
+        skillId: item.skillId!,
+        skillName: item.skillName!,
+        skillLevelId: item.skillLevelId!,
+        levelTitle: item.levelTitle || "",
+        levelValue: item.levelValue || 0
+      }))
 
-    const bindings: ProjectSkillBinding[] = []
-    for (const skill of boundSkills) {
-      if (skill.id) {
-        // 由於 searchCurrentUserSkills 目前沒有返回綁定的 skillLevelId，先取該技能的第一個 Level 顯示
-        const levels = await service.getSkillLevels(skill.id)
-        const level = levels.length > 0 ? levels[0] : null
-        if (level) {
-          bindings.push({
-            skillId: skill.id,
-            skillName: skill.name || "",
-            skillLevelId: level.id || "",
-            skillLevelTitle: level.title || "",
-            skillLevelValue: level.levelValue || 1
-          })
-        }
-      }
-    }
     projectSkillBindings.value = [...bindings]
     originalBindings.value = [...bindings]
   } catch (e) {
@@ -167,8 +158,8 @@ const addSkillBinding = () => {
       skillId: skill.id!,
       skillName: skill.name!,
       skillLevelId: level.id!,
-      skillLevelTitle: level.title!,
-      skillLevelValue: level.levelValue!
+      levelTitle: level.title!,
+      levelValue: level.levelValue!
     })
 
     // 重置選擇
@@ -235,7 +226,7 @@ defineExpose({
         <el-table :data="projectSkillBindings" border style="width: 100%; margin-bottom: 20px">
           <el-table-column prop="skillName" label="技能名稱" min-width="150" />
           <el-table-column label="技能等級" min-width="150">
-            <template #default="{ row }"> {{ row.skillLevelTitle }} ({{ row.skillLevelValue }}) </template>
+            <template #default="{ row }"> {{ row.levelTitle }} ({{ row.levelValue }}) </template>
           </el-table-column>
           <el-table-column label="操作" width="100" fixed="right">
             <template #default="{ $index }">
