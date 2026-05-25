@@ -41,7 +41,7 @@ export const constantRoutes: RouteRecordRaw[] = [
   },
   {
     path: "/",
-    redirect: "/sa/f"
+    redirect: "/personal-management"
   },
   {
     path: "/sa",
@@ -82,15 +82,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         }
       }
     ]
-  }
-]
-
-/**
- * 動態路由
- * 用来放置有權限 (Roles 屬性) 的路由
- * 必須帶有 Name 屬性
- */
-export const asyncRoutes: RouteRecordRaw[] = [
+  },
   {
     path: "/personal-management",
     component: Layout,
@@ -120,7 +112,15 @@ export const asyncRoutes: RouteRecordRaw[] = [
         }
       }
     ]
-  },
+  }
+]
+
+/**
+ * 動態路由
+ * 用来放置有權限 (Roles 屬性) 的路由
+ * 必須帶有 Name 屬性
+ */
+export const asyncRoutes: RouteRecordRaw[] = [
   {
     path: "/dataView",
     component: Layout,

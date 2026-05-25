@@ -24,8 +24,7 @@ const loginByEmail = async () => {
   loading.value = true
   try {
     await userStore.loginByEmail(email.value, password.value)
-    const firstRoute = userStore.getFirstPermissionRoute()
-    await router.push(firstRoute)
+    await router.push("/")
   } catch (error) {
     console.error("Login failed:", error)
   } finally {
