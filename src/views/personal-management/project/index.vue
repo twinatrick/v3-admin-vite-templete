@@ -77,7 +77,7 @@ const onRowSelect = (row: ProjectVo) => {
       :grid-cols="2"
       :query-fn="queryProjects"
       :bind-url="true"
-      :button-col-span="1"
+      :button-col-span="2"
       :default-page-size="20"
       :default-sort-by="'createdTime'"
       :default-sort-dir="'desc'"
