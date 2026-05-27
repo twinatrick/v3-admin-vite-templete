@@ -11,6 +11,7 @@ import { showLoading } from "@/utils"
 import { useUserStore } from "@/store/modules/user"
 import { usePermissionStore } from "@/store/modules/permission"
 import { QueryForm, QueryFormItem } from "@/components/QueryForm"
+import UserEntitySelect from "@/components/UserEntitySelect/index.vue"
 
 //data
 const _allRoutes = router
@@ -179,8 +180,8 @@ onMounted(() => {
       <QueryFormItem label="Description" :col-span="1">
         <el-input v-model="roleListFilters.description" placeholder=" " clearable />
       </QueryFormItem>
-      <QueryFormItem label="Created By" :col-span="1">
-        <el-input v-model="roleListFilters.createdBy" placeholder=" " clearable />
+      <QueryFormItem label="Created By" :col-span="1" field="createdBy">
+        <UserEntitySelect v-model="roleListFilters.createdBy" placeholder=" " />
       </QueryFormItem>
     </QueryForm>
 

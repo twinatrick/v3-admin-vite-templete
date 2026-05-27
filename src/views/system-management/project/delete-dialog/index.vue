@@ -1,20 +1,24 @@
 <script setup lang="ts">
-import { ref } from "vue"
+import { computed, ref } from "vue"
 import { ElMessage } from "element-plus"
 import { showLoading } from "@/utils"
 import { resolveErrorMessage } from "@/utils"
 import service from "../service"
 import { ProjectVo } from "@/api/generated/Api"
+import { useUserEmailCache } from "@/hooks/useUserEmailCache"
 
 // Data
 const visible = ref(false)
 const projectData = ref<ProjectVo>({})
 const emit = defineEmits(["reload"])
+const { loadUserEmailCache, getCreatorEmail } = useUserEmailCache()
+const createdByEmail = computed(() => getCreatorEmail(projectData.value.createdBy))
 
 // Functions
 const show = (data: ProjectVo) => {
   projectData.value = data
   visible.value = true
+  loadUserEmailCache()
 }
 
 const hide = () => {
@@ -48,7 +52,7 @@ defineExpose({
       <el-descriptions :column="1" border>
         <el-descriptions-item label="項目名稱">{{ projectData.name }}</el-descriptions-item>
         <el-descriptions-item label="描述">{{ projectData.description || "無" }}</el-descriptions-item>
-        <el-descriptions-item label="創建者">{{ projectData.createdBy }}</el-descriptions-item>
+        <el-descriptions-item label="創建者">{{ createdByEmail }}</el-descriptions-item>
       </el-descriptions>
       <el-alert class="mt-4" type="warning" :closable="false">
         <template #title>

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import CustomTable from "@/components/CustomTable/index.vue"
 import { CustomTableOptionType } from "@/components/CustomTable/types/Option"
+import { onMounted } from "vue"
+import { useUserEmailCache } from "@/hooks/useUserEmailCache"
 
 const prop = defineProps<{
   data: any[]
@@ -8,6 +10,7 @@ const prop = defineProps<{
   remotePagination: { currentPage: number; pageSize: number; total: number }
 }>()
 const emit = defineEmits(["page-change", "sort-change", "row-click", "row-dbclick"])
+const { loadUserEmailCache, getCreatorEmail } = useUserEmailCache()
 
 const options: CustomTableOptionType = {
   realPagination: true,
@@ -36,6 +39,14 @@ const onRowClick = (payload: { row: any; column: any; event: any }) => {
 const onRowDbClick = (payload: { row: any; column: any; event: any }) => {
   emit("row-dbclick", payload.row)
 }
+
+const createdByFormatter = (row: any) => {
+  return getCreatorEmail(row.createdBy)
+}
+
+onMounted(() => {
+  loadUserEmailCache()
+})
 </script>
 <template>
   <custom-table
@@ -58,7 +69,13 @@ const onRowDbClick = (payload: { row: any; column: any; event: any }) => {
     <template #body>
       <el-table-column prop="name" label="項目名稱" fixed="left" min-width="200" sortable="custom" />
       <el-table-column prop="description" label="描述" min-width="300" sortable="custom" />
-      <el-table-column prop="createdBy" label="創建者" min-width="150" sortable="custom" />
+      <el-table-column
+        prop="createdBy"
+        label="創建者"
+        min-width="150"
+        sortable="custom"
+        :formatter="createdByFormatter"
+      />
       <el-table-column prop="createdTime" label="創建時間" min-width="180" sortable="custom" />
     </template>
   </custom-table>

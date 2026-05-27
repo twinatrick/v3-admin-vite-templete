@@ -35,13 +35,15 @@ export interface RepresentationModelObject {
   _links?: Links
 }
 
-export interface EntityModelUserSkill {
+export interface EntityModelSkill {
   createdBy?: string
   updatedBy?: string
   /** @format date-time */
   createdTime?: string
   /** @format date-time */
   updatedTime?: string
+  name?: string
+  description?: string
   _links?: Links
 }
 
@@ -56,15 +58,40 @@ export interface PageMetadata {
   number?: number
 }
 
-export interface PagedModelEntityModelUserSkill {
+export interface PagedModelEntityModelSkill {
   _embedded?: {
-    userSkills?: EntityModelUserSkill[]
+    skills?: EntityModelSkill[]
   }
   _links?: Links
   page?: PageMetadata
 }
 
-export interface EntityModelSkill {
+export interface CollectionModelEntityModelSkill {
+  _embedded?: {
+    skills?: EntityModelSkill[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelUserProject {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUserProject {
+  _embedded?: {
+    userProjects?: EntityModelUserProject[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface EntityModelProject {
   createdBy?: string
   updatedBy?: string
   /** @format date-time */
@@ -83,6 +110,133 @@ export interface CollectionModelObject {
   _links?: Links
 }
 
+export interface CollectionModelEntityModelUserProject {
+  _embedded?: {
+    userProjects?: EntityModelUserProject[]
+  }
+  _links?: Links
+}
+
+export interface PagedModelEntityModelProject {
+  _embedded?: {
+    projects?: EntityModelProject[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelProject {
+  _embedded?: {
+    projects?: EntityModelProject[]
+  }
+  _links?: Links
+}
+
+export interface User {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  email?: string
+  password?: string
+  phone?: string
+  disabled?: boolean
+  roleArr?: string[]
+}
+
+export interface EntityModelUser {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  email?: string
+  password?: string
+  phone?: string
+  disabled?: boolean
+  roleArr?: string[]
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUser {
+  _embedded?: {
+    users?: EntityModelUser[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelUser {
+  _embedded?: {
+    users?: EntityModelUser[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelUserRole {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUserRole {
+  _embedded?: {
+    userRoles?: EntityModelUserRole[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelUserRole {
+  _embedded?: {
+    userRoles?: EntityModelUserRole[]
+  }
+  _links?: Links
+}
+
+export interface Role {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  description?: string
+  permissions?: string
+}
+
+export interface EntityModelProjectSkill {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelProjectSkill {
+  _embedded?: {
+    projectSkills?: EntityModelProjectSkill[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
 export interface EntityModelSkillLevel {
   createdBy?: string
   updatedBy?: string
@@ -95,6 +249,85 @@ export interface EntityModelSkillLevel {
   title?: string
   description?: string
   _links?: Links
+}
+
+export interface CollectionModelEntityModelProjectSkill {
+  _embedded?: {
+    projectSkills?: EntityModelProjectSkill[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelAquarkData {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  station_id?: string
+  /** @format date-time */
+  trans_time?: string
+  /** @format float */
+  rain_d?: number
+  /** @format float */
+  moisture?: number
+  /** @format float */
+  temperature?: number
+  /** @format float */
+  echo?: number
+  /** @format float */
+  waterSpeedAquark?: number
+  /** @format float */
+  v1?: number
+  /** @format float */
+  v2?: number
+  /** @format float */
+  v3?: number
+  /** @format float */
+  v4?: number
+  /** @format float */
+  v5?: number
+  /** @format float */
+  v6?: number
+  /** @format float */
+  v7?: number
+  csq?: string
+  peak?: boolean
+  _links?: Links
+}
+
+export interface PagedModelEntityModelAquarkData {
+  _embedded?: {
+    aquarkDatas?: EntityModelAquarkData[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelAquarkData {
+  _embedded?: {
+    aquarkDatas?: EntityModelAquarkData[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelUserSkill {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUserSkill {
+  _embedded?: {
+    userSkills?: EntityModelUserSkill[]
+  }
+  _links?: Links
+  page?: PageMetadata
 }
 
 export interface CollectionModelEntityModelUserSkill {
@@ -138,72 +371,6 @@ export interface Function {
   type?: number
 }
 
-export interface Role {
-  /** @format uuid */
-  id?: string
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  description?: string
-  permissions?: string
-}
-
-export interface EntityModelUserProject {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelUserProject {
-  _embedded?: {
-    userProjects?: EntityModelUserProject[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface EntityModelProject {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  description?: string
-  _links?: Links
-}
-
-export interface CollectionModelEntityModelUserProject {
-  _embedded?: {
-    userProjects?: EntityModelUserProject[]
-  }
-  _links?: Links
-}
-
-export interface PagedModelEntityModelSkill {
-  _embedded?: {
-    skills?: EntityModelSkill[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelSkill {
-  _embedded?: {
-    skills?: EntityModelSkill[]
-  }
-  _links?: Links
-}
-
 export interface EntityModelRole {
   createdBy?: string
   updatedBy?: string
@@ -228,165 +395,6 @@ export interface PagedModelEntityModelRole {
 export interface CollectionModelEntityModelRole {
   _embedded?: {
     roles?: EntityModelRole[]
-  }
-  _links?: Links
-}
-
-export interface PagedModelEntityModelSkillLevel {
-  _embedded?: {
-    skillLevels?: EntityModelSkillLevel[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelSkillLevel {
-  _embedded?: {
-    skillLevels?: EntityModelSkillLevel[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelProjectSkill {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelProjectSkill {
-  _embedded?: {
-    projectSkills?: EntityModelProjectSkill[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelProjectSkill {
-  _embedded?: {
-    projectSkills?: EntityModelProjectSkill[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelUserRole {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelUserRole {
-  _embedded?: {
-    userRoles?: EntityModelUserRole[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface User {
-  /** @format uuid */
-  id?: string
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  email?: string
-  password?: string
-  phone?: string
-  disabled?: boolean
-  roleArr?: string[]
-}
-
-export interface EntityModelFunction {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  parent?: string
-  sort?: string
-  /** @format int32 */
-  type?: number
-  _links?: Links
-}
-
-export interface PagedModelEntityModelFunction {
-  _embedded?: {
-    functions?: EntityModelFunction[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelFunction {
-  _embedded?: {
-    functions?: EntityModelFunction[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelAquarkData {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  station_id?: string
-  /** @format date-time */
-  trans_time?: string
-  /** @format float */
-  rain_d?: number
-  /** @format float */
-  moisture?: number
-  /** @format float */
-  temperature?: number
-  /** @format float */
-  echo?: number
-  /** @format float */
-  waterSpeedAquark?: number
-  /** @format float */
-  v1?: number
-  /** @format float */
-  v2?: number
-  /** @format float */
-  v3?: number
-  /** @format float */
-  v4?: number
-  /** @format float */
-  v5?: number
-  /** @format float */
-  v6?: number
-  /** @format float */
-  v7?: number
-  peak?: boolean
-  csq?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelAquarkData {
-  _embedded?: {
-    aquarkDatas?: EntityModelAquarkData[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelAquarkData {
-  _embedded?: {
-    aquarkDatas?: EntityModelAquarkData[]
   }
   _links?: Links
 }
@@ -420,22 +428,22 @@ export interface CollectionModelEntityModelAlertCheckLimit {
   _links?: Links
 }
 
-export interface PagedModelEntityModelProject {
+export interface PagedModelEntityModelSkillLevel {
   _embedded?: {
-    projects?: EntityModelProject[]
+    skillLevels?: EntityModelSkillLevel[]
   }
   _links?: Links
   page?: PageMetadata
 }
 
-export interface CollectionModelEntityModelProject {
+export interface CollectionModelEntityModelSkillLevel {
   _embedded?: {
-    projects?: EntityModelProject[]
+    skillLevels?: EntityModelSkillLevel[]
   }
   _links?: Links
 }
 
-export interface EntityModelUser {
+export interface EntityModelFunction {
   createdBy?: string
   updatedBy?: string
   /** @format date-time */
@@ -443,25 +451,24 @@ export interface EntityModelUser {
   /** @format date-time */
   updatedTime?: string
   name?: string
-  email?: string
-  password?: string
-  phone?: string
-  disabled?: boolean
-  roleArr?: string[]
+  parent?: string
+  sort?: string
+  /** @format int32 */
+  type?: number
   _links?: Links
 }
 
-export interface PagedModelEntityModelUser {
+export interface PagedModelEntityModelFunction {
   _embedded?: {
-    users?: EntityModelUser[]
+    functions?: EntityModelFunction[]
   }
   _links?: Links
   page?: PageMetadata
 }
 
-export interface CollectionModelEntityModelUser {
+export interface CollectionModelEntityModelFunction {
   _embedded?: {
-    users?: EntityModelUser[]
+    functions?: EntityModelFunction[]
   }
   _links?: Links
 }
@@ -517,8 +524,8 @@ export interface AquarkDataRequestBody {
   v6?: number
   /** @format float */
   v7?: number
-  peak?: boolean
   csq?: string
+  peak?: boolean
 }
 
 export interface FunctionRequestBody {
@@ -1632,8 +1639,8 @@ export interface AquarkDataRaw {
   v6?: number
   /** @format float */
   v7?: number
-  peak?: boolean
   csq?: string
+  peak?: boolean
 }
 
 export interface ResponseTypeListAquarkDataRaw {
@@ -3521,11 +3528,34 @@ export class Api<SecurityDataType extends unknown> {
      *
      * @tags project-search-controller
      * @name ExecuteSearchProjectGet
+     * @request GET:/projects/search/deleteByIdHard
+     * @response `200` `any` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-project-get": (
+      query?: {
+        /** @format uuid */
+        projectId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<any, any>({
+        path: `/projects/search/deleteByIdHard`,
+        method: "GET",
+        query: query,
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags project-search-controller
+     * @name ExecuteSearchProjectGet1
      * @request GET:/projects/search/findByName
      * @response `200` `CollectionModelEntityModelProject` OK
      * @response `404` `any` Not Found
      */
-    "executeSearch-project-get": (
+    "executeSearch-project-get_1": (
       query?: {
         name?: string
       },
@@ -4262,11 +4292,34 @@ export class Api<SecurityDataType extends unknown> {
      *
      * @tags skill-search-controller
      * @name ExecuteSearchSkillGet
+     * @request GET:/skills/search/deleteByIdHard
+     * @response `200` `any` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-skill-get": (
+      query?: {
+        /** @format uuid */
+        skillId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<any, any>({
+        path: `/skills/search/deleteByIdHard`,
+        method: "GET",
+        query: query,
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags skill-search-controller
+     * @name ExecuteSearchSkillGet1
      * @request GET:/skills/search/findByName
      * @response `200` `CollectionModelEntityModelSkill` OK
      * @response `404` `any` Not Found
      */
-    "executeSearch-skill-get": (
+    "executeSearch-skill-get_1": (
       query?: {
         name?: string
       },
@@ -4786,6 +4839,78 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userRoles/search/deleteAllByUserInAndRoleIn`,
         method: "GET",
         query: query,
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-role-search-controller
+     * @name ExecuteSearchUserroleGet1
+     * @request GET:/userRoles/search/deleteByUserId
+     * @response `200` `any` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userrole-get_1": (
+      query?: {
+        /** @format uuid */
+        userId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<any, any>({
+        path: `/userRoles/search/deleteByUserId`,
+        method: "GET",
+        query: query,
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-role-search-controller
+     * @name ExecuteSearchUserroleGet2
+     * @request GET:/userRoles/search/deleteByUserIdAndRoleId
+     * @response `200` `any` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userrole-get_2": (
+      query?: {
+        /** @format uuid */
+        userId?: string
+        /** @format uuid */
+        roleId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<any, any>({
+        path: `/userRoles/search/deleteByUserIdAndRoleId`,
+        method: "GET",
+        query: query,
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-role-search-controller
+     * @name ExecuteSearchUserroleGet3
+     * @request GET:/userRoles/search/findByUserId
+     * @response `200` `CollectionModelEntityModelUserRole` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userrole-get_3": (
+      query?: {
+        /** @format uuid */
+        userId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<CollectionModelEntityModelUserRole, any>({
+        path: `/userRoles/search/findByUserId`,
+        method: "GET",
+        query: query,
+        format: "json",
         ...params
       })
   }

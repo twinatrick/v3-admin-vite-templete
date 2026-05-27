@@ -7,6 +7,7 @@ import DeleteDialog from "./delete-dialog/index.vue"
 import { SkillVo } from "@/api/generated/Api"
 import service from "./service"
 import DataTable from "./data-table/index.vue"
+import UserEntitySelect from "@/components/UserEntitySelect/index.vue"
 
 // Data
 const queryFormRef = ref<any>(null)
@@ -77,7 +78,7 @@ const onRowSelect = (row: SkillVo) => {
       :grid-cols="3"
       :query-fn="querySkills"
       :bind-url="true"
-      :button-col-span="1"
+      :button-col-span="3"
       :default-page-size="20"
       :default-sort-by="'createdTime'"
       :default-sort-dir="'desc'"
@@ -88,8 +89,8 @@ const onRowSelect = (row: SkillVo) => {
       <QueryFormItem label="描述" :col-span="1">
         <el-input v-model="skillListFilters.description" placeholder=" " clearable />
       </QueryFormItem>
-      <QueryFormItem label="創建者" :col-span="1">
-        <el-input v-model="skillListFilters.createdBy" placeholder=" " clearable />
+      <QueryFormItem label="創建者" :col-span="1" field="createdBy">
+        <UserEntitySelect v-model="skillListFilters.createdBy" placeholder=" " />
       </QueryFormItem>
     </QueryForm>
 

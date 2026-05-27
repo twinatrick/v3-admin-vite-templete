@@ -8,6 +8,7 @@ import DeleteDialog from "./delete-dialog/index.vue"
 import { showLoading } from "@/utils"
 import service from "./service"
 import DataTable from "./data-table/index.vue"
+import UserEntitySelect from "@/components/UserEntitySelect/index.vue"
 //data
 
 const queryFormRef = ref<any>(null)
@@ -115,8 +116,8 @@ onMounted(() => {
           <el-option label="Disabled" value="true" />
         </el-select>
       </QueryFormItem>
-      <QueryFormItem label="Created By" :col-span="1">
-        <el-input v-model="userListFilters.createdBy" placeholder=" " clearable />
+      <QueryFormItem label="Created By" :col-span="1" field="createdBy">
+        <UserEntitySelect v-model="userListFilters.createdBy" placeholder=" " />
       </QueryFormItem>
     </QueryForm>
 

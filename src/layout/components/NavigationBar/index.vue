@@ -119,7 +119,7 @@ onMounted(() => {
     font-size: 30px;
   }
   .right-menu {
-    float: right;
+    margin-left: auto;
     margin-right: 10px;
     height: 100%;
     display: flex;

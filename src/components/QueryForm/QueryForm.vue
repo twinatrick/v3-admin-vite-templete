@@ -1,8 +1,9 @@
 <script setup lang="ts" generic="T extends Record<string, any>, R = any">
-import { computed, onMounted, onActivated, ref } from "vue"
+import { computed, onMounted, onActivated, provide, ref, toRef } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import { useRemoteTableQuery } from "@/hooks/useRemoteTableQuery"
 import type { LocationQuery } from "vue-router"
+import { QUERY_FORM_MODEL_KEY } from "./context"
 
 interface QueryFnParams {
   page: number
@@ -56,6 +57,7 @@ const router = useRouter()
 
 // 使用 v-model 绑定表单数据
 const formData = defineModel<T>({ required: true })
+provide(QUERY_FORM_MODEL_KEY, toRef(formData) as any)
 
 // 避免 keep-alive 元件初次载入时，onMounted 与 onActivated 同时触发两次查询
 let isFirstActivated = true

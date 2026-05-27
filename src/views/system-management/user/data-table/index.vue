@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import CustomTable from "@/components/CustomTable/index.vue"
 import service from "../service"
-import { computed } from "vue"
+import { computed, onMounted } from "vue"
 import { CustomTableOptionType } from "@/components/CustomTable/types/Option"
+import { useUserEmailCache } from "@/hooks/useUserEmailCache"
 
 const prop = defineProps<{
   data: any[]
@@ -10,6 +11,7 @@ const prop = defineProps<{
   remotePagination: { currentPage: number; pageSize: number; total: number }
 }>()
 const emit = defineEmits(["page-change", "sort-change", "row-click", "row-dbclick"])
+const { loadUserEmailCache, getCreatorEmail } = useUserEmailCache()
 
 const roleList = computed(() => service.data.role)
 
@@ -35,6 +37,10 @@ const statusFormatter = (row: any) => {
   return row.disabled ? "Disabled" : "Enabled"
 }
 
+const createdByFormatter = (row: any) => {
+  return getCreatorEmail(row.createdBy)
+}
+
 const handlePageChange = (payload: { page: number; size: number }) => {
   emit("page-change", payload)
 }
@@ -47,6 +53,10 @@ const onRowClick = (payload: { row: any; column: any; event: any }) => {
 const onRowDbClick = (payload: { row: any; column: any; event: any }) => {
   emit("row-dbclick", payload.row)
 }
+
+onMounted(() => {
+  loadUserEmailCache()
+})
 </script>
 <template>
   <custom-table
@@ -72,7 +82,13 @@ const onRowDbClick = (payload: { row: any; column: any; event: any }) => {
       <el-table-column prop="phone" label="Phone" min-width="150" sortable="custom" />
       <el-table-column label="Roles" min-width="200" :formatter="roleFormatter" sortable="custom" />
       <el-table-column label="Status" width="120" :formatter="statusFormatter" sortable="custom" />
-      <el-table-column prop="createdBy" label="Created By" min-width="150" sortable="custom" />
+      <el-table-column
+        prop="createdBy"
+        label="Created By"
+        min-width="150"
+        sortable="custom"
+        :formatter="createdByFormatter"
+      />
     </template>
   </custom-table>
 </template>
