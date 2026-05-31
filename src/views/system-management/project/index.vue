@@ -48,12 +48,6 @@ const createBtnClick = () => {
   createDialogRef.value?.show()
 }
 
-const editBtnClick = () => {
-  if (selectedRow.value.id) {
-    editDialogRef.value?.show(selectedRow.value)
-  }
-}
-
 const deleteBtnClick = () => {
   if (selectedRow.value.id) {
     deleteDialogRef.value?.show(selectedRow.value)
@@ -114,7 +108,6 @@ const onRowSelect = (row: ProjectVo) => {
           <el-form-item>
             <el-space>
               <el-button icon="Plus" type="primary" @click="createBtnClick">創建</el-button>
-              <el-button icon="Edit" type="warning" :disabled="!isSelected" @click="editBtnClick">編輯</el-button>
               <el-button icon="Delete" type="danger" :disabled="!isSelected" @click="deleteBtnClick">刪除</el-button>
             </el-space>
           </el-form-item>

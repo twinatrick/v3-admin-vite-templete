@@ -47,21 +47,6 @@ const createBtnClick = () => {
   createDialogRef.value?.show()
 }
 
-const editBtnClick = () => {
-  if (selectedRow.value.id) {
-    const payload: SkillVo = {
-      id: selectedRow.value.id,
-      name: selectedRow.value.name,
-      description: selectedRow.value.description,
-      createdBy: selectedRow.value.createdBy,
-      updatedBy: selectedRow.value.updatedBy,
-      createdTime: selectedRow.value.createdTime,
-      updatedTime: selectedRow.value.updatedTime
-    }
-    editDialogRef.value?.show(payload)
-  }
-}
-
 const deleteBtnClick = () => {
   if (selectedRow.value.id) {
     deleteDialogRef.value?.show({
@@ -137,7 +122,6 @@ const onRowSelect = (row: CurrentUserSkillVo) => {
           <el-form-item>
             <el-space>
               <el-button icon="Plus" type="primary" @click="createBtnClick">創建</el-button>
-              <el-button icon="Edit" type="warning" :disabled="!isSelected" @click="editBtnClick">編輯</el-button>
               <el-button icon="Delete" type="danger" :disabled="!isSelected" @click="deleteBtnClick">刪除</el-button>
             </el-space>
           </el-form-item>

@@ -25,7 +25,7 @@ const prop = defineProps({
     default: 20
   }
 })
-const emit = defineEmits(["selected", "page-change", "sort-change"])
+const emit = defineEmits(["selected", "row-dbclick", "page-change", "sort-change"])
 const option: CustomTableOptionType = {
   realPagination: true,
   pagination: {
@@ -53,6 +53,10 @@ const handlePageChange = (payload: { page: number; size: number }) => {
 const handleSortChange = (payload: { sortBy: string; sortDir: "asc" | "desc" | null }) => {
   emit("sort-change", payload)
 }
+const handleRowDbClick = (payload: { row: RoleVO }) => {
+  selectedRow.value = payload.row
+  emit("row-dbclick", payload.row)
+}
 defineExpose({
   selectedRow
 })
@@ -70,6 +74,7 @@ defineExpose({
     :page-size="prop.pageSize"
     v-loading="prop.loading"
     @selected="handleSelected"
+    @row-dbclick="handleRowDbClick"
     @page-change="handlePageChange"
     @sort-change="handleSortChange"
   >

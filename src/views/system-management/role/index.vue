@@ -96,10 +96,6 @@ const createBtnClick = () => {
   createDialogRef.value?.show()
 }
 
-const editBtnClick = () => {
-  editDialogRef.value?.show()
-}
-
 const deleteBtnClick = async () => {
   const isConfirmed = await ElMessageBox.confirm("Are you sure to delete?", "Confirm Delete", {
     confirmButtonText: "OK",
@@ -142,6 +138,10 @@ const afterCreate = async (_data: RoleVO) => {
 
 const afterUpdate = async (_data: RoleVO) => {
   await queryFormRef.value?.refresh()
+}
+
+const onRowDbClick = (_row: RoleVO) => {
+  editDialogRef.value?.show()
 }
 
 const _updateUserInfoAndPermission = async () => {
@@ -194,6 +194,7 @@ onMounted(() => {
       :total="queryFormRef.total"
       :current-page="queryFormRef.currentPage"
       :page-size="queryFormRef.size"
+      @row-dbclick="onRowDbClick"
       @page-change="queryFormRef.onPageChange"
       @sort-change="queryFormRef.onSortChange"
     >
@@ -201,7 +202,6 @@ onMounted(() => {
         <el-form-item>
           <el-space>
             <el-button icon="Plus" type="primary" @click="createBtnClick">Create</el-button>
-            <el-button icon="Edit" type="warning" :disabled="!isSelected" @click="editBtnClick">Edit </el-button>
             <el-button icon="Delete" type="danger" ml-auto :disabled="!isSelected" @click="deleteBtnClick"
               >Delete
             </el-button>
