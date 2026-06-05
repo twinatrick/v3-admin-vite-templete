@@ -35,7 +35,7 @@ export interface RepresentationModelObject {
   _links?: Links
 }
 
-export interface EntityModelSkill {
+export interface EntityModelProject {
   createdBy?: string
   updatedBy?: string
   /** @format date-time */
@@ -58,65 +58,6 @@ export interface PageMetadata {
   number?: number
 }
 
-export interface PagedModelEntityModelSkill {
-  _embedded?: {
-    skills?: EntityModelSkill[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelSkill {
-  _embedded?: {
-    skills?: EntityModelSkill[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelUserProject {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelUserProject {
-  _embedded?: {
-    userProjects?: EntityModelUserProject[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface EntityModelProject {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  description?: string
-  _links?: Links
-}
-
-export interface CollectionModelObject {
-  _embedded?: {
-    objects?: object[]
-  }
-  _links?: Links
-}
-
-export interface CollectionModelEntityModelUserProject {
-  _embedded?: {
-    userProjects?: EntityModelUserProject[]
-  }
-  _links?: Links
-}
-
 export interface PagedModelEntityModelProject {
   _embedded?: {
     projects?: EntityModelProject[]
@@ -132,9 +73,7 @@ export interface CollectionModelEntityModelProject {
   _links?: Links
 }
 
-export interface User {
-  /** @format uuid */
-  id?: string
+export interface EntityModelRole {
   createdBy?: string
   updatedBy?: string
   /** @format date-time */
@@ -142,67 +81,16 @@ export interface User {
   /** @format date-time */
   updatedTime?: string
   name?: string
-  email?: string
-  password?: string
-  phone?: string
-  disabled?: boolean
-  roleArr?: string[]
-}
-
-export interface EntityModelUser {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  email?: string
-  password?: string
-  phone?: string
-  disabled?: boolean
-  roleArr?: string[]
+  description?: string
   _links?: Links
 }
 
-export interface PagedModelEntityModelUser {
+export interface PagedModelEntityModelRole {
   _embedded?: {
-    users?: EntityModelUser[]
+    roles?: EntityModelRole[]
   }
   _links?: Links
   page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelUser {
-  _embedded?: {
-    users?: EntityModelUser[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelUserRole {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelUserRole {
-  _embedded?: {
-    userRoles?: EntityModelUserRole[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelUserRole {
-  _embedded?: {
-    userRoles?: EntityModelUserRole[]
-  }
-  _links?: Links
 }
 
 export interface Role {
@@ -216,180 +104,6 @@ export interface Role {
   updatedTime?: string
   name?: string
   description?: string
-  permissions?: string
-}
-
-export interface EntityModelProjectSkill {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelProjectSkill {
-  _embedded?: {
-    projectSkills?: EntityModelProjectSkill[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface EntityModelSkillLevel {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  /** @format int32 */
-  levelValue?: number
-  title?: string
-  description?: string
-  _links?: Links
-}
-
-export interface CollectionModelEntityModelProjectSkill {
-  _embedded?: {
-    projectSkills?: EntityModelProjectSkill[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelAquarkData {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  station_id?: string
-  /** @format date-time */
-  trans_time?: string
-  /** @format float */
-  rain_d?: number
-  /** @format float */
-  moisture?: number
-  /** @format float */
-  temperature?: number
-  /** @format float */
-  echo?: number
-  /** @format float */
-  waterSpeedAquark?: number
-  /** @format float */
-  v1?: number
-  /** @format float */
-  v2?: number
-  /** @format float */
-  v3?: number
-  /** @format float */
-  v4?: number
-  /** @format float */
-  v5?: number
-  /** @format float */
-  v6?: number
-  /** @format float */
-  v7?: number
-  csq?: string
-  peak?: boolean
-  _links?: Links
-}
-
-export interface PagedModelEntityModelAquarkData {
-  _embedded?: {
-    aquarkDatas?: EntityModelAquarkData[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelAquarkData {
-  _embedded?: {
-    aquarkDatas?: EntityModelAquarkData[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelUserSkill {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelUserSkill {
-  _embedded?: {
-    userSkills?: EntityModelUserSkill[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelUserSkill {
-  _embedded?: {
-    userSkills?: EntityModelUserSkill[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelRoleFunction {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelRoleFunction {
-  _embedded?: {
-    roleFunctions?: EntityModelRoleFunction[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface Function {
-  /** @format uuid */
-  id?: string
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  parent?: string
-  sort?: string
-  /** @format int32 */
-  type?: number
-}
-
-export interface EntityModelRole {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  description?: string
-  permissions?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelRole {
-  _embedded?: {
-    roles?: EntityModelRole[]
-  }
-  _links?: Links
-  page?: PageMetadata
 }
 
 export interface CollectionModelEntityModelRole {
@@ -428,17 +142,149 @@ export interface CollectionModelEntityModelAlertCheckLimit {
   _links?: Links
 }
 
-export interface PagedModelEntityModelSkillLevel {
+export interface EntityModelUser {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  email?: string
+  phone?: string
+  disabled?: boolean
+  roleArr?: string[]
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUser {
   _embedded?: {
-    skillLevels?: EntityModelSkillLevel[]
+    users?: EntityModelUser[]
   }
   _links?: Links
   page?: PageMetadata
 }
 
-export interface CollectionModelEntityModelSkillLevel {
+export interface User {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  email?: string
+  phone?: string
+  disabled?: boolean
+  roleArr?: string[]
+}
+
+export interface EntityModelUserSkill {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUserSkill {
   _embedded?: {
-    skillLevels?: EntityModelSkillLevel[]
+    userSkills?: EntityModelUserSkill[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface EntityModelSkill {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  description?: string
+  _links?: Links
+}
+
+export interface CollectionModelObject {
+  _embedded?: {
+    objects?: object[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelSkillLevel {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  /** @format int32 */
+  levelValue?: number
+  title?: string
+  description?: string
+  _links?: Links
+}
+
+export interface CollectionModelEntityModelUserSkill {
+  _embedded?: {
+    userSkills?: EntityModelUserSkill[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelUserProject {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUserProject {
+  _embedded?: {
+    userProjects?: EntityModelUserProject[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelUserProject {
+  _embedded?: {
+    userProjects?: EntityModelUserProject[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelUserRole {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUserRole {
+  _embedded?: {
+    userRoles?: EntityModelUserRole[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelUserRole {
+  _embedded?: {
+    userRoles?: EntityModelUserRole[]
   }
   _links?: Links
 }
@@ -458,6 +304,22 @@ export interface EntityModelFunction {
   _links?: Links
 }
 
+export interface Function {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  parent?: string
+  sort?: string
+  /** @format int32 */
+  type?: number
+}
+
 export interface PagedModelEntityModelFunction {
   _embedded?: {
     functions?: EntityModelFunction[]
@@ -469,6 +331,158 @@ export interface PagedModelEntityModelFunction {
 export interface CollectionModelEntityModelFunction {
   _embedded?: {
     functions?: EntityModelFunction[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelRoleFunction {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelRoleFunction {
+  _embedded?: {
+    roleFunctions?: EntityModelRoleFunction[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface PagedModelEntityModelSkill {
+  _embedded?: {
+    skills?: EntityModelSkill[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelSkill {
+  _embedded?: {
+    skills?: EntityModelSkill[]
+  }
+  _links?: Links
+}
+
+export interface PagedModelEntityModelSkillLevel {
+  _embedded?: {
+    skillLevels?: EntityModelSkillLevel[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelSkillLevel {
+  _embedded?: {
+    skillLevels?: EntityModelSkillLevel[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelAquarkData {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  station_id?: string
+  /** @format date-time */
+  trans_time?: string
+  /** @format float */
+  rain_d?: number
+  /** @format float */
+  moisture?: number
+  /** @format float */
+  temperature?: number
+  /** @format float */
+  echo?: number
+  /** @format float */
+  waterSpeedAquark?: number
+  /** @format float */
+  v1?: number
+  /** @format float */
+  v2?: number
+  /** @format float */
+  v3?: number
+  /** @format float */
+  v4?: number
+  /** @format float */
+  v5?: number
+  /** @format float */
+  v6?: number
+  /** @format float */
+  v7?: number
+  peak?: boolean
+  csq?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelAquarkData {
+  _embedded?: {
+    aquarkDatas?: EntityModelAquarkData[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelAquarkData {
+  _embedded?: {
+    aquarkDatas?: EntityModelAquarkData[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelUserProjectSkill {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUserProjectSkill {
+  _embedded?: {
+    userProjectSkills?: EntityModelUserProjectSkill[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelUserProjectSkill {
+  _embedded?: {
+    userProjectSkills?: EntityModelUserProjectSkill[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelProjectSkill {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelProjectSkill {
+  _embedded?: {
+    projectSkills?: EntityModelProjectSkill[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelProjectSkill {
+  _embedded?: {
+    projectSkills?: EntityModelProjectSkill[]
   }
   _links?: Links
 }
@@ -524,8 +538,8 @@ export interface AquarkDataRequestBody {
   v6?: number
   /** @format float */
   v7?: number
-  csq?: string
   peak?: boolean
+  csq?: string
 }
 
 export interface FunctionRequestBody {
@@ -620,7 +634,19 @@ export interface RoleRequestBody {
   updatedTime?: string
   name?: string
   description?: string
-  permissions?: string
+}
+
+export interface UserProjectSkillRequestBody {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  skill?: string
+  skillLevel?: string
 }
 
 export interface UserProjectRequestBody {
@@ -670,7 +696,6 @@ export interface UserRequestBody {
   updatedTime?: string
   name?: string
   email?: string
-  password?: string
   phone?: string
   disabled?: boolean
   roleArr?: string[]
@@ -691,6 +716,11 @@ export interface ResponseTypeString {
 export interface PersonalProjectRequest {
   name?: string
   description?: string
+}
+
+export interface UserRoleRebindRequest {
+  userId?: string
+  roleIds?: string[]
 }
 
 /** 使用者搜尋查詢參數 */
@@ -1196,7 +1226,6 @@ export interface RoleOutVo {
   id?: string
   name?: string
   description?: string
-  permissions?: string
   createdBy?: string
   updatedBy?: string
   /** @format date-time */
@@ -1639,8 +1668,8 @@ export interface AquarkDataRaw {
   v6?: number
   /** @format float */
   v7?: number
-  csq?: string
   peak?: boolean
+  csq?: string
 }
 
 export interface ResponseTypeListAquarkDataRaw {
@@ -1829,6 +1858,16 @@ export interface UserProjectRebindRequest {
 export interface ProjectSkillRebindRequest {
   projectId?: string
   bindings?: SkillLevelBindingItem[]
+}
+
+export interface MemberSkillBindings {
+  userId?: string
+  skills?: SkillLevelBindingItem[]
+}
+
+export interface ProjectMemberSkillsRebindRequest {
+  projectId?: string
+  members?: MemberSkillBindings[]
 }
 
 export interface ResponseTypeListSkillLevelVo {
@@ -2792,10 +2831,26 @@ export class Api<SecurityDataType extends unknown> {
      *
      * @tags profile-controller
      * @name Descriptor9
-     * @request GET:/profile/userProjects
+     * @request GET:/profile/userProjectSkills
      * @response `200` `string` OK
      */
     descriptor_9: (params: RequestParams = {}) =>
+      this.http.request<string, any>({
+        path: `/profile/userProjectSkills`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags profile-controller
+     * @name Descriptor10
+     * @request GET:/profile/userProjects
+     * @response `200` `string` OK
+     */
+    descriptor_10: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/userProjects`,
         method: "GET",
@@ -2807,11 +2862,11 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags profile-controller
-     * @name Descriptor10
+     * @name Descriptor11
      * @request GET:/profile/userRoles
      * @response `200` `string` OK
      */
-    descriptor_10: (params: RequestParams = {}) =>
+    descriptor_11: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/userRoles`,
         method: "GET",
@@ -2823,11 +2878,11 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags profile-controller
-     * @name Descriptor11
+     * @name Descriptor12
      * @request GET:/profile/userSkills
      * @response `200` `string` OK
      */
-    descriptor_11: (params: RequestParams = {}) =>
+    descriptor_12: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/userSkills`,
         method: "GET",
@@ -2839,11 +2894,11 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags profile-controller
-     * @name Descriptor12
+     * @name Descriptor13
      * @request GET:/profile/users
      * @response `200` `string` OK
      */
-    descriptor_12: (params: RequestParams = {}) =>
+    descriptor_13: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/users`,
         method: "GET",
@@ -4333,6 +4388,674 @@ export class Api<SecurityDataType extends unknown> {
         ...params
       })
   }
+  userProjectSkillEntityController = {
+    /**
+     * @description get-userprojectskill
+     *
+     * @tags user-project-skill-entity-controller
+     * @name GetCollectionResourceUserprojectskillGet
+     * @request GET:/userProjectSkills
+     * @response `200` `PagedModelEntityModelUserProjectSkill` OK
+     */
+    "getCollectionResource-userprojectskill-get": (
+      query?: {
+        /**
+         * Zero-based page index (0..N)
+         * @min 0
+         * @default 0
+         */
+        page?: number
+        /**
+         * The size of the page to be returned
+         * @min 1
+         * @default 20
+         */
+        size?: number
+        /** Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+        sort?: string[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<PagedModelEntityModelUserProjectSkill, any>({
+        path: `/userProjectSkills`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description create-userprojectskill
+     *
+     * @tags user-project-skill-entity-controller
+     * @name PostCollectionResourceUserprojectskillPost
+     * @request POST:/userProjectSkills
+     * @response `201` `EntityModelUserProjectSkill` Created
+     */
+    "postCollectionResource-userprojectskill-post": (data: UserProjectSkillRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelUserProjectSkill, any>({
+        path: `/userProjectSkills`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-userprojectskill
+     *
+     * @tags user-project-skill-entity-controller
+     * @name GetItemResourceUserprojectskillGet
+     * @request GET:/userProjectSkills/{id}
+     * @response `200` `EntityModelUserProjectSkill` OK
+     * @response `404` `any` Not Found
+     */
+    "getItemResource-userprojectskill-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelUserProjectSkill, any>({
+        path: `/userProjectSkills/${id}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-userprojectskill
+     *
+     * @tags user-project-skill-entity-controller
+     * @name PutItemResourceUserprojectskillPut
+     * @request PUT:/userProjectSkills/{id}
+     * @response `200` `EntityModelUserProjectSkill` OK
+     * @response `201` `EntityModelUserProjectSkill` Created
+     * @response `204` `any` No Content
+     */
+    "putItemResource-userprojectskill-put": (
+      id: string,
+      data: UserProjectSkillRequestBody,
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelUserProjectSkill, any>({
+        path: `/userProjectSkills/${id}`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-userprojectskill
+     *
+     * @tags user-project-skill-entity-controller
+     * @name DeleteItemResourceUserprojectskillDelete
+     * @request DELETE:/userProjectSkills/{id}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deleteItemResource-userprojectskill-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/userProjectSkills/${id}`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-userprojectskill
+     *
+     * @tags user-project-skill-entity-controller
+     * @name PatchItemResourceUserprojectskillPatch
+     * @request PATCH:/userProjectSkills/{id}
+     * @response `200` `EntityModelUserProjectSkill` OK
+     * @response `204` `any` No Content
+     */
+    "patchItemResource-userprojectskill-patch": (
+      id: string,
+      data: UserProjectSkillRequestBody,
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelUserProjectSkill, any>({
+        path: `/userProjectSkills/${id}`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      })
+  }
+  userProjectSkillSearchController = {
+    /**
+     * No description
+     *
+     * @tags user-project-skill-search-controller
+     * @name ExecuteSearchUserprojectskillGet
+     * @request GET:/userProjectSkills/search/deleteByProjectId
+     * @response `200` `any` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userprojectskill-get": (
+      query?: {
+        /** @format uuid */
+        projectId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<any, any>({
+        path: `/userProjectSkills/search/deleteByProjectId`,
+        method: "GET",
+        query: query,
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-project-skill-search-controller
+     * @name ExecuteSearchUserprojectskillGet1
+     * @request GET:/userProjectSkills/search/deleteBySkillId
+     * @response `200` `any` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userprojectskill-get_1": (
+      query?: {
+        /** @format uuid */
+        skillId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<any, any>({
+        path: `/userProjectSkills/search/deleteBySkillId`,
+        method: "GET",
+        query: query,
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-project-skill-search-controller
+     * @name ExecuteSearchUserprojectskillGet2
+     * @request GET:/userProjectSkills/search/deleteByUserIdAndProjectId
+     * @response `200` `any` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userprojectskill-get_2": (
+      query?: {
+        /** @format uuid */
+        userId?: string
+        /** @format uuid */
+        projectId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<any, any>({
+        path: `/userProjectSkills/search/deleteByUserIdAndProjectId`,
+        method: "GET",
+        query: query,
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-project-skill-search-controller
+     * @name ExecuteSearchUserprojectskillGet3
+     * @request GET:/userProjectSkills/search/deleteByUserIdAndProjectIdAndSkillId
+     * @response `200` `any` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userprojectskill-get_3": (
+      query?: {
+        /** @format uuid */
+        userId?: string
+        /** @format uuid */
+        projectId?: string
+        /** @format uuid */
+        skillId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<any, any>({
+        path: `/userProjectSkills/search/deleteByUserIdAndProjectIdAndSkillId`,
+        method: "GET",
+        query: query,
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-project-skill-search-controller
+     * @name ExecuteSearchUserprojectskillGet4
+     * @request GET:/userProjectSkills/search/existsBySkillId
+     * @response `200` `boolean` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userprojectskill-get_4": (
+      query?: {
+        /** @format uuid */
+        skillId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<boolean, any>({
+        path: `/userProjectSkills/search/existsBySkillId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-project-skill-search-controller
+     * @name ExecuteSearchUserprojectskillGet5
+     * @request GET:/userProjectSkills/search/existsBySkillLevelId
+     * @response `200` `boolean` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userprojectskill-get_5": (
+      query?: {
+        /** @format uuid */
+        skillLevelId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<boolean, any>({
+        path: `/userProjectSkills/search/existsBySkillLevelId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-project-skill-search-controller
+     * @name ExecuteSearchUserprojectskillGet6
+     * @request GET:/userProjectSkills/search/existsByUserIdAndProjectId
+     * @response `200` `boolean` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userprojectskill-get_6": (
+      query?: {
+        /** @format uuid */
+        userId?: string
+        /** @format uuid */
+        projectId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<boolean, any>({
+        path: `/userProjectSkills/search/existsByUserIdAndProjectId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-project-skill-search-controller
+     * @name ExecuteSearchUserprojectskillGet7
+     * @request GET:/userProjectSkills/search/existsByUserIdAndProjectIdAndSkillId
+     * @response `200` `boolean` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userprojectskill-get_7": (
+      query?: {
+        /** @format uuid */
+        userId?: string
+        /** @format uuid */
+        projectId?: string
+        /** @format uuid */
+        skillId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<boolean, any>({
+        path: `/userProjectSkills/search/existsByUserIdAndProjectIdAndSkillId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-project-skill-search-controller
+     * @name ExecuteSearchUserprojectskillGet8
+     * @request GET:/userProjectSkills/search/findByProjectId
+     * @response `200` `CollectionModelEntityModelUserProjectSkill` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userprojectskill-get_8": (
+      query?: {
+        /** @format uuid */
+        projectId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<CollectionModelEntityModelUserProjectSkill, any>({
+        path: `/userProjectSkills/search/findByProjectId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-project-skill-search-controller
+     * @name ExecuteSearchUserprojectskillGet9
+     * @request GET:/userProjectSkills/search/findByUserId
+     * @response `200` `CollectionModelEntityModelUserProjectSkill` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userprojectskill-get_9": (
+      query?: {
+        /** @format uuid */
+        userId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<CollectionModelEntityModelUserProjectSkill, any>({
+        path: `/userProjectSkills/search/findByUserId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-project-skill-search-controller
+     * @name ExecuteSearchUserprojectskillGet10
+     * @request GET:/userProjectSkills/search/findByUserIdAndProjectId
+     * @response `200` `CollectionModelEntityModelUserProjectSkill` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userprojectskill-get_10": (
+      query?: {
+        /** @format uuid */
+        userId?: string
+        /** @format uuid */
+        projectId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<CollectionModelEntityModelUserProjectSkill, any>({
+        path: `/userProjectSkills/search/findByUserIdAndProjectId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-project-skill-search-controller
+     * @name ExecuteSearchUserprojectskillGet11
+     * @request GET:/userProjectSkills/search/findByUserIdAndProjectIdAndSkillId
+     * @response `200` `EntityModelUserProjectSkill` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userprojectskill-get_11": (
+      query?: {
+        /** @format uuid */
+        userId?: string
+        /** @format uuid */
+        projectId?: string
+        /** @format uuid */
+        skillId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelUserProjectSkill, any>({
+        path: `/userProjectSkills/search/findByUserIdAndProjectIdAndSkillId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      })
+  }
+  userProjectSkillPropertyReferenceController = {
+    /**
+     * @description get-skill-by-userprojectskill-Id
+     *
+     * @tags user-project-skill-property-reference-controller
+     * @name FollowPropertyReferenceUserprojectskillGet
+     * @request GET:/userProjectSkills/{id}/skill
+     * @response `200` `EntityModelSkill` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-userprojectskill-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkill, any>({
+        path: `/userProjectSkills/${id}/skill`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-skill-by-userprojectskill-Id
+     *
+     * @tags user-project-skill-property-reference-controller
+     * @name CreatePropertyReferenceUserprojectskillPut
+     * @request PUT:/userProjectSkills/{id}/skill
+     * @response `200` `EntityModelSkill` OK
+     * @response `201` `EntityModelSkill` Created
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-userprojectskill-put": (
+      id: string,
+      data: CollectionModelObject,
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelSkill, any>({
+        path: `/userProjectSkills/${id}/skill`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-skill-by-userprojectskill-Id
+     *
+     * @tags user-project-skill-property-reference-controller
+     * @name DeletePropertyReferenceUserprojectskillDelete
+     * @request DELETE:/userProjectSkills/{id}/skill
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReference-userprojectskill-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/userProjectSkills/${id}/skill`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-skill-by-userprojectskill-Id
+     *
+     * @tags user-project-skill-property-reference-controller
+     * @name CreatePropertyReferenceUserprojectskillPatch
+     * @request PATCH:/userProjectSkills/{id}/skill
+     * @response `200` `EntityModelSkill` OK
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-userprojectskill-patch": (
+      id: string,
+      data: CollectionModelObject,
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelSkill, any>({
+        path: `/userProjectSkills/${id}/skill`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-skill-by-userprojectskill-Id
+     *
+     * @tags user-project-skill-property-reference-controller
+     * @name FollowPropertyReferenceUserprojectskillGet1
+     * @request GET:/userProjectSkills/{id}/skill/{propertyId}
+     * @response `200` `EntityModelSkill` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-userprojectskill-get_1": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkill, any>({
+        path: `/userProjectSkills/${id}/skill/${propertyId}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-skill-by-userprojectskill-Id
+     *
+     * @tags user-project-skill-property-reference-controller
+     * @name DeletePropertyReferenceIdUserprojectskillDelete
+     * @request DELETE:/userProjectSkills/{id}/skill/{propertyId}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReferenceId-userprojectskill-delete": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/userProjectSkills/${id}/skill/${propertyId}`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description get-skilllevel-by-userprojectskill-Id
+     *
+     * @tags user-project-skill-property-reference-controller
+     * @name FollowPropertyReferenceUserprojectskillGet2
+     * @request GET:/userProjectSkills/{id}/skillLevel
+     * @response `200` `EntityModelSkillLevel` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-userprojectskill-get_2": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkillLevel, any>({
+        path: `/userProjectSkills/${id}/skillLevel`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-skilllevel-by-userprojectskill-Id
+     *
+     * @tags user-project-skill-property-reference-controller
+     * @name CreatePropertyReferenceUserprojectskillPut1
+     * @request PUT:/userProjectSkills/{id}/skillLevel
+     * @response `200` `EntityModelSkillLevel` OK
+     * @response `201` `EntityModelSkillLevel` Created
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-userprojectskill-put_1": (
+      id: string,
+      data: CollectionModelObject,
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelSkillLevel, any>({
+        path: `/userProjectSkills/${id}/skillLevel`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-skilllevel-by-userprojectskill-Id
+     *
+     * @tags user-project-skill-property-reference-controller
+     * @name DeletePropertyReferenceUserprojectskillDelete1
+     * @request DELETE:/userProjectSkills/{id}/skillLevel
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReference-userprojectskill-delete_1": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/userProjectSkills/${id}/skillLevel`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-skilllevel-by-userprojectskill-Id
+     *
+     * @tags user-project-skill-property-reference-controller
+     * @name CreatePropertyReferenceUserprojectskillPatch1
+     * @request PATCH:/userProjectSkills/{id}/skillLevel
+     * @response `200` `EntityModelSkillLevel` OK
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-userprojectskill-patch_1": (
+      id: string,
+      data: CollectionModelObject,
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelSkillLevel, any>({
+        path: `/userProjectSkills/${id}/skillLevel`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-skilllevel-by-userprojectskill-Id
+     *
+     * @tags user-project-skill-property-reference-controller
+     * @name FollowPropertyReferenceUserprojectskillGet3
+     * @request GET:/userProjectSkills/{id}/skillLevel/{propertyId}
+     * @response `200` `EntityModelSkillLevel` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-userprojectskill-get_3": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelSkillLevel, any>({
+        path: `/userProjectSkills/${id}/skillLevel/${propertyId}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-skilllevel-by-userprojectskill-Id
+     *
+     * @tags user-project-skill-property-reference-controller
+     * @name DeletePropertyReferenceIdUserprojectskillDelete1
+     * @request DELETE:/userProjectSkills/{id}/skillLevel/{propertyId}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReferenceId-userprojectskill-delete_1": (
+      id: string,
+      propertyId: string,
+      params: RequestParams = {}
+    ) =>
+      this.http.request<any, any>({
+        path: `/userProjectSkills/${id}/skillLevel/${propertyId}`,
+        method: "DELETE",
+        ...params
+      })
+  }
   userProjectEntityController = {
     /**
      * @description get-userproject
@@ -5585,7 +6308,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-search-controller
      * @name ExecuteSearchUserGet
      * @request GET:/users/search/findByEmail
-     * @response `200` `CollectionModelEntityModelUser` OK
+     * @response `200` `EntityModelUser` OK
      * @response `404` `any` Not Found
      */
     "executeSearch-user-get": (
@@ -5594,7 +6317,7 @@ export class Api<SecurityDataType extends unknown> {
       },
       params: RequestParams = {}
     ) =>
-      this.http.request<CollectionModelEntityModelUser, any>({
+      this.http.request<EntityModelUser, any>({
         path: `/users/search/findByEmail`,
         method: "GET",
         query: query,
@@ -5928,6 +6651,27 @@ export class Api<SecurityDataType extends unknown> {
       })
   }
   users = {
+    /**
+     * @description 完整覆蓋式綁定使用者角色。空清單清空所有角色，null 清單拋出異常。
+     *
+     * @tags Users
+     * @name RebindUserRoles
+     * @summary Rebind user roles
+     * @request POST:/users/{userId}/roles/rebind
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    rebindUserRoles: (userId: string, data: UserRoleRebindRequest, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/users/${userId}/roles/rebind`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
     /**
      * @description 搜尋使用者並回傳分頁結果，支援多種查詢條件與排序
      *
@@ -6483,12 +7227,12 @@ export class Api<SecurityDataType extends unknown> {
       }),
 
     /**
-     * @description Assigns roles to a user.
+     * No description
      *
      * @tags Roles
      * @name UserBindRole
-     * @summary Bind user to roles
      * @request POST:/role/userBindRole
+     * @deprecated
      * @response `200` `ResponseTypeUserVo` OK
      * @response `400` `ResponseTypeUserVo` Invalid input
      * @response `500` `ResponseTypeUserVo` Server error
@@ -6504,12 +7248,13 @@ export class Api<SecurityDataType extends unknown> {
       }),
 
     /**
-     * @description Updates role details.
+     * @description Deprecated: 請改用 /role/updateWithFunctions。此 API 只更新角色資料，不會同步 functionIds 權限綁定。
      *
      * @tags Roles
      * @name UpdateRole
      * @summary Update role
      * @request POST:/role/update
+     * @deprecated
      * @response `200` `ResponseTypeRoleOutVo` OK
      * @response `400` `ResponseTypeRoleOutVo` Invalid input
      * @response `500` `ResponseTypeRoleOutVo` Server error
@@ -6517,6 +7262,27 @@ export class Api<SecurityDataType extends unknown> {
     updateRole: (data: RoleOutVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeRoleOutVo, ResponseTypeRoleOutVo>({
         path: `/role/update`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 更新角色資料並同步 functionIds 權限。functionIds = null 時保留既有權限不變；functionIds = [] 時清空該角色所有權限；functionIds 有值時，以該清單覆蓋該角色權限。
+     *
+     * @tags Roles
+     * @name UpdateRoleWithFunctions
+     * @summary Update role with functions
+     * @request POST:/role/updateWithFunctions
+     * @response `200` `ResponseTypeRoleOutVo` OK
+     * @response `400` `ResponseTypeRoleOutVo` Invalid input
+     * @response `500` `ResponseTypeRoleOutVo` Server error
+     */
+    updateRoleWithFunctions: (data: RoleOutVo, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeRoleOutVo, ResponseTypeRoleOutVo>({
+        path: `/role/updateWithFunctions`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -6566,12 +7332,13 @@ export class Api<SecurityDataType extends unknown> {
       }),
 
     /**
-     * @description Removes functions from a role.
+     * @description Deprecated: 請改用 /role/updateWithFunctions，透過 functionIds 一次同步角色權限；若要清空權限請傳 functionIds = []。
      *
      * @tags Roles
      * @name RoleUnbindFunction
      * @summary Unbind role from functions
      * @request POST:/role/roleUnbindFunction
+     * @deprecated
      * @response `200` `ResponseTypeRoleOutVo` OK
      * @response `400` `ResponseTypeRoleOutVo` Invalid input
      * @response `500` `ResponseTypeRoleOutVo` Server error
@@ -6608,12 +7375,13 @@ export class Api<SecurityDataType extends unknown> {
       }),
 
     /**
-     * @description Assigns functions to a role.
+     * @description Deprecated: 請改用 /role/updateWithFunctions，透過 functionIds 一次同步角色權限。
      *
      * @tags Roles
      * @name RoleBindFunction
      * @summary Bind role to functions
      * @request POST:/role/roleBindFunction
+     * @deprecated
      * @response `200` `ResponseTypeRoleOutVo` OK
      * @response `400` `ResponseTypeRoleOutVo` Invalid input
      * @response `500` `ResponseTypeRoleOutVo` Server error
@@ -6794,12 +7562,13 @@ export class Api<SecurityDataType extends unknown> {
       }),
 
     /**
-     * @description Creates a new role.
+     * @description Deprecated: 請改用 /role/addWithFunctions。此 API 只建立角色，不會同步 functionIds 權限綁定。
      *
      * @tags Roles
      * @name AddRole
      * @summary Add role
      * @request POST:/role/add
+     * @deprecated
      * @response `200` `ResponseTypeRoleOutVo` OK
      * @response `400` `ResponseTypeRoleOutVo` Invalid input
      * @response `500` `ResponseTypeRoleOutVo` Server error
@@ -6807,6 +7576,27 @@ export class Api<SecurityDataType extends unknown> {
     addRole: (data: RoleOutVo, params: RequestParams = {}) =>
       this.http.request<ResponseTypeRoleOutVo, ResponseTypeRoleOutVo>({
         path: `/role/add`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 建立角色並同步綁定 functionIds 權限。functionIds = null 時不處理權限；functionIds = [] 時清空權限；functionIds 有值時，以該清單為準綁定角色權限。
+     *
+     * @tags Roles
+     * @name AddRoleWithFunctions
+     * @summary Add role with functions
+     * @request POST:/role/addWithFunctions
+     * @response `200` `ResponseTypeRoleOutVo` OK
+     * @response `400` `ResponseTypeRoleOutVo` Invalid input
+     * @response `500` `ResponseTypeRoleOutVo` Server error
+     */
+    addRoleWithFunctions: (data: RoleOutVo, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeRoleOutVo, ResponseTypeRoleOutVo>({
+        path: `/role/addWithFunctions`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -7222,6 +8012,27 @@ export class Api<SecurityDataType extends unknown> {
     rebindProjectSkills: (data: ProjectSkillRebindRequest, params: RequestParams = {}) =>
       this.http.request<ResponseTypeString, ResponseTypeString>({
         path: `/admin/bindings/project-skill/rebind`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 完整覆蓋式綁定專案成員技能。使用者必須已是專案成員（user_project 存在），否則拋出異常。
+     *
+     * @tags Admin Bindings
+     * @name RebindProjectMemberSkills
+     * @summary Rebind project member skills
+     * @request POST:/admin/bindings/project-members-skills/rebind
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    rebindProjectMemberSkills: (data: ProjectMemberSkillsRebindRequest, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/admin/bindings/project-members-skills/rebind`,
         method: "POST",
         body: data,
         type: ContentType.Json,

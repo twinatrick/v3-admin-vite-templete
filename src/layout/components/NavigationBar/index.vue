@@ -58,7 +58,7 @@ onMounted(() => {
       <ThemeSwitch v-if="showThemeSwitch" class="right-menu-item" @changeTheme="changeColor" />
 
       <div :style="{ color: 'var(--el-text-color-primary)' }">
-        {{ userStore.userInfo?.givenName }} {{ "  " + userStore.userInfo?.familyName }}
+        {{ userStore.userInfo?.name || userStore.userInfo?.email }}
       </div>
 
       <el-dropdown class="right-menu-item">
@@ -80,7 +80,7 @@ onMounted(() => {
         {{ userStore.userInfo?.email }}
       </el-descriptions-item>
       <el-descriptions-item label="Role" label-align="right">
-        {{ userStore.userInfo?.roles?.join(",") }}
+        {{ userStore.userInfo?.roleArr?.join(",") }}
       </el-descriptions-item>
     </el-descriptions>
   </el-dialog>

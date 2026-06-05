@@ -36,8 +36,8 @@ const show = async (data: ProjectVo) => {
 
     const boundSkills = data.id ? await service.getProjectSkills(data.id) : []
     const bindings: ProjectSkillBinding[] = boundSkills
-      .filter((item) => item.skillId && item.skillName && item.skillLevelId)
-      .map((item) => ({
+      .filter((item: any) => item.skillId && item.skillName && item.skillLevelId)
+      .map((item: any) => ({
         skillId: item.skillId!,
         skillName: item.skillName!,
         skillLevelId: item.skillLevelId!,

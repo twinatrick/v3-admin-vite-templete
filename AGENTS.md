@@ -7,10 +7,10 @@
 - **環境設定與執行優先權 (重要)** : 在執行任何開發伺服器、建置、API 生成或測試指令前，請先檢查當前專案目錄下是否存在 .run
   資料夾。 若存在 .run 目錄，必須優先讀取其中的配置檔案 (如 XML)，並將其內嵌的環境變數（如 .env
   覆寫項目）或啟動參數作為最高優先級應用於後續的執行環境中。
-- **套件管理員**：雖然 `README.md` 中提到了 `pnpm`，但目前專案中**僅存在 `package-lock.json`**，且 `package.json` 中的腳本都使用 `npm run`。請**一律使用 `npm`** 來安裝套件與執行指令。
-- **開發伺服器**：`npm run dev`
-- **建置指令**：提供不同環境的建置 `npm run build:dev`, `npm run build:stage`, `npm run build:prod`。
-- **API 生成**：本專案包含自動生成 API 的腳本，使用 `npm run generate-api`。
+- **套件管理員**：專案已從 npm 遷移至 pnpm，請**一律使用 `pnpm`** 來安裝套件與執行指令。套件鎖定檔案為 `pnpm-lock.yaml`。
+- **開發伺服器**：`pnpm dev`
+- **建置指令**：提供不同環境的建置 `pnpm build:dev`, `pnpm build:stage`, `pnpm build:prod`。
+- **API 生成**：本專案包含自動生成 API 的腳本，使用 `pnpm generate-api`。
 
 ## 🏗️ 架構與技術棧
 
@@ -24,13 +24,13 @@
 
 - **程式碼風格**：請務必在提交或完成修改前執行程式碼風格檢查。
 
-  - 專案標準腳本為 `npm run lint`。
-  - **【Token 節省黑魔法】**：為了幫用戶極致節省 Token 成本，在實際執行時，請優先將其拆解並轉換為原生指令：\* \*`rtk npx eslint .`\*\*。
+  - 專案標準腳本為 `pnpm lint`。
+  - **【Token 節省黑魔法】**：為了幫用戶極致節省 Token 成本，在實際執行時，請優先將其拆解並轉換為原生指令：**`rtk pnpm exec eslint .`**。
 
 - **單元測試**：使用 Vitest 執行測試，測試環境預設為 `jsdom`，測試檔路徑：`tests/**/*.test.ts`。
-  - 專案標準腳本為 `npm run test`。
+  - 專案標準腳本為 `pnpm test`。
   - **【Token 節省黑魔法】**：為了讓底層的 RTK 盾牌能夠看穿 npm 包裝並發揮 90% 以上的壓縮率，在實際執行測試時，**禁止**
-    直接使用 `npm run test`，請**必須優先使用原生指令：`rtk npx vitest run`**。
+    直接使用 `pnpm test`，請**必須優先使用原生指令：`rtk pnpm exec vitest run`**。
 
 ## ✍️ 溝通與回應準則
 

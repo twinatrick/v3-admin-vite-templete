@@ -114,10 +114,10 @@ function createService() {
   async function bindSkillToProject(projectId: string, skillId: string, skillLevelId: string) {
     const existingBindings = await getProjectSkills(projectId)
     const nextBindings: SkillLevelBindingItem[] = existingBindings
-      .filter((binding): binding is Required<Pick<ProjectSkillVo, "skillId" | "skillLevelId">> =>
+      .filter((binding: any): binding is Required<Pick<ProjectSkillVo, "skillId" | "skillLevelId">> =>
         Boolean(binding.skillId && binding.skillLevelId)
       )
-      .map((binding) => ({
+      .map((binding: any) => ({
         skillId: binding.skillId,
         skillLevelId: binding.skillLevelId
       }))

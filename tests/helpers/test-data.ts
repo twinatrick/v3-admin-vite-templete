@@ -43,7 +43,6 @@ export function createMockRole(override: Partial<RoleOutVo> = {}): RoleOutVo {
     id: `role-${Math.random().toString(36).substr(2, 9)}`,
     name: "測試角色",
     description: "這是一個測試角色",
-    permissions: "",
     createdBy: "admin",
     updatedBy: "admin",
     createdTime: new Date().toISOString(),

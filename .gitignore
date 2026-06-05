@@ -5,7 +5,8 @@ node_modules
 dist
 dist-ssr
 *.local
-.npmrc
+# .npmrc
+.npmrc.local
 cypress/screenshots
 cypress/videos
 .idea/*

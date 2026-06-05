@@ -171,7 +171,7 @@ const parseTitle = (route: TagView) => {
   if (typeof title === "string") {
     return title
   } else if (typeof title === "function") {
-    return title(route)
+    return (title as (route: TagView) => string)(route)
   } else {
     return "Parsed error"
   }

@@ -3,8 +3,18 @@
  * 用於在測試中模擬 API 回應
  */
 
-import { vi } from "vitest"
-import type { ApiResponse } from "@/api/generated/Api"
+import { vi, expect } from "vitest"
+
+/**
+ * API 回應類型定義
+ * 用於測試中的 mock 回應
+ */
+export interface ApiResponse<T> {
+  code: number
+  data: T
+  message: string
+  errorType?: string
+}
 
 /**
  * 創建成功的 API 回應
