@@ -35,12 +35,36 @@ const show = async () => {
   formData.data = { ...prop.data } // 使用 formData.data = { ...prop.data } 來更新響應式對象
   formData.reset()
   formData.data = { ...prop.data } // 確保數據完整複製
-  selectedFunctionIds.value = [...(formData.functionKeys || [])]
-  OldFunctionKeys.value = [...(formData.functionKeys || [])]
+
+  // 1. 優先使用 functionKeys，若不存在則使用 functionIds
+  const rawFunctionIds = formData.functionKeys || formData.data.functionIds || []
+
+  // 2. 過濾掉不存在於 allFunctions 中的 function ID
+  const validFunctionIds = rawFunctionIds.filter((id) => isFunctionIdValid(id, prop.allFunctions))
+
+  // 3. 更新 formData 中的 functionKeys
+  formData.functionKeys = validFunctionIds
+
+  // 4. 初始化選擇框的值
+  selectedFunctionIds.value = [...validFunctionIds]
+  OldFunctionKeys.value = [...validFunctionIds]
+
   formRef.value?.resetFields()
   visible.value = true
 }
 const OldFunctionKeys = ref<string[]>([])
+
+/**
+ * 檢查 function ID 是否存在於樹形結構中
+ */
+const isFunctionIdValid = (id: string, functions: TreeProp[]): boolean => {
+  for (const func of functions) {
+    if (func.id === id) return true
+    if (func.children && isFunctionIdValid(id, func.children)) return true
+  }
+  return false
+}
+
 const hide = () => {
   visible.value = false
 }
