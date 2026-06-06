@@ -94,20 +94,20 @@ export const constantRoutes: RouteRecordRaw[] = [
     },
     children: [
       {
-        path: "skill",
-        component: () => import("@/views/personal-management/skill/index.vue"),
-        meta: {
-          title: "我的技能",
-          elIcon: "Star",
-          keepAlive: false
-        }
-      },
-      {
         path: "project",
         component: () => import("@/views/personal-management/project/index.vue"),
         meta: {
           title: "我的項目",
           elIcon: "Folder",
+          keepAlive: false
+        }
+      },
+      {
+        path: "job",
+        component: () => import("@/views/personal-management/job/index.vue"),
+        meta: {
+          title: "我的職缺",
+          elIcon: "List",
           keepAlive: false
         }
       }
@@ -222,6 +222,36 @@ export const asyncRoutes: RouteRecordRaw[] = [
         meta: {
           title: "項目管理",
           elIcon: "Folder",
+          keepAlive: false
+        }
+      },
+      {
+        path: "company",
+        component: () => import("@/views/system-management/company/index.vue"),
+        name: "Company:View",
+        meta: {
+          title: "公司管理",
+          elIcon: "OfficeBuilding",
+          keepAlive: false
+        }
+      },
+      {
+        path: "jobPosting",
+        component: () => import("@/views/system-management/jobPosting/index.vue"),
+        name: "JobPosting:View",
+        meta: {
+          title: "職缺管理",
+          elIcon: "List",
+          keepAlive: false
+        }
+      },
+      {
+        path: "userJobLink",
+        component: () => import("@/views/system-management/userJobLink/index.vue"),
+        name: "UserJobLink:View",
+        meta: {
+          title: "職缺連結管理",
+          elIcon: "Link",
           keepAlive: false
         }
       }

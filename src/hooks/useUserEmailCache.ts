@@ -13,8 +13,6 @@ type UserSelectOption = {
 }
 
 const CACHE_TTL_MS = 5 * 60 * 1000
-const PAGE_SIZE = 200
-const MAX_PAGES = 50
 
 const userEmailMap = ref<Record<string, string>>({})
 const userOptions = ref<UserSelectOption[]>([])
@@ -32,41 +30,26 @@ async function loadUserEmailCache(force = false) {
   if (loadingPromise) return loadingPromise
 
   loadingPromise = (async () => {
+    const res = await api.users.getAllUser()
+    const users: UserVo[] = res.data || []
+
     const nextMap: Record<string, string> = {}
     const nextOptions: UserSelectOption[] = []
-    let page = 0
 
-    for (let index = 0; index < MAX_PAGES; index += 1) {
-      const res = await api.users.searchUsers({
-        page,
-        size: PAGE_SIZE,
-        sortBy: "createdTime",
-        sortDir: "desc"
+    users.forEach((user) => {
+      if (!user.id) return
+      const email = user.email || user.id
+      const name = user.name || ""
+      const disabled = Boolean(user.disabled)
+      nextMap[user.id] = email
+      nextOptions.push({
+        label: name ? `${email} (${name})` : email,
+        value: user.id,
+        email,
+        name,
+        disabled
       })
-
-      const pageResult = res.data || {}
-      const users: UserVo[] = pageResult.content || []
-
-      users.forEach((user) => {
-        if (!user.id) return
-        const email = user.email || user.id
-        const name = user.name || ""
-        const disabled = Boolean(user.disabled)
-        nextMap[user.id] = email
-        nextOptions.push({
-          label: name ? `${email} (${name})` : email,
-          value: user.id,
-          email,
-          name,
-          disabled
-        })
-      })
-
-      if (!pageResult.hasNext) break
-
-      const currentPage = pageResult.currentPage ?? page
-      page = currentPage + 1
-    }
+    })
 
     userEmailMap.value = nextMap
     userOptions.value = nextOptions
