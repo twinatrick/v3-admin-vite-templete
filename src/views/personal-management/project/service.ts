@@ -1,6 +1,6 @@
 import { reactive } from "vue"
 import { api } from "@/api/client"
-import { CurrentUserSkillVo, ProjectSearchQuery, ProjectVo } from "@/api/generated/Api"
+import { CurrentUserSkillVo, ProjectSearchQuery, ProjectVo, SkillLevelBindingItem } from "@/api/generated/Api"
 import { resolveErrorMessage } from "@/utils"
 
 class Data {
@@ -112,24 +112,11 @@ function createService() {
     return res.data || []
   }
 
-  async function bindSkillToProject(projectId: string, skillId: string, skillLevelId: string) {
-    const res = await api.projects.bindPersonalProjectSkill(projectId, {
-      skillId,
-      skillLevelId
+  async function rebindProjectSkills(projectId: string, bindings: SkillLevelBindingItem[]) {
+    const res = await api.userBindings.rebindCurrentUserProjectSkills(projectId, {
+      bindings
     })
-    if (res.code !== 200) throw new Error(resolveErrorMessage(res, "綁定技能失敗"))
-  }
-
-  async function updateProjectSkillLevel(projectId: string, skillId: string, skillLevelId: string) {
-    const res = await api.projects.updatePersonalProjectSkillLevel(projectId, skillId, {
-      skillLevelId
-    })
-    if (res.code !== 200) throw new Error(resolveErrorMessage(res, "更新技能等級失敗"))
-  }
-
-  async function unbindSkillFromProject(projectId: string, skillId: string) {
-    const res = await api.projects.unbindPersonalProjectSkill(projectId, skillId)
-    if (res.code !== 200) throw new Error(resolveErrorMessage(res, "解除綁定失敗"))
+    if (res.code !== 200) throw new Error(resolveErrorMessage(res, "更新專案技能綁定失敗"))
   }
 
   return {
@@ -140,9 +127,7 @@ function createService() {
     getAllSkills,
     getSkillLevels,
     getProjectSkills,
-    bindSkillToProject,
-    updateProjectSkillLevel,
-    unbindSkillFromProject
+    rebindProjectSkills
   }
 }
 

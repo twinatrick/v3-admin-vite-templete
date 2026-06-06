@@ -46,27 +46,18 @@ const confirmClick = async () => {
     text: "創建中..."
   })
   try {
-    // 獲取選中的 function IDs
     const checkedKeys = selectedFunctionIds.value
 
-    // 1. 先創建 role（不包含 functionIds，因為後端不會自動處理）
     const requestData: RoleVO = {
       name: formData.name,
-      description: formData.description
+      description: formData.description,
+      functionIds: checkedKeys
     }
 
-    const res = await api.roles.addRole(requestData)
+    const res = await api.roles.addRoleWithFunctions(requestData)
     const data = res?.data
 
-    // 2. 如果有選中的 functions 且創建成功，則綁定 functions
-    if (checkedKeys.length > 0 && data?.id) {
-      await api.roles.roleBindFunction({
-        role: data.id,
-        functionList: checkedKeys
-      })
-    }
-
-    emit("create", { ...data, functionKeys: checkedKeys })
+    emit("create", { ...data, functionKeys: checkedKeys, functionIds: checkedKeys })
     hide()
   } catch (e) {
     console.error(e)
@@ -105,6 +96,7 @@ defineExpose({
           placeholder="請選擇功能權限"
           style="width: 100%"
         />
+        <div class="text-xs text-gray-400 mt-1">儲存時會以目前選取結果完整同步權限。</div>
       </el-form-item>
     </el-form>
     <template #footer>

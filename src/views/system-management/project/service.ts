@@ -1,6 +1,13 @@
 import { reactive } from "vue"
 import { api } from "@/api/client"
-import { ProjectSearchQuery, ProjectSkillVo, ProjectVo, SkillLevelBindingItem, SkillVo } from "@/api/generated/Api"
+import {
+  MemberSkillBindings,
+  ProjectSearchQuery,
+  ProjectVo,
+  SkillLevelBindingItem,
+  SkillVo,
+  UserVo
+} from "@/api/generated/Api"
 import { resolveErrorMessage } from "@/utils"
 
 class Data {
@@ -12,6 +19,7 @@ class Data {
   sortDir: "asc" | "desc"
   filters: Omit<ProjectSearchQuery, "page" | "size" | "sortBy" | "sortDir" | "normalizedSortDir" | "validSortDir">
   allSkills: SkillVo[]
+  allUsers: UserVo[]
 
   constructor() {
     this.projects = []
@@ -26,6 +34,7 @@ class Data {
       createdBy: ""
     }
     this.allSkills = []
+    this.allUsers = []
   }
 }
 
@@ -93,6 +102,12 @@ function createService() {
     return data.allSkills
   }
 
+  async function getAllUsers() {
+    const res = await api.users.getAllUser()
+    data.allUsers = res.data || []
+    return data.allUsers
+  }
+
   async function getSkillLevels(skillId: string) {
     const res = await api.skills.getSkillLevels(skillId)
     return res.data || []
@@ -111,32 +126,12 @@ function createService() {
     if (res.code !== 200) throw new Error(resolveErrorMessage(res, "更新專案技能綁定失敗"))
   }
 
-  async function bindSkillToProject(projectId: string, skillId: string, skillLevelId: string) {
-    const existingBindings = await getProjectSkills(projectId)
-    const nextBindings: SkillLevelBindingItem[] = existingBindings
-      .filter((binding: any): binding is Required<Pick<ProjectSkillVo, "skillId" | "skillLevelId">> =>
-        Boolean(binding.skillId && binding.skillLevelId)
-      )
-      .map((binding: any) => ({
-        skillId: binding.skillId,
-        skillLevelId: binding.skillLevelId
-      }))
-
-    const existingIndex = nextBindings.findIndex((binding) => binding.skillId === skillId)
-    if (existingIndex >= 0) {
-      nextBindings[existingIndex].skillLevelId = skillLevelId
-    } else {
-      nextBindings.push({
-        skillId,
-        skillLevelId
-      })
-    }
-
-    const res = await api.adminBindings.rebindProjectSkills({
+  async function rebindProjectMemberSkills(projectId: string, members: MemberSkillBindings[]) {
+    const res = await api.adminBindings.rebindProjectMemberSkills({
       projectId,
-      bindings: nextBindings
+      members
     })
-    if (res.code !== 200) throw new Error(resolveErrorMessage(res, "綁定技能失敗"))
+    if (res.code !== 200) throw new Error(resolveErrorMessage(res, "更新專案成員技能等級失敗"))
   }
 
   return {
@@ -145,10 +140,11 @@ function createService() {
     saveProject,
     deleteProject,
     getAllSkills,
+    getAllUsers,
     getSkillLevels,
     getProjectSkills,
     rebindProjectSkills,
-    bindSkillToProject
+    rebindProjectMemberSkills
   }
 }
 

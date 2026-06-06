@@ -35,354 +35,6 @@ export interface RepresentationModelObject {
   _links?: Links
 }
 
-export interface EntityModelProject {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  description?: string
-  _links?: Links
-}
-
-export interface PageMetadata {
-  /** @format int64 */
-  size?: number
-  /** @format int64 */
-  totalElements?: number
-  /** @format int64 */
-  totalPages?: number
-  /** @format int64 */
-  number?: number
-}
-
-export interface PagedModelEntityModelProject {
-  _embedded?: {
-    projects?: EntityModelProject[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelProject {
-  _embedded?: {
-    projects?: EntityModelProject[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelRole {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  description?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelRole {
-  _embedded?: {
-    roles?: EntityModelRole[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface Role {
-  /** @format uuid */
-  id?: string
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  description?: string
-}
-
-export interface CollectionModelEntityModelRole {
-  _embedded?: {
-    roles?: EntityModelRole[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelAlertCheckLimit {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  tableName?: string
-  columnName?: string
-  /** @format double */
-  limitValue?: number
-  _links?: Links
-}
-
-export interface PagedModelEntityModelAlertCheckLimit {
-  _embedded?: {
-    alertCheckLimits?: EntityModelAlertCheckLimit[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelAlertCheckLimit {
-  _embedded?: {
-    alertCheckLimits?: EntityModelAlertCheckLimit[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelUser {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  email?: string
-  phone?: string
-  disabled?: boolean
-  roleArr?: string[]
-  _links?: Links
-}
-
-export interface PagedModelEntityModelUser {
-  _embedded?: {
-    users?: EntityModelUser[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface User {
-  /** @format uuid */
-  id?: string
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  email?: string
-  phone?: string
-  disabled?: boolean
-  roleArr?: string[]
-}
-
-export interface EntityModelUserSkill {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelUserSkill {
-  _embedded?: {
-    userSkills?: EntityModelUserSkill[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface EntityModelSkill {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  description?: string
-  _links?: Links
-}
-
-export interface CollectionModelObject {
-  _embedded?: {
-    objects?: object[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelSkillLevel {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  /** @format int32 */
-  levelValue?: number
-  title?: string
-  description?: string
-  _links?: Links
-}
-
-export interface CollectionModelEntityModelUserSkill {
-  _embedded?: {
-    userSkills?: EntityModelUserSkill[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelUserProject {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelUserProject {
-  _embedded?: {
-    userProjects?: EntityModelUserProject[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelUserProject {
-  _embedded?: {
-    userProjects?: EntityModelUserProject[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelUserRole {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelUserRole {
-  _embedded?: {
-    userRoles?: EntityModelUserRole[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelUserRole {
-  _embedded?: {
-    userRoles?: EntityModelUserRole[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelFunction {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  parent?: string
-  sort?: string
-  /** @format int32 */
-  type?: number
-  _links?: Links
-}
-
-export interface Function {
-  /** @format uuid */
-  id?: string
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  parent?: string
-  sort?: string
-  /** @format int32 */
-  type?: number
-}
-
-export interface PagedModelEntityModelFunction {
-  _embedded?: {
-    functions?: EntityModelFunction[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelFunction {
-  _embedded?: {
-    functions?: EntityModelFunction[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelRoleFunction {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelRoleFunction {
-  _embedded?: {
-    roleFunctions?: EntityModelRoleFunction[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface PagedModelEntityModelSkill {
-  _embedded?: {
-    skills?: EntityModelSkill[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelSkill {
-  _embedded?: {
-    skills?: EntityModelSkill[]
-  }
-  _links?: Links
-}
-
-export interface PagedModelEntityModelSkillLevel {
-  _embedded?: {
-    skillLevels?: EntityModelSkillLevel[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelSkillLevel {
-  _embedded?: {
-    skillLevels?: EntityModelSkillLevel[]
-  }
-  _links?: Links
-}
-
 export interface EntityModelAquarkData {
   createdBy?: string
   updatedBy?: string
@@ -422,6 +74,17 @@ export interface EntityModelAquarkData {
   _links?: Links
 }
 
+export interface PageMetadata {
+  /** @format int64 */
+  size?: number
+  /** @format int64 */
+  totalElements?: number
+  /** @format int64 */
+  totalPages?: number
+  /** @format int64 */
+  number?: number
+}
+
 export interface PagedModelEntityModelAquarkData {
   _embedded?: {
     aquarkDatas?: EntityModelAquarkData[]
@@ -433,6 +96,361 @@ export interface PagedModelEntityModelAquarkData {
 export interface CollectionModelEntityModelAquarkData {
   _embedded?: {
     aquarkDatas?: EntityModelAquarkData[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelSkill {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  description?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelSkill {
+  _embedded?: {
+    skills?: EntityModelSkill[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelSkill {
+  _embedded?: {
+    skills?: EntityModelSkill[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelUserRole {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUserRole {
+  _embedded?: {
+    userRoles?: EntityModelUserRole[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelUserRole {
+  _embedded?: {
+    userRoles?: EntityModelUserRole[]
+  }
+  _links?: Links
+}
+
+export interface User {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  email?: string
+  phone?: string
+  disabled?: boolean
+  roleArr?: string[]
+}
+
+export interface Role {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  description?: string
+}
+
+export interface EntityModelProject {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  description?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelProject {
+  _embedded?: {
+    projects?: EntityModelProject[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelProject {
+  _embedded?: {
+    projects?: EntityModelProject[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelProjectSkill {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelProjectSkill {
+  _embedded?: {
+    projectSkills?: EntityModelProjectSkill[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface EntityModelSkillLevel {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  /** @format int32 */
+  levelValue?: number
+  title?: string
+  description?: string
+  _links?: Links
+}
+
+export interface CollectionModelObject {
+  _embedded?: {
+    objects?: object[]
+  }
+  _links?: Links
+}
+
+export interface CollectionModelEntityModelProjectSkill {
+  _embedded?: {
+    projectSkills?: EntityModelProjectSkill[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelCompanyWebsite {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  url?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelCompanyWebsite {
+  _embedded?: {
+    companyWebsites?: EntityModelCompanyWebsite[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface EntityModelCompany {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  description?: string
+  /** @format date */
+  lastScrapedAt?: string
+  _links?: Links
+}
+
+export interface EntityModelUserProject {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUserProject {
+  _embedded?: {
+    userProjects?: EntityModelUserProject[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelUserProject {
+  _embedded?: {
+    userProjects?: EntityModelUserProject[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelJobPosting {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  title?: string
+  url?: string
+  description?: string
+  requirements?: string
+  responsibilities?: string
+  salaryRange?: string
+  /** @format date */
+  postedDate?: string
+  geminiAnalysis?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelJobPosting {
+  _embedded?: {
+    jobPostings?: EntityModelJobPosting[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface PagedModelEntityModelSkillLevel {
+  _embedded?: {
+    skillLevels?: EntityModelSkillLevel[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelSkillLevel {
+  _embedded?: {
+    skillLevels?: EntityModelSkillLevel[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelUser {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  email?: string
+  phone?: string
+  disabled?: boolean
+  roleArr?: string[]
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUser {
+  _embedded?: {
+    users?: EntityModelUser[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface EntityModelRoleFunction {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelRoleFunction {
+  _embedded?: {
+    roleFunctions?: EntityModelRoleFunction[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface Function {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  parent?: string
+  sort?: string
+  /** @format int32 */
+  type?: number
+}
+
+export interface PagedModelEntityModelCompany {
+  _embedded?: {
+    companies?: EntityModelCompany[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelCompanyWebsite {
+  _embedded?: {
+    companyWebsites?: CompanyWebsiteResponse[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelAlertCheckLimit {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  tableName?: string
+  columnName?: string
+  /** @format double */
+  limitValue?: number
+  _links?: Links
+}
+
+export interface PagedModelEntityModelAlertCheckLimit {
+  _embedded?: {
+    alertCheckLimits?: EntityModelAlertCheckLimit[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelAlertCheckLimit {
+  _embedded?: {
+    alertCheckLimits?: EntityModelAlertCheckLimit[]
   }
   _links?: Links
 }
@@ -462,7 +480,7 @@ export interface CollectionModelEntityModelUserProjectSkill {
   _links?: Links
 }
 
-export interface EntityModelProjectSkill {
+export interface EntityModelUserSkill {
   createdBy?: string
   updatedBy?: string
   /** @format date-time */
@@ -472,17 +490,94 @@ export interface EntityModelProjectSkill {
   _links?: Links
 }
 
-export interface PagedModelEntityModelProjectSkill {
+export interface PagedModelEntityModelUserSkill {
   _embedded?: {
-    projectSkills?: EntityModelProjectSkill[]
+    userSkills?: EntityModelUserSkill[]
   }
   _links?: Links
   page?: PageMetadata
 }
 
-export interface CollectionModelEntityModelProjectSkill {
+export interface CollectionModelEntityModelUserSkill {
   _embedded?: {
-    projectSkills?: EntityModelProjectSkill[]
+    userSkills?: EntityModelUserSkill[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelFunction {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  parent?: string
+  sort?: string
+  /** @format int32 */
+  type?: number
+  _links?: Links
+}
+
+export interface PagedModelEntityModelFunction {
+  _embedded?: {
+    functions?: EntityModelFunction[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelFunction {
+  _embedded?: {
+    functions?: EntityModelFunction[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelUserJobLink {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  userNotes?: string
+  geminiFeedback?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUserJobLink {
+  _embedded?: {
+    userJobLinks?: EntityModelUserJobLink[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface EntityModelRole {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  description?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelRole {
+  _embedded?: {
+    roles?: EntityModelRole[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelRole {
+  _embedded?: {
+    roles?: EntityModelRole[]
   }
   _links?: Links
 }
@@ -542,6 +637,45 @@ export interface AquarkDataRequestBody {
   csq?: string
 }
 
+export interface CompanyRequestBody {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  websites?: string[]
+  description?: string
+  /** @format date */
+  lastScrapedAt?: string
+}
+
+export interface CompanyWebsiteRequestBody {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  company?: string
+  url?: string
+}
+
+export interface CompanyWebsiteResponse {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  url?: string
+}
+
 export interface FunctionRequestBody {
   /** @format uuid */
   id?: string
@@ -556,6 +690,27 @@ export interface FunctionRequestBody {
   sort?: string
   /** @format int32 */
   type?: number
+}
+
+export interface JobPostingRequestBody {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  company?: string
+  title?: string
+  url?: string
+  description?: string
+  requirements?: string
+  responsibilities?: string
+  salaryRange?: string
+  /** @format date */
+  postedDate?: string
+  geminiAnalysis?: string
 }
 
 export interface ProjectSkillRequestBody {
@@ -636,6 +791,37 @@ export interface RoleRequestBody {
   description?: string
 }
 
+export interface UserRequestBody {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  email?: string
+  phone?: string
+  disabled?: boolean
+  roleArr?: string[]
+}
+
+export interface UserJobLinkRequestBody {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  user?: string
+  jobPosting?: string
+  userNotes?: string
+  geminiFeedback?: string
+}
+
 export interface UserProjectSkillRequestBody {
   /** @format uuid */
   id?: string
@@ -685,22 +871,6 @@ export interface UserSkillRequestBody {
   skillLevel?: string
 }
 
-export interface UserRequestBody {
-  /** @format uuid */
-  id?: string
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  email?: string
-  phone?: string
-  disabled?: boolean
-  roleArr?: string[]
-}
-
 export interface PersonalProjectSkillLevelRequest {
   skillLevelId?: string
 }
@@ -718,9 +888,67 @@ export interface PersonalProjectRequest {
   description?: string
 }
 
+export interface JobPostingVo {
+  id?: string
+  companyId?: string
+  companyName?: string
+  title?: string
+  url?: string
+  description?: string
+  requirements?: string
+  responsibilities?: string
+  salaryRange?: string
+  /** @format date */
+  postedDate?: string
+  geminiAnalysis?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+}
+
+export interface ResponseTypeJobPostingVo {
+  /** @format int32 */
+  code?: number
+  data?: JobPostingVo
+  message?: string
+  errorType?: string
+}
+
+export interface UpdateCompanyRequest {
+  /** @format uuid */
+  id?: string
+  name?: string
+  websites?: string[]
+  description?: string
+}
+
+export interface CompanyVo {
+  id?: string
+  name?: string
+  websites?: string[]
+  description?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+}
+
+export interface ResponseTypeCompanyVo {
+  /** @format int32 */
+  code?: number
+  data?: CompanyVo
+  message?: string
+  errorType?: string
+}
+
 export interface UserRoleRebindRequest {
   userId?: string
-  roleIds?: string[]
+  roleIds: string[]
 }
 
 /** 使用者搜尋查詢參數 */
@@ -867,12 +1095,37 @@ export interface UserProjectBindRequest {
 }
 
 export interface SkillBindingsRebindRequest {
-  bindings?: SkillLevelBindingItem[]
+  bindings: SkillLevelBindingItem[]
 }
 
 export interface SkillLevelBindingItem {
-  skillId?: string
-  skillLevelId?: string
+  skillId: string
+  skillLevelId: string
+}
+
+export interface UserJobLinkVo {
+  id?: string
+  userId?: string
+  userEmail?: string
+  jobPostingId?: string
+  jobTitle?: string
+  companyName?: string
+  userNotes?: string
+  geminiFeedback?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+}
+
+export interface ResponseTypeUserJobLinkVo {
+  /** @format int32 */
+  code?: number
+  data?: UserJobLinkVo
+  message?: string
+  errorType?: string
 }
 
 export interface SkillVo {
@@ -1486,6 +1739,26 @@ export interface ProjectSkillBindRequest {
   skillLevelId?: string
 }
 
+export interface ResponseTypeListJobPostingVo {
+  /** @format int32 */
+  code?: number
+  data?: JobPostingVo[]
+  message?: string
+  errorType?: string
+}
+
+export interface CreateJobPostingRequest {
+  companyId: string
+  title: string
+  url: string
+  description?: string
+  requirements?: string
+  responsibilities?: string
+  salaryRange?: string
+  /** @format date */
+  postedDate?: string
+}
+
 /** 功能搜尋查詢參數 */
 export interface FunctionSearchQuery {
   /**
@@ -1593,6 +1866,12 @@ export interface ResponseTypeObject {
   data?: object
   message?: string
   errorType?: string
+}
+
+export interface CreateCompanyRequest {
+  name: string
+  websites: string[]
+  description?: string
 }
 
 export interface SuperUserRequest {
@@ -1846,28 +2125,36 @@ export interface ResponseTypePageResultAlertCheckLimitVo {
 }
 
 export interface UserSkillRebindRequest {
-  userId?: string
-  bindings?: SkillLevelBindingItem[]
+  userId: string
+  bindings: SkillLevelBindingItem[]
 }
 
 export interface UserProjectRebindRequest {
-  userId?: string
-  projectIds?: string[]
+  userId: string
+  projectIds: string[]
 }
 
 export interface ProjectSkillRebindRequest {
-  projectId?: string
-  bindings?: SkillLevelBindingItem[]
+  projectId: string
+  bindings: SkillLevelBindingItem[]
 }
 
 export interface MemberSkillBindings {
-  userId?: string
+  userId: string
   skills?: SkillLevelBindingItem[]
 }
 
 export interface ProjectMemberSkillsRebindRequest {
-  projectId?: string
-  members?: MemberSkillBindings[]
+  projectId: string
+  members: MemberSkillBindings[]
+}
+
+export interface ResponseTypeListUserJobLinkVo {
+  /** @format int32 */
+  code?: number
+  data?: UserJobLinkVo[]
+  message?: string
+  errorType?: string
 }
 
 export interface ResponseTypeListSkillLevelVo {
@@ -1934,10 +2221,41 @@ export interface ResponseTypeListProjectSkillVo {
   errorType?: string
 }
 
+export interface MemberSkillLevelVo {
+  skillId?: string
+  skillName?: string
+  skillLevelId?: string
+  levelTitle?: string
+  /** @format int32 */
+  levelValue?: number
+}
+
+export interface ProjectMemberSkillVo {
+  userId?: string
+  userEmail?: string
+  skills?: MemberSkillLevelVo[]
+}
+
+export interface ResponseTypeListProjectMemberSkillVo {
+  /** @format int32 */
+  code?: number
+  data?: ProjectMemberSkillVo[]
+  message?: string
+  errorType?: string
+}
+
 export interface ResponseTypeListProjectVo {
   /** @format int32 */
   code?: number
   data?: ProjectVo[]
+  message?: string
+  errorType?: string
+}
+
+export interface ResponseTypeListCompanyVo {
+  /** @format int32 */
+  code?: number
+  data?: CompanyVo[]
   message?: string
   errorType?: string
 }
@@ -2445,6 +2763,482 @@ export class Api<SecurityDataType extends unknown> {
         ...params
       })
   }
+  companyEntityController = {
+    /**
+     * @description get-company
+     *
+     * @tags company-entity-controller
+     * @name GetCollectionResourceCompanyGet
+     * @request GET:/companies
+     * @response `200` `PagedModelEntityModelCompany` OK
+     */
+    "getCollectionResource-company-get": (
+      query?: {
+        /**
+         * Zero-based page index (0..N)
+         * @min 0
+         * @default 0
+         */
+        page?: number
+        /**
+         * The size of the page to be returned
+         * @min 1
+         * @default 20
+         */
+        size?: number
+        /** Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+        sort?: string[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<PagedModelEntityModelCompany, any>({
+        path: `/companies`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description create-company
+     *
+     * @tags company-entity-controller
+     * @name PostCollectionResourceCompanyPost
+     * @request POST:/companies
+     * @response `201` `EntityModelCompany` Created
+     */
+    "postCollectionResource-company-post": (data: CompanyRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelCompany, any>({
+        path: `/companies`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-company
+     *
+     * @tags company-entity-controller
+     * @name GetItemResourceCompanyGet
+     * @request GET:/companies/{id}
+     * @response `200` `EntityModelCompany` OK
+     * @response `404` `any` Not Found
+     */
+    "getItemResource-company-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelCompany, any>({
+        path: `/companies/${id}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-company
+     *
+     * @tags company-entity-controller
+     * @name PutItemResourceCompanyPut
+     * @request PUT:/companies/{id}
+     * @response `200` `EntityModelCompany` OK
+     * @response `201` `EntityModelCompany` Created
+     * @response `204` `any` No Content
+     */
+    "putItemResource-company-put": (id: string, data: CompanyRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelCompany, any>({
+        path: `/companies/${id}`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-company
+     *
+     * @tags company-entity-controller
+     * @name DeleteItemResourceCompanyDelete
+     * @request DELETE:/companies/{id}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deleteItemResource-company-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/companies/${id}`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-company
+     *
+     * @tags company-entity-controller
+     * @name PatchItemResourceCompanyPatch
+     * @request PATCH:/companies/{id}
+     * @response `200` `EntityModelCompany` OK
+     * @response `204` `any` No Content
+     */
+    "patchItemResource-company-patch": (id: string, data: CompanyRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelCompany, any>({
+        path: `/companies/${id}`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      })
+  }
+  companyPropertyReferenceController = {
+    /**
+     * @description get-companywebsite-by-company-Id
+     *
+     * @tags company-property-reference-controller
+     * @name FollowPropertyReferenceCompanyGet
+     * @request GET:/companies/{id}/websites
+     * @response `200` `CollectionModelCompanyWebsite` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-company-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<CollectionModelCompanyWebsite, any>({
+        path: `/companies/${id}/websites`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-companywebsite-by-company-Id
+     *
+     * @tags company-property-reference-controller
+     * @name CreatePropertyReferenceCompanyPut
+     * @request PUT:/companies/{id}/websites
+     * @response `200` `CollectionModelCompanyWebsite` OK
+     * @response `201` `CollectionModelCompanyWebsite` Created
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-company-put": (id: string, data: CollectionModelObject, params: RequestParams = {}) =>
+      this.http.request<CollectionModelCompanyWebsite, any>({
+        path: `/companies/${id}/websites`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-companywebsite-by-company-Id
+     *
+     * @tags company-property-reference-controller
+     * @name DeletePropertyReferenceCompanyDelete
+     * @request DELETE:/companies/{id}/websites
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReference-company-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/companies/${id}/websites`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-companywebsite-by-company-Id
+     *
+     * @tags company-property-reference-controller
+     * @name CreatePropertyReferenceCompanyPatch
+     * @request PATCH:/companies/{id}/websites
+     * @response `200` `CollectionModelCompanyWebsite` OK
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-company-patch": (id: string, data: CollectionModelObject, params: RequestParams = {}) =>
+      this.http.request<CollectionModelCompanyWebsite, any>({
+        path: `/companies/${id}/websites`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-companywebsite-by-company-Id
+     *
+     * @tags company-property-reference-controller
+     * @name FollowPropertyReferenceCompanyGet1
+     * @request GET:/companies/{id}/websites/{propertyId}
+     * @response `200` `CollectionModelCompanyWebsite` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-company-get_1": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<CollectionModelCompanyWebsite, any>({
+        path: `/companies/${id}/websites/${propertyId}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-companywebsite-by-company-Id
+     *
+     * @tags company-property-reference-controller
+     * @name DeletePropertyReferenceIdCompanyDelete
+     * @request DELETE:/companies/{id}/websites/{propertyId}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReferenceId-company-delete": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/companies/${id}/websites/${propertyId}`,
+        method: "DELETE",
+        ...params
+      })
+  }
+  companyWebsiteEntityController = {
+    /**
+     * @description get-companywebsite
+     *
+     * @tags company-website-entity-controller
+     * @name GetCollectionResourceCompanywebsiteGet
+     * @request GET:/companyWebsites
+     * @response `200` `PagedModelEntityModelCompanyWebsite` OK
+     */
+    "getCollectionResource-companywebsite-get": (
+      query?: {
+        /**
+         * Zero-based page index (0..N)
+         * @min 0
+         * @default 0
+         */
+        page?: number
+        /**
+         * The size of the page to be returned
+         * @min 1
+         * @default 20
+         */
+        size?: number
+        /** Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+        sort?: string[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<PagedModelEntityModelCompanyWebsite, any>({
+        path: `/companyWebsites`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description create-companywebsite
+     *
+     * @tags company-website-entity-controller
+     * @name PostCollectionResourceCompanywebsitePost
+     * @request POST:/companyWebsites
+     * @response `201` `EntityModelCompanyWebsite` Created
+     */
+    "postCollectionResource-companywebsite-post": (data: CompanyWebsiteRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelCompanyWebsite, any>({
+        path: `/companyWebsites`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-companywebsite
+     *
+     * @tags company-website-entity-controller
+     * @name GetItemResourceCompanywebsiteGet
+     * @request GET:/companyWebsites/{id}
+     * @response `200` `EntityModelCompanyWebsite` OK
+     * @response `404` `any` Not Found
+     */
+    "getItemResource-companywebsite-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelCompanyWebsite, any>({
+        path: `/companyWebsites/${id}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-companywebsite
+     *
+     * @tags company-website-entity-controller
+     * @name PutItemResourceCompanywebsitePut
+     * @request PUT:/companyWebsites/{id}
+     * @response `200` `EntityModelCompanyWebsite` OK
+     * @response `201` `EntityModelCompanyWebsite` Created
+     * @response `204` `any` No Content
+     */
+    "putItemResource-companywebsite-put": (id: string, data: CompanyWebsiteRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelCompanyWebsite, any>({
+        path: `/companyWebsites/${id}`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-companywebsite
+     *
+     * @tags company-website-entity-controller
+     * @name DeleteItemResourceCompanywebsiteDelete
+     * @request DELETE:/companyWebsites/{id}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deleteItemResource-companywebsite-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/companyWebsites/${id}`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-companywebsite
+     *
+     * @tags company-website-entity-controller
+     * @name PatchItemResourceCompanywebsitePatch
+     * @request PATCH:/companyWebsites/{id}
+     * @response `200` `EntityModelCompanyWebsite` OK
+     * @response `204` `any` No Content
+     */
+    "patchItemResource-companywebsite-patch": (
+      id: string,
+      data: CompanyWebsiteRequestBody,
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelCompanyWebsite, any>({
+        path: `/companyWebsites/${id}`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      })
+  }
+  companyWebsitePropertyReferenceController = {
+    /**
+     * @description get-company-by-companywebsite-Id
+     *
+     * @tags company-website-property-reference-controller
+     * @name FollowPropertyReferenceCompanywebsiteGet
+     * @request GET:/companyWebsites/{id}/company
+     * @response `200` `EntityModelCompany` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-companywebsite-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelCompany, any>({
+        path: `/companyWebsites/${id}/company`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-company-by-companywebsite-Id
+     *
+     * @tags company-website-property-reference-controller
+     * @name CreatePropertyReferenceCompanywebsitePut
+     * @request PUT:/companyWebsites/{id}/company
+     * @response `200` `EntityModelCompany` OK
+     * @response `201` `EntityModelCompany` Created
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-companywebsite-put": (
+      id: string,
+      data: CollectionModelObject,
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelCompany, any>({
+        path: `/companyWebsites/${id}/company`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-company-by-companywebsite-Id
+     *
+     * @tags company-website-property-reference-controller
+     * @name DeletePropertyReferenceCompanywebsiteDelete
+     * @request DELETE:/companyWebsites/{id}/company
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReference-companywebsite-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/companyWebsites/${id}/company`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-company-by-companywebsite-Id
+     *
+     * @tags company-website-property-reference-controller
+     * @name CreatePropertyReferenceCompanywebsitePatch
+     * @request PATCH:/companyWebsites/{id}/company
+     * @response `200` `EntityModelCompany` OK
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-companywebsite-patch": (
+      id: string,
+      data: CollectionModelObject,
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelCompany, any>({
+        path: `/companyWebsites/${id}/company`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-company-by-companywebsite-Id
+     *
+     * @tags company-website-property-reference-controller
+     * @name FollowPropertyReferenceCompanywebsiteGet1
+     * @request GET:/companyWebsites/{id}/company/{propertyId}
+     * @response `200` `EntityModelCompany` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-companywebsite-get_1": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelCompany, any>({
+        path: `/companyWebsites/${id}/company/${propertyId}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-company-by-companywebsite-Id
+     *
+     * @tags company-website-property-reference-controller
+     * @name DeletePropertyReferenceIdCompanywebsiteDelete
+     * @request DELETE:/companyWebsites/{id}/company/{propertyId}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReferenceId-companywebsite-delete": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/companyWebsites/${id}/company/${propertyId}`,
+        method: "DELETE",
+        ...params
+      })
+  }
   functionEntityController = {
     /**
      * @description get-function
@@ -2665,6 +3459,238 @@ export class Api<SecurityDataType extends unknown> {
         ...params
       })
   }
+  jobPostingEntityController = {
+    /**
+     * @description get-jobposting
+     *
+     * @tags job-posting-entity-controller
+     * @name GetCollectionResourceJobpostingGet
+     * @request GET:/jobPostings
+     * @response `200` `PagedModelEntityModelJobPosting` OK
+     */
+    "getCollectionResource-jobposting-get": (
+      query?: {
+        /**
+         * Zero-based page index (0..N)
+         * @min 0
+         * @default 0
+         */
+        page?: number
+        /**
+         * The size of the page to be returned
+         * @min 1
+         * @default 20
+         */
+        size?: number
+        /** Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+        sort?: string[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<PagedModelEntityModelJobPosting, any>({
+        path: `/jobPostings`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description create-jobposting
+     *
+     * @tags job-posting-entity-controller
+     * @name PostCollectionResourceJobpostingPost
+     * @request POST:/jobPostings
+     * @response `201` `EntityModelJobPosting` Created
+     */
+    "postCollectionResource-jobposting-post": (data: JobPostingRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelJobPosting, any>({
+        path: `/jobPostings`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-jobposting
+     *
+     * @tags job-posting-entity-controller
+     * @name GetItemResourceJobpostingGet
+     * @request GET:/jobPostings/{id}
+     * @response `200` `EntityModelJobPosting` OK
+     * @response `404` `any` Not Found
+     */
+    "getItemResource-jobposting-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelJobPosting, any>({
+        path: `/jobPostings/${id}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-jobposting
+     *
+     * @tags job-posting-entity-controller
+     * @name PutItemResourceJobpostingPut
+     * @request PUT:/jobPostings/{id}
+     * @response `200` `EntityModelJobPosting` OK
+     * @response `201` `EntityModelJobPosting` Created
+     * @response `204` `any` No Content
+     */
+    "putItemResource-jobposting-put": (id: string, data: JobPostingRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelJobPosting, any>({
+        path: `/jobPostings/${id}`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-jobposting
+     *
+     * @tags job-posting-entity-controller
+     * @name DeleteItemResourceJobpostingDelete
+     * @request DELETE:/jobPostings/{id}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deleteItemResource-jobposting-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/jobPostings/${id}`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-jobposting
+     *
+     * @tags job-posting-entity-controller
+     * @name PatchItemResourceJobpostingPatch
+     * @request PATCH:/jobPostings/{id}
+     * @response `200` `EntityModelJobPosting` OK
+     * @response `204` `any` No Content
+     */
+    "patchItemResource-jobposting-patch": (id: string, data: JobPostingRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelJobPosting, any>({
+        path: `/jobPostings/${id}`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      })
+  }
+  jobPostingPropertyReferenceController = {
+    /**
+     * @description get-company-by-jobposting-Id
+     *
+     * @tags job-posting-property-reference-controller
+     * @name FollowPropertyReferenceJobpostingGet
+     * @request GET:/jobPostings/{id}/company
+     * @response `200` `EntityModelCompany` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-jobposting-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelCompany, any>({
+        path: `/jobPostings/${id}/company`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-company-by-jobposting-Id
+     *
+     * @tags job-posting-property-reference-controller
+     * @name CreatePropertyReferenceJobpostingPut
+     * @request PUT:/jobPostings/{id}/company
+     * @response `200` `EntityModelCompany` OK
+     * @response `201` `EntityModelCompany` Created
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-jobposting-put": (id: string, data: CollectionModelObject, params: RequestParams = {}) =>
+      this.http.request<EntityModelCompany, any>({
+        path: `/jobPostings/${id}/company`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-company-by-jobposting-Id
+     *
+     * @tags job-posting-property-reference-controller
+     * @name DeletePropertyReferenceJobpostingDelete
+     * @request DELETE:/jobPostings/{id}/company
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReference-jobposting-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/jobPostings/${id}/company`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-company-by-jobposting-Id
+     *
+     * @tags job-posting-property-reference-controller
+     * @name CreatePropertyReferenceJobpostingPatch
+     * @request PATCH:/jobPostings/{id}/company
+     * @response `200` `EntityModelCompany` OK
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-jobposting-patch": (id: string, data: CollectionModelObject, params: RequestParams = {}) =>
+      this.http.request<EntityModelCompany, any>({
+        path: `/jobPostings/${id}/company`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-company-by-jobposting-Id
+     *
+     * @tags job-posting-property-reference-controller
+     * @name FollowPropertyReferenceJobpostingGet1
+     * @request GET:/jobPostings/{id}/company/{propertyId}
+     * @response `200` `EntityModelCompany` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-jobposting-get_1": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelCompany, any>({
+        path: `/jobPostings/${id}/company/${propertyId}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-company-by-jobposting-Id
+     *
+     * @tags job-posting-property-reference-controller
+     * @name DeletePropertyReferenceIdJobpostingDelete
+     * @request DELETE:/jobPostings/{id}/company/{propertyId}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReferenceId-jobposting-delete": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/jobPostings/${id}/company/${propertyId}`,
+        method: "DELETE",
+        ...params
+      })
+  }
   profileController = {
     /**
      * No description
@@ -2719,10 +3745,42 @@ export class Api<SecurityDataType extends unknown> {
      *
      * @tags profile-controller
      * @name Descriptor2
-     * @request GET:/profile/functions
+     * @request GET:/profile/companies
      * @response `200` `string` OK
      */
     descriptor_2: (params: RequestParams = {}) =>
+      this.http.request<string, any>({
+        path: `/profile/companies`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags profile-controller
+     * @name Descriptor3
+     * @request GET:/profile/companyWebsites
+     * @response `200` `string` OK
+     */
+    descriptor_3: (params: RequestParams = {}) =>
+      this.http.request<string, any>({
+        path: `/profile/companyWebsites`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags profile-controller
+     * @name Descriptor4
+     * @request GET:/profile/functions
+     * @response `200` `string` OK
+     */
+    descriptor_4: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/functions`,
         method: "GET",
@@ -2734,11 +3792,27 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags profile-controller
-     * @name Descriptor3
+     * @name Descriptor5
+     * @request GET:/profile/jobPostings
+     * @response `200` `string` OK
+     */
+    descriptor_5: (params: RequestParams = {}) =>
+      this.http.request<string, any>({
+        path: `/profile/jobPostings`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags profile-controller
+     * @name Descriptor6
      * @request GET:/profile/projectSkills
      * @response `200` `string` OK
      */
-    descriptor_3: (params: RequestParams = {}) =>
+    descriptor_6: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/projectSkills`,
         method: "GET",
@@ -2750,11 +3824,11 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags profile-controller
-     * @name Descriptor4
+     * @name Descriptor7
      * @request GET:/profile/projects
      * @response `200` `string` OK
      */
-    descriptor_4: (params: RequestParams = {}) =>
+    descriptor_7: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/projects`,
         method: "GET",
@@ -2766,11 +3840,11 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags profile-controller
-     * @name Descriptor5
+     * @name Descriptor8
      * @request GET:/profile/roleFunctions
      * @response `200` `string` OK
      */
-    descriptor_5: (params: RequestParams = {}) =>
+    descriptor_8: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/roleFunctions`,
         method: "GET",
@@ -2782,11 +3856,11 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags profile-controller
-     * @name Descriptor6
+     * @name Descriptor9
      * @request GET:/profile/roles
      * @response `200` `string` OK
      */
-    descriptor_6: (params: RequestParams = {}) =>
+    descriptor_9: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/roles`,
         method: "GET",
@@ -2798,11 +3872,11 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags profile-controller
-     * @name Descriptor7
+     * @name Descriptor10
      * @request GET:/profile/skillLevels
      * @response `200` `string` OK
      */
-    descriptor_7: (params: RequestParams = {}) =>
+    descriptor_10: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/skillLevels`,
         method: "GET",
@@ -2814,11 +3888,11 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags profile-controller
-     * @name Descriptor8
+     * @name Descriptor11
      * @request GET:/profile/skills
      * @response `200` `string` OK
      */
-    descriptor_8: (params: RequestParams = {}) =>
+    descriptor_11: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/skills`,
         method: "GET",
@@ -2830,11 +3904,27 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags profile-controller
-     * @name Descriptor9
+     * @name Descriptor12
+     * @request GET:/profile/userJobLinks
+     * @response `200` `string` OK
+     */
+    descriptor_12: (params: RequestParams = {}) =>
+      this.http.request<string, any>({
+        path: `/profile/userJobLinks`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags profile-controller
+     * @name Descriptor13
      * @request GET:/profile/userProjectSkills
      * @response `200` `string` OK
      */
-    descriptor_9: (params: RequestParams = {}) =>
+    descriptor_13: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/userProjectSkills`,
         method: "GET",
@@ -2846,11 +3936,11 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags profile-controller
-     * @name Descriptor10
+     * @name Descriptor14
      * @request GET:/profile/userProjects
      * @response `200` `string` OK
      */
-    descriptor_10: (params: RequestParams = {}) =>
+    descriptor_14: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/userProjects`,
         method: "GET",
@@ -2862,11 +3952,11 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags profile-controller
-     * @name Descriptor11
+     * @name Descriptor15
      * @request GET:/profile/userRoles
      * @response `200` `string` OK
      */
-    descriptor_11: (params: RequestParams = {}) =>
+    descriptor_15: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/userRoles`,
         method: "GET",
@@ -2878,11 +3968,11 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags profile-controller
-     * @name Descriptor12
+     * @name Descriptor16
      * @request GET:/profile/userSkills
      * @response `200` `string` OK
      */
-    descriptor_12: (params: RequestParams = {}) =>
+    descriptor_16: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/userSkills`,
         method: "GET",
@@ -2894,11 +3984,11 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags profile-controller
-     * @name Descriptor13
+     * @name Descriptor17
      * @request GET:/profile/users
      * @response `200` `string` OK
      */
-    descriptor_13: (params: RequestParams = {}) =>
+    descriptor_17: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/users`,
         method: "GET",
@@ -4388,6 +5478,355 @@ export class Api<SecurityDataType extends unknown> {
         ...params
       })
   }
+  userJobLinkEntityController = {
+    /**
+     * @description get-userjoblink
+     *
+     * @tags user-job-link-entity-controller
+     * @name GetCollectionResourceUserjoblinkGet
+     * @request GET:/userJobLinks
+     * @response `200` `PagedModelEntityModelUserJobLink` OK
+     */
+    "getCollectionResource-userjoblink-get": (
+      query?: {
+        /**
+         * Zero-based page index (0..N)
+         * @min 0
+         * @default 0
+         */
+        page?: number
+        /**
+         * The size of the page to be returned
+         * @min 1
+         * @default 20
+         */
+        size?: number
+        /** Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. */
+        sort?: string[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<PagedModelEntityModelUserJobLink, any>({
+        path: `/userJobLinks`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description create-userjoblink
+     *
+     * @tags user-job-link-entity-controller
+     * @name PostCollectionResourceUserjoblinkPost
+     * @request POST:/userJobLinks
+     * @response `201` `EntityModelUserJobLink` Created
+     */
+    "postCollectionResource-userjoblink-post": (data: UserJobLinkRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelUserJobLink, any>({
+        path: `/userJobLinks`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-userjoblink
+     *
+     * @tags user-job-link-entity-controller
+     * @name GetItemResourceUserjoblinkGet
+     * @request GET:/userJobLinks/{id}
+     * @response `200` `EntityModelUserJobLink` OK
+     * @response `404` `any` Not Found
+     */
+    "getItemResource-userjoblink-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelUserJobLink, any>({
+        path: `/userJobLinks/${id}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-userjoblink
+     *
+     * @tags user-job-link-entity-controller
+     * @name PutItemResourceUserjoblinkPut
+     * @request PUT:/userJobLinks/{id}
+     * @response `200` `EntityModelUserJobLink` OK
+     * @response `201` `EntityModelUserJobLink` Created
+     * @response `204` `any` No Content
+     */
+    "putItemResource-userjoblink-put": (id: string, data: UserJobLinkRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelUserJobLink, any>({
+        path: `/userJobLinks/${id}`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-userjoblink
+     *
+     * @tags user-job-link-entity-controller
+     * @name DeleteItemResourceUserjoblinkDelete
+     * @request DELETE:/userJobLinks/{id}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deleteItemResource-userjoblink-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/userJobLinks/${id}`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-userjoblink
+     *
+     * @tags user-job-link-entity-controller
+     * @name PatchItemResourceUserjoblinkPatch
+     * @request PATCH:/userJobLinks/{id}
+     * @response `200` `EntityModelUserJobLink` OK
+     * @response `204` `any` No Content
+     */
+    "patchItemResource-userjoblink-patch": (id: string, data: UserJobLinkRequestBody, params: RequestParams = {}) =>
+      this.http.request<EntityModelUserJobLink, any>({
+        path: `/userJobLinks/${id}`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      })
+  }
+  userJobLinkPropertyReferenceController = {
+    /**
+     * @description get-jobposting-by-userjoblink-Id
+     *
+     * @tags user-job-link-property-reference-controller
+     * @name FollowPropertyReferenceUserjoblinkGet
+     * @request GET:/userJobLinks/{id}/jobPosting
+     * @response `200` `EntityModelJobPosting` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-userjoblink-get": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelJobPosting, any>({
+        path: `/userJobLinks/${id}/jobPosting`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-jobposting-by-userjoblink-Id
+     *
+     * @tags user-job-link-property-reference-controller
+     * @name CreatePropertyReferenceUserjoblinkPut
+     * @request PUT:/userJobLinks/{id}/jobPosting
+     * @response `200` `EntityModelJobPosting` OK
+     * @response `201` `EntityModelJobPosting` Created
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-userjoblink-put": (id: string, data: CollectionModelObject, params: RequestParams = {}) =>
+      this.http.request<EntityModelJobPosting, any>({
+        path: `/userJobLinks/${id}/jobPosting`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-jobposting-by-userjoblink-Id
+     *
+     * @tags user-job-link-property-reference-controller
+     * @name DeletePropertyReferenceUserjoblinkDelete
+     * @request DELETE:/userJobLinks/{id}/jobPosting
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReference-userjoblink-delete": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/userJobLinks/${id}/jobPosting`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-jobposting-by-userjoblink-Id
+     *
+     * @tags user-job-link-property-reference-controller
+     * @name CreatePropertyReferenceUserjoblinkPatch
+     * @request PATCH:/userJobLinks/{id}/jobPosting
+     * @response `200` `EntityModelJobPosting` OK
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-userjoblink-patch": (
+      id: string,
+      data: CollectionModelObject,
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelJobPosting, any>({
+        path: `/userJobLinks/${id}/jobPosting`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-jobposting-by-userjoblink-Id
+     *
+     * @tags user-job-link-property-reference-controller
+     * @name FollowPropertyReferenceUserjoblinkGet1
+     * @request GET:/userJobLinks/{id}/jobPosting/{propertyId}
+     * @response `200` `EntityModelJobPosting` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-userjoblink-get_1": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelJobPosting, any>({
+        path: `/userJobLinks/${id}/jobPosting/${propertyId}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-jobposting-by-userjoblink-Id
+     *
+     * @tags user-job-link-property-reference-controller
+     * @name DeletePropertyReferenceIdUserjoblinkDelete
+     * @request DELETE:/userJobLinks/{id}/jobPosting/{propertyId}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReferenceId-userjoblink-delete": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/userJobLinks/${id}/jobPosting/${propertyId}`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description get-user-by-userjoblink-Id
+     *
+     * @tags user-job-link-property-reference-controller
+     * @name FollowPropertyReferenceUserjoblinkGet2
+     * @request GET:/userJobLinks/{id}/user
+     * @response `200` `EntityModelUser` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-userjoblink-get_2": (id: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelUser, any>({
+        path: `/userJobLinks/${id}/user`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description update-user-by-userjoblink-Id
+     *
+     * @tags user-job-link-property-reference-controller
+     * @name CreatePropertyReferenceUserjoblinkPut1
+     * @request PUT:/userJobLinks/{id}/user
+     * @response `200` `EntityModelUser` OK
+     * @response `201` `EntityModelUser` Created
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-userjoblink-put_1": (
+      id: string,
+      data: CollectionModelObject,
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelUser, any>({
+        path: `/userJobLinks/${id}/user`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-user-by-userjoblink-Id
+     *
+     * @tags user-job-link-property-reference-controller
+     * @name DeletePropertyReferenceUserjoblinkDelete1
+     * @request DELETE:/userJobLinks/{id}/user
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReference-userjoblink-delete_1": (id: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/userJobLinks/${id}/user`,
+        method: "DELETE",
+        ...params
+      }),
+
+    /**
+     * @description patch-user-by-userjoblink-Id
+     *
+     * @tags user-job-link-property-reference-controller
+     * @name CreatePropertyReferenceUserjoblinkPatch1
+     * @request PATCH:/userJobLinks/{id}/user
+     * @response `200` `EntityModelUser` OK
+     * @response `204` `any` No Content
+     */
+    "createPropertyReference-userjoblink-patch_1": (
+      id: string,
+      data: CollectionModelObject,
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelUser, any>({
+        path: `/userJobLinks/${id}/user`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description get-user-by-userjoblink-Id
+     *
+     * @tags user-job-link-property-reference-controller
+     * @name FollowPropertyReferenceUserjoblinkGet3
+     * @request GET:/userJobLinks/{id}/user/{propertyId}
+     * @response `200` `EntityModelUser` OK
+     * @response `404` `any` Not Found
+     */
+    "followPropertyReference-userjoblink-get_3": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<EntityModelUser, any>({
+        path: `/userJobLinks/${id}/user/${propertyId}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description delete-user-by-userjoblink-Id
+     *
+     * @tags user-job-link-property-reference-controller
+     * @name DeletePropertyReferenceIdUserjoblinkDelete1
+     * @request DELETE:/userJobLinks/{id}/user/{propertyId}
+     * @response `204` `any` No Content
+     * @response `404` `any` Not Found
+     */
+    "deletePropertyReferenceId-userjoblink-delete_1": (id: string, propertyId: string, params: RequestParams = {}) =>
+      this.http.request<any, any>({
+        path: `/userJobLinks/${id}/user/${propertyId}`,
+        method: "DELETE",
+        ...params
+      })
+  }
   userProjectSkillEntityController = {
     /**
      * @description get-userprojectskill
@@ -5286,11 +6725,35 @@ export class Api<SecurityDataType extends unknown> {
      *
      * @tags user-project-search-controller
      * @name ExecuteSearchUserprojectGet4
-     * @request GET:/userProjects/search/findByUserId
+     * @request GET:/userProjects/search/findByProjectId
      * @response `200` `CollectionModelEntityModelUserProject` OK
      * @response `404` `any` Not Found
      */
     "executeSearch-userproject-get_4": (
+      query?: {
+        /** @format uuid */
+        projectId?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<CollectionModelEntityModelUserProject, any>({
+        path: `/userProjects/search/findByProjectId`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-project-search-controller
+     * @name ExecuteSearchUserprojectGet5
+     * @request GET:/userProjects/search/findByUserId
+     * @response `200` `CollectionModelEntityModelUserProject` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-userproject-get_5": (
       query?: {
         /** @format uuid */
         userId?: string
@@ -6559,6 +8022,24 @@ export class Api<SecurityDataType extends unknown> {
       }),
 
     /**
+     * @description 取得專案所有成員在此專案中的技能等級綁定，供編輯專案時回填既有資料
+     *
+     * @tags Projects
+     * @name GetProjectMemberSkills
+     * @summary Get project member skills
+     * @request GET:/project/{projectId}/member-skills
+     * @response `200` `ResponseTypeListProjectMemberSkillVo` OK
+     * @response `500` `ResponseTypeListProjectMemberSkillVo` Server error
+     */
+    getProjectMemberSkills: (projectId: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListProjectMemberSkillVo, ResponseTypeListProjectMemberSkillVo>({
+        path: `/project/${projectId}/member-skills`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
      * @description 獲取個人專屬的專案綁定的所有技能與等級詳細資訊，會驗證當前使用者權限
      *
      * @tags Projects
@@ -6645,6 +8126,239 @@ export class Api<SecurityDataType extends unknown> {
     deletePersonalProject: (projectId: string, params: RequestParams = {}) =>
       this.http.request<ResponseTypeString, ResponseTypeString>({
         path: `/project/personal/delete/${projectId}`,
+        method: "DELETE",
+        format: "json",
+        ...params
+      })
+  }
+  jobPosting = {
+    /**
+     * @description 更新職缺資訊。
+     *
+     * @tags Job Posting
+     * @name UpdateJobPosting
+     * @summary 更新職缺
+     * @request PUT:/job-posting/update
+     * @response `200` `ResponseTypeJobPostingVo` OK
+     * @response `400` `ResponseTypeJobPostingVo` Invalid input
+     * @response `500` `ResponseTypeJobPostingVo` Server error
+     */
+    updateJobPosting: (data: JobPostingVo, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeJobPostingVo, ResponseTypeJobPostingVo>({
+        path: `/job-posting/update`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 根據公司 ID 爬取該公司網站上的職缺並使用 Gemini 分析。
+     *
+     * @tags Job Posting
+     * @name ScrapeJobs
+     * @summary 爬取並分析職缺
+     * @request POST:/job-posting/scrape/{companyId}
+     * @response `200` `ResponseTypeListJobPostingVo` OK
+     * @response `400` `ResponseTypeListJobPostingVo` Invalid input
+     * @response `500` `ResponseTypeListJobPostingVo` Server error
+     */
+    scrapeJobs: (companyId: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListJobPostingVo, ResponseTypeListJobPostingVo>({
+        path: `/job-posting/scrape/${companyId}`,
+        method: "POST",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 手動新增一筆職缺。
+     *
+     * @tags Job Posting
+     * @name AddJobPosting
+     * @summary 新增職缺
+     * @request POST:/job-posting/add
+     * @response `200` `ResponseTypeJobPostingVo` OK
+     * @response `400` `ResponseTypeJobPostingVo` Invalid input
+     * @response `500` `ResponseTypeJobPostingVo` Server error
+     */
+    addJobPosting: (data: CreateJobPostingRequest, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeJobPostingVo, ResponseTypeJobPostingVo>({
+        path: `/job-posting/add`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 返回所有職缺列表。
+     *
+     * @tags Job Posting
+     * @name GetAllJobPostings
+     * @summary 取得所有職缺
+     * @request GET:/job-posting/get
+     * @response `200` `ResponseTypeListJobPostingVo` OK
+     * @response `500` `ResponseTypeListJobPostingVo` Server error
+     */
+    getAllJobPostings: (params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListJobPostingVo, ResponseTypeListJobPostingVo>({
+        path: `/job-posting/get`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 根據 ID 取得職缺資訊。
+     *
+     * @tags Job Posting
+     * @name GetJobPostingById
+     * @summary 取得職缺詳情
+     * @request GET:/job-posting/get/{id}
+     * @response `200` `ResponseTypeJobPostingVo` OK
+     * @response `500` `ResponseTypeJobPostingVo` Server error
+     */
+    getJobPostingById: (id: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeJobPostingVo, ResponseTypeJobPostingVo>({
+        path: `/job-posting/get/${id}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 根據公司 ID 取得該公司所有職缺。
+     *
+     * @tags Job Posting
+     * @name GetJobPostingsByCompanyId
+     * @summary 取得公司職缺
+     * @request GET:/job-posting/company/{companyId}
+     * @response `200` `ResponseTypeListJobPostingVo` OK
+     * @response `500` `ResponseTypeListJobPostingVo` Server error
+     */
+    getJobPostingsByCompanyId: (companyId: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListJobPostingVo, ResponseTypeListJobPostingVo>({
+        path: `/job-posting/company/${companyId}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 根據 ID 刪除職缺。
+     *
+     * @tags Job Posting
+     * @name DeleteJobPosting
+     * @summary 刪除職缺
+     * @request DELETE:/job-posting/delete/{id}
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    deleteJobPosting: (id: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/job-posting/delete/${id}`,
+        method: "DELETE",
+        format: "json",
+        ...params
+      })
+  }
+  company = {
+    /**
+     * @description 更新公司資訊。
+     *
+     * @tags Company
+     * @name UpdateCompany
+     * @summary 更新公司
+     * @request PUT:/company/update
+     * @response `200` `ResponseTypeCompanyVo` OK
+     * @response `400` `ResponseTypeCompanyVo` Invalid input
+     * @response `500` `ResponseTypeCompanyVo` Server error
+     */
+    updateCompany: (data: UpdateCompanyRequest, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeCompanyVo, ResponseTypeCompanyVo>({
+        path: `/company/update`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 建立一間新的公司。
+     *
+     * @tags Company
+     * @name AddCompany
+     * @summary 新增公司
+     * @request POST:/company/add
+     * @response `200` `ResponseTypeCompanyVo` OK
+     * @response `400` `ResponseTypeCompanyVo` Invalid input
+     * @response `500` `ResponseTypeCompanyVo` Server error
+     */
+    addCompany: (data: CreateCompanyRequest, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeCompanyVo, ResponseTypeCompanyVo>({
+        path: `/company/add`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 返回所有公司列表。
+     *
+     * @tags Company
+     * @name GetAllCompanies
+     * @summary 取得所有公司
+     * @request GET:/company/get
+     * @response `200` `ResponseTypeListCompanyVo` OK
+     * @response `500` `ResponseTypeListCompanyVo` Server error
+     */
+    getAllCompanies: (params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListCompanyVo, ResponseTypeListCompanyVo>({
+        path: `/company/get`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 根據 ID 取得公司資訊。
+     *
+     * @tags Company
+     * @name GetCompanyById
+     * @summary 取得公司詳情
+     * @request GET:/company/get/{id}
+     * @response `200` `ResponseTypeCompanyVo` OK
+     * @response `500` `ResponseTypeCompanyVo` Server error
+     */
+    getCompanyById: (id: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeCompanyVo, ResponseTypeCompanyVo>({
+        path: `/company/get/${id}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 根據 ID 刪除公司。
+     *
+     * @tags Company
+     * @name DeleteCompany
+     * @summary 刪除公司
+     * @request DELETE:/company/delete/{id}
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    deleteCompany: (id: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/company/delete/${id}`,
         method: "DELETE",
         format: "json",
         ...params
@@ -6854,6 +8568,119 @@ export class Api<SecurityDataType extends unknown> {
         method: "POST",
         body: data,
         type: ContentType.Json,
+        format: "json",
+        ...params
+      })
+  }
+  userJobLink = {
+    /**
+     * @description 建立使用者與職缺的關聯。
+     *
+     * @tags User Job Link
+     * @name AddUserJobLink
+     * @summary 新增使用者職缺連結
+     * @request POST:/user-job-link/add
+     * @response `200` `ResponseTypeUserJobLinkVo` OK
+     * @response `400` `ResponseTypeUserJobLinkVo` Invalid input
+     * @response `500` `ResponseTypeUserJobLinkVo` Server error
+     */
+    addUserJobLink: (data: UserJobLinkVo, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeUserJobLinkVo, ResponseTypeUserJobLinkVo>({
+        path: `/user-job-link/add`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 根據使用者 ID 取得該使用者所有職缺連結。
+     *
+     * @tags User Job Link
+     * @name GetUserJobLinksByUserId
+     * @summary 取得使用者所有職缺連結
+     * @request GET:/user-job-link/user/{userId}
+     * @response `200` `ResponseTypeListUserJobLinkVo` OK
+     * @response `500` `ResponseTypeListUserJobLinkVo` Server error
+     */
+    getUserJobLinksByUserId: (userId: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListUserJobLinkVo, ResponseTypeListUserJobLinkVo>({
+        path: `/user-job-link/user/${userId}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 根據職缺 ID 取得該職缺的所有使用者連結。
+     *
+     * @tags User Job Link
+     * @name GetUserJobLinksByJobPostingId
+     * @summary 取得職缺所有使用者連結
+     * @request GET:/user-job-link/job-posting/{jobPostingId}
+     * @response `200` `ResponseTypeListUserJobLinkVo` OK
+     * @response `500` `ResponseTypeListUserJobLinkVo` Server error
+     */
+    getUserJobLinksByJobPostingId: (jobPostingId: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListUserJobLinkVo, ResponseTypeListUserJobLinkVo>({
+        path: `/user-job-link/job-posting/${jobPostingId}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 返回所有使用者職缺連結列表。
+     *
+     * @tags User Job Link
+     * @name GetAllUserJobLinks
+     * @summary 取得所有連結
+     * @request GET:/user-job-link/get
+     * @response `200` `ResponseTypeListUserJobLinkVo` OK
+     * @response `500` `ResponseTypeListUserJobLinkVo` Server error
+     */
+    getAllUserJobLinks: (params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListUserJobLinkVo, ResponseTypeListUserJobLinkVo>({
+        path: `/user-job-link/get`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 根據 ID 取得使用者職缺連結資訊。
+     *
+     * @tags User Job Link
+     * @name GetUserJobLinkById
+     * @summary 取得連結詳情
+     * @request GET:/user-job-link/get/{id}
+     * @response `200` `ResponseTypeUserJobLinkVo` OK
+     * @response `500` `ResponseTypeUserJobLinkVo` Server error
+     */
+    getUserJobLinkById: (id: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeUserJobLinkVo, ResponseTypeUserJobLinkVo>({
+        path: `/user-job-link/get/${id}`,
+        method: "GET",
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 根據 ID 刪除使用者職缺連結。
+     *
+     * @tags User Job Link
+     * @name DeleteUserJobLink
+     * @summary 刪除使用者職缺連結
+     * @request DELETE:/user-job-link/delete/{id}
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    deleteUserJobLink: (id: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/user-job-link/delete/${id}`,
+        method: "DELETE",
         format: "json",
         ...params
       })

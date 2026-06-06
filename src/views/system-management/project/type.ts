@@ -17,6 +17,7 @@ export class ProjectFormData {
       id: "",
       name: "",
       description: "",
+      userIds: [],
       createdBy: "",
       updatedBy: "",
       createdTime: "",
@@ -65,4 +66,9 @@ export interface ProjectSkillBinding {
   skillLevelId: string
   levelTitle: string
   levelValue: number
+}
+
+export interface ProjectMemberSkillBinding {
+  userId: string
+  skills: ProjectSkillBinding[]
 }

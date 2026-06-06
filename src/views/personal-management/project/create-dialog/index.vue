@@ -54,11 +54,15 @@ const confirmBtnClick = async () => {
     // 1. 先創建 Project
     const createdProject = await service.saveProject(formData.data)
 
-    // 2. 如果有 Skill 綁定，使用返回的 Project ID 綁定 Skills
+    // 2. 如果有 Skill 綁定，使用返回的 Project ID 完整同步 Skills
     if (projectSkillBindings.value.length > 0 && createdProject?.id) {
-      for (const binding of projectSkillBindings.value) {
-        await service.bindSkillToProject(createdProject.id, binding.skillId, binding.skillLevelId)
-      }
+      await service.rebindProjectSkills(
+        createdProject.id,
+        projectSkillBindings.value.map((binding) => ({
+          skillId: binding.skillId,
+          skillLevelId: binding.skillLevelId
+        }))
+      )
     }
 
     ElMessage.success("創建項目成功")

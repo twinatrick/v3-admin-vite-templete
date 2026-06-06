@@ -47,12 +47,10 @@ const show = async () => {
 
   // 4. 初始化選擇框的值
   selectedFunctionIds.value = [...validFunctionIds]
-  OldFunctionKeys.value = [...validFunctionIds]
 
   formRef.value?.resetFields()
   visible.value = true
 }
-const OldFunctionKeys = ref<string[]>([])
 
 /**
  * 檢查 function ID 是否存在於樹形結構中
@@ -76,13 +74,11 @@ const confirmClick = async () => {
   const loading = showLoading("角色更新中...")
   try {
     formData.functionKeys = selectedFunctionIds.value
-    const { data } = await api.roles.updateRole(formData.data)
-    const removeKeys = OldFunctionKeys.value.filter((key) => !formData.functionKeys?.includes(key))
-    const addKeys = formData.functionKeys?.filter((key) => !OldFunctionKeys.value.includes(key))
-    if (removeKeys.length > 0)
-      await api.roles.roleUnbindFunction({ role: formData.data.id || "", functionList: removeKeys })
-    if (addKeys.length > 0) await api.roles.roleBindFunction({ role: formData.data.id || "", functionList: addKeys })
-    emit("update", data)
+    const { data } = await api.roles.updateRoleWithFunctions({
+      ...formData.data,
+      functionIds: selectedFunctionIds.value
+    })
+    emit("update", { ...data, functionKeys: selectedFunctionIds.value, functionIds: selectedFunctionIds.value })
     hide()
   } catch (e) {
     console.log(e)
@@ -121,6 +117,7 @@ defineExpose({
           placeholder="請選擇功能權限"
           style="width: 100%"
         />
+        <div class="text-xs text-gray-400 mt-1">儲存時會以目前選取結果完整同步權限，清空代表移除所有權限。</div>
       </el-form-item>
     </el-form>
     <template #footer>

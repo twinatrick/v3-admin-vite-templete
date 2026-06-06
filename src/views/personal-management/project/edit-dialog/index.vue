@@ -12,7 +12,6 @@ const visible = ref(false)
 const formData = reactive(new ProjectFormData())
 const formRef = ref<InstanceType<typeof ElForm> | null>(null)
 const projectSkillBindings = ref<ProjectSkillBinding[]>([])
-const originalBindings = ref<ProjectSkillBinding[]>([])
 const emit = defineEmits(["reload"])
 
 // Skill 綁定相關
@@ -25,7 +24,6 @@ const selectedLevelId = ref("")
 const show = async (data: ProjectVo) => {
   formData.data = data
   projectSkillBindings.value = []
-  originalBindings.value = []
   formRef.value?.clearValidate()
   visible.value = true
 
@@ -46,7 +44,6 @@ const show = async (data: ProjectVo) => {
       }))
 
     projectSkillBindings.value = [...bindings]
-    originalBindings.value = [...bindings]
   } catch (e) {
     console.error(e)
     ElMessage.error(resolveErrorMessage(e, "加載技能列表失敗"))
@@ -74,34 +71,13 @@ const confirmBtnClick = async () => {
 
     const projectId = formData.data.id
 
-    // 計算綁定的差異 (Added, Removed, Updated)
-    const oldBindings = originalBindings.value
-    const newBindings = projectSkillBindings.value
-
-    const oldIds = oldBindings.map((b) => b.skillId)
-    const newIds = newBindings.map((b) => b.skillId)
-
-    const added = newBindings.filter((b) => !oldIds.includes(b.skillId))
-    const removed = oldBindings.filter((b) => !newIds.includes(b.skillId))
-    const updated = newBindings.filter((nb) => {
-      const ob = oldBindings.find((ob) => ob.skillId === nb.skillId)
-      return ob && ob.skillLevelId !== nb.skillLevelId
-    })
-
-    // 處理新增綁定
-    for (const b of added) {
-      await service.bindSkillToProject(projectId, b.skillId, b.skillLevelId)
-    }
-
-    // 處理解除綁定
-    for (const b of removed) {
-      await service.unbindSkillFromProject(projectId, b.skillId)
-    }
-
-    // 處理更新綁定等級
-    for (const b of updated) {
-      await service.updateProjectSkillLevel(projectId, b.skillId, b.skillLevelId)
-    }
+    await service.rebindProjectSkills(
+      projectId,
+      projectSkillBindings.value.map((binding) => ({
+        skillId: binding.skillId,
+        skillLevelId: binding.skillLevelId
+      }))
+    )
 
     ElMessage.success("更新項目成功")
     emit("reload")
@@ -218,7 +194,7 @@ defineExpose({
       <div class="w-100% mb-4">
         <el-alert class="mb-3" type="info" :closable="false">
           <template #title>
-            <span>提示：此處顯示的是待添加的新技能綁定。保存後將添加到項目中。</span>
+            <span>提示：此列表是儲存後的完整技能綁定結果，移除項目會在儲存後同步解除綁定。</span>
           </template>
         </el-alert>
 
