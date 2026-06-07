@@ -39,14 +39,14 @@ const innerValue = ref(props.modelValue)
 const filteredOptions = computed(() => {
   let items = cache.value
   if (props.activeOnly) {
-    items = items.filter((item) => !item[props.activeKey])
+    items = items.filter((item) => !item[props.activeKey as keyof T])
   }
   if (!searchKeyword.value) return items
   const kw = searchKeyword.value.toLowerCase()
   return items.filter((item) => {
     if (props.filterKeys && props.filterKeys.length > 0) {
       return (props.filterKeys as (keyof T)[]).some((key) => {
-        const v = item[key]
+        const v = item[key as keyof T]
         return v != null && String(v).toLowerCase().includes(kw)
       })
     }
