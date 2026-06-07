@@ -89,8 +89,8 @@ onMounted(() => {
 <template>
   <el-select
     v-model="innerValue"
-    :placeholder="placeholder"
-    :clearable="clearable"
+    :placeholder="props.placeholder"
+    :clearable="props.clearable"
     filterable
     @change="handleChange"
     @visible-change="handleVisibleChange"

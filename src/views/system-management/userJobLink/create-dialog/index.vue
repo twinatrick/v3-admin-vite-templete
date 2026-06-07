@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue"
 import service from "../service"
-import EntitySelect from "@/components/EntitySelect/index.vue"
-import { api } from "@/api/client"
+import UserEntitySelect from "@/components/UserEntitySelect/index.vue"
+import JobPostingEntitySelect from "@/components/JobPostingEntitySelect/index.vue"
 
 const emit = defineEmits<{ (event: "done"): void }>()
 
@@ -39,20 +39,10 @@ defineExpose({ show })
   <el-dialog v-model="visible" title="新增職缺連結" width="500px">
     <el-form :model="form" label-width="120px">
       <el-form-item label="使用者" required>
-        <EntitySelect
-          v-model="form.userId"
-          :fetchFn="() => api.users.getAllUser()"
-          :labelRender="(u: any) => `${u.email || ''}${u.name ? ` (${u.name})` : ''}`"
-          placeholder="選擇使用者"
-        />
+        <UserEntitySelect v-model="form.userId" placeholder="選擇使用者" />
       </el-form-item>
       <el-form-item label="職缺" required>
-        <EntitySelect
-          v-model="form.jobPostingId"
-          :fetchFn="() => api.jobPosting.getAllJobPostings()"
-          :labelRender="(j: any) => `${j.title || ''}${j.companyName ? ` - ${j.companyName}` : ''}`"
-          placeholder="選擇職缺"
-        />
+        <JobPostingEntitySelect v-model="form.jobPostingId" placeholder="選擇職缺" />
       </el-form-item>
       <el-form-item label="備註">
         <el-input v-model="form.userNotes" type="textarea" :rows="3" placeholder="備註" />

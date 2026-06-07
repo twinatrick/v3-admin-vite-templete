@@ -3,6 +3,7 @@ import { reactive, ref } from "vue"
 import { rules } from "../rules"
 import service from "../service"
 import { JobPosting } from "../type"
+import CompanyEntitySelect from "@/components/CompanyEntitySelect/index.vue"
 
 const emit = defineEmits<{ (event: "done"): void }>()
 
@@ -60,7 +61,7 @@ defineExpose({ show })
   <el-dialog v-model="visible" title="編輯職缺" width="600px" @closed="formRef?.clearValidate()">
     <el-form ref="formRef" :model="form" :rules="rules" label-width="120px">
       <el-form-item label="公司" prop="companyId">
-        <el-input :model-value="form.companyId" disabled />
+        <CompanyEntitySelect v-model="form.companyId" />
       </el-form-item>
       <el-form-item label="職缺名稱" prop="title">
         <el-input v-model="form.title" placeholder="請輸入職缺名稱" />
