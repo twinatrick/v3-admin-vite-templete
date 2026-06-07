@@ -17,21 +17,20 @@ export const constantRoutes: RouteRecordRaw[] = [
       }
     ]
   },
-  // {
-  //   path: "/403",
-  //   component: () => import("@/views/error-page/403.vue"),
-  //   meta: {
-  //     hidden: true
-  //   }
-  // },
-  // {
-  //   path: "/404",
-  //   component: () => import("@/views/error-page/404.vue"),
-  //   meta: {
-  //     hidden: true
-  //   },
-  //   alias: "/:pathMatch(.*)*"
-  // },
+  {
+    path: "/403",
+    component: () => import("@/views/error-page/403.vue"),
+    meta: {
+      hidden: true
+    }
+  },
+  {
+    path: "/404",
+    component: () => import("@/views/error-page/404.vue"),
+    meta: {
+      hidden: true
+    }
+  },
   {
     path: "/login",
     component: () => import("@/views/login/index.vue"),
@@ -93,6 +92,15 @@ export const constantRoutes: RouteRecordRaw[] = [
       alwaysShow: true
     },
     children: [
+      {
+        path: "skill",
+        component: () => import("@/views/personal-management/skill/index.vue"),
+        meta: {
+          title: "我的技能",
+          elIcon: "Star",
+          keepAlive: false
+        }
+      },
       {
         path: "project",
         component: () => import("@/views/personal-management/project/index.vue"),

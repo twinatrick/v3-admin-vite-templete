@@ -11,8 +11,12 @@ import { resolveErrorMessage } from "@/utils"
 
 NProgress.configure({ showSpinner: false })
 
+const LOADING_TIMEOUT = 15000
+let previousLoading: { close: () => void } | null = null
+
 router.beforeEach(async (to) => {
   NProgress.start()
+  previousLoading?.close()
   const userStore = useUserStoreHook()
   const permissionStore = usePermissionStoreHook()
   const loading = ElLoading.service({
@@ -20,59 +24,50 @@ router.beforeEach(async (to) => {
     text: `Goto ${to.meta.title || to.path}...`,
     background: "rgba(0, 0, 0, 0.7)"
   })
-  //檢查Cache裡是否有token
+  previousLoading = loading
+  const timer = setTimeout(() => loading.close(), LOADING_TIMEOUT)
   try {
+    // 403/404 頁面直接放行，不需權限檢查
+    if (to.path === "/403" || to.path === "/404") {
+      return true
+    }
+    //檢查Cache裡是否有token
     if (getToken()) {
       if (to.path === "/login") {
         //如果已經登入，且準備進入Login頁面，則導到主頁
         return { path: "/" }
-      } else {
-        await userStore.getInfo()
-        const permissions = userStore.userInfo?.permissions
-        if (!permissions) {
-          userStore.logout()
-          throw new Error("You hava no permission to access this page.")
-        }
-        await permissionStore.setRoutesByFunctions(permissions)
-
-        const dynamicRoutes = permissionStore.routes
-        const dynamicRouteUrls = generateAllUrls(dynamicRoutes, "")
-        const inDynamicRouteUrl = includeUrl(dynamicRouteUrls, to.path)
-        // console.log(dynamicRoutes, dynamicRouteUrls, inDynamicRouteUrl)
-        // console.log("allUrl", dynamicRouteUrls)
-        // console.log("in allUrl", dynamicRouteUrls)
-        if (inDynamicRouteUrl) return true
-        const allUrl = generateAllUrls(router.getRoutes(), "")
-        const inAllUrl = includeUrl(allUrl, to.path)
-        if (inAllUrl) return { path: "/403" }
-        return { path: "/404" }
-        // const allUrl = generateAllUrls(_allRoutes, "")
-        // const permissionUrl = generateAllUrls(permissionRoutes, "")
-        // const path = getCleanUrl(to.fullPath, to.params)
-        // const inAllUrl = includeUrl(allUrl, path)
-        // const inPermissionUrl = includeUrl(permissionUrl, path)
-        // console.log("path", path)
-        // console.log("inAllUrl", inAllUrl)
-        // console.log("permissionUrl", permissionUrl)
-        // console.log("inPermissionUrl", inPermissionUrl)
-        // return inDynamicRouteUrl
-        // if (inPermissionUrl) {
-        //   if (inAllUrl) return true
-        //   return { path: "/404" }
-        // } else {
-        //   if (inAllUrl) return true
-        //   return { path: "/403" }
-        // }
       }
-    } else {
-      // 如果没有 Token
-      // 如果在免登入的白名单中，则直接進入
-      if (!isWhiteList(to)) {
-        // 其他没有權限的頁面會被導到登入頁面
+      await userStore.getInfo()
+      const permissions = userStore.userInfo?.permissions
+      if (!permissions) {
+        userStore.logout()
+        throw new Error("You hava no permission to access this page.")
+      }
+      await permissionStore.setRoutesByFunctions(permissions)
+
+      // 如果沒有任何可訪問的頁面，則登出
+      if (permissionStore.dynamicRoutes.length === 0) {
+        userStore.resetToken()
+        ElMessage.error("您沒有任何頁面權限，請聯絡管理員")
         return { path: "/login" }
       }
-      return true
+
+      const dynamicRoutes = permissionStore.routes
+      const dynamicRouteUrls = generateAllUrls(dynamicRoutes, "")
+      const inDynamicRouteUrl = includeUrl(dynamicRouteUrls, to.path)
+      if (inDynamicRouteUrl) return true
+      const allUrl = generateAllUrls(router.getRoutes(), "")
+      const inAllUrl = includeUrl(allUrl, to.path)
+      if (inAllUrl) return { path: "/403" }
+      return { path: "/404" }
     }
+    // 如果没有 Token
+    // 如果在免登入的白名单中，则直接進入
+    if (!isWhiteList(to)) {
+      // 其他没有權限的頁面會被導到登入頁面
+      return { path: "/login" }
+    }
+    return true
   } catch (err: any) {
     // 過程中發生任何錯誤，都直接重置 Token，並導到登錄頁面
     userStore.resetToken()
@@ -80,6 +75,7 @@ router.beforeEach(async (to) => {
     ElMessage.error(resolveErrorMessage(err, "路由守衛發生錯誤"))
     return { path: "/login" }
   } finally {
+    clearTimeout(timer)
     NProgress.done()
     loading.close()
   }
