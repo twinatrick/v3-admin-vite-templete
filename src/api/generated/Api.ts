@@ -35,42 +35,13 @@ export interface RepresentationModelObject {
   _links?: Links
 }
 
-export interface EntityModelAquarkData {
+export interface EntityModelUserSkill {
   createdBy?: string
   updatedBy?: string
   /** @format date-time */
   createdTime?: string
   /** @format date-time */
   updatedTime?: string
-  station_id?: string
-  /** @format date-time */
-  trans_time?: string
-  /** @format float */
-  rain_d?: number
-  /** @format float */
-  moisture?: number
-  /** @format float */
-  temperature?: number
-  /** @format float */
-  echo?: number
-  /** @format float */
-  waterSpeedAquark?: number
-  /** @format float */
-  v1?: number
-  /** @format float */
-  v2?: number
-  /** @format float */
-  v3?: number
-  /** @format float */
-  v4?: number
-  /** @format float */
-  v5?: number
-  /** @format float */
-  v6?: number
-  /** @format float */
-  v7?: number
-  peak?: boolean
-  csq?: string
   _links?: Links
 }
 
@@ -85,19 +56,12 @@ export interface PageMetadata {
   number?: number
 }
 
-export interface PagedModelEntityModelAquarkData {
+export interface PagedModelEntityModelUserSkill {
   _embedded?: {
-    aquarkDatas?: EntityModelAquarkData[]
+    userSkills?: EntityModelUserSkill[]
   }
   _links?: Links
   page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelAquarkData {
-  _embedded?: {
-    aquarkDatas?: EntityModelAquarkData[]
-  }
-  _links?: Links
 }
 
 export interface EntityModelSkill {
@@ -112,118 +76,11 @@ export interface EntityModelSkill {
   _links?: Links
 }
 
-export interface PagedModelEntityModelSkill {
+export interface CollectionModelObject {
   _embedded?: {
-    skills?: EntityModelSkill[]
+    objects?: object[]
   }
   _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelSkill {
-  _embedded?: {
-    skills?: EntityModelSkill[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelUserRole {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelUserRole {
-  _embedded?: {
-    userRoles?: EntityModelUserRole[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelUserRole {
-  _embedded?: {
-    userRoles?: EntityModelUserRole[]
-  }
-  _links?: Links
-}
-
-export interface User {
-  /** @format uuid */
-  id?: string
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  email?: string
-  phone?: string
-  disabled?: boolean
-  roleArr?: string[]
-}
-
-export interface Role {
-  /** @format uuid */
-  id?: string
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  description?: string
-}
-
-export interface EntityModelProject {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  description?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelProject {
-  _embedded?: {
-    projects?: EntityModelProject[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelProject {
-  _embedded?: {
-    projects?: EntityModelProject[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelProjectSkill {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelProjectSkill {
-  _embedded?: {
-    projectSkills?: EntityModelProjectSkill[]
-  }
-  _links?: Links
-  page?: PageMetadata
 }
 
 export interface EntityModelSkillLevel {
@@ -240,16 +97,9 @@ export interface EntityModelSkillLevel {
   _links?: Links
 }
 
-export interface CollectionModelObject {
+export interface CollectionModelEntityModelUserSkill {
   _embedded?: {
-    objects?: object[]
-  }
-  _links?: Links
-}
-
-export interface CollectionModelEntityModelProjectSkill {
-  _embedded?: {
-    projectSkills?: EntityModelProjectSkill[]
+    userSkills?: EntityModelUserSkill[]
   }
   _links?: Links
 }
@@ -287,96 +137,6 @@ export interface EntityModelCompany {
   _links?: Links
 }
 
-export interface EntityModelUserProject {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelUserProject {
-  _embedded?: {
-    userProjects?: EntityModelUserProject[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelUserProject {
-  _embedded?: {
-    userProjects?: EntityModelUserProject[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelJobPosting {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  title?: string
-  url?: string
-  description?: string
-  requirements?: string
-  responsibilities?: string
-  salaryRange?: string
-  /** @format date */
-  postedDate?: string
-  geminiAnalysis?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelJobPosting {
-  _embedded?: {
-    jobPostings?: EntityModelJobPosting[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface PagedModelEntityModelSkillLevel {
-  _embedded?: {
-    skillLevels?: EntityModelSkillLevel[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelSkillLevel {
-  _embedded?: {
-    skillLevels?: EntityModelSkillLevel[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelUser {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  name?: string
-  email?: string
-  phone?: string
-  disabled?: boolean
-  roleArr?: string[]
-  _links?: Links
-}
-
-export interface PagedModelEntityModelUser {
-  _embedded?: {
-    users?: EntityModelUser[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
 export interface EntityModelRoleFunction {
   createdBy?: string
   updatedBy?: string
@@ -411,19 +171,17 @@ export interface Function {
   type?: number
 }
 
-export interface PagedModelEntityModelCompany {
-  _embedded?: {
-    companies?: EntityModelCompany[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelCompanyWebsite {
-  _embedded?: {
-    companyWebsites?: CompanyWebsiteResponse[]
-  }
-  _links?: Links
+export interface Role {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  description?: string
 }
 
 export interface EntityModelAlertCheckLimit {
@@ -455,57 +213,7 @@ export interface CollectionModelEntityModelAlertCheckLimit {
   _links?: Links
 }
 
-export interface EntityModelUserProjectSkill {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelUserProjectSkill {
-  _embedded?: {
-    userProjectSkills?: EntityModelUserProjectSkill[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelUserProjectSkill {
-  _embedded?: {
-    userProjectSkills?: EntityModelUserProjectSkill[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelUserSkill {
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-  _links?: Links
-}
-
-export interface PagedModelEntityModelUserSkill {
-  _embedded?: {
-    userSkills?: EntityModelUserSkill[]
-  }
-  _links?: Links
-  page?: PageMetadata
-}
-
-export interface CollectionModelEntityModelUserSkill {
-  _embedded?: {
-    userSkills?: EntityModelUserSkill[]
-  }
-  _links?: Links
-}
-
-export interface EntityModelFunction {
+export interface EntityModelUser {
   createdBy?: string
   updatedBy?: string
   /** @format date-time */
@@ -513,24 +221,74 @@ export interface EntityModelFunction {
   /** @format date-time */
   updatedTime?: string
   name?: string
-  parent?: string
-  sort?: string
-  /** @format int32 */
-  type?: number
+  email?: string
+  phone?: string
+  disabled?: boolean
+  roleArr?: string[]
   _links?: Links
 }
 
-export interface PagedModelEntityModelFunction {
+export interface User {
+  /** @format uuid */
+  id?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  email?: string
+  phone?: string
+  disabled?: boolean
+  roleArr?: string[]
+}
+
+export interface PagedModelEntityModelUser {
   _embedded?: {
-    functions?: EntityModelFunction[]
+    users?: EntityModelUser[]
   }
   _links?: Links
   page?: PageMetadata
 }
 
-export interface CollectionModelEntityModelFunction {
+export interface CollectionModelEntityModelUser {
   _embedded?: {
-    functions?: EntityModelFunction[]
+    users?: EntityModelUser[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelJobPosting {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  title?: string
+  url?: string
+  description?: string
+  requirements?: string
+  responsibilities?: string
+  salaryRange?: string
+  /** @format date */
+  postedDate?: string
+  geminiAnalysis?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelJobPosting {
+  _embedded?: {
+    jobPostings?: EntityModelJobPosting[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelJobPosting {
+  _embedded?: {
+    jobPostings?: EntityModelJobPosting[]
   }
   _links?: Links
 }
@@ -578,6 +336,269 @@ export interface PagedModelEntityModelRole {
 export interface CollectionModelEntityModelRole {
   _embedded?: {
     roles?: EntityModelRole[]
+  }
+  _links?: Links
+}
+
+export interface PagedModelEntityModelCompany {
+  _embedded?: {
+    companies?: EntityModelCompany[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelCompanyWebsite {
+  _embedded?: {
+    companyWebsites?: CompanyWebsiteResponse[]
+  }
+  _links?: Links
+}
+
+export interface CollectionModelEntityModelCompany {
+  _embedded?: {
+    companies?: EntityModelCompany[]
+  }
+  _links?: Links
+}
+
+export interface PagedModelEntityModelSkill {
+  _embedded?: {
+    skills?: EntityModelSkill[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelSkill {
+  _embedded?: {
+    skills?: EntityModelSkill[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelUserRole {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUserRole {
+  _embedded?: {
+    userRoles?: EntityModelUserRole[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelUserRole {
+  _embedded?: {
+    userRoles?: EntityModelUserRole[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelProjectSkill {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelProjectSkill {
+  _embedded?: {
+    projectSkills?: EntityModelProjectSkill[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelProjectSkill {
+  _embedded?: {
+    projectSkills?: EntityModelProjectSkill[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelAquarkData {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  station_id?: string
+  /** @format date-time */
+  trans_time?: string
+  /** @format float */
+  rain_d?: number
+  /** @format float */
+  moisture?: number
+  /** @format float */
+  temperature?: number
+  /** @format float */
+  echo?: number
+  /** @format float */
+  waterSpeedAquark?: number
+  /** @format float */
+  v1?: number
+  /** @format float */
+  v2?: number
+  /** @format float */
+  v3?: number
+  /** @format float */
+  v4?: number
+  /** @format float */
+  v5?: number
+  /** @format float */
+  v6?: number
+  /** @format float */
+  v7?: number
+  peak?: boolean
+  csq?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelAquarkData {
+  _embedded?: {
+    aquarkDatas?: EntityModelAquarkData[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelAquarkData {
+  _embedded?: {
+    aquarkDatas?: EntityModelAquarkData[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelUserProjectSkill {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUserProjectSkill {
+  _embedded?: {
+    userProjectSkills?: EntityModelUserProjectSkill[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelUserProjectSkill {
+  _embedded?: {
+    userProjectSkills?: EntityModelUserProjectSkill[]
+  }
+  _links?: Links
+}
+
+export interface PagedModelEntityModelSkillLevel {
+  _embedded?: {
+    skillLevels?: EntityModelSkillLevel[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelSkillLevel {
+  _embedded?: {
+    skillLevels?: EntityModelSkillLevel[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelUserProject {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  _links?: Links
+}
+
+export interface PagedModelEntityModelUserProject {
+  _embedded?: {
+    userProjects?: EntityModelUserProject[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface EntityModelProject {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  description?: string
+  _links?: Links
+}
+
+export interface CollectionModelEntityModelUserProject {
+  _embedded?: {
+    userProjects?: EntityModelUserProject[]
+  }
+  _links?: Links
+}
+
+export interface EntityModelFunction {
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+  name?: string
+  parent?: string
+  sort?: string
+  /** @format int32 */
+  type?: number
+  _links?: Links
+}
+
+export interface PagedModelEntityModelFunction {
+  _embedded?: {
+    functions?: EntityModelFunction[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelFunction {
+  _embedded?: {
+    functions?: EntityModelFunction[]
+  }
+  _links?: Links
+}
+
+export interface PagedModelEntityModelProject {
+  _embedded?: {
+    projects?: EntityModelProject[]
+  }
+  _links?: Links
+  page?: PageMetadata
+}
+
+export interface CollectionModelEntityModelProject {
+  _embedded?: {
+    projects?: EntityModelProject[]
   }
   _links?: Links
 }
@@ -1103,6 +1124,14 @@ export interface SkillLevelBindingItem {
   skillLevelId: string
 }
 
+export interface ResponseTypeUserJobLinkVo {
+  /** @format int32 */
+  code?: number
+  data?: UserJobLinkVo
+  message?: string
+  errorType?: string
+}
+
 export interface UserJobLinkVo {
   id?: string
   userId?: string
@@ -1120,10 +1149,15 @@ export interface UserJobLinkVo {
   updatedTime?: string
 }
 
-export interface ResponseTypeUserJobLinkVo {
+export interface AudioRecognizeVo {
+  text?: string
+  phonetic?: string
+}
+
+export interface ResponseTypeAudioRecognizeVo {
   /** @format int32 */
   code?: number
-  data?: UserJobLinkVo
+  data?: AudioRecognizeVo
   message?: string
   errorType?: string
 }
@@ -1737,6 +1771,100 @@ export interface ProjectSkillBindRequest {
   projectId?: string
   skillId?: string
   skillLevelId?: string
+}
+
+/** 職缺搜尋查詢參數 */
+export interface JobPostingSearchQuery {
+  /**
+   * 頁碼，從0開始
+   * @format int32
+   * @min 0
+   * @example 0
+   */
+  page?: number
+  /**
+   * 每頁大小
+   * @format int32
+   * @min 1
+   * @max 100
+   * @example 20
+   */
+  size?: number
+  /**
+   * 排序欄位
+   * @example "createdTime"
+   */
+  sortBy?: string
+  /**
+   * 排序方向：asc/desc
+   * @example "desc"
+   */
+  sortDir?: string
+  /** 職缺標題（模糊查詢） */
+  title?: string
+  /** 公司ID（精確查詢） */
+  companyId?: string
+  /** 公司名稱（模糊查詢） */
+  companyName?: string
+  /** 薪資範圍（模糊查詢） */
+  salaryRange?: string
+  /**
+   * 發布日期（起始）
+   * @format date
+   */
+  postedDateStart?: string
+  /**
+   * 發布日期（結束）
+   * @format date
+   */
+  postedDateEnd?: string
+  /** 創建者（精確查詢） */
+  createdBy?: string
+  normalizedSortDir?: string
+  validSortDir?: boolean
+}
+
+/** 分頁結果 */
+export interface PageResultJobPostingVo {
+  /** 資料列表 */
+  content?: JobPostingVo[]
+  /**
+   * 總記錄數
+   * @format int64
+   */
+  totalElements?: number
+  /**
+   * 總頁數
+   * @format int32
+   */
+  totalPages?: number
+  /**
+   * 當前頁碼（從0開始）
+   * @format int32
+   */
+  currentPage?: number
+  /**
+   * 每頁大小
+   * @format int32
+   */
+  pageSize?: number
+  /** 是否有下一頁 */
+  hasNext?: boolean
+  /** 是否有上一頁 */
+  hasPrevious?: boolean
+  /** 是否為第一頁 */
+  isFirst?: boolean
+  /** 是否為最後一頁 */
+  isLast?: boolean
+}
+
+export interface ResponseTypePageResultJobPostingVo {
+  /** @format int32 */
+  code?: number
+  /** 分頁結果 */
+  data?: PageResultJobPostingVo
+  message?: string
+  errorType?: string
 }
 
 export interface ResponseTypeListJobPostingVo {
@@ -2428,8 +2556,8 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title OpenAPI definition
- * @version v0
+ * @title BackendApi
+ * @version 1.0.0
  * @baseUrl http://localhost:8000
  */
 export class Api<SecurityDataType extends unknown> {
@@ -2446,6 +2574,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags alert-check-limit-entity-controller
      * @name GetCollectionResourceAlertchecklimitGet
      * @request GET:/alertCheckLimits
+     * @secure
      * @response `200` `PagedModelEntityModelAlertCheckLimit` OK
      */
     "getCollectionResource-alertchecklimit-get": (
@@ -2471,6 +2600,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/alertCheckLimits`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -2481,6 +2611,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags alert-check-limit-entity-controller
      * @name PostCollectionResourceAlertchecklimitPost
      * @request POST:/alertCheckLimits
+     * @secure
      * @response `201` `EntityModelAlertCheckLimit` Created
      */
     "postCollectionResource-alertchecklimit-post": (data: AlertCheckLimitRequestBody, params: RequestParams = {}) =>
@@ -2488,6 +2619,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/alertCheckLimits`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -2499,6 +2631,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags alert-check-limit-entity-controller
      * @name GetItemResourceAlertchecklimitGet
      * @request GET:/alertCheckLimits/{id}
+     * @secure
      * @response `200` `EntityModelAlertCheckLimit` OK
      * @response `404` `any` Not Found
      */
@@ -2506,6 +2639,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelAlertCheckLimit, any>({
         path: `/alertCheckLimits/${id}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -2516,6 +2650,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags alert-check-limit-entity-controller
      * @name PutItemResourceAlertchecklimitPut
      * @request PUT:/alertCheckLimits/{id}
+     * @secure
      * @response `200` `EntityModelAlertCheckLimit` OK
      * @response `201` `EntityModelAlertCheckLimit` Created
      * @response `204` `any` No Content
@@ -2525,6 +2660,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/alertCheckLimits/${id}`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -2536,6 +2672,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags alert-check-limit-entity-controller
      * @name DeleteItemResourceAlertchecklimitDelete
      * @request DELETE:/alertCheckLimits/{id}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -2543,6 +2680,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/alertCheckLimits/${id}`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -2552,6 +2690,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags alert-check-limit-entity-controller
      * @name PatchItemResourceAlertchecklimitPatch
      * @request PATCH:/alertCheckLimits/{id}
+     * @secure
      * @response `200` `EntityModelAlertCheckLimit` OK
      * @response `204` `any` No Content
      */
@@ -2564,6 +2703,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/alertCheckLimits/${id}`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -2576,6 +2716,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags alert-check-limit-search-controller
      * @name ExecuteSearchAlertchecklimitGet
      * @request GET:/alertCheckLimits/search/findAlertCheckLimitByTableNameAndColumnName
+     * @secure
      * @response `200` `CollectionModelEntityModelAlertCheckLimit` OK
      * @response `404` `any` Not Found
      */
@@ -2590,6 +2731,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/alertCheckLimits/search/findAlertCheckLimitByTableNameAndColumnName`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       })
@@ -2601,6 +2743,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags aquark-data-entity-controller
      * @name GetCollectionResourceAquarkdataGet
      * @request GET:/aquarkDatas
+     * @secure
      * @response `200` `PagedModelEntityModelAquarkData` OK
      */
     "getCollectionResource-aquarkdata-get": (
@@ -2626,6 +2769,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/aquarkDatas`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -2636,6 +2780,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags aquark-data-entity-controller
      * @name PostCollectionResourceAquarkdataPost
      * @request POST:/aquarkDatas
+     * @secure
      * @response `201` `EntityModelAquarkData` Created
      */
     "postCollectionResource-aquarkdata-post": (data: AquarkDataRequestBody, params: RequestParams = {}) =>
@@ -2643,6 +2788,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/aquarkDatas`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -2654,6 +2800,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags aquark-data-entity-controller
      * @name GetItemResourceAquarkdataGet
      * @request GET:/aquarkDatas/{id}
+     * @secure
      * @response `200` `EntityModelAquarkData` OK
      * @response `404` `any` Not Found
      */
@@ -2661,6 +2808,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelAquarkData, any>({
         path: `/aquarkDatas/${id}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -2671,6 +2819,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags aquark-data-entity-controller
      * @name PutItemResourceAquarkdataPut
      * @request PUT:/aquarkDatas/{id}
+     * @secure
      * @response `200` `EntityModelAquarkData` OK
      * @response `201` `EntityModelAquarkData` Created
      * @response `204` `any` No Content
@@ -2680,6 +2829,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/aquarkDatas/${id}`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -2691,6 +2841,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags aquark-data-entity-controller
      * @name DeleteItemResourceAquarkdataDelete
      * @request DELETE:/aquarkDatas/{id}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -2698,6 +2849,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/aquarkDatas/${id}`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -2707,6 +2859,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags aquark-data-entity-controller
      * @name PatchItemResourceAquarkdataPatch
      * @request PATCH:/aquarkDatas/{id}
+     * @secure
      * @response `200` `EntityModelAquarkData` OK
      * @response `204` `any` No Content
      */
@@ -2715,6 +2868,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/aquarkDatas/${id}`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -2727,6 +2881,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags aquark-data-search-controller
      * @name ExecuteSearchAquarkdataGet
      * @request GET:/aquarkDatas/search/findAquarkDataByStation_idAndTrans_time
+     * @secure
      * @response `200` `CollectionModelEntityModelAquarkData` OK
      * @response `404` `any` Not Found
      */
@@ -2742,6 +2897,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/aquarkDatas/search/findAquarkDataByStation_idAndTrans_time`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -2752,6 +2908,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags aquark-data-search-controller
      * @name ExecuteSearchAquarkdataGet1
      * @request GET:/aquarkDatas/search/getAquarkDataQueryAllColumn
+     * @secure
      * @response `200` `CollectionModelEntityModelAquarkData` OK
      * @response `404` `any` Not Found
      */
@@ -2759,6 +2916,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<CollectionModelEntityModelAquarkData, any>({
         path: `/aquarkDatas/search/getAquarkDataQueryAllColumn`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       })
@@ -2770,6 +2928,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-entity-controller
      * @name GetCollectionResourceCompanyGet
      * @request GET:/companies
+     * @secure
      * @response `200` `PagedModelEntityModelCompany` OK
      */
     "getCollectionResource-company-get": (
@@ -2795,6 +2954,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/companies`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -2805,6 +2965,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-entity-controller
      * @name PostCollectionResourceCompanyPost
      * @request POST:/companies
+     * @secure
      * @response `201` `EntityModelCompany` Created
      */
     "postCollectionResource-company-post": (data: CompanyRequestBody, params: RequestParams = {}) =>
@@ -2812,6 +2973,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/companies`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -2823,6 +2985,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-entity-controller
      * @name GetItemResourceCompanyGet
      * @request GET:/companies/{id}
+     * @secure
      * @response `200` `EntityModelCompany` OK
      * @response `404` `any` Not Found
      */
@@ -2830,6 +2993,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelCompany, any>({
         path: `/companies/${id}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -2840,6 +3004,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-entity-controller
      * @name PutItemResourceCompanyPut
      * @request PUT:/companies/{id}
+     * @secure
      * @response `200` `EntityModelCompany` OK
      * @response `201` `EntityModelCompany` Created
      * @response `204` `any` No Content
@@ -2849,6 +3014,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/companies/${id}`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -2860,6 +3026,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-entity-controller
      * @name DeleteItemResourceCompanyDelete
      * @request DELETE:/companies/{id}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -2867,6 +3034,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/companies/${id}`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -2876,6 +3044,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-entity-controller
      * @name PatchItemResourceCompanyPatch
      * @request PATCH:/companies/{id}
+     * @secure
      * @response `200` `EntityModelCompany` OK
      * @response `204` `any` No Content
      */
@@ -2884,7 +3053,28 @@ export class Api<SecurityDataType extends unknown> {
         path: `/companies/${id}`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
+        format: "json",
+        ...params
+      })
+  }
+  companySearchController = {
+    /**
+     * No description
+     *
+     * @tags company-search-controller
+     * @name ExecuteSearchCompanyGet
+     * @request GET:/companies/search/findAllIds
+     * @secure
+     * @response `200` `CollectionModelEntityModelCompany` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-company-get": (params: RequestParams = {}) =>
+      this.http.request<CollectionModelEntityModelCompany, any>({
+        path: `/companies/search/findAllIds`,
+        method: "GET",
+        secure: true,
         format: "json",
         ...params
       })
@@ -2896,6 +3086,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-property-reference-controller
      * @name FollowPropertyReferenceCompanyGet
      * @request GET:/companies/{id}/websites
+     * @secure
      * @response `200` `CollectionModelCompanyWebsite` OK
      * @response `404` `any` Not Found
      */
@@ -2903,6 +3094,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<CollectionModelCompanyWebsite, any>({
         path: `/companies/${id}/websites`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -2913,6 +3105,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-property-reference-controller
      * @name CreatePropertyReferenceCompanyPut
      * @request PUT:/companies/{id}/websites
+     * @secure
      * @response `200` `CollectionModelCompanyWebsite` OK
      * @response `201` `CollectionModelCompanyWebsite` Created
      * @response `204` `any` No Content
@@ -2922,6 +3115,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/companies/${id}/websites`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -2933,6 +3127,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-property-reference-controller
      * @name DeletePropertyReferenceCompanyDelete
      * @request DELETE:/companies/{id}/websites
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -2940,6 +3135,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/companies/${id}/websites`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -2949,6 +3145,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-property-reference-controller
      * @name CreatePropertyReferenceCompanyPatch
      * @request PATCH:/companies/{id}/websites
+     * @secure
      * @response `200` `CollectionModelCompanyWebsite` OK
      * @response `204` `any` No Content
      */
@@ -2957,6 +3154,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/companies/${id}/websites`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -2968,6 +3166,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-property-reference-controller
      * @name FollowPropertyReferenceCompanyGet1
      * @request GET:/companies/{id}/websites/{propertyId}
+     * @secure
      * @response `200` `CollectionModelCompanyWebsite` OK
      * @response `404` `any` Not Found
      */
@@ -2975,6 +3174,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<CollectionModelCompanyWebsite, any>({
         path: `/companies/${id}/websites/${propertyId}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -2985,6 +3185,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-property-reference-controller
      * @name DeletePropertyReferenceIdCompanyDelete
      * @request DELETE:/companies/{id}/websites/{propertyId}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -2992,6 +3193,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/companies/${id}/websites/${propertyId}`,
         method: "DELETE",
+        secure: true,
         ...params
       })
   }
@@ -3002,6 +3204,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-website-entity-controller
      * @name GetCollectionResourceCompanywebsiteGet
      * @request GET:/companyWebsites
+     * @secure
      * @response `200` `PagedModelEntityModelCompanyWebsite` OK
      */
     "getCollectionResource-companywebsite-get": (
@@ -3027,6 +3230,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/companyWebsites`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3037,6 +3241,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-website-entity-controller
      * @name PostCollectionResourceCompanywebsitePost
      * @request POST:/companyWebsites
+     * @secure
      * @response `201` `EntityModelCompanyWebsite` Created
      */
     "postCollectionResource-companywebsite-post": (data: CompanyWebsiteRequestBody, params: RequestParams = {}) =>
@@ -3044,6 +3249,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/companyWebsites`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -3055,6 +3261,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-website-entity-controller
      * @name GetItemResourceCompanywebsiteGet
      * @request GET:/companyWebsites/{id}
+     * @secure
      * @response `200` `EntityModelCompanyWebsite` OK
      * @response `404` `any` Not Found
      */
@@ -3062,6 +3269,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelCompanyWebsite, any>({
         path: `/companyWebsites/${id}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3072,6 +3280,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-website-entity-controller
      * @name PutItemResourceCompanywebsitePut
      * @request PUT:/companyWebsites/{id}
+     * @secure
      * @response `200` `EntityModelCompanyWebsite` OK
      * @response `201` `EntityModelCompanyWebsite` Created
      * @response `204` `any` No Content
@@ -3081,6 +3290,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/companyWebsites/${id}`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -3092,6 +3302,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-website-entity-controller
      * @name DeleteItemResourceCompanywebsiteDelete
      * @request DELETE:/companyWebsites/{id}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -3099,6 +3310,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/companyWebsites/${id}`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -3108,6 +3320,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-website-entity-controller
      * @name PatchItemResourceCompanywebsitePatch
      * @request PATCH:/companyWebsites/{id}
+     * @secure
      * @response `200` `EntityModelCompanyWebsite` OK
      * @response `204` `any` No Content
      */
@@ -3120,6 +3333,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/companyWebsites/${id}`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -3132,6 +3346,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-website-property-reference-controller
      * @name FollowPropertyReferenceCompanywebsiteGet
      * @request GET:/companyWebsites/{id}/company
+     * @secure
      * @response `200` `EntityModelCompany` OK
      * @response `404` `any` Not Found
      */
@@ -3139,6 +3354,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelCompany, any>({
         path: `/companyWebsites/${id}/company`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3149,6 +3365,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-website-property-reference-controller
      * @name CreatePropertyReferenceCompanywebsitePut
      * @request PUT:/companyWebsites/{id}/company
+     * @secure
      * @response `200` `EntityModelCompany` OK
      * @response `201` `EntityModelCompany` Created
      * @response `204` `any` No Content
@@ -3162,6 +3379,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/companyWebsites/${id}/company`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -3173,6 +3391,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-website-property-reference-controller
      * @name DeletePropertyReferenceCompanywebsiteDelete
      * @request DELETE:/companyWebsites/{id}/company
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -3180,6 +3399,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/companyWebsites/${id}/company`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -3189,6 +3409,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-website-property-reference-controller
      * @name CreatePropertyReferenceCompanywebsitePatch
      * @request PATCH:/companyWebsites/{id}/company
+     * @secure
      * @response `200` `EntityModelCompany` OK
      * @response `204` `any` No Content
      */
@@ -3201,6 +3422,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/companyWebsites/${id}/company`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -3212,6 +3434,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-website-property-reference-controller
      * @name FollowPropertyReferenceCompanywebsiteGet1
      * @request GET:/companyWebsites/{id}/company/{propertyId}
+     * @secure
      * @response `200` `EntityModelCompany` OK
      * @response `404` `any` Not Found
      */
@@ -3219,6 +3442,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelCompany, any>({
         path: `/companyWebsites/${id}/company/${propertyId}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3229,6 +3453,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags company-website-property-reference-controller
      * @name DeletePropertyReferenceIdCompanywebsiteDelete
      * @request DELETE:/companyWebsites/{id}/company/{propertyId}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -3236,6 +3461,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/companyWebsites/${id}/company/${propertyId}`,
         method: "DELETE",
+        secure: true,
         ...params
       })
   }
@@ -3246,6 +3472,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags function-entity-controller
      * @name GetCollectionResourceFunctionGet
      * @request GET:/functions
+     * @secure
      * @response `200` `PagedModelEntityModelFunction` OK
      */
     "getCollectionResource-function-get": (
@@ -3271,6 +3498,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/functions`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3281,6 +3509,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags function-entity-controller
      * @name PostCollectionResourceFunctionPost
      * @request POST:/functions
+     * @secure
      * @response `201` `EntityModelFunction` Created
      */
     "postCollectionResource-function-post": (data: FunctionRequestBody, params: RequestParams = {}) =>
@@ -3288,6 +3517,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/functions`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -3299,6 +3529,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags function-entity-controller
      * @name GetItemResourceFunctionGet
      * @request GET:/functions/{id}
+     * @secure
      * @response `200` `EntityModelFunction` OK
      * @response `404` `any` Not Found
      */
@@ -3306,6 +3537,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelFunction, any>({
         path: `/functions/${id}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3316,6 +3548,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags function-entity-controller
      * @name PutItemResourceFunctionPut
      * @request PUT:/functions/{id}
+     * @secure
      * @response `200` `EntityModelFunction` OK
      * @response `201` `EntityModelFunction` Created
      * @response `204` `any` No Content
@@ -3325,6 +3558,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/functions/${id}`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -3336,6 +3570,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags function-entity-controller
      * @name DeleteItemResourceFunctionDelete
      * @request DELETE:/functions/{id}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -3343,6 +3578,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/functions/${id}`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -3352,6 +3588,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags function-entity-controller
      * @name PatchItemResourceFunctionPatch
      * @request PATCH:/functions/{id}
+     * @secure
      * @response `200` `EntityModelFunction` OK
      * @response `204` `any` No Content
      */
@@ -3360,6 +3597,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/functions/${id}`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -3372,6 +3610,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags function-search-controller
      * @name ExecuteSearchFunctionGet
      * @request GET:/functions/search/findAllByGrandParentId
+     * @secure
      * @response `200` `CollectionModelEntityModelFunction` OK
      * @response `404` `any` Not Found
      */
@@ -3385,6 +3624,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/functions/search/findAllByGrandParentId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3394,20 +3634,16 @@ export class Api<SecurityDataType extends unknown> {
      *
      * @tags function-search-controller
      * @name ExecuteSearchFunctionGet1
-     * @request GET:/functions/search/findFunctionByName
-     * @response `200` `EntityModelFunction` OK
+     * @request GET:/functions/search/findAllIds
+     * @secure
+     * @response `200` `CollectionModelEntityModelFunction` OK
      * @response `404` `any` Not Found
      */
-    "executeSearch-function-get_1": (
-      query?: {
-        name?: string
-      },
-      params: RequestParams = {}
-    ) =>
-      this.http.request<EntityModelFunction, any>({
-        path: `/functions/search/findFunctionByName`,
+    "executeSearch-function-get_1": (params: RequestParams = {}) =>
+      this.http.request<CollectionModelEntityModelFunction, any>({
+        path: `/functions/search/findAllIds`,
         method: "GET",
-        query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3417,11 +3653,37 @@ export class Api<SecurityDataType extends unknown> {
      *
      * @tags function-search-controller
      * @name ExecuteSearchFunctionGet2
-     * @request GET:/functions/search/findFunctionByNameAndParent
-     * @response `200` `CollectionModelEntityModelFunction` OK
+     * @request GET:/functions/search/findFunctionByName
+     * @secure
+     * @response `200` `EntityModelFunction` OK
      * @response `404` `any` Not Found
      */
     "executeSearch-function-get_2": (
+      query?: {
+        name?: string
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<EntityModelFunction, any>({
+        path: `/functions/search/findFunctionByName`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags function-search-controller
+     * @name ExecuteSearchFunctionGet3
+     * @request GET:/functions/search/findFunctionByNameAndParent
+     * @secure
+     * @response `200` `CollectionModelEntityModelFunction` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-function-get_3": (
       query?: {
         name?: string
         parent?: string
@@ -3432,6 +3694,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/functions/search/findFunctionByNameAndParent`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3440,12 +3703,13 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags function-search-controller
-     * @name ExecuteSearchFunctionGet3
+     * @name ExecuteSearchFunctionGet4
      * @request GET:/functions/search/getParent
+     * @secure
      * @response `200` `CollectionModelEntityModelFunction` OK
      * @response `404` `any` Not Found
      */
-    "executeSearch-function-get_3": (
+    "executeSearch-function-get_4": (
       query?: {
         parent?: string[]
       },
@@ -3455,6 +3719,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/functions/search/getParent`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       })
@@ -3466,6 +3731,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags job-posting-entity-controller
      * @name GetCollectionResourceJobpostingGet
      * @request GET:/jobPostings
+     * @secure
      * @response `200` `PagedModelEntityModelJobPosting` OK
      */
     "getCollectionResource-jobposting-get": (
@@ -3491,6 +3757,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/jobPostings`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3501,6 +3768,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags job-posting-entity-controller
      * @name PostCollectionResourceJobpostingPost
      * @request POST:/jobPostings
+     * @secure
      * @response `201` `EntityModelJobPosting` Created
      */
     "postCollectionResource-jobposting-post": (data: JobPostingRequestBody, params: RequestParams = {}) =>
@@ -3508,6 +3776,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/jobPostings`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -3519,6 +3788,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags job-posting-entity-controller
      * @name GetItemResourceJobpostingGet
      * @request GET:/jobPostings/{id}
+     * @secure
      * @response `200` `EntityModelJobPosting` OK
      * @response `404` `any` Not Found
      */
@@ -3526,6 +3796,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelJobPosting, any>({
         path: `/jobPostings/${id}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3536,6 +3807,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags job-posting-entity-controller
      * @name PutItemResourceJobpostingPut
      * @request PUT:/jobPostings/{id}
+     * @secure
      * @response `200` `EntityModelJobPosting` OK
      * @response `201` `EntityModelJobPosting` Created
      * @response `204` `any` No Content
@@ -3545,6 +3817,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/jobPostings/${id}`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -3556,6 +3829,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags job-posting-entity-controller
      * @name DeleteItemResourceJobpostingDelete
      * @request DELETE:/jobPostings/{id}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -3563,6 +3837,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/jobPostings/${id}`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -3572,6 +3847,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags job-posting-entity-controller
      * @name PatchItemResourceJobpostingPatch
      * @request PATCH:/jobPostings/{id}
+     * @secure
      * @response `200` `EntityModelJobPosting` OK
      * @response `204` `any` No Content
      */
@@ -3580,7 +3856,28 @@ export class Api<SecurityDataType extends unknown> {
         path: `/jobPostings/${id}`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
+        format: "json",
+        ...params
+      })
+  }
+  jobPostingSearchController = {
+    /**
+     * No description
+     *
+     * @tags job-posting-search-controller
+     * @name ExecuteSearchJobpostingGet
+     * @request GET:/jobPostings/search/findAllIds
+     * @secure
+     * @response `200` `CollectionModelEntityModelJobPosting` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-jobposting-get": (params: RequestParams = {}) =>
+      this.http.request<CollectionModelEntityModelJobPosting, any>({
+        path: `/jobPostings/search/findAllIds`,
+        method: "GET",
+        secure: true,
         format: "json",
         ...params
       })
@@ -3592,6 +3889,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags job-posting-property-reference-controller
      * @name FollowPropertyReferenceJobpostingGet
      * @request GET:/jobPostings/{id}/company
+     * @secure
      * @response `200` `EntityModelCompany` OK
      * @response `404` `any` Not Found
      */
@@ -3599,6 +3897,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelCompany, any>({
         path: `/jobPostings/${id}/company`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3609,6 +3908,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags job-posting-property-reference-controller
      * @name CreatePropertyReferenceJobpostingPut
      * @request PUT:/jobPostings/{id}/company
+     * @secure
      * @response `200` `EntityModelCompany` OK
      * @response `201` `EntityModelCompany` Created
      * @response `204` `any` No Content
@@ -3618,6 +3918,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/jobPostings/${id}/company`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -3629,6 +3930,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags job-posting-property-reference-controller
      * @name DeletePropertyReferenceJobpostingDelete
      * @request DELETE:/jobPostings/{id}/company
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -3636,6 +3938,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/jobPostings/${id}/company`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -3645,6 +3948,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags job-posting-property-reference-controller
      * @name CreatePropertyReferenceJobpostingPatch
      * @request PATCH:/jobPostings/{id}/company
+     * @secure
      * @response `200` `EntityModelCompany` OK
      * @response `204` `any` No Content
      */
@@ -3653,6 +3957,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/jobPostings/${id}/company`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -3664,6 +3969,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags job-posting-property-reference-controller
      * @name FollowPropertyReferenceJobpostingGet1
      * @request GET:/jobPostings/{id}/company/{propertyId}
+     * @secure
      * @response `200` `EntityModelCompany` OK
      * @response `404` `any` Not Found
      */
@@ -3671,6 +3977,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelCompany, any>({
         path: `/jobPostings/${id}/company/${propertyId}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3681,6 +3988,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags job-posting-property-reference-controller
      * @name DeletePropertyReferenceIdJobpostingDelete
      * @request DELETE:/jobPostings/{id}/company/{propertyId}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -3688,6 +3996,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/jobPostings/${id}/company/${propertyId}`,
         method: "DELETE",
+        secure: true,
         ...params
       })
   }
@@ -3698,12 +4007,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags profile-controller
      * @name ListAllFormsOfMetadata
      * @request GET:/profile
+     * @secure
      * @response `200` `RepresentationModelObject` OK
      */
     listAllFormsOfMetadata: (params: RequestParams = {}) =>
       this.http.request<RepresentationModelObject, any>({
         path: `/profile`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3714,12 +4025,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags profile-controller
      * @name Descriptor
      * @request GET:/profile/alertCheckLimits
+     * @secure
      * @response `200` `string` OK
      */
     descriptor: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/alertCheckLimits`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3730,12 +4043,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags profile-controller
      * @name Descriptor1
      * @request GET:/profile/aquarkDatas
+     * @secure
      * @response `200` `string` OK
      */
     descriptor_1: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/aquarkDatas`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3746,12 +4061,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags profile-controller
      * @name Descriptor2
      * @request GET:/profile/companies
+     * @secure
      * @response `200` `string` OK
      */
     descriptor_2: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/companies`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3762,12 +4079,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags profile-controller
      * @name Descriptor3
      * @request GET:/profile/companyWebsites
+     * @secure
      * @response `200` `string` OK
      */
     descriptor_3: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/companyWebsites`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3778,12 +4097,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags profile-controller
      * @name Descriptor4
      * @request GET:/profile/functions
+     * @secure
      * @response `200` `string` OK
      */
     descriptor_4: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/functions`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3794,12 +4115,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags profile-controller
      * @name Descriptor5
      * @request GET:/profile/jobPostings
+     * @secure
      * @response `200` `string` OK
      */
     descriptor_5: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/jobPostings`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3810,12 +4133,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags profile-controller
      * @name Descriptor6
      * @request GET:/profile/projectSkills
+     * @secure
      * @response `200` `string` OK
      */
     descriptor_6: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/projectSkills`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3826,12 +4151,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags profile-controller
      * @name Descriptor7
      * @request GET:/profile/projects
+     * @secure
      * @response `200` `string` OK
      */
     descriptor_7: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/projects`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3842,12 +4169,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags profile-controller
      * @name Descriptor8
      * @request GET:/profile/roleFunctions
+     * @secure
      * @response `200` `string` OK
      */
     descriptor_8: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/roleFunctions`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3858,12 +4187,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags profile-controller
      * @name Descriptor9
      * @request GET:/profile/roles
+     * @secure
      * @response `200` `string` OK
      */
     descriptor_9: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/roles`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3874,12 +4205,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags profile-controller
      * @name Descriptor10
      * @request GET:/profile/skillLevels
+     * @secure
      * @response `200` `string` OK
      */
     descriptor_10: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/skillLevels`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3890,12 +4223,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags profile-controller
      * @name Descriptor11
      * @request GET:/profile/skills
+     * @secure
      * @response `200` `string` OK
      */
     descriptor_11: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/skills`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3906,12 +4241,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags profile-controller
      * @name Descriptor12
      * @request GET:/profile/userJobLinks
+     * @secure
      * @response `200` `string` OK
      */
     descriptor_12: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/userJobLinks`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3922,12 +4259,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags profile-controller
      * @name Descriptor13
      * @request GET:/profile/userProjectSkills
+     * @secure
      * @response `200` `string` OK
      */
     descriptor_13: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/userProjectSkills`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3938,12 +4277,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags profile-controller
      * @name Descriptor14
      * @request GET:/profile/userProjects
+     * @secure
      * @response `200` `string` OK
      */
     descriptor_14: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/userProjects`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3954,12 +4295,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags profile-controller
      * @name Descriptor15
      * @request GET:/profile/userRoles
+     * @secure
      * @response `200` `string` OK
      */
     descriptor_15: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/userRoles`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3970,12 +4313,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags profile-controller
      * @name Descriptor16
      * @request GET:/profile/userSkills
+     * @secure
      * @response `200` `string` OK
      */
     descriptor_16: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/userSkills`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -3986,12 +4331,14 @@ export class Api<SecurityDataType extends unknown> {
      * @tags profile-controller
      * @name Descriptor17
      * @request GET:/profile/users
+     * @secure
      * @response `200` `string` OK
      */
     descriptor_17: (params: RequestParams = {}) =>
       this.http.request<string, any>({
         path: `/profile/users`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       })
@@ -4003,6 +4350,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-entity-controller
      * @name GetCollectionResourceProjectskillGet
      * @request GET:/projectSkills
+     * @secure
      * @response `200` `PagedModelEntityModelProjectSkill` OK
      */
     "getCollectionResource-projectskill-get": (
@@ -4028,6 +4376,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/projectSkills`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -4038,6 +4387,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-entity-controller
      * @name PostCollectionResourceProjectskillPost
      * @request POST:/projectSkills
+     * @secure
      * @response `201` `EntityModelProjectSkill` Created
      */
     "postCollectionResource-projectskill-post": (data: ProjectSkillRequestBody, params: RequestParams = {}) =>
@@ -4045,6 +4395,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/projectSkills`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -4056,6 +4407,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-entity-controller
      * @name GetItemResourceProjectskillGet
      * @request GET:/projectSkills/{id}
+     * @secure
      * @response `200` `EntityModelProjectSkill` OK
      * @response `404` `any` Not Found
      */
@@ -4063,6 +4415,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelProjectSkill, any>({
         path: `/projectSkills/${id}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -4073,6 +4426,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-entity-controller
      * @name PutItemResourceProjectskillPut
      * @request PUT:/projectSkills/{id}
+     * @secure
      * @response `200` `EntityModelProjectSkill` OK
      * @response `201` `EntityModelProjectSkill` Created
      * @response `204` `any` No Content
@@ -4082,6 +4436,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/projectSkills/${id}`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -4093,6 +4448,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-entity-controller
      * @name DeleteItemResourceProjectskillDelete
      * @request DELETE:/projectSkills/{id}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -4100,6 +4456,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/projectSkills/${id}`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -4109,6 +4466,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-entity-controller
      * @name PatchItemResourceProjectskillPatch
      * @request PATCH:/projectSkills/{id}
+     * @secure
      * @response `200` `EntityModelProjectSkill` OK
      * @response `204` `any` No Content
      */
@@ -4117,6 +4475,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/projectSkills/${id}`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -4129,6 +4488,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-search-controller
      * @name ExecuteSearchProjectskillGet
      * @request GET:/projectSkills/search/deleteByProjectId
+     * @secure
      * @response `200` `any` OK
      * @response `404` `any` Not Found
      */
@@ -4143,6 +4503,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/projectSkills/search/deleteByProjectId`,
         method: "GET",
         query: query,
+        secure: true,
         ...params
       }),
 
@@ -4152,6 +4513,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-search-controller
      * @name ExecuteSearchProjectskillGet1
      * @request GET:/projectSkills/search/deleteByProjectIdAndSkillId
+     * @secure
      * @response `200` `any` OK
      * @response `404` `any` Not Found
      */
@@ -4168,6 +4530,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/projectSkills/search/deleteByProjectIdAndSkillId`,
         method: "GET",
         query: query,
+        secure: true,
         ...params
       }),
 
@@ -4177,6 +4540,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-search-controller
      * @name ExecuteSearchProjectskillGet2
      * @request GET:/projectSkills/search/deleteBySkillId
+     * @secure
      * @response `200` `any` OK
      * @response `404` `any` Not Found
      */
@@ -4191,6 +4555,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/projectSkills/search/deleteBySkillId`,
         method: "GET",
         query: query,
+        secure: true,
         ...params
       }),
 
@@ -4200,6 +4565,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-search-controller
      * @name ExecuteSearchProjectskillGet3
      * @request GET:/projectSkills/search/existsByProjectIdAndSkillId
+     * @secure
      * @response `200` `boolean` OK
      * @response `404` `any` Not Found
      */
@@ -4216,6 +4582,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/projectSkills/search/existsByProjectIdAndSkillId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -4226,6 +4593,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-search-controller
      * @name ExecuteSearchProjectskillGet4
      * @request GET:/projectSkills/search/existsBySkillId
+     * @secure
      * @response `200` `boolean` OK
      * @response `404` `any` Not Found
      */
@@ -4240,6 +4608,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/projectSkills/search/existsBySkillId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -4250,6 +4619,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-search-controller
      * @name ExecuteSearchProjectskillGet5
      * @request GET:/projectSkills/search/existsBySkillLevelId
+     * @secure
      * @response `200` `boolean` OK
      * @response `404` `any` Not Found
      */
@@ -4264,6 +4634,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/projectSkills/search/existsBySkillLevelId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -4274,6 +4645,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-search-controller
      * @name ExecuteSearchProjectskillGet6
      * @request GET:/projectSkills/search/findByProjectId
+     * @secure
      * @response `200` `CollectionModelEntityModelProjectSkill` OK
      * @response `404` `any` Not Found
      */
@@ -4288,6 +4660,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/projectSkills/search/findByProjectId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -4298,6 +4671,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-search-controller
      * @name ExecuteSearchProjectskillGet7
      * @request GET:/projectSkills/search/findByProjectIdAndSkillId
+     * @secure
      * @response `200` `EntityModelProjectSkill` OK
      * @response `404` `any` Not Found
      */
@@ -4314,6 +4688,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/projectSkills/search/findByProjectIdAndSkillId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       })
@@ -4325,6 +4700,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-property-reference-controller
      * @name FollowPropertyReferenceProjectskillGet
      * @request GET:/projectSkills/{id}/skill
+     * @secure
      * @response `200` `EntityModelSkill` OK
      * @response `404` `any` Not Found
      */
@@ -4332,6 +4708,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelSkill, any>({
         path: `/projectSkills/${id}/skill`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -4342,6 +4719,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-property-reference-controller
      * @name CreatePropertyReferenceProjectskillPut
      * @request PUT:/projectSkills/{id}/skill
+     * @secure
      * @response `200` `EntityModelSkill` OK
      * @response `201` `EntityModelSkill` Created
      * @response `204` `any` No Content
@@ -4351,6 +4729,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/projectSkills/${id}/skill`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -4362,6 +4741,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-property-reference-controller
      * @name DeletePropertyReferenceProjectskillDelete
      * @request DELETE:/projectSkills/{id}/skill
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -4369,6 +4749,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/projectSkills/${id}/skill`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -4378,6 +4759,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-property-reference-controller
      * @name CreatePropertyReferenceProjectskillPatch
      * @request PATCH:/projectSkills/{id}/skill
+     * @secure
      * @response `200` `EntityModelSkill` OK
      * @response `204` `any` No Content
      */
@@ -4390,6 +4772,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/projectSkills/${id}/skill`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -4401,6 +4784,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-property-reference-controller
      * @name FollowPropertyReferenceProjectskillGet1
      * @request GET:/projectSkills/{id}/skill/{propertyId}
+     * @secure
      * @response `200` `EntityModelSkill` OK
      * @response `404` `any` Not Found
      */
@@ -4408,6 +4792,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelSkill, any>({
         path: `/projectSkills/${id}/skill/${propertyId}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -4418,6 +4803,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-property-reference-controller
      * @name DeletePropertyReferenceIdProjectskillDelete
      * @request DELETE:/projectSkills/{id}/skill/{propertyId}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -4425,6 +4811,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/projectSkills/${id}/skill/${propertyId}`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -4434,6 +4821,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-property-reference-controller
      * @name FollowPropertyReferenceProjectskillGet2
      * @request GET:/projectSkills/{id}/skillLevel
+     * @secure
      * @response `200` `EntityModelSkillLevel` OK
      * @response `404` `any` Not Found
      */
@@ -4441,6 +4829,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelSkillLevel, any>({
         path: `/projectSkills/${id}/skillLevel`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -4451,6 +4840,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-property-reference-controller
      * @name CreatePropertyReferenceProjectskillPut1
      * @request PUT:/projectSkills/{id}/skillLevel
+     * @secure
      * @response `200` `EntityModelSkillLevel` OK
      * @response `201` `EntityModelSkillLevel` Created
      * @response `204` `any` No Content
@@ -4464,6 +4854,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/projectSkills/${id}/skillLevel`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -4475,6 +4866,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-property-reference-controller
      * @name DeletePropertyReferenceProjectskillDelete1
      * @request DELETE:/projectSkills/{id}/skillLevel
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -4482,6 +4874,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/projectSkills/${id}/skillLevel`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -4491,6 +4884,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-property-reference-controller
      * @name CreatePropertyReferenceProjectskillPatch1
      * @request PATCH:/projectSkills/{id}/skillLevel
+     * @secure
      * @response `200` `EntityModelSkillLevel` OK
      * @response `204` `any` No Content
      */
@@ -4503,6 +4897,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/projectSkills/${id}/skillLevel`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -4514,6 +4909,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-property-reference-controller
      * @name FollowPropertyReferenceProjectskillGet3
      * @request GET:/projectSkills/{id}/skillLevel/{propertyId}
+     * @secure
      * @response `200` `EntityModelSkillLevel` OK
      * @response `404` `any` Not Found
      */
@@ -4521,6 +4917,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelSkillLevel, any>({
         path: `/projectSkills/${id}/skillLevel/${propertyId}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -4531,6 +4928,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-skill-property-reference-controller
      * @name DeletePropertyReferenceIdProjectskillDelete1
      * @request DELETE:/projectSkills/{id}/skillLevel/{propertyId}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -4538,6 +4936,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/projectSkills/${id}/skillLevel/${propertyId}`,
         method: "DELETE",
+        secure: true,
         ...params
       })
   }
@@ -4548,6 +4947,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-entity-controller
      * @name GetCollectionResourceProjectGet
      * @request GET:/projects
+     * @secure
      * @response `200` `PagedModelEntityModelProject` OK
      */
     "getCollectionResource-project-get": (
@@ -4573,6 +4973,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/projects`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -4583,6 +4984,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-entity-controller
      * @name PostCollectionResourceProjectPost
      * @request POST:/projects
+     * @secure
      * @response `201` `EntityModelProject` Created
      */
     "postCollectionResource-project-post": (data: ProjectRequestBody, params: RequestParams = {}) =>
@@ -4590,6 +4992,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/projects`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -4601,6 +5004,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-entity-controller
      * @name GetItemResourceProjectGet
      * @request GET:/projects/{id}
+     * @secure
      * @response `200` `EntityModelProject` OK
      * @response `404` `any` Not Found
      */
@@ -4608,6 +5012,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelProject, any>({
         path: `/projects/${id}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -4618,6 +5023,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-entity-controller
      * @name PutItemResourceProjectPut
      * @request PUT:/projects/{id}
+     * @secure
      * @response `200` `EntityModelProject` OK
      * @response `201` `EntityModelProject` Created
      * @response `204` `any` No Content
@@ -4627,6 +5033,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/projects/${id}`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -4638,6 +5045,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-entity-controller
      * @name DeleteItemResourceProjectDelete
      * @request DELETE:/projects/{id}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -4645,6 +5053,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/projects/${id}`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -4654,6 +5063,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-entity-controller
      * @name PatchItemResourceProjectPatch
      * @request PATCH:/projects/{id}
+     * @secure
      * @response `200` `EntityModelProject` OK
      * @response `204` `any` No Content
      */
@@ -4662,6 +5072,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/projects/${id}`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -4674,6 +5085,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-search-controller
      * @name ExecuteSearchProjectGet
      * @request GET:/projects/search/deleteByIdHard
+     * @secure
      * @response `200` `any` OK
      * @response `404` `any` Not Found
      */
@@ -4688,6 +5100,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/projects/search/deleteByIdHard`,
         method: "GET",
         query: query,
+        secure: true,
         ...params
       }),
 
@@ -4697,6 +5110,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags project-search-controller
      * @name ExecuteSearchProjectGet1
      * @request GET:/projects/search/findByName
+     * @secure
      * @response `200` `CollectionModelEntityModelProject` OK
      * @response `404` `any` Not Found
      */
@@ -4710,6 +5124,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/projects/search/findByName`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       })
@@ -4721,6 +5136,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags role-function-entity-controller
      * @name GetCollectionResourceRolefunctionGet
      * @request GET:/roleFunctions
+     * @secure
      * @response `200` `PagedModelEntityModelRoleFunction` OK
      */
     "getCollectionResource-rolefunction-get": (
@@ -4746,6 +5162,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/roleFunctions`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -4756,6 +5173,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags role-function-entity-controller
      * @name PostCollectionResourceRolefunctionPost
      * @request POST:/roleFunctions
+     * @secure
      * @response `201` `EntityModelRoleFunction` Created
      */
     "postCollectionResource-rolefunction-post": (data: RoleFunctionRequestBody, params: RequestParams = {}) =>
@@ -4763,6 +5181,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/roleFunctions`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -4774,6 +5193,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags role-function-entity-controller
      * @name GetItemResourceRolefunctionGet
      * @request GET:/roleFunctions/{id}
+     * @secure
      * @response `200` `EntityModelRoleFunction` OK
      * @response `404` `any` Not Found
      */
@@ -4781,6 +5201,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelRoleFunction, any>({
         path: `/roleFunctions/${id}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -4791,6 +5212,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags role-function-entity-controller
      * @name PutItemResourceRolefunctionPut
      * @request PUT:/roleFunctions/{id}
+     * @secure
      * @response `200` `EntityModelRoleFunction` OK
      * @response `201` `EntityModelRoleFunction` Created
      * @response `204` `any` No Content
@@ -4800,6 +5222,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/roleFunctions/${id}`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -4811,6 +5234,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags role-function-entity-controller
      * @name DeleteItemResourceRolefunctionDelete
      * @request DELETE:/roleFunctions/{id}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -4818,6 +5242,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/roleFunctions/${id}`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -4827,6 +5252,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags role-function-entity-controller
      * @name PatchItemResourceRolefunctionPatch
      * @request PATCH:/roleFunctions/{id}
+     * @secure
      * @response `200` `EntityModelRoleFunction` OK
      * @response `204` `any` No Content
      */
@@ -4835,6 +5261,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/roleFunctions/${id}`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -4847,6 +5274,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags role-function-search-controller
      * @name ExecuteSearchRolefunctionGet
      * @request GET:/roleFunctions/search/deleteAllByFunctionIn
+     * @secure
      * @response `200` `any` OK
      * @response `404` `any` Not Found
      */
@@ -4860,6 +5288,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/roleFunctions/search/deleteAllByFunctionIn`,
         method: "GET",
         query: query,
+        secure: true,
         ...params
       }),
 
@@ -4869,6 +5298,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags role-function-search-controller
      * @name ExecuteSearchRolefunctionGet1
      * @request GET:/roleFunctions/search/deleteByFunction
+     * @secure
      * @response `200` `any` OK
      * @response `404` `any` Not Found
      */
@@ -4883,6 +5313,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/roleFunctions/search/deleteByFunction`,
         method: "GET",
         query: query,
+        secure: true,
         ...params
       }),
 
@@ -4892,6 +5323,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags role-function-search-controller
      * @name ExecuteSearchRolefunctionGet2
      * @request GET:/roleFunctions/search/deleteByFunctionAndRole
+     * @secure
      * @response `200` `any` OK
      * @response `404` `any` Not Found
      */
@@ -4906,6 +5338,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/roleFunctions/search/deleteByFunctionAndRole`,
         method: "GET",
         query: query,
+        secure: true,
         ...params
       }),
 
@@ -4915,6 +5348,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags role-function-search-controller
      * @name ExecuteSearchRolefunctionGet3
      * @request GET:/roleFunctions/search/deleteByRoleKey
+     * @secure
      * @response `200` `any` OK
      * @response `404` `any` Not Found
      */
@@ -4929,6 +5363,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/roleFunctions/search/deleteByRoleKey`,
         method: "GET",
         query: query,
+        secure: true,
         ...params
       })
   }
@@ -4939,6 +5374,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags role-entity-controller
      * @name GetCollectionResourceRoleGet
      * @request GET:/roles
+     * @secure
      * @response `200` `PagedModelEntityModelRole` OK
      */
     "getCollectionResource-role-get": (
@@ -4964,6 +5400,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/roles`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -4974,6 +5411,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags role-entity-controller
      * @name PostCollectionResourceRolePost
      * @request POST:/roles
+     * @secure
      * @response `201` `EntityModelRole` Created
      */
     "postCollectionResource-role-post": (data: RoleRequestBody, params: RequestParams = {}) =>
@@ -4981,6 +5419,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/roles`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -4992,6 +5431,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags role-entity-controller
      * @name GetItemResourceRoleGet
      * @request GET:/roles/{id}
+     * @secure
      * @response `200` `EntityModelRole` OK
      * @response `404` `any` Not Found
      */
@@ -4999,6 +5439,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelRole, any>({
         path: `/roles/${id}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -5009,6 +5450,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags role-entity-controller
      * @name PutItemResourceRolePut
      * @request PUT:/roles/{id}
+     * @secure
      * @response `200` `EntityModelRole` OK
      * @response `201` `EntityModelRole` Created
      * @response `204` `any` No Content
@@ -5018,6 +5460,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/roles/${id}`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -5029,6 +5472,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags role-entity-controller
      * @name DeleteItemResourceRoleDelete
      * @request DELETE:/roles/{id}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -5036,6 +5480,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/roles/${id}`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -5045,6 +5490,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags role-entity-controller
      * @name PatchItemResourceRolePatch
      * @request PATCH:/roles/{id}
+     * @secure
      * @response `200` `EntityModelRole` OK
      * @response `204` `any` No Content
      */
@@ -5053,6 +5499,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/roles/${id}`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -5064,20 +5511,16 @@ export class Api<SecurityDataType extends unknown> {
      *
      * @tags role-search-controller
      * @name ExecuteSearchRoleGet
-     * @request GET:/roles/search/findRoleByIdIn
+     * @request GET:/roles/search/findAllIds
+     * @secure
      * @response `200` `CollectionModelEntityModelRole` OK
      * @response `404` `any` Not Found
      */
-    "executeSearch-role-get": (
-      query?: {
-        ids?: string[]
-      },
-      params: RequestParams = {}
-    ) =>
+    "executeSearch-role-get": (params: RequestParams = {}) =>
       this.http.request<CollectionModelEntityModelRole, any>({
-        path: `/roles/search/findRoleByIdIn`,
+        path: `/roles/search/findAllIds`,
         method: "GET",
-        query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -5087,11 +5530,37 @@ export class Api<SecurityDataType extends unknown> {
      *
      * @tags role-search-controller
      * @name ExecuteSearchRoleGet1
-     * @request GET:/roles/search/findRoleByName
-     * @response `200` `EntityModelRole` OK
+     * @request GET:/roles/search/findRoleByIdIn
+     * @secure
+     * @response `200` `CollectionModelEntityModelRole` OK
      * @response `404` `any` Not Found
      */
     "executeSearch-role-get_1": (
+      query?: {
+        ids?: string[]
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<CollectionModelEntityModelRole, any>({
+        path: `/roles/search/findRoleByIdIn`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags role-search-controller
+     * @name ExecuteSearchRoleGet2
+     * @request GET:/roles/search/findRoleByName
+     * @secure
+     * @response `200` `EntityModelRole` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-role-get_2": (
       query?: {
         name?: string
       },
@@ -5101,6 +5570,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/roles/search/findRoleByName`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       })
@@ -5112,6 +5582,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags skill-level-entity-controller
      * @name GetCollectionResourceSkilllevelGet
      * @request GET:/skillLevels
+     * @secure
      * @response `200` `PagedModelEntityModelSkillLevel` OK
      */
     "getCollectionResource-skilllevel-get": (
@@ -5137,6 +5608,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skillLevels`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -5147,6 +5619,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags skill-level-entity-controller
      * @name PostCollectionResourceSkilllevelPost
      * @request POST:/skillLevels
+     * @secure
      * @response `201` `EntityModelSkillLevel` Created
      */
     "postCollectionResource-skilllevel-post": (data: SkillLevelRequestBody, params: RequestParams = {}) =>
@@ -5154,6 +5627,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skillLevels`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -5165,6 +5639,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags skill-level-entity-controller
      * @name GetItemResourceSkilllevelGet
      * @request GET:/skillLevels/{id}
+     * @secure
      * @response `200` `EntityModelSkillLevel` OK
      * @response `404` `any` Not Found
      */
@@ -5172,6 +5647,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelSkillLevel, any>({
         path: `/skillLevels/${id}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -5182,6 +5658,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags skill-level-entity-controller
      * @name PutItemResourceSkilllevelPut
      * @request PUT:/skillLevels/{id}
+     * @secure
      * @response `200` `EntityModelSkillLevel` OK
      * @response `201` `EntityModelSkillLevel` Created
      * @response `204` `any` No Content
@@ -5191,6 +5668,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skillLevels/${id}`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -5202,6 +5680,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags skill-level-entity-controller
      * @name DeleteItemResourceSkilllevelDelete
      * @request DELETE:/skillLevels/{id}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -5209,6 +5688,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/skillLevels/${id}`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -5218,6 +5698,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags skill-level-entity-controller
      * @name PatchItemResourceSkilllevelPatch
      * @request PATCH:/skillLevels/{id}
+     * @secure
      * @response `200` `EntityModelSkillLevel` OK
      * @response `204` `any` No Content
      */
@@ -5226,6 +5707,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skillLevels/${id}`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -5238,6 +5720,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags skill-level-search-controller
      * @name ExecuteSearchSkilllevelGet
      * @request GET:/skillLevels/search/deleteBySkillId
+     * @secure
      * @response `200` `any` OK
      * @response `404` `any` Not Found
      */
@@ -5252,6 +5735,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skillLevels/search/deleteBySkillId`,
         method: "GET",
         query: query,
+        secure: true,
         ...params
       }),
 
@@ -5261,6 +5745,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags skill-level-search-controller
      * @name ExecuteSearchSkilllevelGet1
      * @request GET:/skillLevels/search/existsBySkillIdAndLevelValue
+     * @secure
      * @response `200` `boolean` OK
      * @response `404` `any` Not Found
      */
@@ -5277,6 +5762,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skillLevels/search/existsBySkillIdAndLevelValue`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -5287,6 +5773,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags skill-level-search-controller
      * @name ExecuteSearchSkilllevelGet2
      * @request GET:/skillLevels/search/findBySkillIdOrderByLevelValueAsc
+     * @secure
      * @response `200` `CollectionModelEntityModelSkillLevel` OK
      * @response `404` `any` Not Found
      */
@@ -5301,6 +5788,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skillLevels/search/findBySkillIdOrderByLevelValueAsc`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       })
@@ -5312,6 +5800,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags skill-entity-controller
      * @name GetCollectionResourceSkillGet
      * @request GET:/skills
+     * @secure
      * @response `200` `PagedModelEntityModelSkill` OK
      */
     "getCollectionResource-skill-get": (
@@ -5337,6 +5826,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skills`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -5347,6 +5837,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags skill-entity-controller
      * @name PostCollectionResourceSkillPost
      * @request POST:/skills
+     * @secure
      * @response `201` `EntityModelSkill` Created
      */
     "postCollectionResource-skill-post": (data: SkillRequestBody, params: RequestParams = {}) =>
@@ -5354,6 +5845,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skills`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -5365,6 +5857,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags skill-entity-controller
      * @name GetItemResourceSkillGet
      * @request GET:/skills/{id}
+     * @secure
      * @response `200` `EntityModelSkill` OK
      * @response `404` `any` Not Found
      */
@@ -5372,6 +5865,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelSkill, any>({
         path: `/skills/${id}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -5382,6 +5876,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags skill-entity-controller
      * @name PutItemResourceSkillPut
      * @request PUT:/skills/{id}
+     * @secure
      * @response `200` `EntityModelSkill` OK
      * @response `201` `EntityModelSkill` Created
      * @response `204` `any` No Content
@@ -5391,6 +5886,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skills/${id}`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -5402,6 +5898,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags skill-entity-controller
      * @name DeleteItemResourceSkillDelete
      * @request DELETE:/skills/{id}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -5409,6 +5906,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/skills/${id}`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -5418,6 +5916,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags skill-entity-controller
      * @name PatchItemResourceSkillPatch
      * @request PATCH:/skills/{id}
+     * @secure
      * @response `200` `EntityModelSkill` OK
      * @response `204` `any` No Content
      */
@@ -5426,6 +5925,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skills/${id}`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -5438,6 +5938,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags skill-search-controller
      * @name ExecuteSearchSkillGet
      * @request GET:/skills/search/deleteByIdHard
+     * @secure
      * @response `200` `any` OK
      * @response `404` `any` Not Found
      */
@@ -5452,6 +5953,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skills/search/deleteByIdHard`,
         method: "GET",
         query: query,
+        secure: true,
         ...params
       }),
 
@@ -5460,11 +5962,31 @@ export class Api<SecurityDataType extends unknown> {
      *
      * @tags skill-search-controller
      * @name ExecuteSearchSkillGet1
-     * @request GET:/skills/search/findByName
+     * @request GET:/skills/search/findAllIds
+     * @secure
      * @response `200` `CollectionModelEntityModelSkill` OK
      * @response `404` `any` Not Found
      */
-    "executeSearch-skill-get_1": (
+    "executeSearch-skill-get_1": (params: RequestParams = {}) =>
+      this.http.request<CollectionModelEntityModelSkill, any>({
+        path: `/skills/search/findAllIds`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags skill-search-controller
+     * @name ExecuteSearchSkillGet2
+     * @request GET:/skills/search/findByName
+     * @secure
+     * @response `200` `CollectionModelEntityModelSkill` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-skill-get_2": (
       query?: {
         name?: string
       },
@@ -5474,6 +5996,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skills/search/findByName`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       })
@@ -5485,6 +6008,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-job-link-entity-controller
      * @name GetCollectionResourceUserjoblinkGet
      * @request GET:/userJobLinks
+     * @secure
      * @response `200` `PagedModelEntityModelUserJobLink` OK
      */
     "getCollectionResource-userjoblink-get": (
@@ -5510,6 +6034,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userJobLinks`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -5520,6 +6045,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-job-link-entity-controller
      * @name PostCollectionResourceUserjoblinkPost
      * @request POST:/userJobLinks
+     * @secure
      * @response `201` `EntityModelUserJobLink` Created
      */
     "postCollectionResource-userjoblink-post": (data: UserJobLinkRequestBody, params: RequestParams = {}) =>
@@ -5527,6 +6053,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userJobLinks`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -5538,6 +6065,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-job-link-entity-controller
      * @name GetItemResourceUserjoblinkGet
      * @request GET:/userJobLinks/{id}
+     * @secure
      * @response `200` `EntityModelUserJobLink` OK
      * @response `404` `any` Not Found
      */
@@ -5545,6 +6073,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelUserJobLink, any>({
         path: `/userJobLinks/${id}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -5555,6 +6084,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-job-link-entity-controller
      * @name PutItemResourceUserjoblinkPut
      * @request PUT:/userJobLinks/{id}
+     * @secure
      * @response `200` `EntityModelUserJobLink` OK
      * @response `201` `EntityModelUserJobLink` Created
      * @response `204` `any` No Content
@@ -5564,6 +6094,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userJobLinks/${id}`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -5575,6 +6106,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-job-link-entity-controller
      * @name DeleteItemResourceUserjoblinkDelete
      * @request DELETE:/userJobLinks/{id}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -5582,6 +6114,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/userJobLinks/${id}`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -5591,6 +6124,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-job-link-entity-controller
      * @name PatchItemResourceUserjoblinkPatch
      * @request PATCH:/userJobLinks/{id}
+     * @secure
      * @response `200` `EntityModelUserJobLink` OK
      * @response `204` `any` No Content
      */
@@ -5599,6 +6133,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userJobLinks/${id}`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -5611,6 +6146,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-job-link-property-reference-controller
      * @name FollowPropertyReferenceUserjoblinkGet
      * @request GET:/userJobLinks/{id}/jobPosting
+     * @secure
      * @response `200` `EntityModelJobPosting` OK
      * @response `404` `any` Not Found
      */
@@ -5618,6 +6154,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelJobPosting, any>({
         path: `/userJobLinks/${id}/jobPosting`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -5628,6 +6165,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-job-link-property-reference-controller
      * @name CreatePropertyReferenceUserjoblinkPut
      * @request PUT:/userJobLinks/{id}/jobPosting
+     * @secure
      * @response `200` `EntityModelJobPosting` OK
      * @response `201` `EntityModelJobPosting` Created
      * @response `204` `any` No Content
@@ -5637,6 +6175,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userJobLinks/${id}/jobPosting`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -5648,6 +6187,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-job-link-property-reference-controller
      * @name DeletePropertyReferenceUserjoblinkDelete
      * @request DELETE:/userJobLinks/{id}/jobPosting
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -5655,6 +6195,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/userJobLinks/${id}/jobPosting`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -5664,6 +6205,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-job-link-property-reference-controller
      * @name CreatePropertyReferenceUserjoblinkPatch
      * @request PATCH:/userJobLinks/{id}/jobPosting
+     * @secure
      * @response `200` `EntityModelJobPosting` OK
      * @response `204` `any` No Content
      */
@@ -5676,6 +6218,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userJobLinks/${id}/jobPosting`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -5687,6 +6230,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-job-link-property-reference-controller
      * @name FollowPropertyReferenceUserjoblinkGet1
      * @request GET:/userJobLinks/{id}/jobPosting/{propertyId}
+     * @secure
      * @response `200` `EntityModelJobPosting` OK
      * @response `404` `any` Not Found
      */
@@ -5694,6 +6238,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelJobPosting, any>({
         path: `/userJobLinks/${id}/jobPosting/${propertyId}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -5704,6 +6249,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-job-link-property-reference-controller
      * @name DeletePropertyReferenceIdUserjoblinkDelete
      * @request DELETE:/userJobLinks/{id}/jobPosting/{propertyId}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -5711,6 +6257,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/userJobLinks/${id}/jobPosting/${propertyId}`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -5720,6 +6267,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-job-link-property-reference-controller
      * @name FollowPropertyReferenceUserjoblinkGet2
      * @request GET:/userJobLinks/{id}/user
+     * @secure
      * @response `200` `EntityModelUser` OK
      * @response `404` `any` Not Found
      */
@@ -5727,6 +6275,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelUser, any>({
         path: `/userJobLinks/${id}/user`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -5737,6 +6286,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-job-link-property-reference-controller
      * @name CreatePropertyReferenceUserjoblinkPut1
      * @request PUT:/userJobLinks/{id}/user
+     * @secure
      * @response `200` `EntityModelUser` OK
      * @response `201` `EntityModelUser` Created
      * @response `204` `any` No Content
@@ -5750,6 +6300,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userJobLinks/${id}/user`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -5761,6 +6312,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-job-link-property-reference-controller
      * @name DeletePropertyReferenceUserjoblinkDelete1
      * @request DELETE:/userJobLinks/{id}/user
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -5768,6 +6320,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/userJobLinks/${id}/user`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -5777,6 +6330,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-job-link-property-reference-controller
      * @name CreatePropertyReferenceUserjoblinkPatch1
      * @request PATCH:/userJobLinks/{id}/user
+     * @secure
      * @response `200` `EntityModelUser` OK
      * @response `204` `any` No Content
      */
@@ -5789,6 +6343,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userJobLinks/${id}/user`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -5800,6 +6355,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-job-link-property-reference-controller
      * @name FollowPropertyReferenceUserjoblinkGet3
      * @request GET:/userJobLinks/{id}/user/{propertyId}
+     * @secure
      * @response `200` `EntityModelUser` OK
      * @response `404` `any` Not Found
      */
@@ -5807,6 +6363,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelUser, any>({
         path: `/userJobLinks/${id}/user/${propertyId}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -5817,6 +6374,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-job-link-property-reference-controller
      * @name DeletePropertyReferenceIdUserjoblinkDelete1
      * @request DELETE:/userJobLinks/{id}/user/{propertyId}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -5824,6 +6382,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/userJobLinks/${id}/user/${propertyId}`,
         method: "DELETE",
+        secure: true,
         ...params
       })
   }
@@ -5834,6 +6393,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-entity-controller
      * @name GetCollectionResourceUserprojectskillGet
      * @request GET:/userProjectSkills
+     * @secure
      * @response `200` `PagedModelEntityModelUserProjectSkill` OK
      */
     "getCollectionResource-userprojectskill-get": (
@@ -5859,6 +6419,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjectSkills`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -5869,6 +6430,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-entity-controller
      * @name PostCollectionResourceUserprojectskillPost
      * @request POST:/userProjectSkills
+     * @secure
      * @response `201` `EntityModelUserProjectSkill` Created
      */
     "postCollectionResource-userprojectskill-post": (data: UserProjectSkillRequestBody, params: RequestParams = {}) =>
@@ -5876,6 +6438,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjectSkills`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -5887,6 +6450,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-entity-controller
      * @name GetItemResourceUserprojectskillGet
      * @request GET:/userProjectSkills/{id}
+     * @secure
      * @response `200` `EntityModelUserProjectSkill` OK
      * @response `404` `any` Not Found
      */
@@ -5894,6 +6458,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelUserProjectSkill, any>({
         path: `/userProjectSkills/${id}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -5904,6 +6469,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-entity-controller
      * @name PutItemResourceUserprojectskillPut
      * @request PUT:/userProjectSkills/{id}
+     * @secure
      * @response `200` `EntityModelUserProjectSkill` OK
      * @response `201` `EntityModelUserProjectSkill` Created
      * @response `204` `any` No Content
@@ -5917,6 +6483,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjectSkills/${id}`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -5928,6 +6495,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-entity-controller
      * @name DeleteItemResourceUserprojectskillDelete
      * @request DELETE:/userProjectSkills/{id}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -5935,6 +6503,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/userProjectSkills/${id}`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -5944,6 +6513,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-entity-controller
      * @name PatchItemResourceUserprojectskillPatch
      * @request PATCH:/userProjectSkills/{id}
+     * @secure
      * @response `200` `EntityModelUserProjectSkill` OK
      * @response `204` `any` No Content
      */
@@ -5956,6 +6526,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjectSkills/${id}`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -5968,6 +6539,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-search-controller
      * @name ExecuteSearchUserprojectskillGet
      * @request GET:/userProjectSkills/search/deleteByProjectId
+     * @secure
      * @response `200` `any` OK
      * @response `404` `any` Not Found
      */
@@ -5982,6 +6554,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjectSkills/search/deleteByProjectId`,
         method: "GET",
         query: query,
+        secure: true,
         ...params
       }),
 
@@ -5991,6 +6564,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-search-controller
      * @name ExecuteSearchUserprojectskillGet1
      * @request GET:/userProjectSkills/search/deleteBySkillId
+     * @secure
      * @response `200` `any` OK
      * @response `404` `any` Not Found
      */
@@ -6005,6 +6579,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjectSkills/search/deleteBySkillId`,
         method: "GET",
         query: query,
+        secure: true,
         ...params
       }),
 
@@ -6014,6 +6589,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-search-controller
      * @name ExecuteSearchUserprojectskillGet2
      * @request GET:/userProjectSkills/search/deleteByUserIdAndProjectId
+     * @secure
      * @response `200` `any` OK
      * @response `404` `any` Not Found
      */
@@ -6030,6 +6606,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjectSkills/search/deleteByUserIdAndProjectId`,
         method: "GET",
         query: query,
+        secure: true,
         ...params
       }),
 
@@ -6039,6 +6616,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-search-controller
      * @name ExecuteSearchUserprojectskillGet3
      * @request GET:/userProjectSkills/search/deleteByUserIdAndProjectIdAndSkillId
+     * @secure
      * @response `200` `any` OK
      * @response `404` `any` Not Found
      */
@@ -6057,6 +6635,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjectSkills/search/deleteByUserIdAndProjectIdAndSkillId`,
         method: "GET",
         query: query,
+        secure: true,
         ...params
       }),
 
@@ -6066,6 +6645,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-search-controller
      * @name ExecuteSearchUserprojectskillGet4
      * @request GET:/userProjectSkills/search/existsBySkillId
+     * @secure
      * @response `200` `boolean` OK
      * @response `404` `any` Not Found
      */
@@ -6080,6 +6660,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjectSkills/search/existsBySkillId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -6090,6 +6671,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-search-controller
      * @name ExecuteSearchUserprojectskillGet5
      * @request GET:/userProjectSkills/search/existsBySkillLevelId
+     * @secure
      * @response `200` `boolean` OK
      * @response `404` `any` Not Found
      */
@@ -6104,6 +6686,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjectSkills/search/existsBySkillLevelId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -6114,6 +6697,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-search-controller
      * @name ExecuteSearchUserprojectskillGet6
      * @request GET:/userProjectSkills/search/existsByUserIdAndProjectId
+     * @secure
      * @response `200` `boolean` OK
      * @response `404` `any` Not Found
      */
@@ -6130,6 +6714,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjectSkills/search/existsByUserIdAndProjectId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -6140,6 +6725,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-search-controller
      * @name ExecuteSearchUserprojectskillGet7
      * @request GET:/userProjectSkills/search/existsByUserIdAndProjectIdAndSkillId
+     * @secure
      * @response `200` `boolean` OK
      * @response `404` `any` Not Found
      */
@@ -6158,6 +6744,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjectSkills/search/existsByUserIdAndProjectIdAndSkillId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -6168,6 +6755,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-search-controller
      * @name ExecuteSearchUserprojectskillGet8
      * @request GET:/userProjectSkills/search/findByProjectId
+     * @secure
      * @response `200` `CollectionModelEntityModelUserProjectSkill` OK
      * @response `404` `any` Not Found
      */
@@ -6182,6 +6770,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjectSkills/search/findByProjectId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -6192,6 +6781,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-search-controller
      * @name ExecuteSearchUserprojectskillGet9
      * @request GET:/userProjectSkills/search/findByUserId
+     * @secure
      * @response `200` `CollectionModelEntityModelUserProjectSkill` OK
      * @response `404` `any` Not Found
      */
@@ -6206,6 +6796,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjectSkills/search/findByUserId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -6216,6 +6807,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-search-controller
      * @name ExecuteSearchUserprojectskillGet10
      * @request GET:/userProjectSkills/search/findByUserIdAndProjectId
+     * @secure
      * @response `200` `CollectionModelEntityModelUserProjectSkill` OK
      * @response `404` `any` Not Found
      */
@@ -6232,6 +6824,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjectSkills/search/findByUserIdAndProjectId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -6242,6 +6835,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-search-controller
      * @name ExecuteSearchUserprojectskillGet11
      * @request GET:/userProjectSkills/search/findByUserIdAndProjectIdAndSkillId
+     * @secure
      * @response `200` `EntityModelUserProjectSkill` OK
      * @response `404` `any` Not Found
      */
@@ -6260,6 +6854,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjectSkills/search/findByUserIdAndProjectIdAndSkillId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       })
@@ -6271,6 +6866,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-property-reference-controller
      * @name FollowPropertyReferenceUserprojectskillGet
      * @request GET:/userProjectSkills/{id}/skill
+     * @secure
      * @response `200` `EntityModelSkill` OK
      * @response `404` `any` Not Found
      */
@@ -6278,6 +6874,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelSkill, any>({
         path: `/userProjectSkills/${id}/skill`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -6288,6 +6885,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-property-reference-controller
      * @name CreatePropertyReferenceUserprojectskillPut
      * @request PUT:/userProjectSkills/{id}/skill
+     * @secure
      * @response `200` `EntityModelSkill` OK
      * @response `201` `EntityModelSkill` Created
      * @response `204` `any` No Content
@@ -6301,6 +6899,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjectSkills/${id}/skill`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -6312,6 +6911,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-property-reference-controller
      * @name DeletePropertyReferenceUserprojectskillDelete
      * @request DELETE:/userProjectSkills/{id}/skill
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -6319,6 +6919,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/userProjectSkills/${id}/skill`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -6328,6 +6929,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-property-reference-controller
      * @name CreatePropertyReferenceUserprojectskillPatch
      * @request PATCH:/userProjectSkills/{id}/skill
+     * @secure
      * @response `200` `EntityModelSkill` OK
      * @response `204` `any` No Content
      */
@@ -6340,6 +6942,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjectSkills/${id}/skill`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -6351,6 +6954,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-property-reference-controller
      * @name FollowPropertyReferenceUserprojectskillGet1
      * @request GET:/userProjectSkills/{id}/skill/{propertyId}
+     * @secure
      * @response `200` `EntityModelSkill` OK
      * @response `404` `any` Not Found
      */
@@ -6358,6 +6962,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelSkill, any>({
         path: `/userProjectSkills/${id}/skill/${propertyId}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -6368,6 +6973,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-property-reference-controller
      * @name DeletePropertyReferenceIdUserprojectskillDelete
      * @request DELETE:/userProjectSkills/{id}/skill/{propertyId}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -6375,6 +6981,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/userProjectSkills/${id}/skill/${propertyId}`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -6384,6 +6991,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-property-reference-controller
      * @name FollowPropertyReferenceUserprojectskillGet2
      * @request GET:/userProjectSkills/{id}/skillLevel
+     * @secure
      * @response `200` `EntityModelSkillLevel` OK
      * @response `404` `any` Not Found
      */
@@ -6391,6 +6999,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelSkillLevel, any>({
         path: `/userProjectSkills/${id}/skillLevel`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -6401,6 +7010,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-property-reference-controller
      * @name CreatePropertyReferenceUserprojectskillPut1
      * @request PUT:/userProjectSkills/{id}/skillLevel
+     * @secure
      * @response `200` `EntityModelSkillLevel` OK
      * @response `201` `EntityModelSkillLevel` Created
      * @response `204` `any` No Content
@@ -6414,6 +7024,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjectSkills/${id}/skillLevel`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -6425,6 +7036,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-property-reference-controller
      * @name DeletePropertyReferenceUserprojectskillDelete1
      * @request DELETE:/userProjectSkills/{id}/skillLevel
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -6432,6 +7044,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/userProjectSkills/${id}/skillLevel`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -6441,6 +7054,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-property-reference-controller
      * @name CreatePropertyReferenceUserprojectskillPatch1
      * @request PATCH:/userProjectSkills/{id}/skillLevel
+     * @secure
      * @response `200` `EntityModelSkillLevel` OK
      * @response `204` `any` No Content
      */
@@ -6453,6 +7067,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjectSkills/${id}/skillLevel`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -6464,6 +7079,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-property-reference-controller
      * @name FollowPropertyReferenceUserprojectskillGet3
      * @request GET:/userProjectSkills/{id}/skillLevel/{propertyId}
+     * @secure
      * @response `200` `EntityModelSkillLevel` OK
      * @response `404` `any` Not Found
      */
@@ -6471,6 +7087,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelSkillLevel, any>({
         path: `/userProjectSkills/${id}/skillLevel/${propertyId}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -6481,6 +7098,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-skill-property-reference-controller
      * @name DeletePropertyReferenceIdUserprojectskillDelete1
      * @request DELETE:/userProjectSkills/{id}/skillLevel/{propertyId}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -6492,6 +7110,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/userProjectSkills/${id}/skillLevel/${propertyId}`,
         method: "DELETE",
+        secure: true,
         ...params
       })
   }
@@ -6502,6 +7121,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-entity-controller
      * @name GetCollectionResourceUserprojectGet
      * @request GET:/userProjects
+     * @secure
      * @response `200` `PagedModelEntityModelUserProject` OK
      */
     "getCollectionResource-userproject-get": (
@@ -6527,6 +7147,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjects`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -6537,6 +7158,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-entity-controller
      * @name PostCollectionResourceUserprojectPost
      * @request POST:/userProjects
+     * @secure
      * @response `201` `EntityModelUserProject` Created
      */
     "postCollectionResource-userproject-post": (data: UserProjectRequestBody, params: RequestParams = {}) =>
@@ -6544,6 +7166,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjects`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -6555,6 +7178,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-entity-controller
      * @name GetItemResourceUserprojectGet
      * @request GET:/userProjects/{id}
+     * @secure
      * @response `200` `EntityModelUserProject` OK
      * @response `404` `any` Not Found
      */
@@ -6562,6 +7186,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelUserProject, any>({
         path: `/userProjects/${id}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -6572,6 +7197,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-entity-controller
      * @name PutItemResourceUserprojectPut
      * @request PUT:/userProjects/{id}
+     * @secure
      * @response `200` `EntityModelUserProject` OK
      * @response `201` `EntityModelUserProject` Created
      * @response `204` `any` No Content
@@ -6581,6 +7207,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjects/${id}`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -6592,6 +7219,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-entity-controller
      * @name DeleteItemResourceUserprojectDelete
      * @request DELETE:/userProjects/{id}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -6599,6 +7227,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/userProjects/${id}`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -6608,6 +7237,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-entity-controller
      * @name PatchItemResourceUserprojectPatch
      * @request PATCH:/userProjects/{id}
+     * @secure
      * @response `200` `EntityModelUserProject` OK
      * @response `204` `any` No Content
      */
@@ -6616,6 +7246,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjects/${id}`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -6628,6 +7259,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-search-controller
      * @name ExecuteSearchUserprojectGet
      * @request GET:/userProjects/search/deleteByProjectId
+     * @secure
      * @response `200` `any` OK
      * @response `404` `any` Not Found
      */
@@ -6642,6 +7274,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjects/search/deleteByProjectId`,
         method: "GET",
         query: query,
+        secure: true,
         ...params
       }),
 
@@ -6651,6 +7284,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-search-controller
      * @name ExecuteSearchUserprojectGet1
      * @request GET:/userProjects/search/deleteByUserIdAndProjectId
+     * @secure
      * @response `200` `any` OK
      * @response `404` `any` Not Found
      */
@@ -6667,6 +7301,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjects/search/deleteByUserIdAndProjectId`,
         method: "GET",
         query: query,
+        secure: true,
         ...params
       }),
 
@@ -6676,6 +7311,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-search-controller
      * @name ExecuteSearchUserprojectGet2
      * @request GET:/userProjects/search/existsByProjectId
+     * @secure
      * @response `200` `boolean` OK
      * @response `404` `any` Not Found
      */
@@ -6690,6 +7326,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjects/search/existsByProjectId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -6700,6 +7337,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-search-controller
      * @name ExecuteSearchUserprojectGet3
      * @request GET:/userProjects/search/existsByUserIdAndProjectId
+     * @secure
      * @response `200` `boolean` OK
      * @response `404` `any` Not Found
      */
@@ -6716,6 +7354,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjects/search/existsByUserIdAndProjectId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -6726,6 +7365,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-search-controller
      * @name ExecuteSearchUserprojectGet4
      * @request GET:/userProjects/search/findByProjectId
+     * @secure
      * @response `200` `CollectionModelEntityModelUserProject` OK
      * @response `404` `any` Not Found
      */
@@ -6740,6 +7380,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjects/search/findByProjectId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -6750,6 +7391,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-search-controller
      * @name ExecuteSearchUserprojectGet5
      * @request GET:/userProjects/search/findByUserId
+     * @secure
      * @response `200` `CollectionModelEntityModelUserProject` OK
      * @response `404` `any` Not Found
      */
@@ -6764,6 +7406,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjects/search/findByUserId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       })
@@ -6775,6 +7418,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-property-reference-controller
      * @name FollowPropertyReferenceUserprojectGet
      * @request GET:/userProjects/{id}/project
+     * @secure
      * @response `200` `EntityModelProject` OK
      * @response `404` `any` Not Found
      */
@@ -6782,6 +7426,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelProject, any>({
         path: `/userProjects/${id}/project`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -6792,6 +7437,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-property-reference-controller
      * @name CreatePropertyReferenceUserprojectPut
      * @request PUT:/userProjects/{id}/project
+     * @secure
      * @response `200` `EntityModelProject` OK
      * @response `201` `EntityModelProject` Created
      * @response `204` `any` No Content
@@ -6801,6 +7447,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjects/${id}/project`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -6812,6 +7459,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-property-reference-controller
      * @name DeletePropertyReferenceUserprojectDelete
      * @request DELETE:/userProjects/{id}/project
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -6819,6 +7467,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/userProjects/${id}/project`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -6828,6 +7477,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-property-reference-controller
      * @name CreatePropertyReferenceUserprojectPatch
      * @request PATCH:/userProjects/{id}/project
+     * @secure
      * @response `200` `EntityModelProject` OK
      * @response `204` `any` No Content
      */
@@ -6840,6 +7490,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userProjects/${id}/project`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -6851,6 +7502,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-property-reference-controller
      * @name FollowPropertyReferenceUserprojectGet1
      * @request GET:/userProjects/{id}/project/{propertyId}
+     * @secure
      * @response `200` `EntityModelProject` OK
      * @response `404` `any` Not Found
      */
@@ -6858,6 +7510,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelProject, any>({
         path: `/userProjects/${id}/project/${propertyId}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -6868,6 +7521,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-project-property-reference-controller
      * @name DeletePropertyReferenceIdUserprojectDelete
      * @request DELETE:/userProjects/{id}/project/{propertyId}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -6875,6 +7529,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/userProjects/${id}/project/${propertyId}`,
         method: "DELETE",
+        secure: true,
         ...params
       })
   }
@@ -6885,6 +7540,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-role-entity-controller
      * @name GetCollectionResourceUserroleGet
      * @request GET:/userRoles
+     * @secure
      * @response `200` `PagedModelEntityModelUserRole` OK
      */
     "getCollectionResource-userrole-get": (
@@ -6910,6 +7566,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userRoles`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -6920,6 +7577,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-role-entity-controller
      * @name PostCollectionResourceUserrolePost
      * @request POST:/userRoles
+     * @secure
      * @response `201` `EntityModelUserRole` Created
      */
     "postCollectionResource-userrole-post": (data: UserRoleRequestBody, params: RequestParams = {}) =>
@@ -6927,6 +7585,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userRoles`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -6938,6 +7597,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-role-entity-controller
      * @name GetItemResourceUserroleGet
      * @request GET:/userRoles/{id}
+     * @secure
      * @response `200` `EntityModelUserRole` OK
      * @response `404` `any` Not Found
      */
@@ -6945,6 +7605,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelUserRole, any>({
         path: `/userRoles/${id}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -6955,6 +7616,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-role-entity-controller
      * @name PutItemResourceUserrolePut
      * @request PUT:/userRoles/{id}
+     * @secure
      * @response `200` `EntityModelUserRole` OK
      * @response `201` `EntityModelUserRole` Created
      * @response `204` `any` No Content
@@ -6964,6 +7626,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userRoles/${id}`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -6975,6 +7638,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-role-entity-controller
      * @name DeleteItemResourceUserroleDelete
      * @request DELETE:/userRoles/{id}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -6982,6 +7646,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/userRoles/${id}`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -6991,6 +7656,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-role-entity-controller
      * @name PatchItemResourceUserrolePatch
      * @request PATCH:/userRoles/{id}
+     * @secure
      * @response `200` `EntityModelUserRole` OK
      * @response `204` `any` No Content
      */
@@ -6999,6 +7665,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userRoles/${id}`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -7011,6 +7678,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-role-search-controller
      * @name ExecuteSearchUserroleGet
      * @request GET:/userRoles/search/deleteAllByUserInAndRoleIn
+     * @secure
      * @response `200` `any` OK
      * @response `404` `any` Not Found
      */
@@ -7025,6 +7693,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userRoles/search/deleteAllByUserInAndRoleIn`,
         method: "GET",
         query: query,
+        secure: true,
         ...params
       }),
 
@@ -7034,6 +7703,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-role-search-controller
      * @name ExecuteSearchUserroleGet1
      * @request GET:/userRoles/search/deleteByUserId
+     * @secure
      * @response `200` `any` OK
      * @response `404` `any` Not Found
      */
@@ -7048,6 +7718,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userRoles/search/deleteByUserId`,
         method: "GET",
         query: query,
+        secure: true,
         ...params
       }),
 
@@ -7057,6 +7728,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-role-search-controller
      * @name ExecuteSearchUserroleGet2
      * @request GET:/userRoles/search/deleteByUserIdAndRoleId
+     * @secure
      * @response `200` `any` OK
      * @response `404` `any` Not Found
      */
@@ -7073,6 +7745,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userRoles/search/deleteByUserIdAndRoleId`,
         method: "GET",
         query: query,
+        secure: true,
         ...params
       }),
 
@@ -7082,6 +7755,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-role-search-controller
      * @name ExecuteSearchUserroleGet3
      * @request GET:/userRoles/search/findByUserId
+     * @secure
      * @response `200` `CollectionModelEntityModelUserRole` OK
      * @response `404` `any` Not Found
      */
@@ -7096,6 +7770,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userRoles/search/findByUserId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       })
@@ -7107,6 +7782,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-entity-controller
      * @name GetCollectionResourceUserskillGet
      * @request GET:/userSkills
+     * @secure
      * @response `200` `PagedModelEntityModelUserSkill` OK
      */
     "getCollectionResource-userskill-get": (
@@ -7132,6 +7808,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userSkills`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -7142,6 +7819,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-entity-controller
      * @name PostCollectionResourceUserskillPost
      * @request POST:/userSkills
+     * @secure
      * @response `201` `EntityModelUserSkill` Created
      */
     "postCollectionResource-userskill-post": (data: UserSkillRequestBody, params: RequestParams = {}) =>
@@ -7149,6 +7827,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userSkills`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -7160,6 +7839,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-entity-controller
      * @name GetItemResourceUserskillGet
      * @request GET:/userSkills/{id}
+     * @secure
      * @response `200` `EntityModelUserSkill` OK
      * @response `404` `any` Not Found
      */
@@ -7167,6 +7847,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelUserSkill, any>({
         path: `/userSkills/${id}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -7177,6 +7858,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-entity-controller
      * @name PutItemResourceUserskillPut
      * @request PUT:/userSkills/{id}
+     * @secure
      * @response `200` `EntityModelUserSkill` OK
      * @response `201` `EntityModelUserSkill` Created
      * @response `204` `any` No Content
@@ -7186,6 +7868,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userSkills/${id}`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -7197,6 +7880,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-entity-controller
      * @name DeleteItemResourceUserskillDelete
      * @request DELETE:/userSkills/{id}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -7204,6 +7888,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/userSkills/${id}`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -7213,6 +7898,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-entity-controller
      * @name PatchItemResourceUserskillPatch
      * @request PATCH:/userSkills/{id}
+     * @secure
      * @response `200` `EntityModelUserSkill` OK
      * @response `204` `any` No Content
      */
@@ -7221,6 +7907,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userSkills/${id}`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -7233,6 +7920,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-search-controller
      * @name ExecuteSearchUserskillGet
      * @request GET:/userSkills/search/deleteBySkillId
+     * @secure
      * @response `200` `any` OK
      * @response `404` `any` Not Found
      */
@@ -7247,6 +7935,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userSkills/search/deleteBySkillId`,
         method: "GET",
         query: query,
+        secure: true,
         ...params
       }),
 
@@ -7256,6 +7945,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-search-controller
      * @name ExecuteSearchUserskillGet1
      * @request GET:/userSkills/search/deleteByUserIdAndSkillId
+     * @secure
      * @response `200` `any` OK
      * @response `404` `any` Not Found
      */
@@ -7272,6 +7962,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userSkills/search/deleteByUserIdAndSkillId`,
         method: "GET",
         query: query,
+        secure: true,
         ...params
       }),
 
@@ -7281,6 +7972,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-search-controller
      * @name ExecuteSearchUserskillGet2
      * @request GET:/userSkills/search/existsBySkillId
+     * @secure
      * @response `200` `boolean` OK
      * @response `404` `any` Not Found
      */
@@ -7295,6 +7987,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userSkills/search/existsBySkillId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -7305,6 +7998,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-search-controller
      * @name ExecuteSearchUserskillGet3
      * @request GET:/userSkills/search/existsBySkillLevelId
+     * @secure
      * @response `200` `boolean` OK
      * @response `404` `any` Not Found
      */
@@ -7319,6 +8013,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userSkills/search/existsBySkillLevelId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -7329,6 +8024,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-search-controller
      * @name ExecuteSearchUserskillGet4
      * @request GET:/userSkills/search/existsByUserIdAndSkillId
+     * @secure
      * @response `200` `boolean` OK
      * @response `404` `any` Not Found
      */
@@ -7345,6 +8041,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userSkills/search/existsByUserIdAndSkillId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -7355,6 +8052,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-search-controller
      * @name ExecuteSearchUserskillGet5
      * @request GET:/userSkills/search/findBySkillId
+     * @secure
      * @response `200` `CollectionModelEntityModelUserSkill` OK
      * @response `404` `any` Not Found
      */
@@ -7369,6 +8067,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userSkills/search/findBySkillId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -7379,6 +8078,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-search-controller
      * @name ExecuteSearchUserskillGet6
      * @request GET:/userSkills/search/findByUserId
+     * @secure
      * @response `200` `CollectionModelEntityModelUserSkill` OK
      * @response `404` `any` Not Found
      */
@@ -7393,6 +8093,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userSkills/search/findByUserId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -7403,6 +8104,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-search-controller
      * @name ExecuteSearchUserskillGet7
      * @request GET:/userSkills/search/findByUserIdAndSkillId
+     * @secure
      * @response `200` `CollectionModelEntityModelUserSkill` OK
      * @response `404` `any` Not Found
      */
@@ -7419,6 +8121,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userSkills/search/findByUserIdAndSkillId`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       })
@@ -7430,6 +8133,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-property-reference-controller
      * @name FollowPropertyReferenceUserskillGet
      * @request GET:/userSkills/{id}/skill
+     * @secure
      * @response `200` `EntityModelSkill` OK
      * @response `404` `any` Not Found
      */
@@ -7437,6 +8141,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelSkill, any>({
         path: `/userSkills/${id}/skill`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -7447,6 +8152,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-property-reference-controller
      * @name CreatePropertyReferenceUserskillPut
      * @request PUT:/userSkills/{id}/skill
+     * @secure
      * @response `200` `EntityModelSkill` OK
      * @response `201` `EntityModelSkill` Created
      * @response `204` `any` No Content
@@ -7456,6 +8162,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userSkills/${id}/skill`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -7467,6 +8174,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-property-reference-controller
      * @name DeletePropertyReferenceUserskillDelete
      * @request DELETE:/userSkills/{id}/skill
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -7474,6 +8182,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/userSkills/${id}/skill`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -7483,6 +8192,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-property-reference-controller
      * @name CreatePropertyReferenceUserskillPatch
      * @request PATCH:/userSkills/{id}/skill
+     * @secure
      * @response `200` `EntityModelSkill` OK
      * @response `204` `any` No Content
      */
@@ -7491,6 +8201,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userSkills/${id}/skill`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -7502,6 +8213,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-property-reference-controller
      * @name FollowPropertyReferenceUserskillGet1
      * @request GET:/userSkills/{id}/skill/{propertyId}
+     * @secure
      * @response `200` `EntityModelSkill` OK
      * @response `404` `any` Not Found
      */
@@ -7509,6 +8221,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelSkill, any>({
         path: `/userSkills/${id}/skill/${propertyId}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -7519,6 +8232,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-property-reference-controller
      * @name DeletePropertyReferenceIdUserskillDelete
      * @request DELETE:/userSkills/{id}/skill/{propertyId}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -7526,6 +8240,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/userSkills/${id}/skill/${propertyId}`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -7535,6 +8250,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-property-reference-controller
      * @name FollowPropertyReferenceUserskillGet2
      * @request GET:/userSkills/{id}/skillLevel
+     * @secure
      * @response `200` `EntityModelSkillLevel` OK
      * @response `404` `any` Not Found
      */
@@ -7542,6 +8258,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelSkillLevel, any>({
         path: `/userSkills/${id}/skillLevel`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -7552,6 +8269,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-property-reference-controller
      * @name CreatePropertyReferenceUserskillPut1
      * @request PUT:/userSkills/{id}/skillLevel
+     * @secure
      * @response `200` `EntityModelSkillLevel` OK
      * @response `201` `EntityModelSkillLevel` Created
      * @response `204` `any` No Content
@@ -7561,6 +8279,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userSkills/${id}/skillLevel`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -7572,6 +8291,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-property-reference-controller
      * @name DeletePropertyReferenceUserskillDelete1
      * @request DELETE:/userSkills/{id}/skillLevel
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -7579,6 +8299,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/userSkills/${id}/skillLevel`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -7588,6 +8309,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-property-reference-controller
      * @name CreatePropertyReferenceUserskillPatch1
      * @request PATCH:/userSkills/{id}/skillLevel
+     * @secure
      * @response `200` `EntityModelSkillLevel` OK
      * @response `204` `any` No Content
      */
@@ -7600,6 +8322,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/userSkills/${id}/skillLevel`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -7611,6 +8334,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-property-reference-controller
      * @name FollowPropertyReferenceUserskillGet3
      * @request GET:/userSkills/{id}/skillLevel/{propertyId}
+     * @secure
      * @response `200` `EntityModelSkillLevel` OK
      * @response `404` `any` Not Found
      */
@@ -7618,6 +8342,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelSkillLevel, any>({
         path: `/userSkills/${id}/skillLevel/${propertyId}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -7628,6 +8353,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-skill-property-reference-controller
      * @name DeletePropertyReferenceIdUserskillDelete1
      * @request DELETE:/userSkills/{id}/skillLevel/{propertyId}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -7635,6 +8361,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/userSkills/${id}/skillLevel/${propertyId}`,
         method: "DELETE",
+        secure: true,
         ...params
       })
   }
@@ -7645,6 +8372,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-entity-controller
      * @name GetCollectionResourceUserGet
      * @request GET:/users
+     * @secure
      * @response `200` `PagedModelEntityModelUser` OK
      */
     "getCollectionResource-user-get": (
@@ -7670,6 +8398,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/users`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -7680,6 +8409,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-entity-controller
      * @name PostCollectionResourceUserPost
      * @request POST:/users
+     * @secure
      * @response `201` `EntityModelUser` Created
      */
     "postCollectionResource-user-post": (data: UserRequestBody, params: RequestParams = {}) =>
@@ -7687,6 +8417,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/users`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -7698,6 +8429,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-entity-controller
      * @name GetItemResourceUserGet
      * @request GET:/users/{id}
+     * @secure
      * @response `200` `EntityModelUser` OK
      * @response `404` `any` Not Found
      */
@@ -7705,6 +8437,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<EntityModelUser, any>({
         path: `/users/${id}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -7715,6 +8448,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-entity-controller
      * @name PutItemResourceUserPut
      * @request PUT:/users/{id}
+     * @secure
      * @response `200` `EntityModelUser` OK
      * @response `201` `EntityModelUser` Created
      * @response `204` `any` No Content
@@ -7724,6 +8458,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/users/${id}`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -7735,6 +8470,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-entity-controller
      * @name DeleteItemResourceUserDelete
      * @request DELETE:/users/{id}
+     * @secure
      * @response `204` `any` No Content
      * @response `404` `any` Not Found
      */
@@ -7742,6 +8478,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<any, any>({
         path: `/users/${id}`,
         method: "DELETE",
+        secure: true,
         ...params
       }),
 
@@ -7751,6 +8488,7 @@ export class Api<SecurityDataType extends unknown> {
      * @tags user-entity-controller
      * @name PatchItemResourceUserPatch
      * @request PATCH:/users/{id}
+     * @secure
      * @response `200` `EntityModelUser` OK
      * @response `204` `any` No Content
      */
@@ -7759,6 +8497,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/users/${id}`,
         method: "PATCH",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -7770,11 +8509,31 @@ export class Api<SecurityDataType extends unknown> {
      *
      * @tags user-search-controller
      * @name ExecuteSearchUserGet
+     * @request GET:/users/search/findAllIds
+     * @secure
+     * @response `200` `CollectionModelEntityModelUser` OK
+     * @response `404` `any` Not Found
+     */
+    "executeSearch-user-get": (params: RequestParams = {}) =>
+      this.http.request<CollectionModelEntityModelUser, any>({
+        path: `/users/search/findAllIds`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags user-search-controller
+     * @name ExecuteSearchUserGet1
      * @request GET:/users/search/findByEmail
+     * @secure
      * @response `200` `EntityModelUser` OK
      * @response `404` `any` Not Found
      */
-    "executeSearch-user-get": (
+    "executeSearch-user-get_1": (
       query?: {
         email?: string
       },
@@ -7784,6 +8543,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/users/search/findByEmail`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params
       })
@@ -7796,6 +8556,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name UpdatePersonalProjectSkillLevel
      * @summary Update personal project skill level
      * @request PUT:/project/personal/{projectId}/skill/{skillId}/level
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -7810,6 +8571,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/project/personal/${projectId}/skill/${skillId}/level`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -7822,6 +8584,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name UpdatePersonalProject
      * @summary Update personal project
      * @request PUT:/project/personal/update/{projectId}
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -7831,6 +8594,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/project/personal/update/${projectId}`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -7843,6 +8607,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name UpdateProject
      * @summary Update project
      * @request POST:/project/update
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -7852,6 +8617,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/project/update`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -7864,6 +8630,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name SearchProjects
      * @summary Search projects with pagination
      * @request POST:/project/search
+     * @secure
      * @response `200` `ResponseTypePageResultProjectVo` OK
      * @response `500` `ResponseTypePageResultProjectVo` Server error
      */
@@ -7872,6 +8639,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/project/search`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -7884,6 +8652,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name BindPersonalProjectSkill
      * @summary Bind personal project skill
      * @request POST:/project/personal/{projectId}/skill/bind
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -7893,6 +8662,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/project/personal/${projectId}/skill/bind`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -7905,6 +8675,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name AddPersonalProject
      * @summary Add personal project
      * @request POST:/project/personal/add
+     * @secure
      * @response `200` `ResponseTypeProjectVo` OK
      * @response `400` `ResponseTypeProjectVo` Invalid input
      * @response `500` `ResponseTypeProjectVo` Server error
@@ -7914,6 +8685,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/project/personal/add`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -7926,6 +8698,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name DeleteProject
      * @summary Delete project
      * @request POST:/project/delete
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -7935,6 +8708,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/project/delete`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -7947,6 +8721,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name SearchCurrentUserProjects
      * @summary Search current user projects with pagination
      * @request POST:/project/current/search
+     * @secure
      * @response `200` `ResponseTypePageResultProjectVo` OK
      * @response `500` `ResponseTypePageResultProjectVo` Server error
      */
@@ -7955,6 +8730,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/project/current/search`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -7968,6 +8744,7 @@ export class Api<SecurityDataType extends unknown> {
      * @summary Bind project skill
      * @request POST:/project/bindSkill
      * @deprecated
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -7977,6 +8754,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/project/bindSkill`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -7989,6 +8767,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name AddProject
      * @summary Add project
      * @request POST:/project/add
+     * @secure
      * @response `200` `ResponseTypeProjectVo` OK
      * @response `400` `ResponseTypeProjectVo` Invalid input
      * @response `500` `ResponseTypeProjectVo` Server error
@@ -7998,6 +8777,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/project/add`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8010,6 +8790,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetProjectSkills
      * @summary Get project skills
      * @request GET:/project/{projectId}/skills
+     * @secure
      * @response `200` `ResponseTypeListProjectSkillVo` OK
      * @response `500` `ResponseTypeListProjectSkillVo` Server error
      */
@@ -8017,6 +8798,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListProjectSkillVo, ResponseTypeListProjectSkillVo>({
         path: `/project/${projectId}/skills`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -8028,6 +8810,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetProjectMemberSkills
      * @summary Get project member skills
      * @request GET:/project/{projectId}/member-skills
+     * @secure
      * @response `200` `ResponseTypeListProjectMemberSkillVo` OK
      * @response `500` `ResponseTypeListProjectMemberSkillVo` Server error
      */
@@ -8035,6 +8818,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListProjectMemberSkillVo, ResponseTypeListProjectMemberSkillVo>({
         path: `/project/${projectId}/member-skills`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -8046,6 +8830,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetPersonalProjectSkills
      * @summary Get personal project skills
      * @request GET:/project/personal/{projectId}/skills
+     * @secure
      * @response `200` `ResponseTypeListProjectSkillVo` OK
      * @response `500` `ResponseTypeListProjectSkillVo` Server error
      */
@@ -8053,6 +8838,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListProjectSkillVo, ResponseTypeListProjectSkillVo>({
         path: `/project/personal/${projectId}/skills`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -8064,6 +8850,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetProject
      * @summary Get projects
      * @request GET:/project/get
+     * @secure
      * @response `200` `ResponseTypeListProjectVo` OK
      * @response `500` `ResponseTypeListProjectVo` Server error
      */
@@ -8071,6 +8858,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListProjectVo, ResponseTypeListProjectVo>({
         path: `/project/get`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -8082,6 +8870,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetCurrentUserProjects
      * @summary Get current user projects
      * @request GET:/project/current
+     * @secure
      * @response `200` `ResponseTypeListProjectVo` OK
      * @response `500` `ResponseTypeListProjectVo` Server error
      */
@@ -8089,6 +8878,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListProjectVo, ResponseTypeListProjectVo>({
         path: `/project/current`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -8100,6 +8890,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name UnbindPersonalProjectSkill
      * @summary Unbind personal project skill
      * @request DELETE:/project/personal/{projectId}/skill/{skillId}
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -8108,6 +8899,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeString, ResponseTypeString>({
         path: `/project/personal/${projectId}/skill/${skillId}`,
         method: "DELETE",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -8119,6 +8911,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name DeletePersonalProject
      * @summary Delete personal project
      * @request DELETE:/project/personal/delete/{projectId}
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -8127,6 +8920,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeString, ResponseTypeString>({
         path: `/project/personal/delete/${projectId}`,
         method: "DELETE",
+        secure: true,
         format: "json",
         ...params
       })
@@ -8139,6 +8933,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name UpdateJobPosting
      * @summary 更新職缺
      * @request PUT:/job-posting/update
+     * @secure
      * @response `200` `ResponseTypeJobPostingVo` OK
      * @response `400` `ResponseTypeJobPostingVo` Invalid input
      * @response `500` `ResponseTypeJobPostingVo` Server error
@@ -8148,6 +8943,30 @@ export class Api<SecurityDataType extends unknown> {
         path: `/job-posting/update`,
         method: "PUT",
         body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 根據條件分頁搜尋職缺。
+     *
+     * @tags Job Posting
+     * @name SearchJobPostings
+     * @summary 分頁搜尋職缺
+     * @request POST:/job-posting/search
+     * @secure
+     * @response `200` `ResponseTypePageResultJobPostingVo` OK
+     * @response `400` `ResponseTypePageResultJobPostingVo` Invalid input
+     * @response `500` `ResponseTypePageResultJobPostingVo` Server error
+     */
+    searchJobPostings: (data: JobPostingSearchQuery, params: RequestParams = {}) =>
+      this.http.request<ResponseTypePageResultJobPostingVo, ResponseTypePageResultJobPostingVo>({
+        path: `/job-posting/search`,
+        method: "POST",
+        body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8160,6 +8979,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name ScrapeJobs
      * @summary 爬取並分析職缺
      * @request POST:/job-posting/scrape/{companyId}
+     * @secure
      * @response `200` `ResponseTypeListJobPostingVo` OK
      * @response `400` `ResponseTypeListJobPostingVo` Invalid input
      * @response `500` `ResponseTypeListJobPostingVo` Server error
@@ -8168,6 +8988,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListJobPostingVo, ResponseTypeListJobPostingVo>({
         path: `/job-posting/scrape/${companyId}`,
         method: "POST",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -8179,6 +9000,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name AddJobPosting
      * @summary 新增職缺
      * @request POST:/job-posting/add
+     * @secure
      * @response `200` `ResponseTypeJobPostingVo` OK
      * @response `400` `ResponseTypeJobPostingVo` Invalid input
      * @response `500` `ResponseTypeJobPostingVo` Server error
@@ -8188,6 +9010,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/job-posting/add`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8200,6 +9023,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetAllJobPostings
      * @summary 取得所有職缺
      * @request GET:/job-posting/get
+     * @secure
      * @response `200` `ResponseTypeListJobPostingVo` OK
      * @response `500` `ResponseTypeListJobPostingVo` Server error
      */
@@ -8207,6 +9031,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListJobPostingVo, ResponseTypeListJobPostingVo>({
         path: `/job-posting/get`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -8218,6 +9043,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetJobPostingById
      * @summary 取得職缺詳情
      * @request GET:/job-posting/get/{id}
+     * @secure
      * @response `200` `ResponseTypeJobPostingVo` OK
      * @response `500` `ResponseTypeJobPostingVo` Server error
      */
@@ -8225,6 +9051,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeJobPostingVo, ResponseTypeJobPostingVo>({
         path: `/job-posting/get/${id}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -8236,6 +9063,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetJobPostingsByCompanyId
      * @summary 取得公司職缺
      * @request GET:/job-posting/company/{companyId}
+     * @secure
      * @response `200` `ResponseTypeListJobPostingVo` OK
      * @response `500` `ResponseTypeListJobPostingVo` Server error
      */
@@ -8243,6 +9071,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListJobPostingVo, ResponseTypeListJobPostingVo>({
         path: `/job-posting/company/${companyId}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -8254,6 +9083,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name DeleteJobPosting
      * @summary 刪除職缺
      * @request DELETE:/job-posting/delete/{id}
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -8262,6 +9092,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeString, ResponseTypeString>({
         path: `/job-posting/delete/${id}`,
         method: "DELETE",
+        secure: true,
         format: "json",
         ...params
       })
@@ -8274,6 +9105,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name UpdateCompany
      * @summary 更新公司
      * @request PUT:/company/update
+     * @secure
      * @response `200` `ResponseTypeCompanyVo` OK
      * @response `400` `ResponseTypeCompanyVo` Invalid input
      * @response `500` `ResponseTypeCompanyVo` Server error
@@ -8283,6 +9115,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/company/update`,
         method: "PUT",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8295,6 +9128,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name AddCompany
      * @summary 新增公司
      * @request POST:/company/add
+     * @secure
      * @response `200` `ResponseTypeCompanyVo` OK
      * @response `400` `ResponseTypeCompanyVo` Invalid input
      * @response `500` `ResponseTypeCompanyVo` Server error
@@ -8304,6 +9138,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/company/add`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8316,6 +9151,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetAllCompanies
      * @summary 取得所有公司
      * @request GET:/company/get
+     * @secure
      * @response `200` `ResponseTypeListCompanyVo` OK
      * @response `500` `ResponseTypeListCompanyVo` Server error
      */
@@ -8323,6 +9159,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListCompanyVo, ResponseTypeListCompanyVo>({
         path: `/company/get`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -8334,6 +9171,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetCompanyById
      * @summary 取得公司詳情
      * @request GET:/company/get/{id}
+     * @secure
      * @response `200` `ResponseTypeCompanyVo` OK
      * @response `500` `ResponseTypeCompanyVo` Server error
      */
@@ -8341,6 +9179,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeCompanyVo, ResponseTypeCompanyVo>({
         path: `/company/get/${id}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -8352,6 +9191,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name DeleteCompany
      * @summary 刪除公司
      * @request DELETE:/company/delete/{id}
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -8360,6 +9200,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeString, ResponseTypeString>({
         path: `/company/delete/${id}`,
         method: "DELETE",
+        secure: true,
         format: "json",
         ...params
       })
@@ -8372,6 +9213,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name RebindUserRoles
      * @summary Rebind user roles
      * @request POST:/users/{userId}/roles/rebind
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -8381,6 +9223,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/users/${userId}/roles/rebind`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8393,6 +9236,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name SearchUsers
      * @summary Search users with pagination
      * @request POST:/users/search
+     * @secure
      * @response `200` `ResponseTypePageResultUserVo` OK
      * @response `500` `ResponseTypePageResultUserVo` Server error
      */
@@ -8401,6 +9245,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/users/search`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8413,6 +9258,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name SaveUser
      * @summary Save user with roles
      * @request POST:/users/saveUser
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -8422,6 +9268,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/users/saveUser`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8434,6 +9281,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name CreateUser
      * @summary Create user
      * @request POST:/users/create
+     * @secure
      * @response `200` `boolean` OK
      * @response `400` `boolean` Invalid input
      * @response `500` `boolean` Server error
@@ -8443,6 +9291,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/users/create`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8456,6 +9305,7 @@ export class Api<SecurityDataType extends unknown> {
      * @summary Bind user skill
      * @request POST:/users/bindSkill
      * @deprecated
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -8465,6 +9315,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/users/bindSkill`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8478,6 +9329,7 @@ export class Api<SecurityDataType extends unknown> {
      * @summary Bind user project
      * @request POST:/users/bindProject
      * @deprecated
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -8487,6 +9339,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/users/bindProject`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8499,6 +9352,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetUserInfo
      * @summary Get current user info
      * @request GET:/users/infoVo
+     * @secure
      * @response `200` `ResponseTypeUserVo` OK
      * @response `401` `ResponseTypeUserVo` Unauthorized
      * @response `500` `ResponseTypeUserVo` Server error
@@ -8507,6 +9361,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeUserVo, ResponseTypeUserVo>({
         path: `/users/infoVo`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -8518,6 +9373,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetAllUser
      * @summary Get all users
      * @request GET:/users/getAllUser
+     * @secure
      * @response `200` `ResponseTypeListUserVo` OK
      * @response `500` `ResponseTypeListUserVo` Server error
      */
@@ -8525,6 +9381,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListUserVo, ResponseTypeListUserVo>({
         path: `/users/getAllUser`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       })
@@ -8537,6 +9394,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name RebindCurrentUserSkills
      * @summary Rebind current user skills
      * @request POST:/user/bindings/skill/rebind
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -8546,6 +9404,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/user/bindings/skill/rebind`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8558,6 +9417,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name RebindCurrentUserProjectSkills
      * @summary Rebind current user project skills
      * @request POST:/user/bindings/project/{projectId}/skill/rebind
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -8567,7 +9427,71 @@ export class Api<SecurityDataType extends unknown> {
         path: `/user/bindings/project/${projectId}/skill/rebind`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
+        format: "json",
+        ...params
+      })
+  }
+  userJobBindings = {
+    /**
+     * @description 當前使用者綁定一筆職缺。
+     *
+     * @tags User Job Bindings
+     * @name AddJob
+     * @summary 綁定職缺
+     * @request POST:/user/bindings/job/add/{jobPostingId}
+     * @secure
+     * @response `200` `ResponseTypeUserJobLinkVo` OK
+     * @response `400` `ResponseTypeUserJobLinkVo` Invalid input
+     * @response `500` `ResponseTypeUserJobLinkVo` Server error
+     */
+    addJob: (jobPostingId: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeUserJobLinkVo, ResponseTypeUserJobLinkVo>({
+        path: `/user/bindings/job/add/${jobPostingId}`,
+        method: "POST",
+        secure: true,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 取得當前使用者所有已綁定的職缺。
+     *
+     * @tags User Job Bindings
+     * @name GetMyJobs
+     * @summary 取得已綁定職缺列表
+     * @request GET:/user/bindings/job
+     * @secure
+     * @response `200` `ResponseTypeListUserJobLinkVo` OK
+     * @response `500` `ResponseTypeListUserJobLinkVo` Server error
+     */
+    getMyJobs: (params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListUserJobLinkVo, ResponseTypeListUserJobLinkVo>({
+        path: `/user/bindings/job`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params
+      }),
+
+    /**
+     * @description 當前使用者解除綁定一筆職缺。
+     *
+     * @tags User Job Bindings
+     * @name RemoveJob
+     * @summary 解除綁定職缺
+     * @request DELETE:/user/bindings/job/{jobPostingId}
+     * @secure
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    removeJob: (jobPostingId: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/user/bindings/job/${jobPostingId}`,
+        method: "DELETE",
+        secure: true,
         format: "json",
         ...params
       })
@@ -8580,6 +9504,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name AddUserJobLink
      * @summary 新增使用者職缺連結
      * @request POST:/user-job-link/add
+     * @secure
      * @response `200` `ResponseTypeUserJobLinkVo` OK
      * @response `400` `ResponseTypeUserJobLinkVo` Invalid input
      * @response `500` `ResponseTypeUserJobLinkVo` Server error
@@ -8589,6 +9514,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/user-job-link/add`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8601,6 +9527,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetUserJobLinksByUserId
      * @summary 取得使用者所有職缺連結
      * @request GET:/user-job-link/user/{userId}
+     * @secure
      * @response `200` `ResponseTypeListUserJobLinkVo` OK
      * @response `500` `ResponseTypeListUserJobLinkVo` Server error
      */
@@ -8608,6 +9535,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListUserJobLinkVo, ResponseTypeListUserJobLinkVo>({
         path: `/user-job-link/user/${userId}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -8619,6 +9547,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetUserJobLinksByJobPostingId
      * @summary 取得職缺所有使用者連結
      * @request GET:/user-job-link/job-posting/{jobPostingId}
+     * @secure
      * @response `200` `ResponseTypeListUserJobLinkVo` OK
      * @response `500` `ResponseTypeListUserJobLinkVo` Server error
      */
@@ -8626,6 +9555,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListUserJobLinkVo, ResponseTypeListUserJobLinkVo>({
         path: `/user-job-link/job-posting/${jobPostingId}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -8637,6 +9567,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetAllUserJobLinks
      * @summary 取得所有連結
      * @request GET:/user-job-link/get
+     * @secure
      * @response `200` `ResponseTypeListUserJobLinkVo` OK
      * @response `500` `ResponseTypeListUserJobLinkVo` Server error
      */
@@ -8644,6 +9575,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListUserJobLinkVo, ResponseTypeListUserJobLinkVo>({
         path: `/user-job-link/get`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -8655,6 +9587,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetUserJobLinkById
      * @summary 取得連結詳情
      * @request GET:/user-job-link/get/{id}
+     * @secure
      * @response `200` `ResponseTypeUserJobLinkVo` OK
      * @response `500` `ResponseTypeUserJobLinkVo` Server error
      */
@@ -8662,6 +9595,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeUserJobLinkVo, ResponseTypeUserJobLinkVo>({
         path: `/user-job-link/get/${id}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -8673,6 +9607,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name DeleteUserJobLink
      * @summary 刪除使用者職缺連結
      * @request DELETE:/user-job-link/delete/{id}
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -8681,6 +9616,40 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeString, ResponseTypeString>({
         path: `/user-job-link/delete/${id}`,
         method: "DELETE",
+        secure: true,
+        format: "json",
+        ...params
+      })
+  }
+  speechToText = {
+    /**
+     * @description 上傳音訊進行 Whisper 辨識，並根據語言及模式轉換為拼音、注音或羅馬音。
+     *
+     * @tags Speech To Text
+     * @name RecognizeAudio
+     * @summary 語音辨識與拼音轉換
+     * @request POST:/stt/v1/{lan}/{mode}
+     * @secure
+     * @response `200` `ResponseTypeAudioRecognizeVo` OK
+     */
+    recognizeAudio: (
+      lan: string,
+      mode: string,
+      data: {
+        /**
+         * 音訊檔案
+         * @format binary
+         */
+        file: File
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<ResponseTypeAudioRecognizeVo, any>({
+        path: `/stt/v1/${lan}/${mode}`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.FormData,
         format: "json",
         ...params
       })
@@ -8693,6 +9662,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name UpdateSkill
      * @summary Update skill
      * @request POST:/skill/update
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -8702,6 +9672,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skill/update`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8714,6 +9685,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name SearchSkills
      * @summary 搜尋技能（分頁）
      * @request POST:/skill/search
+     * @secure
      * @response `200` `ResponseTypePageResultSkillVo` OK
      * @response `400` `ResponseTypePageResultSkillVo` Invalid input
      * @response `500` `ResponseTypePageResultSkillVo` Server error
@@ -8723,6 +9695,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skill/search`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8735,6 +9708,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name UpdatePersonalSkill
      * @summary 修改個人技能
      * @request POST:/skill/personal/update
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -8751,6 +9725,7 @@ export class Api<SecurityDataType extends unknown> {
         method: "POST",
         query: query,
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8763,6 +9738,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name UpdatePersonalSkillLevel
      * @summary 修改個人技能綁定等級
      * @request POST:/skill/personal/update-level
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -8779,6 +9755,7 @@ export class Api<SecurityDataType extends unknown> {
         method: "POST",
         query: query,
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8791,6 +9768,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name DeletePersonalSkill
      * @summary 解除個人技能綁定
      * @request POST:/skill/personal/delete
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -8805,6 +9783,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skill/personal/delete`,
         method: "POST",
         query: query,
+        secure: true,
         format: "json",
         ...params
       }),
@@ -8816,6 +9795,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name AddPersonalSkill
      * @summary 新增個人技能
      * @request POST:/skill/personal/add
+     * @secure
      * @response `200` `ResponseTypeSkillVo` OK
      * @response `400` `ResponseTypeSkillVo` Invalid input
      * @response `500` `ResponseTypeSkillVo` Server error
@@ -8825,6 +9805,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skill/personal/add`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8837,6 +9818,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name UpdateSkillLevel
      * @summary Update skill level
      * @request POST:/skill/level/update
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -8846,6 +9828,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skill/level/update`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8858,6 +9841,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name SearchSkillLevels
      * @summary 搜尋技能等級（分頁）
      * @request POST:/skill/level/search
+     * @secure
      * @response `200` `ResponseTypePageResultSkillLevelVo` OK
      * @response `400` `ResponseTypePageResultSkillLevelVo` Invalid input
      * @response `500` `ResponseTypePageResultSkillLevelVo` Server error
@@ -8867,6 +9851,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skill/level/search`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8879,6 +9864,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name DeleteSkillLevel
      * @summary Delete skill level
      * @request POST:/skill/level/delete
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -8888,6 +9874,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skill/level/delete`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8900,6 +9887,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name AddSkillLevel
      * @summary Add skill level
      * @request POST:/skill/level/add
+     * @secure
      * @response `200` `ResponseTypeSkillLevelVo` OK
      * @response `400` `ResponseTypeSkillLevelVo` Invalid input
      * @response `500` `ResponseTypeSkillLevelVo` Server error
@@ -8909,6 +9897,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skill/level/add`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8921,6 +9910,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name DeleteSkill
      * @summary Delete skill
      * @request POST:/skill/delete
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -8930,6 +9920,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skill/delete`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8942,6 +9933,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name SearchCurrentUserSkills
      * @summary 搜尋當前使用者技能（分頁）
      * @request POST:/skill/current/search
+     * @secure
      * @response `200` `ResponseTypePageResultCurrentUserSkillVo` OK
      * @response `400` `ResponseTypePageResultCurrentUserSkillVo` Invalid input
      * @response `500` `ResponseTypePageResultCurrentUserSkillVo` Server error
@@ -8951,6 +9943,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skill/current/search`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8963,6 +9956,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name AddSkill
      * @summary Add skill
      * @request POST:/skill/add
+     * @secure
      * @response `200` `ResponseTypeSkillVo` OK
      * @response `400` `ResponseTypeSkillVo` Invalid input
      * @response `500` `ResponseTypeSkillVo` Server error
@@ -8972,6 +9966,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/skill/add`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -8984,6 +9979,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetSkillLevels
      * @summary Get skill levels
      * @request GET:/skill/level/get/{skillId}
+     * @secure
      * @response `200` `ResponseTypeListSkillLevelVo` OK
      * @response `500` `ResponseTypeListSkillLevelVo` Server error
      */
@@ -8991,6 +9987,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListSkillLevelVo, ResponseTypeListSkillLevelVo>({
         path: `/skill/level/get/${skillId}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -9002,6 +9999,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetSkill
      * @summary Get skills
      * @request GET:/skill/get
+     * @secure
      * @response `200` `ResponseTypeListSkillVo` OK
      * @response `500` `ResponseTypeListSkillVo` Server error
      */
@@ -9009,6 +10007,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListSkillVo, ResponseTypeListSkillVo>({
         path: `/skill/get`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -9020,6 +10019,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetCurrentUserSkills
      * @summary 取得當前使用者技能
      * @request GET:/skill/current
+     * @secure
      * @response `200` `ResponseTypeListCurrentUserSkillVo` OK
      * @response `500` `ResponseTypeListCurrentUserSkillVo` Server error
      */
@@ -9027,6 +10027,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListCurrentUserSkillVo, ResponseTypeListCurrentUserSkillVo>({
         path: `/skill/current`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       })
@@ -9039,6 +10040,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name UserUnbindRole
      * @summary Unbind user from roles
      * @request POST:/role/userUnbindRole
+     * @secure
      * @response `200` `ResponseTypeUserVo` OK
      * @response `400` `ResponseTypeUserVo` Invalid input
      * @response `500` `ResponseTypeUserVo` Server error
@@ -9048,6 +10050,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/role/userUnbindRole`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9060,6 +10063,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name UserBindRole
      * @request POST:/role/userBindRole
      * @deprecated
+     * @secure
      * @response `200` `ResponseTypeUserVo` OK
      * @response `400` `ResponseTypeUserVo` Invalid input
      * @response `500` `ResponseTypeUserVo` Server error
@@ -9069,6 +10073,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/role/userBindRole`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9082,6 +10087,7 @@ export class Api<SecurityDataType extends unknown> {
      * @summary Update role
      * @request POST:/role/update
      * @deprecated
+     * @secure
      * @response `200` `ResponseTypeRoleOutVo` OK
      * @response `400` `ResponseTypeRoleOutVo` Invalid input
      * @response `500` `ResponseTypeRoleOutVo` Server error
@@ -9091,6 +10097,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/role/update`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9103,6 +10110,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name UpdateRoleWithFunctions
      * @summary Update role with functions
      * @request POST:/role/updateWithFunctions
+     * @secure
      * @response `200` `ResponseTypeRoleOutVo` OK
      * @response `400` `ResponseTypeRoleOutVo` Invalid input
      * @response `500` `ResponseTypeRoleOutVo` Server error
@@ -9112,6 +10120,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/role/updateWithFunctions`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9124,6 +10133,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name SearchRoles
      * @summary Search roles with pagination
      * @request POST:/role/search
+     * @secure
      * @response `200` `ResponseTypePageResultRoleOutVo` OK
      * @response `500` `ResponseTypePageResultRoleOutVo` Server error
      */
@@ -9132,6 +10142,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/role/search`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9144,6 +10155,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name RoleUnbindUser
      * @summary Unbind role from users
      * @request POST:/role/roleUnbindUser
+     * @secure
      * @response `200` `ResponseTypeRoleOutVo` OK
      * @response `400` `ResponseTypeRoleOutVo` Invalid input
      * @response `500` `ResponseTypeRoleOutVo` Server error
@@ -9153,6 +10165,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/role/roleUnbindUser`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9166,6 +10179,7 @@ export class Api<SecurityDataType extends unknown> {
      * @summary Unbind role from functions
      * @request POST:/role/roleUnbindFunction
      * @deprecated
+     * @secure
      * @response `200` `ResponseTypeRoleOutVo` OK
      * @response `400` `ResponseTypeRoleOutVo` Invalid input
      * @response `500` `ResponseTypeRoleOutVo` Server error
@@ -9175,6 +10189,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/role/roleUnbindFunction`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9187,6 +10202,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name RoleBindUser
      * @summary Bind role to users
      * @request POST:/role/roleBindUser
+     * @secure
      * @response `200` `ResponseTypeRoleOutVo` OK
      * @response `400` `ResponseTypeRoleOutVo` Invalid input
      * @response `500` `ResponseTypeRoleOutVo` Server error
@@ -9196,6 +10212,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/role/roleBindUser`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9209,6 +10226,7 @@ export class Api<SecurityDataType extends unknown> {
      * @summary Bind role to functions
      * @request POST:/role/roleBindFunction
      * @deprecated
+     * @secure
      * @response `200` `ResponseTypeRoleOutVo` OK
      * @response `400` `ResponseTypeRoleOutVo` Invalid input
      * @response `500` `ResponseTypeRoleOutVo` Server error
@@ -9218,6 +10236,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/role/roleBindFunction`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9230,6 +10249,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetRole
      * @summary Get roles
      * @request POST:/role/get
+     * @secure
      * @response `200` `ResponseTypeListRoleOutVo` OK
      * @response `500` `ResponseTypeListRoleOutVo` Server error
      */
@@ -9237,6 +10257,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListRoleOutVo, ResponseTypeListRoleOutVo>({
         path: `/role/get`,
         method: "POST",
+        secure: true,
         format: "json",
         ...params
       }),
@@ -9248,6 +10269,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetUserByRole
      * @summary Get users by role
      * @request POST:/role/getUserByRole
+     * @secure
      * @response `200` `ResponseTypeListUserVo` OK
      * @response `400` `ResponseTypeListUserVo` Invalid input
      * @response `500` `ResponseTypeListUserVo` Server error
@@ -9257,6 +10279,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/role/getUserByRole`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9269,6 +10292,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetRoleByUser
      * @summary Get roles by user
      * @request POST:/role/getRoleByUser
+     * @secure
      * @response `200` `ResponseTypeListRoleOutVo` OK
      * @response `400` `ResponseTypeListRoleOutVo` Invalid input
      * @response `500` `ResponseTypeListRoleOutVo` Server error
@@ -9278,6 +10302,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/role/getRoleByUser`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9290,6 +10315,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetRoleByFunction
      * @summary Get roles by function
      * @request POST:/role/getRoleByFunction
+     * @secure
      * @response `200` `ResponseTypeListRoleOutVo` OK
      * @response `400` `ResponseTypeListRoleOutVo` Invalid input
      * @response `500` `ResponseTypeListRoleOutVo` Server error
@@ -9299,6 +10325,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/role/getRoleByFunction`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9311,6 +10338,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetFunctionByRole
      * @summary Get functions by role
      * @request POST:/role/getFunctionByRole
+     * @secure
      * @response `200` `ResponseTypeListFunctionVo` OK
      * @response `400` `ResponseTypeListFunctionVo` Invalid input
      * @response `500` `ResponseTypeListFunctionVo` Server error
@@ -9320,6 +10348,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/role/getFunctionByRole`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9332,6 +10361,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name FunctionUnbindRole
      * @summary Unbind function from roles
      * @request POST:/role/functionUnbindRole
+     * @secure
      * @response `200` `ResponseTypeFunctionVo` OK
      * @response `400` `ResponseTypeFunctionVo` Invalid input
      * @response `500` `ResponseTypeFunctionVo` Server error
@@ -9341,6 +10371,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/role/functionUnbindRole`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9353,6 +10384,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name FunctionBindRole
      * @summary Bind function to roles
      * @request POST:/role/functionBindRole
+     * @secure
      * @response `200` `ResponseTypeFunctionVo` OK
      * @response `400` `ResponseTypeFunctionVo` Invalid input
      * @response `500` `ResponseTypeFunctionVo` Server error
@@ -9362,6 +10394,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/role/functionBindRole`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9374,6 +10407,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name DeleteRole
      * @summary Delete role
      * @request POST:/role/delete
+     * @secure
      * @response `200` `ResponseTypeRoleOutVo` OK
      * @response `400` `ResponseTypeRoleOutVo` Invalid input
      * @response `500` `ResponseTypeRoleOutVo` Server error
@@ -9383,6 +10417,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/role/delete`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9396,6 +10431,7 @@ export class Api<SecurityDataType extends unknown> {
      * @summary Add role
      * @request POST:/role/add
      * @deprecated
+     * @secure
      * @response `200` `ResponseTypeRoleOutVo` OK
      * @response `400` `ResponseTypeRoleOutVo` Invalid input
      * @response `500` `ResponseTypeRoleOutVo` Server error
@@ -9405,6 +10441,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/role/add`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9417,6 +10454,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name AddRoleWithFunctions
      * @summary Add role with functions
      * @request POST:/role/addWithFunctions
+     * @secure
      * @response `200` `ResponseTypeRoleOutVo` OK
      * @response `400` `ResponseTypeRoleOutVo` Invalid input
      * @response `500` `ResponseTypeRoleOutVo` Server error
@@ -9426,6 +10464,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/role/addWithFunctions`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9439,6 +10478,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name UpdateFunction
      * @summary Update function
      * @request POST:/function/update
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -9448,6 +10488,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/function/update`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9460,6 +10501,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name SearchFunctions
      * @summary Search functions with pagination
      * @request POST:/function/search
+     * @secure
      * @response `200` `ResponseTypePageResultFunctionVo` OK
      * @response `500` `ResponseTypePageResultFunctionVo` Server error
      */
@@ -9468,6 +10510,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/function/search`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9480,6 +10523,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name SaveAllFunction
      * @summary Save function changes
      * @request POST:/function/saveAllFunction
+     * @secure
      * @response `200` `ResponseTypeObject` OK
      * @response `400` `ResponseTypeObject` Invalid input
      * @response `500` `ResponseTypeObject` Server error
@@ -9489,6 +10533,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/function/saveAllFunction`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9501,6 +10546,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name DeleteFunction
      * @summary Delete function
      * @request POST:/function/delete
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -9510,6 +10556,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/function/delete`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9522,6 +10569,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name AddFunction
      * @summary Add function
      * @request POST:/function/add
+     * @secure
      * @response `200` `ResponseTypeObject` OK
      * @response `400` `ResponseTypeObject` Invalid input
      * @response `500` `ResponseTypeObject` Server error
@@ -9531,6 +10579,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/function/add`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9543,6 +10592,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetFunction
      * @summary Get functions
      * @request GET:/function/get
+     * @secure
      * @response `200` `ResponseTypeListFunctionVo` OK
      * @response `500` `ResponseTypeListFunctionVo` Server error
      */
@@ -9550,6 +10600,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListFunctionVo, ResponseTypeListFunctionVo>({
         path: `/function/get`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       })
@@ -9562,6 +10613,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name CreateSuperUser
      * @summary Create super user
      * @request POST:/auth/superuser
+     * @secure
      * @response `200` `ResponseTypeObject` OK
      * @response `400` `ResponseTypeObject` Invalid input
      * @response `500` `ResponseTypeObject` Server error
@@ -9571,6 +10623,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/auth/superuser`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9583,6 +10636,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name Signup
      * @summary Register a new user
      * @request POST:/auth/signup
+     * @secure
      * @response `200` `ResponseTypeToken` OK
      * @response `400` `ResponseTypeToken` Invalid input
      * @response `500` `ResponseTypeToken` Server error
@@ -9592,6 +10646,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/auth/signup`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9604,6 +10659,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name Login
      * @summary User login
      * @request POST:/auth/login
+     * @secure
      * @response `200` `ResponseTypeToken` OK
      * @response `401` `ResponseTypeToken` Unauthorized
      * @response `500` `ResponseTypeToken` Server error
@@ -9613,6 +10669,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/auth/login`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9626,6 +10683,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetData
      * @summary Get aquark data
      * @request POST:/aquarkData/getData
+     * @secure
      * @response `200` `ResponseTypeListAquarkDataRaw` OK
      * @response `400` `ResponseTypeListAquarkDataRaw` Invalid input
      * @response `500` `ResponseTypeListAquarkDataRaw` Server error
@@ -9635,6 +10693,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/aquarkData/getData`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9647,6 +10706,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetAverage
      * @summary Get average aquark data
      * @request POST:/aquarkData/getAverage
+     * @secure
      * @response `200` `ResponseTypeListAverageAquark` OK
      * @response `400` `ResponseTypeListAverageAquark` Invalid input
      * @response `500` `ResponseTypeListAverageAquark` Server error
@@ -9656,6 +10716,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/aquarkData/getAverage`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9668,6 +10729,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetColumnNameList
      * @summary Get column names
      * @request GET:/aquarkData/getColumnNameList
+     * @secure
      * @response `200` `ResponseTypeListString` OK
      * @response `500` `ResponseTypeListString` Server error
      */
@@ -9675,6 +10737,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListString, ResponseTypeListString>({
         path: `/aquarkData/getColumnNameList`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       })
@@ -9687,6 +10750,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name UpdateLimit
      * @summary Update alert limit
      * @request POST:/alertCheckLimit/update
+     * @secure
      * @response `200` `ResponseTypeAlertCheckLimitVo` OK
      * @response `400` `ResponseTypeAlertCheckLimitVo` Invalid input
      * @response `500` `ResponseTypeAlertCheckLimitVo` Server error
@@ -9696,6 +10760,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/alertCheckLimit/update`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9708,6 +10773,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name SearchAlertCheckLimits
      * @summary 搜尋告警檢查限制（分頁）
      * @request POST:/alertCheckLimit/search
+     * @secure
      * @response `200` `ResponseTypePageResultAlertCheckLimitVo` OK
      * @response `400` `ResponseTypePageResultAlertCheckLimitVo` Invalid input
      * @response `500` `ResponseTypePageResultAlertCheckLimitVo` Server error
@@ -9717,6 +10783,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/alertCheckLimit/search`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9729,6 +10796,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name DeleteLimit
      * @summary Delete alert limit
      * @request POST:/alertCheckLimit/delete
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -9738,6 +10806,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/alertCheckLimit/delete`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9750,6 +10819,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name AddLimit
      * @summary Add alert limit
      * @request POST:/alertCheckLimit/add
+     * @secure
      * @response `200` `ResponseTypeAlertCheckLimitVo` OK
      * @response `400` `ResponseTypeAlertCheckLimitVo` Invalid input
      * @response `500` `ResponseTypeAlertCheckLimitVo` Server error
@@ -9759,6 +10829,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/alertCheckLimit/add`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9771,6 +10842,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name GetLimit
      * @summary Get alert limits
      * @request GET:/alertCheckLimit/get
+     * @secure
      * @response `200` `ResponseTypeListAlertCheckLimitVo` OK
      * @response `500` `ResponseTypeListAlertCheckLimitVo` Server error
      */
@@ -9778,6 +10850,7 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListAlertCheckLimitVo, ResponseTypeListAlertCheckLimitVo>({
         path: `/alertCheckLimit/get`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params
       })
@@ -9790,6 +10863,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name RebindUserSkills
      * @summary Rebind user skills
      * @request POST:/admin/bindings/user-skill/rebind
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -9799,6 +10873,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/admin/bindings/user-skill/rebind`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9811,6 +10886,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name RebindUserProjects
      * @summary Rebind user projects
      * @request POST:/admin/bindings/user-project/rebind
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -9820,6 +10896,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/admin/bindings/user-project/rebind`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9832,6 +10909,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name RebindProjectSkills
      * @summary Rebind project skills
      * @request POST:/admin/bindings/project-skill/rebind
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -9841,6 +10919,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/admin/bindings/project-skill/rebind`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params
@@ -9853,6 +10932,7 @@ export class Api<SecurityDataType extends unknown> {
      * @name RebindProjectMemberSkills
      * @summary Rebind project member skills
      * @request POST:/admin/bindings/project-members-skills/rebind
+     * @secure
      * @response `200` `ResponseTypeString` OK
      * @response `400` `ResponseTypeString` Invalid input
      * @response `500` `ResponseTypeString` Server error
@@ -9862,6 +10942,7 @@ export class Api<SecurityDataType extends unknown> {
         path: `/admin/bindings/project-members-skills/rebind`,
         method: "POST",
         body: data,
+        secure: true,
         type: ContentType.Json,
         format: "json",
         ...params

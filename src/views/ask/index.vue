@@ -2,6 +2,7 @@
 import { computed, onUnmounted, reactive, ref } from "vue"
 import type { VADSMessage } from "@/utils/vads-processor"
 import { ElMessage } from "element-plus"
+import { api } from "@/api/client"
 
 // 重要：使用 Vite 的 ?url 導入，這會自動編譯 TS 並給予該檔案的 URL
 // @ts-ignore
@@ -17,8 +18,8 @@ const state = reactive<AudioState>({
   isThinking: false,
   currentVolume: 0,
   threshold: 20,
-  language: "zh-TW",
-  format: "text"
+  language: "zh",
+  format: "none"
 })
 
 // 辨識結果歷史紀錄
@@ -27,17 +28,25 @@ let nextResultId = 1
 
 // 語言選項
 const languageOptions = [
-  { label: "中文 (zh-TW)", value: "zh-TW" },
-  { label: "英文 (en-US)", value: "en-US" },
-  { label: "日文 (ja-JP)", value: "ja-JP" }
+  { label: "中文", value: "zh" },
+  { label: "日文", value: "ja" }
 ]
 
-// 輸出格式選項
+// 輸出模式選項
 const formatOptions = [
-  { label: "純文字", value: "text" },
-  { label: "JSON 格式", value: "json" },
-  { label: "羅馬拼音+片假名", value: "romaji_katakana" }
+  { label: "拼音", value: "pinyin" },
+  { label: "注音", value: "zhuyin" },
+  { label: "羅馬音", value: "romaji" },
+  { label: "純文字", value: "none" }
 ]
+
+const formatLabelMap: Record<string, string> = {
+  pinyin: "拼音",
+  zhuyin: "注音",
+  romaji: "羅馬音",
+  none: "純文字"
+}
+const formatLabel = (format: string) => formatLabelMap[format] || format
 
 // 底層物件參考 (不使用 reactive 避免 Proxy 代理問題)
 const audioRefs: AudioRefs = {
@@ -167,6 +176,7 @@ const sendAudio = async (blob: Blob) => {
     id: currentId,
     timestamp: new Date().toLocaleTimeString(),
     text: "辨識中...",
+    phonetic: "",
     language: state.language,
     format: state.format,
     status: "pending"
@@ -174,36 +184,20 @@ const sendAudio = async (blob: Blob) => {
   results.value.unshift(resultItem) // 加到陣列最前面
 
   try {
-    // 準備要發送的資料 (包含音檔、語言、格式)
-    const formData = new FormData()
-    formData.append("file", blob, "audio.webm")
-    formData.append("language", state.language)
-    formData.append("format", state.format)
+    const file = new File([blob], "audio.webm", { type: "audio/webm" })
+    const res = await api.speechToText.recognizeAudio(state.language, state.format, { file })
 
-    // TODO: 在此處呼叫您的後端 API
-    // const res = await api.ask.recognize(formData);
-
-    // 模擬 API 呼叫 (尚未實作後端時的佔位符)
-    console.log("準備發送資料給後端:", {
-      fileSize: blob.size,
-      language: state.language,
-      format: state.format
-    })
-
-    // 這裡暫時拋出錯誤，讓它走 error 狀態，待後端接上後修改
-    throw new Error("API 尚未實作")
-
-    // --- 假設後端回傳成功 ---
-    // const targetItem = results.value.find(item => item.id === currentId);
-    // if (targetItem) {
-    //     targetItem.text = res.data.text; // 根據實際 API 回傳結構調整
-    //     targetItem.status = 'success';
-    // }
+    const targetItem = results.value.find((item) => item.id === currentId)
+    if (targetItem) {
+      targetItem.text = res.data?.text || ""
+      targetItem.phonetic = res.data?.phonetic || ""
+      targetItem.status = "success"
+    }
   } catch (error) {
     console.error("請求失敗:", error)
     const targetItem = results.value.find((item) => item.id === currentId)
     if (targetItem) {
-      targetItem.text = "辨識失敗 (API 尚未準備好或發生錯誤)"
+      targetItem.text = "辨識失敗，請稍後再試"
       targetItem.status = "error"
     }
   } finally {
@@ -227,95 +221,109 @@ const autoMode = computed(() => state.isAutoMode)
 </script>
 
 <template>
-  <div class="p-6 max-w-2xl mx-auto bg-gray-50 rounded-xl shadow-lg space-y-6 border">
-    <!-- 頂部控制按鈕 -->
-    <button
-      @click="toggleAutoMode"
-      :class="state.isAutoMode ? 'bg-red-500' : 'bg-green-600'"
-      class="w-full py-3 text-white rounded-lg font-bold transition-all shadow hover:opacity-90"
-    >
-      {{ autoMode ? "關閉自動監聽" : "開啟自動監聽" }}
-    </button>
-
-    <!-- 參數設定區 -->
-    <div class="bg-white p-4 rounded-lg shadow-sm border space-y-4">
-      <h3 class="font-semibold text-gray-700 mb-2 border-b pb-2">參數設定</h3>
-      <div class="flex gap-4">
-        <div class="flex-1">
-          <label class="block text-sm text-gray-600 mb-1">辨識語言</label>
-          <el-select v-model="state.language" class="w-full" :disabled="state.isAutoMode">
-            <el-option v-for="item in languageOptions" :key="item.value" :label="item.label" :value="item.value" />
-          </el-select>
+  <div class="app-container gap-4">
+    <!-- 控制區：左右兩欄 -->
+    <div class="grid grid-cols-2 gap-4 shrink-0">
+      <!-- 左欄：按鈕 + 參數 -->
+      <div class="bg-white p-4 rounded-lg shadow-sm border space-y-3">
+        <button
+          @click="toggleAutoMode"
+          :class="state.isAutoMode ? 'bg-red-500' : 'bg-green-600'"
+          class="w-full py-3 text-white rounded-lg font-bold transition-all shadow hover:opacity-90"
+        >
+          {{ autoMode ? "關閉自動監聽" : "開啟自動監聽" }}
+        </button>
+        <div class="flex gap-3">
+          <div class="flex-1">
+            <label class="block text-sm text-gray-600 mb-1">語言</label>
+            <el-select v-model="state.language" class="w-full" :disabled="state.isAutoMode">
+              <el-option v-for="item in languageOptions" :key="item.value" :label="item.label" :value="item.value" />
+            </el-select>
+          </div>
+          <div class="flex-1">
+            <label class="block text-sm text-gray-600 mb-1">模式</label>
+            <el-select v-model="state.format" class="w-full" :disabled="state.isAutoMode">
+              <el-option v-for="item in formatOptions" :key="item.value" :label="item.label" :value="item.value" />
+            </el-select>
+          </div>
         </div>
-        <div class="flex-1">
-          <label class="block text-sm text-gray-600 mb-1">輸出格式</label>
-          <el-select v-model="state.format" class="w-full" :disabled="state.isAutoMode">
-            <el-option v-for="item in formatOptions" :key="item.value" :label="item.label" :value="item.value" />
-          </el-select>
-        </div>
+        <p class="text-xs text-amber-600" v-if="state.isAutoMode">* 監聽中無法更改參數設定</p>
       </div>
-      <p class="text-xs text-amber-600" v-if="state.isAutoMode">* 監聽中無法更改參數設定</p>
-    </div>
 
-    <!-- 音量監測區 -->
-    <div class="space-y-4 bg-white p-4 rounded-lg shadow-sm border">
-      <div class="relative h-8 bg-gray-200 rounded-full overflow-hidden">
-        <div
-          class="absolute h-full bg-blue-400 transition-all duration-75"
-          :style="{ width: state.currentVolume + '%' }"
+      <!-- 右欄：音量監測 -->
+      <div class="bg-white p-4 rounded-lg shadow-sm border space-y-3">
+        <div class="relative h-8 bg-gray-200 rounded-full overflow-hidden">
+          <div
+            class="absolute h-full bg-blue-400 transition-all duration-75"
+            :style="{ width: state.currentVolume + '%' }"
+          />
+          <div class="absolute h-full w-1 bg-red-600 shadow-sm" :style="{ left: state.threshold + '%' }" />
+        </div>
+
+        <div class="flex justify-between text-sm text-gray-600 font-medium">
+          <span>門檻: {{ state.threshold }}</span>
+          <span :class="nowRecording ? 'text-red-500 animate-pulse font-bold' : ''">
+            {{ nowRecording ? "● 錄音中" : "○ 等待聲音" }}
+          </span>
+        </div>
+
+        <input
+          type="range"
+          v-model.number="state.threshold"
+          min="0"
+          max="100"
+          class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer accent-red-500"
         />
-        <div class="absolute h-full w-1 bg-red-600 shadow-sm" :style="{ left: state.threshold + '%' }" />
+
+        <p class="text-xs text-gray-400">音量超過紅線自動觸發錄音，靜音 1.5 秒後停止</p>
       </div>
-
-      <div class="flex justify-between text-sm text-gray-600 font-medium">
-        <span>錄音門檻設定: {{ state.threshold }}</span>
-        <span :class="nowRecording ? 'text-red-500 animate-pulse font-bold' : ''">
-          {{ nowRecording ? "● 正在錄音..." : "○ 等待聲音輸入" }}
-        </span>
-      </div>
-
-      <input
-        type="range"
-        v-model.number="state.threshold"
-        min="0"
-        max="100"
-        class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer accent-red-500"
-      />
-
-      <p class="text-xs text-gray-400">說明：當藍色條（當前音量）超過紅線時，會自動觸發錄音。</p>
     </div>
 
     <!-- 狀態提示 -->
     <div v-if="state.isThinking" class="text-center text-blue-600 font-bold animate-pulse">AI 辨識中，請稍候...</div>
 
-    <!-- 辨識結果歷史區 -->
-    <div class="bg-white p-4 rounded-lg shadow-sm border h-80 flex flex-col">
-      <h3 class="font-semibold text-gray-700 mb-2 border-b pb-2 flex justify-between">
+    <!-- 辨識結果區 -->
+    <div class="bg-white p-4 rounded-lg shadow-sm border flex-1 flex flex-col min-h-0">
+      <h3 class="font-semibold text-gray-700 mb-2 pb-2 flex justify-between items-center">
         <span>辨識結果</span>
         <span class="text-xs font-normal text-gray-400">由新到舊排列</span>
       </h3>
 
-      <div class="flex-1 overflow-y-auto space-y-3 pr-2">
+      <div class="flex-1 overflow-y-auto space-y-3 pr-1">
         <div v-if="results.length === 0" class="text-center text-gray-400 mt-10">尚無辨識紀錄</div>
 
         <div
           v-for="res in results"
           :key="res.id"
-          class="p-3 rounded-lg border text-sm"
+          class="p-4 rounded-lg border"
           :class="{
             'bg-gray-50 border-gray-200': res.status === 'success',
             'bg-blue-50 border-blue-200': res.status === 'pending',
             'bg-red-50 border-red-200': res.status === 'error'
           }"
         >
-          <div class="flex justify-between text-xs text-gray-500 mb-1">
-            <span>[{{ res.language }}] {{ res.format }}</span>
+          <!-- 頂部資訊 -->
+          <div class="flex justify-between text-xs text-gray-500 mb-2">
+            <span>[{{ res.language }}]</span>
             <span>{{ res.timestamp }}</span>
           </div>
-          <div :class="res.status === 'error' ? 'text-red-600' : 'text-gray-800'">
-            <span v-if="res.status === 'pending'" class="animate-pulse">...</span>
-            {{ res.text }}
-          </div>
+
+          <!-- 辨識文字 -->
+          <div v-if="res.status === 'pending'" class="text-gray-500 animate-pulse">辨識中...</div>
+          <div v-else-if="res.status === 'error'" class="text-red-600">{{ res.text }}</div>
+          <template v-else>
+            <div class="text-gray-800 text-base font-medium leading-relaxed">{{ res.text }}</div>
+
+            <!-- 格式分隔 + 拼音（有 phonetic 才顯示） -->
+            <template v-if="res.phonetic">
+              <div class="my-2 flex items-center gap-2 text-xs text-gray-400">
+                <span class="flex-1 border-t border-dashed" />
+                <span class="shrink-0">{{ formatLabel(res.format) }}</span>
+                <span class="flex-1 border-t border-dashed" />
+              </div>
+              <div class="text-gray-600 text-sm">{{ res.phonetic }}</div>
+            </template>
+          </template>
         </div>
       </div>
     </div>

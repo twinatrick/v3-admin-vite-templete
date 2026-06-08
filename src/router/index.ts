@@ -120,6 +120,27 @@ export const constantRoutes: RouteRecordRaw[] = [
         }
       }
     ]
+  },
+  {
+    path: "/ask",
+    component: Layout,
+    redirect: "/ask/index",
+    meta: {
+      title: "語音助理",
+      elIcon: "Microphone",
+      alwaysShow: true
+    },
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/ask/index.vue"),
+        meta: {
+          title: "語音辨識",
+          elIcon: "Microphone",
+          keepAlive: false
+        }
+      }
+    ]
   }
 ]
 

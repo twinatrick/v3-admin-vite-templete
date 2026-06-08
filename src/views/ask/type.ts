@@ -21,6 +21,7 @@ export interface RecognizeResult {
   id: number
   timestamp: string
   text: string
+  phonetic: string
   language: string
   format: string
   status: "pending" | "success" | "error"
