@@ -19,7 +19,7 @@ function createService() {
   async function getAll() {
     data.loading = true
     try {
-      const res = await api.company.getAllCompanies()
+      const res = await api.companyController.getAllCompanies()
       data.list = (res.data || []).map(mapVo)
     } finally {
       data.loading = false
@@ -27,28 +27,28 @@ function createService() {
   }
 
   async function create(payload: { name: string; websites: string[]; description?: string }) {
-    const res = await api.company.addCompany(payload)
+    const res = await api.companyController.addCompany(payload)
     if (res.code !== 200) throw new Error(res.message || "新增公司失敗")
     await getAll()
     return res
   }
 
   async function update(payload: { id: string; name: string; websites: string[]; description?: string }) {
-    const res = await api.company.updateCompany(payload)
+    const res = await api.companyController.updateCompany(payload)
     if (res.code !== 200) throw new Error(res.message || "更新公司失敗")
     await getAll()
     return res
   }
 
   async function remove(id: string) {
-    const res = await api.company.deleteCompany(id)
+    const res = await api.companyController.deleteCompany(id)
     if (res.code !== 200) throw new Error(res.message || "刪除公司失敗")
     await getAll()
     return res
   }
 
   async function scrape(companyId: string) {
-    const res = await api.jobPosting.scrapeJobs(companyId)
+    const res = await api.jobPostingController.scrapeJobs(companyId)
     return res
   }
 

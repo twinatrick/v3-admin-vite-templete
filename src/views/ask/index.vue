@@ -185,7 +185,12 @@ const sendAudio = async (blob: Blob) => {
 
   try {
     const file = new File([blob], "audio.webm", { type: "audio/webm" })
-    const res = await api.speechToText.recognizeAudio(state.language, state.format, { file })
+    const res = await api.learnController.recognizeAudio(
+      state.language,
+      state.format,
+      { file },
+      { timeout: 1000 * 60 * 5 }
+    )
 
     const targetItem = results.value.find((item) => item.id === currentId)
     if (targetItem) {

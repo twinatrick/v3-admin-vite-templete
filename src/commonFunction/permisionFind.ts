@@ -7,7 +7,10 @@ interface PermissionData {
 }
 
 export async function getRoleFunctionAll(): Promise<PermissionData> {
-  const [rolesRes, functionsRes] = await Promise.all([api.roles.getRole(), api.functions.getFunction()])
+  const [rolesRes, functionsRes] = await Promise.all([
+    api.roleController.getRole(),
+    api.functionController.getFunction()
+  ])
 
   if (rolesRes.data.code !== 200 || !rolesRes.data.data) {
     throw new Error(rolesRes.data.message || "Failed to fetch roles.")

@@ -44,7 +44,7 @@ function createService() {
     if (payload?.name !== undefined) data.filters.name = payload.name
     if (payload?.description !== undefined) data.filters.description = payload.description
 
-    const res = await api.projects.searchCurrentUserProjects({
+    const res = await api.projectController.searchCurrentUserProjects({
       page: data.page,
       size: data.size,
       sortBy: data.sortBy,
@@ -62,13 +62,13 @@ function createService() {
   async function saveProject(projectVO: ProjectVo) {
     let result: ProjectVo | undefined
     if (projectVO.id) {
-      const res = await api.projects.updatePersonalProject(projectVO.id, {
+      const res = await api.projectController.updatePersonalProject(projectVO.id, {
         name: projectVO.name,
         description: projectVO.description
       })
       if (res.code !== 200) throw new Error(resolveErrorMessage(res, "更新項目失敗"))
     } else {
-      const res = await api.projects.addPersonalProject({
+      const res = await api.projectController.addPersonalProject({
         name: projectVO.name,
         description: projectVO.description
       })
@@ -85,13 +85,13 @@ function createService() {
 
   async function deleteProject(projectVO: ProjectVo) {
     if (!projectVO.id) throw new Error("Project ID is required")
-    const res = await api.projects.deletePersonalProject(projectVO.id)
+    const res = await api.projectController.deletePersonalProject(projectVO.id)
     if (res.code !== 200) throw new Error(resolveErrorMessage(res, "刪除項目失敗"))
     await queryProject()
   }
 
   async function getAllSkills() {
-    const res = await api.skills.searchCurrentUserSkills({
+    const res = await api.skillController.searchCurrentUserSkills({
       page: 0,
       size: 1000,
       sortBy: "name",
@@ -103,17 +103,17 @@ function createService() {
   }
 
   async function getSkillLevels(skillId: string) {
-    const res = await api.skills.getSkillLevels(skillId)
+    const res = await api.skillController.getSkillLevels(skillId)
     return res.data || []
   }
 
   async function getProjectSkills(projectId: string) {
-    const res = await api.projects.getPersonalProjectSkills(projectId)
+    const res = await api.projectController.getPersonalProjectSkills(projectId)
     return res.data || []
   }
 
   async function rebindProjectSkills(projectId: string, bindings: SkillLevelBindingItem[]) {
-    const res = await api.userBindings.rebindCurrentUserProjectSkills(projectId, {
+    const res = await api.userBindingController.rebindCurrentUserProjectSkills(projectId, {
       bindings
     })
     if (res.code !== 200) throw new Error(resolveErrorMessage(res, "更新專案技能綁定失敗"))

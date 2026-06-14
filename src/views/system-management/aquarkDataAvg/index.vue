@@ -85,7 +85,7 @@ const map = ref<Array<TableColumnMap>>([
 const getAquarkData = async () => {
   startDate.value.setHours(0, 0, 0, 0)
   endDate.value.setHours(23, 59, 59, 999)
-  const res = await api.aquarkData.getAverage({
+  const res = await api.aquarkDataController.getAverage({
     start: startDate.value.toISOString(),
     end: endDate.value.toISOString()
   })

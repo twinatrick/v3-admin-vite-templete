@@ -19,7 +19,7 @@ function createService() {
   async function getAll() {
     data.loading = true
     try {
-      const res = await api.userJobLink.getAllUserJobLinks()
+      const res = await api.userJobLinkController.getAllUserJobLinks()
       data.list = (res.data || []).map(mapVo)
     } finally {
       data.loading = false
@@ -27,14 +27,14 @@ function createService() {
   }
 
   async function create(payload: { userId?: string; jobPostingId: string; userNotes?: string }) {
-    const res = await api.userJobLink.addUserJobLink(payload)
+    const res = await api.userJobLinkController.addUserJobLink(payload)
     if (res.code !== 200) throw new Error(res.message || "新增職缺連結失敗")
     await getAll()
     return res
   }
 
   async function remove(id: string) {
-    const res = await api.userJobLink.deleteUserJobLink(id)
+    const res = await api.userJobLinkController.deleteUserJobLink(id)
     if (res.code !== 200) throw new Error(res.message || "刪除職缺連結失敗")
     await getAll()
     return res

@@ -25,7 +25,7 @@ async function loadCompanyCache(force = false) {
   if (loadingPromise) return loadingPromise
 
   loadingPromise = (async () => {
-    const res = await api.company.getAllCompanies()
+    const res = await api.companyController.getAllCompanies()
     const companies: CompanyVo[] = res.data || []
 
     const nextOptions: CompanySelectOption[] = []

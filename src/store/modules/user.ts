@@ -23,7 +23,7 @@ export const useUserStore = defineStore("user", () => {
     throw new Error("此功能已停用，请更新您的 API 调用以使用邮箱/密码。")
   }
   const loginByEmail = async (email: string, password: string) => {
-    const res = await api.auth.login({ email, password })
+    const res = await api.authController.login({ email, password })
     if (res.code !== 200) {
       throw new Error(res.message || "Login failed: No data returned or accessToken missing.")
     }
@@ -33,7 +33,7 @@ export const useUserStore = defineStore("user", () => {
     return res
   }
   const register = async (email: string, password: string) => {
-    const res = await api.auth.signup({ email, password })
+    const res = await api.authController.signup({ email, password })
     if (res.code !== 200 || !res.data.accessToken) {
       throw new Error(res.message || "Registration failed: No data returned or accessToken missing.")
     }
@@ -46,7 +46,7 @@ export const useUserStore = defineStore("user", () => {
   /** 取得用戶資訊 */
   const getInfo = async () => {
     try {
-      const { data } = await api.users.getUserInfo()
+      const { data } = await api.userController.getUserInfo()
       userInfo.value = data
     } catch (e) {
       console.log(e)

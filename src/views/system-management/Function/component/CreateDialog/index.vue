@@ -43,7 +43,7 @@ const createData = async () => {
     target: "#createDialog"
   })
   try {
-    const res = await api.functions.addFunction({
+    const res = await api.functionController.addFunction({
       name: formData.name,
       parent: "",
       sort: "0",

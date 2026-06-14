@@ -54,7 +54,7 @@ const confirmClick = async () => {
       functionIds: checkedKeys
     }
 
-    const res = await api.roles.addRoleWithFunctions(requestData)
+    const res = await api.roleController.addRoleWithFunctions(requestData)
     const data = res?.data
 
     emit("create", { ...data, functionKeys: checkedKeys, functionIds: checkedKeys })

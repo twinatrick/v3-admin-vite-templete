@@ -31,7 +31,7 @@ const createBtnClick = () => {
 const queryData = async () => {
   try {
     await loadingStart()
-    const res = await api.functions.getFunction()
+    const res = await api.functionController.getFunction()
     tableData.value = res.data
     treeData.value = TransData(res.data)
     console.log(treeData.value)
@@ -55,7 +55,7 @@ const SaveAll = async () => {
     const saveFunctionNewChild = tableData.value.filter((item) => {
       return !item.disabled && item.type == 3 && item.parent == "" && item.newAdd
     })
-    const res = await api.functions.saveAllFunction({
+    const res = await api.functionController.saveAllFunction({
       deleteFunction: JSON.parse(JSON.stringify(deleteData)),
       saveMainFunction: JSON.parse(JSON.stringify(saveMainFunction)),
       saveFunctionNewChild: JSON.parse(JSON.stringify(saveFunctionNewChild))

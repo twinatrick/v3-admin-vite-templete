@@ -1,37 +1,34 @@
 <script setup lang="ts" generic="T extends Record<string, any>">
-import { computed, onMounted, ref } from "vue"
+import { computed, onMounted, ref, shallowRef } from "vue"
 
 const CACHE_TTL_MS = 5 * 60 * 1000
 
-const props = withDefaults(
-  defineProps<{
-    modelValue?: string
-    placeholder?: string
-    clearable?: boolean
-    fetchFn: () => Promise<T[]>
-    labelRender: (item: T) => string
-    valueKey?: keyof T
-    filterKeys?: (keyof T)[]
-    cacheTTL?: number
-    activeOnly?: boolean
-    activeKey?: keyof T
-  }>(),
-  {
-    modelValue: "",
-    placeholder: "請選擇",
-    clearable: true,
-    valueKey: "id" as keyof T,
-    cacheTTL: CACHE_TTL_MS,
-    activeOnly: false,
-    activeKey: "disabled" as keyof T
-  }
-)
+const _props = defineProps<{
+  modelValue?: string
+  placeholder?: string
+  clearable?: boolean
+  fetchFn: () => Promise<T[]>
+  labelRender: (item: T) => string
+  valueKey?: keyof T
+  filterKeys?: (keyof T)[]
+  cacheTTL?: number
+  activeOnly?: boolean
+  activeKey?: keyof T
+}>()
+
+const placeholder = computed(() => _props.placeholder ?? "請選擇")
+const clearable = computed(() => _props.clearable ?? true)
+const valueKey = computed(() => (_props.valueKey ?? "id") as keyof T)
+const cacheTTL = computed(() => _props.cacheTTL ?? CACHE_TTL_MS)
+const labelRender = computed(() => _props.labelRender)
+
+const props = _props
 
 const emit = defineEmits<{
   (event: "update:modelValue", value: string): void
 }>()
 
-const cache = ref<T[]>([])
+const cache = shallowRef<T[]>([])
 const cacheLoadedAt = ref(0)
 const searchKeyword = ref("")
 const innerValue = ref(props.modelValue)
@@ -56,7 +53,7 @@ const filteredOptions = computed(() => {
 
 function shouldReload() {
   if (cache.value.length === 0) return true
-  return Date.now() - cacheLoadedAt.value > props.cacheTTL
+  return Date.now() - cacheLoadedAt.value > cacheTTL.value
 }
 
 async function load() {
@@ -89,8 +86,8 @@ onMounted(() => {
 <template>
   <el-select
     v-model="innerValue"
-    :placeholder="props.placeholder"
-    :clearable="props.clearable"
+    :placeholder="placeholder"
+    :clearable="clearable"
     filterable
     @change="handleChange"
     @visible-change="handleVisibleChange"
@@ -99,9 +96,9 @@ onMounted(() => {
   >
     <el-option
       v-for="item in filteredOptions"
-      :key="String(item[props.valueKey])"
-      :label="props.labelRender(item)"
-      :value="String(item[props.valueKey])"
+      :key="String(item[valueKey])"
+      :label="labelRender(item)"
+      :value="String(item[valueKey])"
     />
   </el-select>
 </template>

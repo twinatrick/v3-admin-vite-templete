@@ -74,7 +74,7 @@ const confirmClick = async () => {
   const loading = showLoading("角色更新中...")
   try {
     formData.functionKeys = selectedFunctionIds.value
-    const { data } = await api.roles.updateRoleWithFunctions({
+    const { data } = await api.roleController.updateRoleWithFunctions({
       ...formData.data,
       functionIds: selectedFunctionIds.value
     })

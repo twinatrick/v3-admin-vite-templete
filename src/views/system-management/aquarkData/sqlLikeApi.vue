@@ -102,7 +102,7 @@ const queryStringTrans = async (query: string) => {
   const result = searchArr.map((item) => {
     return transShowTemplateToCriteriaAPIFilter(item)
   })
-  const res = await api.aquarkData.getData(result)
+  const res = await api.aquarkDataController.getData(result)
   emit("addFilter", res.data)
 }
 const transShowTemplateToCriteriaAPIFilter = (showTemplate: showTemplate): CriteriaAPIFilter => {

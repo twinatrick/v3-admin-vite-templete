@@ -66,7 +66,7 @@ const leveledFunctions = computed(() => {
  * 查询函数 - 传递给 QueryForm
  */
 const queryRoles = async (params: any) => {
-  const res = await api.roles.searchRoles({
+  const res = await api.roleController.searchRoles({
     page: params.page,
     size: params.size,
     sortBy: params.sortBy,
@@ -110,7 +110,7 @@ const deleteBtnClick = async () => {
   })
   try {
     if (!selectedRow.value?.id) throw new Error("No selected row")
-    await api.roles.deleteRole(selectedRow.value)
+    await api.roleController.deleteRole(selectedRow.value)
     // 刷新列表
     await queryFormRef.value?.refresh()
   } catch (e) {
@@ -123,7 +123,7 @@ const deleteBtnClick = async () => {
 const getFunctionList = async () => {
   const loading = showLoading("Loading...")
   try {
-    const { data } = await api.functions.getFunction()
+    const { data } = await api.functionController.getFunction()
     allFunctions.value = data
   } catch (e) {
     console.log(e)

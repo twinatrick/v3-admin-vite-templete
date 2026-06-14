@@ -41,7 +41,7 @@ const handleDelete = async () => {
     .then(() => true)
     .catch(() => false)
   if (isConfirmed) {
-    const res = await api.alertLimits.deleteLimit(selectedRow.value)
+    const res = await api.alertCheckLimitController.deleteLimit(selectedRow.value)
     if (res.code == 0) {
       ElMessageBox.alert("Success")
       reloadData()
@@ -51,7 +51,7 @@ const handleDelete = async () => {
   }
 }
 const reloadData = async () => {
-  const res = await api.alertLimits.getLimit()
+  const res = await api.alertCheckLimitController.getLimit()
   tableData.value = res.data
 }
 

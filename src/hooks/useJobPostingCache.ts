@@ -26,7 +26,7 @@ async function loadJobPostingCache(force = false) {
   if (loadingPromise) return loadingPromise
 
   loadingPromise = (async () => {
-    const res = await api.jobPosting.getAllJobPostings()
+    const res = await api.jobPostingController.getAllJobPostings()
     const postings: JobPostingVo[] = res.data || []
 
     const nextOptions: JobPostingSelectOption[] = []

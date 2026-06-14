@@ -19,7 +19,7 @@ function createService() {
   async function getAll() {
     data.loading = true
     try {
-      const res = await api.jobPosting.getAllJobPostings()
+      const res = await api.jobPostingController.getAllJobPostings()
       data.list = (res.data || []).map(mapVo)
     } finally {
       data.loading = false
@@ -36,21 +36,21 @@ function createService() {
     salaryRange?: string
     postedDate?: string
   }) {
-    const res = await api.jobPosting.addJobPosting(payload)
+    const res = await api.jobPostingController.addJobPosting(payload)
     if (res.code !== 200) throw new Error(res.message || "新增職缺失敗")
     await getAll()
     return res
   }
 
   async function update(payload: JobPostingVo) {
-    const res = await api.jobPosting.updateJobPosting(payload)
+    const res = await api.jobPostingController.updateJobPosting(payload)
     if (res.code !== 200) throw new Error(res.message || "更新職缺失敗")
     await getAll()
     return res
   }
 
   async function remove(id: string) {
-    const res = await api.jobPosting.deleteJobPosting(id)
+    const res = await api.jobPostingController.deleteJobPosting(id)
     if (res.code !== 200) throw new Error(res.message || "刪除職缺失敗")
     await getAll()
     return res

@@ -25,7 +25,7 @@ const rules = ref({
   limitValue: [{ required: true, message: "Please input limitValue", trigger: "blur" }]
 })
 const submitForm = async () => {
-  const res = await api.alertLimits.updateLimit(formData)
+  const res = await api.alertCheckLimitController.updateLimit(formData)
   if (res.code == 0) {
     await ElMessageBox.alert("success")
 

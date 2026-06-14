@@ -52,7 +52,7 @@ function createService() {
     if (payload?.description !== undefined) data.filters.description = payload.description
     if (payload?.createdBy !== undefined) data.filters.createdBy = payload.createdBy
 
-    const res = await api.projects.searchProjects({
+    const res = await api.projectController.searchProjects({
       page: data.page,
       size: data.size,
       sortBy: data.sortBy,
@@ -71,12 +71,12 @@ function createService() {
     let result: ProjectVo | undefined
     if (projectVO.id) {
       // 更新
-      const res = await api.projects.updateProject(projectVO)
+      const res = await api.projectController.updateProject(projectVO)
       if (res.code !== 200) throw new Error(resolveErrorMessage(res, "更新項目失敗"))
       result = res.data
     } else {
       // 創建
-      const res = await api.projects.addProject(projectVO)
+      const res = await api.projectController.addProject(projectVO)
       if (res.code !== 200) throw new Error(resolveErrorMessage(res, "創建項目失敗"))
       result = res.data
     }
@@ -85,13 +85,13 @@ function createService() {
   }
 
   async function deleteProject(projectVO: ProjectVo) {
-    const res = await api.projects.deleteProject(projectVO)
+    const res = await api.projectController.deleteProject(projectVO)
     if (res.code !== 200) throw new Error(resolveErrorMessage(res, "刪除項目失敗"))
     await queryProject()
   }
 
   async function getAllSkills() {
-    const res = await api.skills.searchSkills({
+    const res = await api.skillController.searchSkills({
       page: 0,
       size: 1000,
       sortBy: "name",
@@ -103,23 +103,23 @@ function createService() {
   }
 
   async function getAllUsers() {
-    const res = await api.users.getAllUser()
+    const res = await api.userController.getAllUser()
     data.allUsers = res.data || []
     return data.allUsers
   }
 
   async function getSkillLevels(skillId: string) {
-    const res = await api.skills.getSkillLevels(skillId)
+    const res = await api.skillController.getSkillLevels(skillId)
     return res.data || []
   }
 
   async function getProjectSkills(projectId: string) {
-    const res = await api.projects.getProjectSkills(projectId)
+    const res = await api.projectController.getProjectSkills(projectId)
     return res.data || []
   }
 
   async function rebindProjectSkills(projectId: string, bindings: SkillLevelBindingItem[]) {
-    const res = await api.adminBindings.rebindProjectSkills({
+    const res = await api.projectAdminController.rebindProjectSkills({
       projectId,
       bindings
     })
@@ -127,7 +127,7 @@ function createService() {
   }
 
   async function rebindProjectMemberSkills(projectId: string, members: MemberSkillBindings[]) {
-    const res = await api.adminBindings.rebindProjectMemberSkills({
+    const res = await api.projectAdminController.rebindProjectMemberSkills({
       projectId,
       members
     })

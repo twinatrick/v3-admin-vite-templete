@@ -12,11 +12,11 @@ const map = ref<Array<TableColumnMap>>(colMap)
 const columnList = ref<Array<string>>([])
 const filterList = ref<Array<CriteriaAPIFilter>>([])
 const getColumnList = async () => {
-  const res = await api.aquarkData.getColumnNameList()
+  const res = await api.aquarkDataController.getColumnNameList()
   columnList.value = res.data
 }
 const getAquarkData = async () => {
-  const res = await api.aquarkData.getData(filterList.value)
+  const res = await api.aquarkDataController.getData(filterList.value)
   tableData.value = transQuery(res.data)
 }
 const handleDataReload = async (dataList: any) => {

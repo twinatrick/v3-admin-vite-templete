@@ -53,7 +53,7 @@ function createService() {
     if (payload?.name !== undefined) data.filters.name = payload.name
     if (payload?.description !== undefined) data.filters.description = payload.description
 
-    const res = await api.skills.searchCurrentUserSkills({
+    const res = await api.skillController.searchCurrentUserSkills({
       page: data.page,
       size: data.size,
       sortBy: data.sortBy,
@@ -73,10 +73,10 @@ function createService() {
     const requestData = buildPersonalSkillRequest(skillVO, levelVO)
 
     if (skillVO.id) {
-      const res = await api.skills.updatePersonalSkill({ skillId: skillVO.id }, requestData)
+      const res = await api.skillController.updatePersonalSkill({ skillId: skillVO.id }, requestData)
       if (res.code !== 200) throw new Error(resolveErrorMessage(res, "更新技能失敗"))
     } else {
-      const res = await api.skills.addPersonalSkill(requestData)
+      const res = await api.skillController.addPersonalSkill(requestData)
       if (res.code !== 200) throw new Error(resolveErrorMessage(res, "創建技能失敗"))
       result = res.data
     }
@@ -91,13 +91,13 @@ function createService() {
 
   async function deleteSkill(skillVO: { id?: string }) {
     if (!skillVO.id) throw new Error("Skill ID is required")
-    const res = await api.skills.deletePersonalSkill({ skillId: skillVO.id })
+    const res = await api.skillController.deletePersonalSkill({ skillId: skillVO.id })
     if (res.code !== 200) throw new Error(resolveErrorMessage(res, "刪除技能失敗"))
     await querySkill()
   }
 
   async function getSkillLevels(skillId: string) {
-    const res = await api.skills.getSkillLevels(skillId)
+    const res = await api.skillController.getSkillLevels(skillId)
     return res.data || []
   }
 

@@ -17,7 +17,7 @@ const rules = ref({
   limitValue: [{ required: true, message: "Please input limitValue", trigger: "blur" }]
 })
 const submitForm = async () => {
-  await api.alertLimits.addLimit(form)
+  await api.alertCheckLimitController.addLimit(form)
   emit("confirm")
   dialogVisible.value = false
 }

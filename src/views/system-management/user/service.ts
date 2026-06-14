@@ -34,7 +34,7 @@ class Data {
 function createService() {
   const data = reactive<Data>(new Data())
   async function initialize() {
-    const res1 = await api.roles.getRole()
+    const res1 = await api.roleController.getRole()
     data.role = res1.data || []
   }
   async function queryUser(payload?: Partial<UserSearchQuery>) {
@@ -50,7 +50,7 @@ function createService() {
     if (payload?.disabled !== undefined) data.filters.disabled = payload.disabled
     if (payload?.createdBy !== undefined) data.filters.createdBy = payload.createdBy
 
-    const res = await api.users.searchUsers({
+    const res = await api.userController.searchUsers({
       page: data.page,
       size: data.size,
       sortBy: data.sortBy,
@@ -64,18 +64,18 @@ function createService() {
     data.size = pageResult.pageSize ?? data.size
   }
   async function createUser(userVO: UserVo) {
-    const res = await api.users.saveUser(userVO)
+    const res = await api.userController.saveUser(userVO)
     if (res.data.code !== 200) throw new Error(resolveErrorMessage(res.data, "創建使用者失敗"))
     data.user.unshift(userVO)
   }
   async function updateUser(userVO: UserVo) {
-    const res = await api.users.saveUser(userVO)
+    const res = await api.userController.saveUser(userVO)
     if (res.code !== 200) throw new Error(resolveErrorMessage(res, "更新使用者失敗"))
     const index = data.user.findIndex((item) => item.id === userVO.id)
     data.user.splice(index, 1, userVO)
   }
   async function saveUser(userVO: UserVo) {
-    const res = await api.users.saveUser(userVO)
+    const res = await api.userController.saveUser(userVO)
     if (res.code !== 200) throw new Error(resolveErrorMessage(res, "儲存使用者失敗"))
     await queryUser()
   }

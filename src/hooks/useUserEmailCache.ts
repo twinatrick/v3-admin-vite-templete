@@ -30,7 +30,7 @@ async function loadUserEmailCache(force = false) {
   if (loadingPromise) return loadingPromise
 
   loadingPromise = (async () => {
-    const res = await api.users.getAllUser()
+    const res = await api.userController.getAllUser()
     const users: UserVo[] = res.data || []
 
     const nextMap: Record<string, string> = {}
