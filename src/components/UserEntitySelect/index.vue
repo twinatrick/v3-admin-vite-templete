@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from "vue"
-import { api, request } from "@/api/client"
+import { api } from "@/api/client"
 import { UserVo } from "@/api/generated/Api"
-import { mockGetUserById } from "@/utils/mock-data"
 
 const props = withDefaults(
   defineProps<{
@@ -59,10 +58,10 @@ async function remoteSearch(query: string) {
 
 async function resolveUser(id: string): Promise<UserVo | null> {
   try {
-    const res = await request.get(`/api/users/${id}`)
-    return res.data?.data || null
+    const res = await api.userController.getUserById(id)
+    return res.data || null
   } catch {
-    return mockGetUserById(id)
+    return null
   }
 }
 

@@ -2,7 +2,6 @@
 import { ref, watch } from "vue"
 import { api } from "@/api/client"
 import { CompanyVo } from "@/api/generated/Api"
-import { mockSearchCompanies } from "@/utils/mock-data"
 
 const props = withDefaults(
   defineProps<{
@@ -32,11 +31,10 @@ async function remoteSearch(query: string) {
   }
   loading.value = true
   try {
-    const res = await api.companyController.getAllCompanies()
-    const filtered = (res.data || []).filter((c) => c.name && c.name.toLowerCase().includes(query.toLowerCase()))
-    options.value = filtered.slice(0, 20)
+    const res = await api.companyController.searchCompanies({ name: query, page: 0, size: 20 })
+    options.value = res.data?.content || []
   } catch {
-    options.value = mockSearchCompanies(query).content
+    options.value = []
   } finally {
     loading.value = false
   }

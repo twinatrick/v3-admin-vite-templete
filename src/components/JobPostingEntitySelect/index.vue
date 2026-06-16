@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, watch } from "vue"
-import { api, request } from "@/api/client"
+import { api } from "@/api/client"
 import { JobPostingVo } from "@/api/generated/Api"
-import { mockSearchJobPostings, mockGetJobPostingById } from "@/utils/mock-data"
+import { mockSearchJobPostings } from "@/utils/mock-data"
 
 const props = withDefaults(
   defineProps<{
@@ -47,10 +47,10 @@ async function remoteSearch(query: string) {
 
 async function resolveJob(id: string): Promise<JobPostingVo | null> {
   try {
-    const res = await request.get(`/api/job-posting/get/${id}`)
-    return res.data?.data || null
+    const res = await api.jobPostingController.getJobPostingById(id)
+    return res.data || null
   } catch {
-    return mockGetJobPostingById(id)
+    return null
   }
 }
 
