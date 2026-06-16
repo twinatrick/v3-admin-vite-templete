@@ -1,68 +1,92 @@
 import { reactive } from "vue"
 import { api } from "@/api/client"
-import { JobPostingVo } from "@/api/generated/Api"
+import { JobPostingSearchQuery, JobPostingVo } from "@/api/generated/Api"
 import { JobPosting } from "./type"
 
 class Data {
   list: JobPosting[]
-  loading: boolean
+  page: number
+  size: number
+  totalElements: number
+  sortBy: string
+  sortDir: "asc" | "desc"
+  filters: {
+    title: string
+    companyName: string
+    salaryRange: string
+    createdBy: string
+  }
 
   constructor() {
     this.list = []
-    this.loading = false
+    this.page = 0
+    this.size = 20
+    this.totalElements = 0
+    this.sortBy = "createdTime"
+    this.sortDir = "desc"
+    this.filters = {
+      title: "",
+      companyName: "",
+      salaryRange: "",
+      createdBy: ""
+    }
   }
 }
 
 function createService() {
   const data = reactive<Data>(new Data())
 
-  async function getAll() {
-    data.loading = true
-    try {
-      const res = await api.jobPostingController.getAllJobPostings()
-      data.list = (res.data || []).map(mapVo)
-    } finally {
-      data.loading = false
+  async function queryJobPosting(payload?: Partial<JobPostingSearchQuery>) {
+    if (payload?.page !== undefined) data.page = payload.page
+    if (payload?.size !== undefined) data.size = payload.size
+    if (payload?.sortBy !== undefined) data.sortBy = payload.sortBy
+    if (payload?.sortDir !== undefined && (payload.sortDir === "asc" || payload.sortDir === "desc")) {
+      data.sortDir = payload.sortDir
+    }
+    if (payload?.title !== undefined) data.filters.title = payload.title
+    if (payload?.companyName !== undefined) data.filters.companyName = payload.companyName
+    if (payload?.salaryRange !== undefined) data.filters.salaryRange = payload.salaryRange
+    if (payload?.createdBy !== undefined) data.filters.createdBy = payload.createdBy
+
+    const res = await api.jobPostingController.searchJobPostings({
+      page: data.page,
+      size: data.size,
+      sortBy: data.sortBy,
+      sortDir: data.sortDir,
+      ...data.filters,
+      postedDateStart: payload?.postedDateStart,
+      postedDateEnd: payload?.postedDateEnd
+    })
+    const pageResult = res.data || {}
+    data.list = (pageResult.content || []).map(mapVo)
+    data.totalElements = pageResult.totalElements || 0
+    data.page = pageResult.currentPage ?? data.page
+    data.size = pageResult.pageSize ?? data.size
+    return {
+      data: data.list,
+      total: data.totalElements,
+      page: data.page,
+      size: data.size
     }
   }
 
-  async function create(payload: {
-    companyId: string
-    title: string
-    url: string
-    description?: string
-    requirements?: string
-    responsibilities?: string
-    salaryRange?: string
-    postedDate?: string
-  }) {
-    const res = await api.jobPostingController.addJobPosting(payload)
-    if (res.code !== 200) throw new Error(res.message || "新增職缺失敗")
-    await getAll()
-    return res
+  async function saveJobPosting(vo: JobPostingVo) {
+    if (vo.id) {
+      const res = await api.jobPostingController.updateJobPosting(vo)
+      if (res.code !== 200) throw new Error(res.message || "Update job posting failed")
+    } else {
+      const res = await api.jobPostingController.addJobPosting(vo as any)
+      if (res.code !== 200) throw new Error(res.message || "Create job posting failed")
+    }
+    await queryJobPosting()
   }
 
-  async function update(payload: JobPostingVo) {
-    const res = await api.jobPostingController.updateJobPosting(payload)
-    if (res.code !== 200) throw new Error(res.message || "更新職缺失敗")
-    await getAll()
-    return res
-  }
-
-  async function remove(id: string) {
+  async function deleteJobPosting(id: string) {
     const res = await api.jobPostingController.deleteJobPosting(id)
-    if (res.code !== 200) throw new Error(res.message || "刪除職缺失敗")
-    await getAll()
-    return res
+    if (res.code !== 200) throw new Error(res.message || "Delete job posting failed")
   }
 
-  return {
-    data,
-    getAll,
-    create,
-    update,
-    remove
-  }
+  return { data, queryJobPosting, saveJobPosting, deleteJobPosting }
 }
 
 function mapVo(vo: JobPostingVo): JobPosting {

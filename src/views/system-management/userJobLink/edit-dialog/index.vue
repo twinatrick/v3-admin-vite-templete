@@ -4,38 +4,41 @@ import { ElForm, ElMessage } from "element-plus"
 import { showLoading, resolveErrorMessage } from "@/utils"
 import service from "../service"
 import { userJobLinkCreateRules } from "../rules"
+import { UserJobLink } from "../type"
 import UserEntitySelect from "@/components/UserEntitySelect/index.vue"
 import JobPostingEntitySelect from "@/components/JobPostingEntitySelect/index.vue"
 
 const visible = ref(false)
-const form = reactive({ userId: "", jobPostingId: "", userNotes: "" })
+const form = reactive({ id: "", userId: "", jobPostingId: "", userNotes: "" })
 const formRef = ref<InstanceType<typeof ElForm> | null>(null)
 const emit = defineEmits(["reload"])
 
 const confirmBtnClick = async () => {
   if (!(await formRef.value?.validate())) throw new Error("Form validate failed")
-  const loading = showLoading("Creating...")
+  const loading = showLoading("Updating...")
   try {
     await service.saveUserJobLink({
+      id: form.id,
       userId: form.userId,
       jobPostingId: form.jobPostingId,
       userNotes: form.userNotes || undefined
     })
-    ElMessage.success("Create user job link successfully")
+    ElMessage.success("Update user job link successfully")
     emit("reload")
     hide()
   } catch (e: any) {
-    ElMessage.error(resolveErrorMessage(e, "Create user job link failed"))
+    ElMessage.error(resolveErrorMessage(e, "Update user job link failed"))
   } finally {
     loading.close()
   }
 }
 
-const show = () => {
-  form.userId = ""
-  form.jobPostingId = ""
-  form.userNotes = ""
-  formRef.value?.resetFields()
+const show = (row: UserJobLink) => {
+  form.id = row.id || ""
+  form.userId = row.userId || ""
+  form.jobPostingId = row.jobPostingId || ""
+  form.userNotes = row.userNotes || ""
+  formRef.value?.clearValidate()
   visible.value = true
 }
 const hide = () => {
@@ -45,8 +48,8 @@ const hide = () => {
 defineExpose({ show, hide })
 </script>
 <template>
-  <el-dialog v-model="visible" id="userJobLinkCreateDialog" :close-on-click-modal="false">
-    <template #header><h2 text-center>Create User Job Link</h2></template>
+  <el-dialog v-model="visible" id="userJobLinkEditDialog" :close-on-click-modal="false">
+    <template #header><h2 text-center>Edit User Job Link</h2></template>
     <el-form ref="formRef" :model="form" :rules="userJobLinkCreateRules" label-width="auto" class="flex flex-wrap">
       <el-form-item label="User" prop="userId" class="form-item-1-1">
         <UserEntitySelect v-model="form.userId" />

@@ -6,34 +6,58 @@ import { UserJobLink } from "../type"
 const prop = defineProps<{
   data: UserJobLink[]
   loading: boolean
+  remotePagination: { currentPage: number; pageSize: number; total: number }
 }>()
 
-const emit = defineEmits<{
-  (event: "delete", row: UserJobLink): void
-}>()
+const emit = defineEmits(["page-change", "sort-change", "row-click", "row-dbclick"])
 
 const options: CustomTableOptionType = {
-  table: {
-    border: true
-  },
+  realPagination: true,
   pagination: {
     layout: "total, prev, pager, next, jumper"
+  },
+  table: {
+    highlightCurrentRow: true,
+    height: "100%",
+    border: true
   }
 }
-</script>
 
+const handlePageChange = (payload: { page: number; size: number }) => {
+  emit("page-change", payload)
+}
+const handleSortChange = (payload: { sortBy: string; sortDir: "asc" | "desc" | null }) => {
+  emit("sort-change", payload)
+}
+const onRowClick = (payload: { row: any; column: any; event: any }) => {
+  emit("row-click", payload.row)
+}
+const onRowDbClick = (payload: { row: any; column: any; event: any }) => {
+  emit("row-dbclick", payload.row)
+}
+</script>
 <template>
-  <custom-table :data="prop.data" :option="options" :total="prop.data.length" :loading="prop.loading" class="h-100%">
+  <custom-table
+    :data="prop.data"
+    :option="options"
+    :total="prop.remotePagination.total"
+    :current-page="prop.remotePagination.currentPage"
+    :page-size="prop.remotePagination.pageSize"
+    v-loading="prop.loading"
+    class="h-100%"
+    @page-change="handlePageChange"
+    @sort-change="handleSortChange"
+    @row-click="onRowClick"
+    @row-dbclick="onRowDbClick"
+  >
+    <template #header>
+      <slot name="header" />
+    </template>
     <template #body>
-      <el-table-column prop="userEmail" label="使用者" min-width="180" />
-      <el-table-column prop="jobTitle" label="職缺名稱" min-width="180" />
-      <el-table-column prop="companyName" label="公司" min-width="150" />
-      <el-table-column prop="userNotes" label="備註" min-width="200" show-overflow-tooltip />
-      <el-table-column label="操作" width="80" fixed="right">
-        <template #default="{ row }">
-          <el-button size="small" type="danger" @click="emit('delete', row)">刪除</el-button>
-        </template>
-      </el-table-column>
+      <el-table-column prop="userEmail" label="User" min-width="180" sortable="custom" />
+      <el-table-column prop="jobTitle" label="Job Title" min-width="180" sortable="custom" />
+      <el-table-column prop="companyName" label="Company" min-width="150" sortable="custom" />
+      <el-table-column prop="userNotes" label="Notes" min-width="200" show-overflow-tooltip sortable="custom" />
     </template>
   </custom-table>
 </template>

@@ -5,46 +5,87 @@ import { Company } from "./type"
 
 class Data {
   list: Company[]
-  loading: boolean
+  totalElements: number
+  page: number
+  size: number
+  sortBy: string
+  sortDir: "asc" | "desc"
+  private cachedAll: Company[]
 
   constructor() {
     this.list = []
-    this.loading = false
+    this.totalElements = 0
+    this.page = 0
+    this.size = 20
+    this.sortBy = "createdTime"
+    this.sortDir = "desc"
+    this.cachedAll = []
   }
 }
 
 function createService() {
   const data = reactive<Data>(new Data())
 
-  async function getAll() {
-    data.loading = true
-    try {
-      const res = await api.companyController.getAllCompanies()
-      data.list = (res.data || []).map(mapVo)
-    } finally {
-      data.loading = false
+  async function fetchAll() {
+    const res = await api.companyController.getAllCompanies()
+    data.cachedAll = (res.data || []).map(mapVo)
+    return data.cachedAll
+  }
+
+  async function queryCompany(params?: {
+    page?: number
+    size?: number
+    sortBy?: string
+    sortDir?: "asc" | "desc"
+    filters?: { name?: string; createdBy?: string }
+  }) {
+    if (data.cachedAll.length === 0 || params?.filters) {
+      await fetchAll()
     }
+    let filtered = [...data.cachedAll]
+    const filters = params?.filters || {}
+    if (filters.name) {
+      const q = filters.name.toLowerCase()
+      filtered = filtered.filter((c) => c.name?.toLowerCase().includes(q))
+    }
+    if (filters.createdBy) {
+      filtered = filtered.filter((c) => c.createdBy === filters.createdBy)
+    }
+    const sortBy = params?.sortBy || data.sortBy
+    const sortDir = params?.sortDir || data.sortDir
+    filtered.sort((a, b) => {
+      const aVal = String((a as any)[sortBy] || "")
+      const bVal = String((b as any)[sortBy] || "")
+      const cmp = aVal.localeCompare(bVal)
+      return sortDir === "desc" ? -cmp : cmp
+    })
+    const page = params?.page ?? data.page
+    const size = params?.size ?? data.size
+    const total = filtered.length
+    const start = page * size
+    const paged = filtered.slice(start, start + size)
+    data.list = paged
+    data.totalElements = total
+    data.page = page
+    data.size = size
+    return { data: data.list, total: data.totalElements, page: data.page, size: data.size }
   }
 
-  async function create(payload: { name: string; websites: string[]; description?: string }) {
-    const res = await api.companyController.addCompany(payload)
-    if (res.code !== 200) throw new Error(res.message || "新增公司失敗")
-    await getAll()
-    return res
+  async function saveCompany(payload: { id?: string; name: string; websites: string[]; description?: string }) {
+    if (payload.id) {
+      const res = await api.companyController.updateCompany(payload as any)
+      if (res.code !== 200) throw new Error(res.message || "Update company failed")
+    } else {
+      const res = await api.companyController.addCompany(payload as any)
+      if (res.code !== 200) throw new Error(res.message || "Create company failed")
+    }
+    data.cachedAll = []
   }
 
-  async function update(payload: { id: string; name: string; websites: string[]; description?: string }) {
-    const res = await api.companyController.updateCompany(payload)
-    if (res.code !== 200) throw new Error(res.message || "更新公司失敗")
-    await getAll()
-    return res
-  }
-
-  async function remove(id: string) {
+  async function deleteCompany(id: string) {
     const res = await api.companyController.deleteCompany(id)
-    if (res.code !== 200) throw new Error(res.message || "刪除公司失敗")
-    await getAll()
-    return res
+    if (res.code !== 200) throw new Error(res.message || "Delete company failed")
+    data.cachedAll = []
   }
 
   async function scrape(companyId: string) {
@@ -52,14 +93,7 @@ function createService() {
     return res
   }
 
-  return {
-    data,
-    getAll,
-    create,
-    update,
-    remove,
-    scrape
-  }
+  return { data, queryCompany, saveCompany, deleteCompany, scrape }
 }
 
 function mapVo(vo: CompanyVo): Company {

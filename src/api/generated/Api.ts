@@ -10,6 +10,19 @@
  * ---------------------------------------------------------------
  */
 
+export interface AudioRecognizeVo {
+  text?: string
+  phonetic?: string
+}
+
+export interface ResponseTypeAudioRecognizeVo {
+  /** @format int32 */
+  code?: number
+  data?: AudioRecognizeVo
+  message?: string
+  errorType?: string
+}
+
 export interface CriteriaAPIFilter {
   columnName?: string
   /** @format int32 */
@@ -56,8 +69,8 @@ export interface AquarkDataRaw {
   v6?: number
   /** @format float */
   v7?: number
-  csq?: string
   peak?: boolean
+  csq?: string
 }
 
 export interface ResponseTypeListAquarkDataRaw {
@@ -253,6 +266,307 @@ export interface ResponseTypeListAlertCheckLimitVo {
   /** @format int32 */
   code?: number
   data?: AlertCheckLimitVo[]
+  message?: string
+  errorType?: string
+}
+
+export interface UserJobLinkVo {
+  id?: string
+  userId?: string
+  userEmail?: string
+  jobPostingId?: string
+  jobTitle?: string
+  companyName?: string
+  userNotes?: string
+  geminiFeedback?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+}
+
+export interface ResponseTypeUserJobLinkVo {
+  /** @format int32 */
+  code?: number
+  data?: UserJobLinkVo
+  message?: string
+  errorType?: string
+}
+
+export interface JobPostingVo {
+  id?: string
+  companyId?: string
+  companyName?: string
+  title?: string
+  url?: string
+  description?: string
+  requirements?: string
+  responsibilities?: string
+  salaryRange?: string
+  /** @format date */
+  postedDate?: string
+  geminiAnalysis?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+}
+
+export interface ResponseTypeJobPostingVo {
+  /** @format int32 */
+  code?: number
+  data?: JobPostingVo
+  message?: string
+  errorType?: string
+}
+
+export interface UpdateCompanyRequest {
+  /** @format uuid */
+  id?: string
+  name?: string
+  websites?: string[]
+  description?: string
+}
+
+export interface CompanyVo {
+  id?: string
+  name?: string
+  websites?: string[]
+  description?: string
+  createdBy?: string
+  updatedBy?: string
+  /** @format date-time */
+  createdTime?: string
+  /** @format date-time */
+  updatedTime?: string
+}
+
+export interface ResponseTypeCompanyVo {
+  /** @format int32 */
+  code?: number
+  data?: CompanyVo
+  message?: string
+  errorType?: string
+}
+
+/** 職缺搜尋查詢參數 */
+export interface JobPostingSearchQuery {
+  /**
+   * 頁碼，從0開始
+   * @format int32
+   * @min 0
+   * @example 0
+   */
+  page?: number
+  /**
+   * 每頁大小
+   * @format int32
+   * @min 1
+   * @max 100
+   * @example 20
+   */
+  size?: number
+  /**
+   * 排序欄位
+   * @example "createdTime"
+   */
+  sortBy?: string
+  /**
+   * 排序方向：asc/desc
+   * @example "desc"
+   */
+  sortDir?: string
+  /** 職缺標題（模糊查詢） */
+  title?: string
+  /** 公司ID（精確查詢） */
+  companyId?: string
+  /** 公司名稱（模糊查詢） */
+  companyName?: string
+  /** 薪資範圍（模糊查詢） */
+  salaryRange?: string
+  /**
+   * 發布日期（起始）
+   * @format date
+   */
+  postedDateStart?: string
+  /**
+   * 發布日期（結束）
+   * @format date
+   */
+  postedDateEnd?: string
+  /** 創建者（精確查詢） */
+  createdBy?: string
+  normalizedSortDir?: string
+  validSortDir?: boolean
+}
+
+/** 分頁結果 */
+export interface PageResultJobPostingVo {
+  /** 資料列表 */
+  content?: JobPostingVo[]
+  /**
+   * 總記錄數
+   * @format int64
+   */
+  totalElements?: number
+  /**
+   * 總頁數
+   * @format int32
+   */
+  totalPages?: number
+  /**
+   * 當前頁碼（從0開始）
+   * @format int32
+   */
+  currentPage?: number
+  /**
+   * 每頁大小
+   * @format int32
+   */
+  pageSize?: number
+  /** 是否有下一頁 */
+  hasNext?: boolean
+  /** 是否有上一頁 */
+  hasPrevious?: boolean
+  /** 是否為第一頁 */
+  isFirst?: boolean
+  /** 是否為最後一頁 */
+  isLast?: boolean
+}
+
+export interface ResponseTypePageResultJobPostingVo {
+  /** @format int32 */
+  code?: number
+  /** 分頁結果 */
+  data?: PageResultJobPostingVo
+  message?: string
+  errorType?: string
+}
+
+export interface ResponseTypeListJobPostingVo {
+  /** @format int32 */
+  code?: number
+  data?: JobPostingVo[]
+  message?: string
+  errorType?: string
+}
+
+export interface CreateJobPostingRequest {
+  companyId: string
+  title: string
+  url: string
+  description?: string
+  requirements?: string
+  responsibilities?: string
+  salaryRange?: string
+  /** @format date */
+  postedDate?: string
+}
+
+/** 公司搜尋查詢參數 */
+export interface CompanySearchQuery {
+  /**
+   * 頁碼，從0開始
+   * @format int32
+   * @min 0
+   * @example 0
+   */
+  page?: number
+  /**
+   * 每頁大小
+   * @format int32
+   * @min 1
+   * @max 100
+   * @example 20
+   */
+  size?: number
+  /**
+   * 排序欄位
+   * @example "createdTime"
+   */
+  sortBy?: string
+  /**
+   * 排序方向：asc/desc
+   * @example "desc"
+   */
+  sortDir?: string
+  /** 關鍵字（模糊搜尋公司名稱與描述） */
+  keyword?: string
+  /** 公司名稱（模糊查詢） */
+  name?: string
+  /** 公司描述（模糊查詢） */
+  description?: string
+  /** 創建者（精確查詢） */
+  createdBy?: string
+  normalizedSortDir?: string
+  validSortDir?: boolean
+}
+
+/** 分頁結果 */
+export interface PageResultCompanyVo {
+  /** 資料列表 */
+  content?: CompanyVo[]
+  /**
+   * 總記錄數
+   * @format int64
+   */
+  totalElements?: number
+  /**
+   * 總頁數
+   * @format int32
+   */
+  totalPages?: number
+  /**
+   * 當前頁碼（從0開始）
+   * @format int32
+   */
+  currentPage?: number
+  /**
+   * 每頁大小
+   * @format int32
+   */
+  pageSize?: number
+  /** 是否有下一頁 */
+  hasNext?: boolean
+  /** 是否有上一頁 */
+  hasPrevious?: boolean
+  /** 是否為第一頁 */
+  isFirst?: boolean
+  /** 是否為最後一頁 */
+  isLast?: boolean
+}
+
+export interface ResponseTypePageResultCompanyVo {
+  /** @format int32 */
+  code?: number
+  /** 分頁結果 */
+  data?: PageResultCompanyVo
+  message?: string
+  errorType?: string
+}
+
+export interface CreateCompanyRequest {
+  name: string
+  websites: string[]
+  description?: string
+}
+
+export interface ResponseTypeListUserJobLinkVo {
+  /** @format int32 */
+  code?: number
+  data?: UserJobLinkVo[]
+  message?: string
+  errorType?: string
+}
+
+export interface ResponseTypeListCompanyVo {
+  /** @format int32 */
+  code?: number
+  data?: CompanyVo[]
   message?: string
   errorType?: string
 }
@@ -846,19 +1160,6 @@ export interface ResponseTypeListProjectVo {
   errorType?: string
 }
 
-export interface AudioRecognizeVo {
-  text?: string
-  phonetic?: string
-}
-
-export interface ResponseTypeAudioRecognizeVo {
-  /** @format int32 */
-  code?: number
-  data?: AudioRecognizeVo
-  message?: string
-  errorType?: string
-}
-
 export interface UserRoleRebindRequest {
   userId?: string
   roleIds: string[]
@@ -1297,225 +1598,6 @@ export interface LoginRequest {
   password?: string
 }
 
-export interface JobPostingVo {
-  id?: string
-  companyId?: string
-  companyName?: string
-  title?: string
-  url?: string
-  description?: string
-  requirements?: string
-  responsibilities?: string
-  salaryRange?: string
-  /** @format date */
-  postedDate?: string
-  geminiAnalysis?: string
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-}
-
-export interface ResponseTypeJobPostingVo {
-  /** @format int32 */
-  code?: number
-  data?: JobPostingVo
-  message?: string
-  errorType?: string
-}
-
-export interface UpdateCompanyRequest {
-  /** @format uuid */
-  id?: string
-  name?: string
-  websites?: string[]
-  description?: string
-}
-
-export interface CompanyVo {
-  id?: string
-  name?: string
-  websites?: string[]
-  description?: string
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-}
-
-export interface ResponseTypeCompanyVo {
-  /** @format int32 */
-  code?: number
-  data?: CompanyVo
-  message?: string
-  errorType?: string
-}
-
-export interface ResponseTypeUserJobLinkVo {
-  /** @format int32 */
-  code?: number
-  data?: UserJobLinkVo
-  message?: string
-  errorType?: string
-}
-
-export interface UserJobLinkVo {
-  id?: string
-  userId?: string
-  userEmail?: string
-  jobPostingId?: string
-  jobTitle?: string
-  companyName?: string
-  userNotes?: string
-  geminiFeedback?: string
-  createdBy?: string
-  updatedBy?: string
-  /** @format date-time */
-  createdTime?: string
-  /** @format date-time */
-  updatedTime?: string
-}
-
-/** 職缺搜尋查詢參數 */
-export interface JobPostingSearchQuery {
-  /**
-   * 頁碼，從0開始
-   * @format int32
-   * @min 0
-   * @example 0
-   */
-  page?: number
-  /**
-   * 每頁大小
-   * @format int32
-   * @min 1
-   * @max 100
-   * @example 20
-   */
-  size?: number
-  /**
-   * 排序欄位
-   * @example "createdTime"
-   */
-  sortBy?: string
-  /**
-   * 排序方向：asc/desc
-   * @example "desc"
-   */
-  sortDir?: string
-  /** 職缺標題（模糊查詢） */
-  title?: string
-  /** 公司ID（精確查詢） */
-  companyId?: string
-  /** 公司名稱（模糊查詢） */
-  companyName?: string
-  /** 薪資範圍（模糊查詢） */
-  salaryRange?: string
-  /**
-   * 發布日期（起始）
-   * @format date
-   */
-  postedDateStart?: string
-  /**
-   * 發布日期（結束）
-   * @format date
-   */
-  postedDateEnd?: string
-  /** 創建者（精確查詢） */
-  createdBy?: string
-  normalizedSortDir?: string
-  validSortDir?: boolean
-}
-
-/** 分頁結果 */
-export interface PageResultJobPostingVo {
-  /** 資料列表 */
-  content?: JobPostingVo[]
-  /**
-   * 總記錄數
-   * @format int64
-   */
-  totalElements?: number
-  /**
-   * 總頁數
-   * @format int32
-   */
-  totalPages?: number
-  /**
-   * 當前頁碼（從0開始）
-   * @format int32
-   */
-  currentPage?: number
-  /**
-   * 每頁大小
-   * @format int32
-   */
-  pageSize?: number
-  /** 是否有下一頁 */
-  hasNext?: boolean
-  /** 是否有上一頁 */
-  hasPrevious?: boolean
-  /** 是否為第一頁 */
-  isFirst?: boolean
-  /** 是否為最後一頁 */
-  isLast?: boolean
-}
-
-export interface ResponseTypePageResultJobPostingVo {
-  /** @format int32 */
-  code?: number
-  /** 分頁結果 */
-  data?: PageResultJobPostingVo
-  message?: string
-  errorType?: string
-}
-
-export interface ResponseTypeListJobPostingVo {
-  /** @format int32 */
-  code?: number
-  data?: JobPostingVo[]
-  message?: string
-  errorType?: string
-}
-
-export interface CreateJobPostingRequest {
-  companyId: string
-  title: string
-  url: string
-  description?: string
-  requirements?: string
-  responsibilities?: string
-  salaryRange?: string
-  /** @format date */
-  postedDate?: string
-}
-
-export interface CreateCompanyRequest {
-  name: string
-  websites: string[]
-  description?: string
-}
-
-export interface ResponseTypeListUserJobLinkVo {
-  /** @format int32 */
-  code?: number
-  data?: UserJobLinkVo[]
-  message?: string
-  errorType?: string
-}
-
-export interface ResponseTypeListCompanyVo {
-  /** @format int32 */
-  code?: number
-  data?: CompanyVo[]
-  message?: string
-  errorType?: string
-}
-
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from "axios"
 import axios from "axios"
 
@@ -1665,6 +1747,38 @@ export class Api<SecurityDataType extends unknown> {
     this.http = http
   }
 
+  learnController = {
+    /**
+     * @description 上傳音訊進行 Whisper 辨識，並根據語言及模式轉換為拼音、注音或羅馬音。
+     *
+     * @tags learn-controller
+     * @name RecognizeAudio
+     * @summary 語音辨識與拼音轉換
+     * @request POST:/api/stt/v1/{lan}/{mode}
+     * @secure
+     * @response `200` `ResponseTypeAudioRecognizeVo` OK
+     */
+    recognizeAudio: (
+      lan: string,
+      mode: string,
+      data: {
+        /**
+         * 音訊檔案
+         * @format binary
+         */
+        file: File
+      },
+      params: RequestParams = {}
+    ) =>
+      this.http.request<ResponseTypeAudioRecognizeVo, any>({
+        path: `/api/stt/v1/${lan}/${mode}`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.FormData,
+        ...params
+      })
+  }
   aquarkDataController = {
     /**
      * @description Returns aquark data filtered by criteria.
@@ -1833,6 +1947,496 @@ export class Api<SecurityDataType extends unknown> {
       this.http.request<ResponseTypeListAlertCheckLimitVo, ResponseTypeListAlertCheckLimitVo>({
         path: `/api/alertCheckLimit/get`,
         method: "GET",
+        secure: true,
+        ...params
+      })
+  }
+  userJobLinkController = {
+    /**
+     * @description 更新使用者職缺連結的使用者備註與 Gemini 回饋。
+     *
+     * @tags user-job-link-controller
+     * @name UpdateUserJobLink
+     * @summary 更新使用者職缺連結
+     * @request PUT:/api/user-job-link/update
+     * @secure
+     * @response `200` `ResponseTypeUserJobLinkVo` OK
+     * @response `400` `ResponseTypeUserJobLinkVo` Invalid input
+     * @response `500` `ResponseTypeUserJobLinkVo` Server error
+     */
+    updateUserJobLink: (data: UserJobLinkVo, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeUserJobLinkVo, ResponseTypeUserJobLinkVo>({
+        path: `/api/user-job-link/update`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params
+      }),
+
+    /**
+     * @description 建立使用者與職缺的關聯。
+     *
+     * @tags user-job-link-controller
+     * @name AddUserJobLink
+     * @summary 新增使用者職缺連結
+     * @request POST:/api/user-job-link/add
+     * @secure
+     * @response `200` `ResponseTypeUserJobLinkVo` OK
+     * @response `400` `ResponseTypeUserJobLinkVo` Invalid input
+     * @response `500` `ResponseTypeUserJobLinkVo` Server error
+     */
+    addUserJobLink: (data: UserJobLinkVo, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeUserJobLinkVo, ResponseTypeUserJobLinkVo>({
+        path: `/api/user-job-link/add`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params
+      }),
+
+    /**
+     * @description 根據使用者 ID 取得該使用者所有職缺連結。
+     *
+     * @tags user-job-link-controller
+     * @name GetUserJobLinksByUserId
+     * @summary 取得使用者所有職缺連結
+     * @request GET:/api/user-job-link/user/{userId}
+     * @secure
+     * @response `200` `ResponseTypeListUserJobLinkVo` OK
+     * @response `500` `ResponseTypeListUserJobLinkVo` Server error
+     */
+    getUserJobLinksByUserId: (userId: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListUserJobLinkVo, ResponseTypeListUserJobLinkVo>({
+        path: `/api/user-job-link/user/${userId}`,
+        method: "GET",
+        secure: true,
+        ...params
+      }),
+
+    /**
+     * @description 根據職缺 ID 取得該職缺的所有使用者連結。
+     *
+     * @tags user-job-link-controller
+     * @name GetUserJobLinksByJobPostingId
+     * @summary 取得職缺所有使用者連結
+     * @request GET:/api/user-job-link/job-posting/{jobPostingId}
+     * @secure
+     * @response `200` `ResponseTypeListUserJobLinkVo` OK
+     * @response `500` `ResponseTypeListUserJobLinkVo` Server error
+     */
+    getUserJobLinksByJobPostingId: (jobPostingId: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListUserJobLinkVo, ResponseTypeListUserJobLinkVo>({
+        path: `/api/user-job-link/job-posting/${jobPostingId}`,
+        method: "GET",
+        secure: true,
+        ...params
+      }),
+
+    /**
+     * @description 返回所有使用者職缺連結列表。
+     *
+     * @tags user-job-link-controller
+     * @name GetAllUserJobLinks
+     * @summary 取得所有連結
+     * @request GET:/api/user-job-link/get
+     * @secure
+     * @response `200` `ResponseTypeListUserJobLinkVo` OK
+     * @response `500` `ResponseTypeListUserJobLinkVo` Server error
+     */
+    getAllUserJobLinks: (params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListUserJobLinkVo, ResponseTypeListUserJobLinkVo>({
+        path: `/api/user-job-link/get`,
+        method: "GET",
+        secure: true,
+        ...params
+      }),
+
+    /**
+     * @description 根據 ID 取得使用者職缺連結資訊。
+     *
+     * @tags user-job-link-controller
+     * @name GetUserJobLinkById
+     * @summary 取得連結詳情
+     * @request GET:/api/user-job-link/get/{id}
+     * @secure
+     * @response `200` `ResponseTypeUserJobLinkVo` OK
+     * @response `500` `ResponseTypeUserJobLinkVo` Server error
+     */
+    getUserJobLinkById: (id: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeUserJobLinkVo, ResponseTypeUserJobLinkVo>({
+        path: `/api/user-job-link/get/${id}`,
+        method: "GET",
+        secure: true,
+        ...params
+      }),
+
+    /**
+     * @description 根據 ID 刪除使用者職缺連結。
+     *
+     * @tags user-job-link-controller
+     * @name DeleteUserJobLink
+     * @summary 刪除使用者職缺連結
+     * @request DELETE:/api/user-job-link/delete/{id}
+     * @secure
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    deleteUserJobLink: (id: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/api/user-job-link/delete/${id}`,
+        method: "DELETE",
+        secure: true,
+        ...params
+      })
+  }
+  jobPostingController = {
+    /**
+     * @description 更新職缺資訊。
+     *
+     * @tags job-posting-controller
+     * @name UpdateJobPosting
+     * @summary 更新職缺
+     * @request PUT:/api/job-posting/update
+     * @secure
+     * @response `200` `ResponseTypeJobPostingVo` OK
+     * @response `400` `ResponseTypeJobPostingVo` Invalid input
+     * @response `500` `ResponseTypeJobPostingVo` Server error
+     */
+    updateJobPosting: (data: JobPostingVo, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeJobPostingVo, ResponseTypeJobPostingVo>({
+        path: `/api/job-posting/update`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params
+      }),
+
+    /**
+     * @description 根據條件分頁搜尋職缺。
+     *
+     * @tags job-posting-controller
+     * @name SearchJobPostings
+     * @summary 分頁搜尋職缺
+     * @request POST:/api/job-posting/search
+     * @secure
+     * @response `200` `ResponseTypePageResultJobPostingVo` OK
+     * @response `400` `ResponseTypePageResultJobPostingVo` Invalid input
+     * @response `500` `ResponseTypePageResultJobPostingVo` Server error
+     */
+    searchJobPostings: (data: JobPostingSearchQuery, params: RequestParams = {}) =>
+      this.http.request<ResponseTypePageResultJobPostingVo, ResponseTypePageResultJobPostingVo>({
+        path: `/api/job-posting/search`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params
+      }),
+
+    /**
+     * @description 根據公司 ID 爬取該公司網站上的職缺並使用 Gemini 分析。
+     *
+     * @tags job-posting-controller
+     * @name ScrapeJobs
+     * @summary 爬取並分析職缺
+     * @request POST:/api/job-posting/scrape/{companyId}
+     * @secure
+     * @response `200` `ResponseTypeListJobPostingVo` OK
+     * @response `400` `ResponseTypeListJobPostingVo` Invalid input
+     * @response `500` `ResponseTypeListJobPostingVo` Server error
+     */
+    scrapeJobs: (companyId: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListJobPostingVo, ResponseTypeListJobPostingVo>({
+        path: `/api/job-posting/scrape/${companyId}`,
+        method: "POST",
+        secure: true,
+        ...params
+      }),
+
+    /**
+     * @description 手動新增一筆職缺。
+     *
+     * @tags job-posting-controller
+     * @name AddJobPosting
+     * @summary 新增職缺
+     * @request POST:/api/job-posting/add
+     * @secure
+     * @response `200` `ResponseTypeJobPostingVo` OK
+     * @response `400` `ResponseTypeJobPostingVo` Invalid input
+     * @response `500` `ResponseTypeJobPostingVo` Server error
+     */
+    addJobPosting: (data: CreateJobPostingRequest, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeJobPostingVo, ResponseTypeJobPostingVo>({
+        path: `/api/job-posting/add`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params
+      }),
+
+    /**
+     * @description 返回所有職缺列表。
+     *
+     * @tags job-posting-controller
+     * @name GetAllJobPostings
+     * @summary 取得所有職缺
+     * @request GET:/api/job-posting/get
+     * @secure
+     * @response `200` `ResponseTypeListJobPostingVo` OK
+     * @response `500` `ResponseTypeListJobPostingVo` Server error
+     */
+    getAllJobPostings: (params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListJobPostingVo, ResponseTypeListJobPostingVo>({
+        path: `/api/job-posting/get`,
+        method: "GET",
+        secure: true,
+        ...params
+      }),
+
+    /**
+     * @description 根據 ID 取得職缺資訊。
+     *
+     * @tags job-posting-controller
+     * @name GetJobPostingById
+     * @summary 取得職缺詳情
+     * @request GET:/api/job-posting/get/{id}
+     * @secure
+     * @response `200` `ResponseTypeJobPostingVo` OK
+     * @response `500` `ResponseTypeJobPostingVo` Server error
+     */
+    getJobPostingById: (id: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeJobPostingVo, ResponseTypeJobPostingVo>({
+        path: `/api/job-posting/get/${id}`,
+        method: "GET",
+        secure: true,
+        ...params
+      }),
+
+    /**
+     * @description 根據公司 ID 取得該公司所有職缺。
+     *
+     * @tags job-posting-controller
+     * @name GetJobPostingsByCompanyId
+     * @summary 取得公司職缺
+     * @request GET:/api/job-posting/company/{companyId}
+     * @secure
+     * @response `200` `ResponseTypeListJobPostingVo` OK
+     * @response `500` `ResponseTypeListJobPostingVo` Server error
+     */
+    getJobPostingsByCompanyId: (companyId: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListJobPostingVo, ResponseTypeListJobPostingVo>({
+        path: `/api/job-posting/company/${companyId}`,
+        method: "GET",
+        secure: true,
+        ...params
+      }),
+
+    /**
+     * @description 根據 ID 刪除職缺。
+     *
+     * @tags job-posting-controller
+     * @name DeleteJobPosting
+     * @summary 刪除職缺
+     * @request DELETE:/api/job-posting/delete/{id}
+     * @secure
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    deleteJobPosting: (id: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/api/job-posting/delete/${id}`,
+        method: "DELETE",
+        secure: true,
+        ...params
+      })
+  }
+  companyController = {
+    /**
+     * @description 更新公司資訊。
+     *
+     * @tags company-controller
+     * @name UpdateCompany
+     * @summary 更新公司
+     * @request PUT:/api/company/update
+     * @secure
+     * @response `200` `ResponseTypeCompanyVo` OK
+     * @response `400` `ResponseTypeCompanyVo` Invalid input
+     * @response `500` `ResponseTypeCompanyVo` Server error
+     */
+    updateCompany: (data: UpdateCompanyRequest, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeCompanyVo, ResponseTypeCompanyVo>({
+        path: `/api/company/update`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params
+      }),
+
+    /**
+     * @description 根據條件分頁搜尋公司。
+     *
+     * @tags company-controller
+     * @name SearchCompanies
+     * @summary 分頁搜尋公司
+     * @request POST:/api/company/search
+     * @secure
+     * @response `200` `ResponseTypePageResultCompanyVo` OK
+     * @response `400` `ResponseTypePageResultCompanyVo` Invalid input
+     * @response `500` `ResponseTypePageResultCompanyVo` Server error
+     */
+    searchCompanies: (data: CompanySearchQuery, params: RequestParams = {}) =>
+      this.http.request<ResponseTypePageResultCompanyVo, ResponseTypePageResultCompanyVo>({
+        path: `/api/company/search`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params
+      }),
+
+    /**
+     * @description 建立一間新的公司。
+     *
+     * @tags company-controller
+     * @name AddCompany
+     * @summary 新增公司
+     * @request POST:/api/company/add
+     * @secure
+     * @response `200` `ResponseTypeCompanyVo` OK
+     * @response `400` `ResponseTypeCompanyVo` Invalid input
+     * @response `500` `ResponseTypeCompanyVo` Server error
+     */
+    addCompany: (data: CreateCompanyRequest, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeCompanyVo, ResponseTypeCompanyVo>({
+        path: `/api/company/add`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params
+      }),
+
+    /**
+     * @description 返回所有公司列表。
+     *
+     * @tags company-controller
+     * @name GetAllCompanies
+     * @summary 取得所有公司
+     * @request GET:/api/company/get
+     * @secure
+     * @response `200` `ResponseTypeListCompanyVo` OK
+     * @response `500` `ResponseTypeListCompanyVo` Server error
+     */
+    getAllCompanies: (params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListCompanyVo, ResponseTypeListCompanyVo>({
+        path: `/api/company/get`,
+        method: "GET",
+        secure: true,
+        ...params
+      }),
+
+    /**
+     * @description 根據 ID 取得公司資訊。
+     *
+     * @tags company-controller
+     * @name GetCompanyById
+     * @summary 取得公司詳情
+     * @request GET:/api/company/get/{id}
+     * @secure
+     * @response `200` `ResponseTypeCompanyVo` OK
+     * @response `500` `ResponseTypeCompanyVo` Server error
+     */
+    getCompanyById: (id: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeCompanyVo, ResponseTypeCompanyVo>({
+        path: `/api/company/get/${id}`,
+        method: "GET",
+        secure: true,
+        ...params
+      }),
+
+    /**
+     * @description 根據 ID 刪除公司。
+     *
+     * @tags company-controller
+     * @name DeleteCompany
+     * @summary 刪除公司
+     * @request DELETE:/api/company/delete/{id}
+     * @secure
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    deleteCompany: (id: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/api/company/delete/${id}`,
+        method: "DELETE",
+        secure: true,
+        ...params
+      })
+  }
+  userJobBindingController = {
+    /**
+     * @description 當前使用者綁定一筆職缺。
+     *
+     * @tags user-job-binding-controller
+     * @name AddJob
+     * @summary 綁定職缺
+     * @request POST:/api/user/bindings/job/add/{jobPostingId}
+     * @secure
+     * @response `200` `ResponseTypeUserJobLinkVo` OK
+     * @response `400` `ResponseTypeUserJobLinkVo` Invalid input
+     * @response `500` `ResponseTypeUserJobLinkVo` Server error
+     */
+    addJob: (jobPostingId: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeUserJobLinkVo, ResponseTypeUserJobLinkVo>({
+        path: `/api/user/bindings/job/add/${jobPostingId}`,
+        method: "POST",
+        secure: true,
+        ...params
+      }),
+
+    /**
+     * @description 取得當前使用者所有已綁定的職缺。
+     *
+     * @tags user-job-binding-controller
+     * @name GetMyJobs
+     * @summary 取得已綁定職缺列表
+     * @request GET:/api/user/bindings/job
+     * @secure
+     * @response `200` `ResponseTypeListUserJobLinkVo` OK
+     * @response `500` `ResponseTypeListUserJobLinkVo` Server error
+     */
+    getMyJobs: (params: RequestParams = {}) =>
+      this.http.request<ResponseTypeListUserJobLinkVo, ResponseTypeListUserJobLinkVo>({
+        path: `/api/user/bindings/job`,
+        method: "GET",
+        secure: true,
+        ...params
+      }),
+
+    /**
+     * @description 當前使用者解除綁定一筆職缺。
+     *
+     * @tags user-job-binding-controller
+     * @name RemoveJob
+     * @summary 解除綁定職缺
+     * @request DELETE:/api/user/bindings/job/{jobPostingId}
+     * @secure
+     * @response `200` `ResponseTypeString` OK
+     * @response `400` `ResponseTypeString` Invalid input
+     * @response `500` `ResponseTypeString` Server error
+     */
+    removeJob: (jobPostingId: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeString, ResponseTypeString>({
+        path: `/api/user/bindings/job/${jobPostingId}`,
+        method: "DELETE",
         secure: true,
         ...params
       })
@@ -2693,38 +3297,6 @@ export class Api<SecurityDataType extends unknown> {
         ...params
       })
   }
-  learnController = {
-    /**
-     * @description 上傳音訊進行 Whisper 辨識，並根據語言及模式轉換為拼音、注音或羅馬音。
-     *
-     * @tags learn-controller
-     * @name RecognizeAudio
-     * @summary 語音辨識與拼音轉換
-     * @request POST:/api/stt/v1/{lan}/{mode}
-     * @secure
-     * @response `200` `ResponseTypeAudioRecognizeVo` OK
-     */
-    recognizeAudio: (
-      lan: string,
-      mode: string,
-      data: {
-        /**
-         * 音訊檔案
-         * @format binary
-         */
-        file: File
-      },
-      params: RequestParams = {}
-    ) =>
-      this.http.request<ResponseTypeAudioRecognizeVo, any>({
-        path: `/api/stt/v1/${lan}/${mode}`,
-        method: "POST",
-        body: data,
-        secure: true,
-        type: ContentType.FormData,
-        ...params
-      })
-  }
   userController = {
     /**
      * @description 完整覆蓋式綁定使用者角色。空清單清空所有角色，null 清單拋出異常。
@@ -2833,6 +3405,25 @@ export class Api<SecurityDataType extends unknown> {
         body: data,
         secure: true,
         type: ContentType.Json,
+        ...params
+      }),
+
+    /**
+     * @description 根據 ID 取得使用者資訊。
+     *
+     * @tags user-controller
+     * @name GetUserById
+     * @summary Get user by ID
+     * @request GET:/api/users/{id}
+     * @secure
+     * @response `200` `ResponseTypeUserVo` OK
+     * @response `500` `ResponseTypeUserVo` Server error
+     */
+    getUserById: (id: string, params: RequestParams = {}) =>
+      this.http.request<ResponseTypeUserVo, ResponseTypeUserVo>({
+        path: `/api/users/${id}`,
+        method: "GET",
+        secure: true,
         ...params
       }),
 
@@ -3487,452 +4078,6 @@ export class Api<SecurityDataType extends unknown> {
         body: data,
         secure: true,
         type: ContentType.Json,
-        ...params
-      })
-  }
-  jobPostingController = {
-    /**
-     * @description 更新職缺資訊。
-     *
-     * @tags job-posting-controller
-     * @name UpdateJobPosting
-     * @summary 更新職缺
-     * @request PUT:/api/job-posting/update
-     * @secure
-     * @response `200` `ResponseTypeJobPostingVo` OK
-     * @response `400` `ResponseTypeJobPostingVo` Invalid input
-     * @response `500` `ResponseTypeJobPostingVo` Server error
-     */
-    updateJobPosting: (data: JobPostingVo, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeJobPostingVo, ResponseTypeJobPostingVo>({
-        path: `/api/job-posting/update`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params
-      }),
-
-    /**
-     * @description 根據條件分頁搜尋職缺。
-     *
-     * @tags job-posting-controller
-     * @name SearchJobPostings
-     * @summary 分頁搜尋職缺
-     * @request POST:/api/job-posting/search
-     * @secure
-     * @response `200` `ResponseTypePageResultJobPostingVo` OK
-     * @response `400` `ResponseTypePageResultJobPostingVo` Invalid input
-     * @response `500` `ResponseTypePageResultJobPostingVo` Server error
-     */
-    searchJobPostings: (data: JobPostingSearchQuery, params: RequestParams = {}) =>
-      this.http.request<ResponseTypePageResultJobPostingVo, ResponseTypePageResultJobPostingVo>({
-        path: `/api/job-posting/search`,
-        method: "POST",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params
-      }),
-
-    /**
-     * @description 根據公司 ID 爬取該公司網站上的職缺並使用 Gemini 分析。
-     *
-     * @tags job-posting-controller
-     * @name ScrapeJobs
-     * @summary 爬取並分析職缺
-     * @request POST:/api/job-posting/scrape/{companyId}
-     * @secure
-     * @response `200` `ResponseTypeListJobPostingVo` OK
-     * @response `400` `ResponseTypeListJobPostingVo` Invalid input
-     * @response `500` `ResponseTypeListJobPostingVo` Server error
-     */
-    scrapeJobs: (companyId: string, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeListJobPostingVo, ResponseTypeListJobPostingVo>({
-        path: `/api/job-posting/scrape/${companyId}`,
-        method: "POST",
-        secure: true,
-        ...params
-      }),
-
-    /**
-     * @description 手動新增一筆職缺。
-     *
-     * @tags job-posting-controller
-     * @name AddJobPosting
-     * @summary 新增職缺
-     * @request POST:/api/job-posting/add
-     * @secure
-     * @response `200` `ResponseTypeJobPostingVo` OK
-     * @response `400` `ResponseTypeJobPostingVo` Invalid input
-     * @response `500` `ResponseTypeJobPostingVo` Server error
-     */
-    addJobPosting: (data: CreateJobPostingRequest, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeJobPostingVo, ResponseTypeJobPostingVo>({
-        path: `/api/job-posting/add`,
-        method: "POST",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params
-      }),
-
-    /**
-     * @description 返回所有職缺列表。
-     *
-     * @tags job-posting-controller
-     * @name GetAllJobPostings
-     * @summary 取得所有職缺
-     * @request GET:/api/job-posting/get
-     * @secure
-     * @response `200` `ResponseTypeListJobPostingVo` OK
-     * @response `500` `ResponseTypeListJobPostingVo` Server error
-     */
-    getAllJobPostings: (params: RequestParams = {}) =>
-      this.http.request<ResponseTypeListJobPostingVo, ResponseTypeListJobPostingVo>({
-        path: `/api/job-posting/get`,
-        method: "GET",
-        secure: true,
-        ...params
-      }),
-
-    /**
-     * @description 根據 ID 取得職缺資訊。
-     *
-     * @tags job-posting-controller
-     * @name GetJobPostingById
-     * @summary 取得職缺詳情
-     * @request GET:/api/job-posting/get/{id}
-     * @secure
-     * @response `200` `ResponseTypeJobPostingVo` OK
-     * @response `500` `ResponseTypeJobPostingVo` Server error
-     */
-    getJobPostingById: (id: string, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeJobPostingVo, ResponseTypeJobPostingVo>({
-        path: `/api/job-posting/get/${id}`,
-        method: "GET",
-        secure: true,
-        ...params
-      }),
-
-    /**
-     * @description 根據公司 ID 取得該公司所有職缺。
-     *
-     * @tags job-posting-controller
-     * @name GetJobPostingsByCompanyId
-     * @summary 取得公司職缺
-     * @request GET:/api/job-posting/company/{companyId}
-     * @secure
-     * @response `200` `ResponseTypeListJobPostingVo` OK
-     * @response `500` `ResponseTypeListJobPostingVo` Server error
-     */
-    getJobPostingsByCompanyId: (companyId: string, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeListJobPostingVo, ResponseTypeListJobPostingVo>({
-        path: `/api/job-posting/company/${companyId}`,
-        method: "GET",
-        secure: true,
-        ...params
-      }),
-
-    /**
-     * @description 根據 ID 刪除職缺。
-     *
-     * @tags job-posting-controller
-     * @name DeleteJobPosting
-     * @summary 刪除職缺
-     * @request DELETE:/api/job-posting/delete/{id}
-     * @secure
-     * @response `200` `ResponseTypeString` OK
-     * @response `400` `ResponseTypeString` Invalid input
-     * @response `500` `ResponseTypeString` Server error
-     */
-    deleteJobPosting: (id: string, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeString, ResponseTypeString>({
-        path: `/api/job-posting/delete/${id}`,
-        method: "DELETE",
-        secure: true,
-        ...params
-      })
-  }
-  companyController = {
-    /**
-     * @description 更新公司資訊。
-     *
-     * @tags company-controller
-     * @name UpdateCompany
-     * @summary 更新公司
-     * @request PUT:/api/company/update
-     * @secure
-     * @response `200` `ResponseTypeCompanyVo` OK
-     * @response `400` `ResponseTypeCompanyVo` Invalid input
-     * @response `500` `ResponseTypeCompanyVo` Server error
-     */
-    updateCompany: (data: UpdateCompanyRequest, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeCompanyVo, ResponseTypeCompanyVo>({
-        path: `/api/company/update`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params
-      }),
-
-    /**
-     * @description 建立一間新的公司。
-     *
-     * @tags company-controller
-     * @name AddCompany
-     * @summary 新增公司
-     * @request POST:/api/company/add
-     * @secure
-     * @response `200` `ResponseTypeCompanyVo` OK
-     * @response `400` `ResponseTypeCompanyVo` Invalid input
-     * @response `500` `ResponseTypeCompanyVo` Server error
-     */
-    addCompany: (data: CreateCompanyRequest, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeCompanyVo, ResponseTypeCompanyVo>({
-        path: `/api/company/add`,
-        method: "POST",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params
-      }),
-
-    /**
-     * @description 返回所有公司列表。
-     *
-     * @tags company-controller
-     * @name GetAllCompanies
-     * @summary 取得所有公司
-     * @request GET:/api/company/get
-     * @secure
-     * @response `200` `ResponseTypeListCompanyVo` OK
-     * @response `500` `ResponseTypeListCompanyVo` Server error
-     */
-    getAllCompanies: (params: RequestParams = {}) =>
-      this.http.request<ResponseTypeListCompanyVo, ResponseTypeListCompanyVo>({
-        path: `/api/company/get`,
-        method: "GET",
-        secure: true,
-        ...params
-      }),
-
-    /**
-     * @description 根據 ID 取得公司資訊。
-     *
-     * @tags company-controller
-     * @name GetCompanyById
-     * @summary 取得公司詳情
-     * @request GET:/api/company/get/{id}
-     * @secure
-     * @response `200` `ResponseTypeCompanyVo` OK
-     * @response `500` `ResponseTypeCompanyVo` Server error
-     */
-    getCompanyById: (id: string, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeCompanyVo, ResponseTypeCompanyVo>({
-        path: `/api/company/get/${id}`,
-        method: "GET",
-        secure: true,
-        ...params
-      }),
-
-    /**
-     * @description 根據 ID 刪除公司。
-     *
-     * @tags company-controller
-     * @name DeleteCompany
-     * @summary 刪除公司
-     * @request DELETE:/api/company/delete/{id}
-     * @secure
-     * @response `200` `ResponseTypeString` OK
-     * @response `400` `ResponseTypeString` Invalid input
-     * @response `500` `ResponseTypeString` Server error
-     */
-    deleteCompany: (id: string, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeString, ResponseTypeString>({
-        path: `/api/company/delete/${id}`,
-        method: "DELETE",
-        secure: true,
-        ...params
-      })
-  }
-  userJobBindingController = {
-    /**
-     * @description 當前使用者綁定一筆職缺。
-     *
-     * @tags user-job-binding-controller
-     * @name AddJob
-     * @summary 綁定職缺
-     * @request POST:/api/user/bindings/job/add/{jobPostingId}
-     * @secure
-     * @response `200` `ResponseTypeUserJobLinkVo` OK
-     * @response `400` `ResponseTypeUserJobLinkVo` Invalid input
-     * @response `500` `ResponseTypeUserJobLinkVo` Server error
-     */
-    addJob: (jobPostingId: string, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeUserJobLinkVo, ResponseTypeUserJobLinkVo>({
-        path: `/api/user/bindings/job/add/${jobPostingId}`,
-        method: "POST",
-        secure: true,
-        ...params
-      }),
-
-    /**
-     * @description 取得當前使用者所有已綁定的職缺。
-     *
-     * @tags user-job-binding-controller
-     * @name GetMyJobs
-     * @summary 取得已綁定職缺列表
-     * @request GET:/api/user/bindings/job
-     * @secure
-     * @response `200` `ResponseTypeListUserJobLinkVo` OK
-     * @response `500` `ResponseTypeListUserJobLinkVo` Server error
-     */
-    getMyJobs: (params: RequestParams = {}) =>
-      this.http.request<ResponseTypeListUserJobLinkVo, ResponseTypeListUserJobLinkVo>({
-        path: `/api/user/bindings/job`,
-        method: "GET",
-        secure: true,
-        ...params
-      }),
-
-    /**
-     * @description 當前使用者解除綁定一筆職缺。
-     *
-     * @tags user-job-binding-controller
-     * @name RemoveJob
-     * @summary 解除綁定職缺
-     * @request DELETE:/api/user/bindings/job/{jobPostingId}
-     * @secure
-     * @response `200` `ResponseTypeString` OK
-     * @response `400` `ResponseTypeString` Invalid input
-     * @response `500` `ResponseTypeString` Server error
-     */
-    removeJob: (jobPostingId: string, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeString, ResponseTypeString>({
-        path: `/api/user/bindings/job/${jobPostingId}`,
-        method: "DELETE",
-        secure: true,
-        ...params
-      })
-  }
-  userJobLinkController = {
-    /**
-     * @description 建立使用者與職缺的關聯。
-     *
-     * @tags user-job-link-controller
-     * @name AddUserJobLink
-     * @summary 新增使用者職缺連結
-     * @request POST:/api/user-job-link/add
-     * @secure
-     * @response `200` `ResponseTypeUserJobLinkVo` OK
-     * @response `400` `ResponseTypeUserJobLinkVo` Invalid input
-     * @response `500` `ResponseTypeUserJobLinkVo` Server error
-     */
-    addUserJobLink: (data: UserJobLinkVo, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeUserJobLinkVo, ResponseTypeUserJobLinkVo>({
-        path: `/api/user-job-link/add`,
-        method: "POST",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params
-      }),
-
-    /**
-     * @description 根據使用者 ID 取得該使用者所有職缺連結。
-     *
-     * @tags user-job-link-controller
-     * @name GetUserJobLinksByUserId
-     * @summary 取得使用者所有職缺連結
-     * @request GET:/api/user-job-link/user/{userId}
-     * @secure
-     * @response `200` `ResponseTypeListUserJobLinkVo` OK
-     * @response `500` `ResponseTypeListUserJobLinkVo` Server error
-     */
-    getUserJobLinksByUserId: (userId: string, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeListUserJobLinkVo, ResponseTypeListUserJobLinkVo>({
-        path: `/api/user-job-link/user/${userId}`,
-        method: "GET",
-        secure: true,
-        ...params
-      }),
-
-    /**
-     * @description 根據職缺 ID 取得該職缺的所有使用者連結。
-     *
-     * @tags user-job-link-controller
-     * @name GetUserJobLinksByJobPostingId
-     * @summary 取得職缺所有使用者連結
-     * @request GET:/api/user-job-link/job-posting/{jobPostingId}
-     * @secure
-     * @response `200` `ResponseTypeListUserJobLinkVo` OK
-     * @response `500` `ResponseTypeListUserJobLinkVo` Server error
-     */
-    getUserJobLinksByJobPostingId: (jobPostingId: string, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeListUserJobLinkVo, ResponseTypeListUserJobLinkVo>({
-        path: `/api/user-job-link/job-posting/${jobPostingId}`,
-        method: "GET",
-        secure: true,
-        ...params
-      }),
-
-    /**
-     * @description 返回所有使用者職缺連結列表。
-     *
-     * @tags user-job-link-controller
-     * @name GetAllUserJobLinks
-     * @summary 取得所有連結
-     * @request GET:/api/user-job-link/get
-     * @secure
-     * @response `200` `ResponseTypeListUserJobLinkVo` OK
-     * @response `500` `ResponseTypeListUserJobLinkVo` Server error
-     */
-    getAllUserJobLinks: (params: RequestParams = {}) =>
-      this.http.request<ResponseTypeListUserJobLinkVo, ResponseTypeListUserJobLinkVo>({
-        path: `/api/user-job-link/get`,
-        method: "GET",
-        secure: true,
-        ...params
-      }),
-
-    /**
-     * @description 根據 ID 取得使用者職缺連結資訊。
-     *
-     * @tags user-job-link-controller
-     * @name GetUserJobLinkById
-     * @summary 取得連結詳情
-     * @request GET:/api/user-job-link/get/{id}
-     * @secure
-     * @response `200` `ResponseTypeUserJobLinkVo` OK
-     * @response `500` `ResponseTypeUserJobLinkVo` Server error
-     */
-    getUserJobLinkById: (id: string, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeUserJobLinkVo, ResponseTypeUserJobLinkVo>({
-        path: `/api/user-job-link/get/${id}`,
-        method: "GET",
-        secure: true,
-        ...params
-      }),
-
-    /**
-     * @description 根據 ID 刪除使用者職缺連結。
-     *
-     * @tags user-job-link-controller
-     * @name DeleteUserJobLink
-     * @summary 刪除使用者職缺連結
-     * @request DELETE:/api/user-job-link/delete/{id}
-     * @secure
-     * @response `200` `ResponseTypeString` OK
-     * @response `400` `ResponseTypeString` Invalid input
-     * @response `500` `ResponseTypeString` Server error
-     */
-    deleteUserJobLink: (id: string, params: RequestParams = {}) =>
-      this.http.request<ResponseTypeString, ResponseTypeString>({
-        path: `/api/user-job-link/delete/${id}`,
-        method: "DELETE",
-        secure: true,
         ...params
       })
   }

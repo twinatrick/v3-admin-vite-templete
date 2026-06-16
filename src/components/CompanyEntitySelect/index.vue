@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from "vue"
-import { useCompanyCache } from "@/hooks/useCompanyCache"
+import { ref, watch } from "vue"
+import { api } from "@/api/client"
+import { CompanyVo } from "@/api/generated/Api"
+import { mockSearchCompanies } from "@/utils/mock-data"
 
 const props = withDefaults(
   defineProps<{
@@ -19,44 +21,72 @@ const emit = defineEmits<{
   (event: "update:modelValue", value: string): void
 }>()
 
-const { loadCompanyCache, getCompanyOptions } = useCompanyCache()
+const loading = ref(false)
+const options = ref<CompanyVo[]>([])
+const selectedId = ref(props.modelValue)
 
-const searchKeyword = ref("")
-const innerValue = ref(props.modelValue)
+async function remoteSearch(query: string) {
+  if (!query) {
+    options.value = []
+    return
+  }
+  loading.value = true
+  try {
+    const res = await api.companyController.getAllCompanies()
+    const filtered = (res.data || []).filter((c) => c.name && c.name.toLowerCase().includes(query.toLowerCase()))
+    options.value = filtered.slice(0, 20)
+  } catch {
+    options.value = mockSearchCompanies(query).content
+  } finally {
+    loading.value = false
+  }
+}
 
-const options = computed(() => getCompanyOptions(searchKeyword.value))
+async function resolveCompany(id: string): Promise<CompanyVo | null> {
+  try {
+    const res = await api.companyController.getCompanyById(id)
+    return res.data || null
+  } catch {
+    return null
+  }
+}
 
 watch(
   () => props.modelValue,
-  (value) => {
-    innerValue.value = value
-  }
+  async (newVal) => {
+    selectedId.value = newVal || ""
+    if (newVal && !options.value.some((o) => o.id === newVal)) {
+      const company = await resolveCompany(newVal)
+      if (company) {
+        options.value = [company, ...options.value]
+      }
+    }
+  },
+  { immediate: true }
 )
 
-const handleChange = (value: string) => {
+function handleChange(value: string) {
   emit("update:modelValue", value || "")
 }
 
-const handleFilter = (keyword: string) => {
-  searchKeyword.value = keyword
+function handleClear() {
+  selectedId.value = ""
+  emit("update:modelValue", "")
 }
-
-onMounted(() => {
-  loadCompanyCache()
-})
 </script>
 
 <template>
   <el-select
-    v-model="innerValue"
+    v-model="selectedId"
     :placeholder="placeholder"
     :clearable="clearable"
     filterable
+    remote
+    :remote-method="remoteSearch"
+    :loading="loading"
     @change="handleChange"
-    @visible-change="loadCompanyCache"
-    @clear="handleChange('')"
-    @filter-method="handleFilter"
+    @clear="handleClear"
   >
-    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+    <el-option v-for="item in options" :key="item.id!" :label="item.name || item.id!" :value="item.id!" />
   </el-select>
 </template>

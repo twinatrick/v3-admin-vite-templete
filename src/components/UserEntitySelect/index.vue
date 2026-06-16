@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from "vue"
-import { useUserEmailCache } from "@/hooks/useUserEmailCache"
+import { ref, watch } from "vue"
+import { api, request } from "@/api/client"
+import { UserVo } from "@/api/generated/Api"
+import { mockGetUserById } from "@/utils/mock-data"
 
 const props = withDefaults(
   defineProps<{
@@ -23,49 +25,83 @@ const emit = defineEmits<{
   (event: "update:modelValue", value: string): void
 }>()
 
-const { loadUserEmailCache, getUserOptions } = useUserEmailCache()
+const loading = ref(false)
+const options = ref<UserVo[]>([])
+const selectedId = ref(props.modelValue)
 
-const searchKeyword = ref("")
-const innerValue = ref(props.modelValue)
+function formatLabel(user: UserVo): string {
+  const email = user.email || user.id || ""
+  const name = user.name || ""
+  if (props.labelMode === "email") return email
+  return name ? `${email} (${name})` : email
+}
 
-const options = computed(() =>
-  getUserOptions(searchKeyword.value, {
-    labelMode: props.labelMode,
-    activeOnly: props.activeOnly
-  })
-)
+async function remoteSearch(query: string) {
+  if (!query) {
+    options.value = []
+    return
+  }
+  loading.value = true
+  try {
+    const res = await api.userController.searchUsers({
+      name: query,
+      page: 0,
+      size: 20,
+      ...(props.activeOnly ? { disabled: false } : {})
+    })
+    options.value = res.data?.content || []
+  } catch {
+    options.value = []
+  } finally {
+    loading.value = false
+  }
+}
+
+async function resolveUser(id: string): Promise<UserVo | null> {
+  try {
+    const res = await request.get(`/api/users/${id}`)
+    return res.data?.data || null
+  } catch {
+    return mockGetUserById(id)
+  }
+}
 
 watch(
   () => props.modelValue,
-  (value) => {
-    innerValue.value = value
-  }
+  async (newVal) => {
+    selectedId.value = newVal || ""
+    if (newVal && !options.value.some((o) => o.id === newVal)) {
+      const user = await resolveUser(newVal)
+      if (user) {
+        options.value = [user, ...options.value]
+      }
+    }
+  },
+  { immediate: true }
 )
 
-const handleChange = (value: string) => {
+function handleChange(value: string) {
   emit("update:modelValue", value || "")
 }
 
-const handleFilter = (keyword: string) => {
-  searchKeyword.value = keyword
+function handleClear() {
+  selectedId.value = ""
+  emit("update:modelValue", "")
 }
-
-onMounted(() => {
-  loadUserEmailCache()
-})
 </script>
 
 <template>
   <el-select
-    v-model="innerValue"
+    v-model="selectedId"
     :placeholder="placeholder"
     :clearable="clearable"
     filterable
+    remote
+    :remote-method="remoteSearch"
+    :loading="loading"
     @change="handleChange"
-    @visible-change="loadUserEmailCache"
-    @clear="handleChange('')"
-    @filter-method="handleFilter"
+    @clear="handleClear"
   >
-    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+    <el-option v-for="item in options" :key="item.id!" :label="formatLabel(item)" :value="item.id!" />
   </el-select>
 </template>

@@ -57,3 +57,4 @@ function createService() {
 }
 
 export const api = new Api<AxiosInstance>(http)
+export const request = service

@@ -1,5 +1,37 @@
-export const rules = {
-  companyId: [{ required: true, message: "請選擇公司", trigger: "change" }],
-  title: [{ required: true, message: "職缺名稱為必填", trigger: "blur" }],
-  url: [{ required: true, message: "網址為必填", trigger: "blur" }]
+import { FormRules } from "element-plus"
+
+export const jobPostingCreateRules: FormRules = {
+  companyId: {
+    required: true,
+    message: "Please select a company",
+    trigger: "change"
+  },
+  title: {
+    required: true,
+    message: "Please input job title",
+    trigger: "blur"
+  },
+  url: {
+    required: true,
+    message: "Please input job url",
+    trigger: "blur"
+  }
+}
+
+export const jobPostingEditRules: FormRules = {
+  companyId: {
+    required: true,
+    message: "Please select a company",
+    trigger: "change"
+  },
+  title: {
+    required: true,
+    message: "Please input job title",
+    trigger: "blur"
+  },
+  url: {
+    required: true,
+    message: "Please input job url",
+    trigger: "blur"
+  }
 }

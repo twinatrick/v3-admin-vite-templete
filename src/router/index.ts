@@ -54,7 +54,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         path: "u",
         component: () => import("@/views/system-management/user/index.vue"),
         meta: {
-          title: "User",
+          title: "使用者管理",
           elIcon: "Setting",
           hidden: true,
           tagView: false
@@ -64,7 +64,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         path: "f",
         component: () => import("@/views/system-management/Function/index.vue"),
         meta: {
-          title: "Function",
+          title: "功能管理",
           elIcon: "Setting",
           hidden: true,
           tagView: false
@@ -74,7 +74,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         path: "r",
         component: () => import("@/views/system-management/role/index.vue"),
         meta: {
-          title: "Role Permission",
+          title: "角色權限",
           elIcon: "User",
           hidden: true,
           tagView: false
@@ -155,7 +155,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
     component: Layout,
     redirect: "/system/user",
     meta: {
-      title: "System Mgmt",
+      title: "系統資料",
       elIcon: "Odometer",
       alwaysShow: true
     },
@@ -165,7 +165,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         component: () => import("@/views/system-management/aquarkData/index.vue"),
         name: "AquarkData:View",
         meta: {
-          title: "aquarkData",
+          title: "資料管理",
           elIcon: "UserFilled",
           keepAlive: false
         }
@@ -175,7 +175,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         component: () => import("@/views/system-management/aquarkDataAvg/index.vue"),
         name: "AquarkDataAvg:View",
         meta: {
-          title: "aquarkDataAvg",
+          title: "資料平均",
           elIcon: "UserFilled",
           keepAlive: false
         }
@@ -187,7 +187,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
     component: Layout,
     redirect: "/system/user",
     meta: {
-      title: "System Mgmt",
+      title: "系統管理",
       elIcon: "Odometer",
       alwaysShow: true
     },
@@ -197,7 +197,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         component: () => import("@/views/system-management/user/index.vue"),
         name: "User:View",
         meta: {
-          title: "User",
+          title: "使用者管理",
           elIcon: "UserFilled",
           keepAlive: false
         }
@@ -207,7 +207,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         component: () => import("@/views/system-management/limitSetting/index.vue"),
         name: "LimitSetting:View",
         meta: {
-          title: "limitSetting",
+          title: "限制設定",
           elIcon: "UserFilled",
           keepAlive: false
         }
@@ -219,7 +219,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
     component: Layout,
     redirect: "/system-admin/setting",
     meta: {
-      title: "System Admin",
+      title: "管理員設定",
       elIcon: "Setting",
       alwaysShow: true
     },
@@ -229,7 +229,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         component: () => import("@/views/system-management/role/index.vue"),
         name: "RolePermission:View",
         meta: {
-          title: "Role Permission",
+          title: "角色權限",
           elIcon: "User",
           keepAlive: false
         }
